@@ -1,0 +1,29 @@
+{
+  "name": "Looncup_nodejs_server2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:prod": "forever start --name 'loon-server' src/index.js",
+    "start:dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "carrier": "^0.3.0",
+    "csprng": "^0.1.2",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "firebase-admin": "^6.0.0",
+    "graphql-cli": "^2.16.7",
+    "graphql-middleware": "^1.7.2",
+    "graphql-yoga": "^1.16.2",
+    "jsonwebtoken": "^8.3.0",
+    "prisma-binding": "^2.1.5"
+  }
+}

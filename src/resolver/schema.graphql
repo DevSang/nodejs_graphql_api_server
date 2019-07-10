@@ -1,0 +1,45 @@
+# import Query.*, Mutation.* from "../generated/prisma.graphql"
+
+type Mutation {
+  signin(email: String!, password: String!): getNewTokenPayload
+  signup(
+    email: String!
+    password: String!
+    deleted: Boolean
+    dob: DateTime!
+    given_birth: Boolean!
+    first_name: String!
+    last_name: String!
+    country_id:Int!
+    user_cups: User_cupsCreateManyWithoutUserInput): AuthPayload
+  getNewToken(email: String!): getNewTokenPayload
+  gettesttoken(email: String!, password: String!): Tokens
+  registerCup(anon_serial_number: Int!): CupInfo
+  runPerlScript(userId: Int!): scriptResult
+  getCupData(userId: Int!, mdateRowIdArray: String!): scriptResult
+  signinDataAnalysis(userId: String!, password: String!): userResult
+}
+type getNewTokenPayload {
+  accessToken: String
+  refreshToken: String
+  user: Users
+  cups: User_cups
+}
+type AuthPayload {
+  accessToken: String
+  refreshToken: String
+  user: Users
+}
+type Tokens {
+  accessToken: String
+  refreshToken: String
+}
+type CupInfo {
+  user_cup: User_cups
+}
+type scriptResult {
+  result: String
+}
+type userResult {
+  result: Boolean
+}

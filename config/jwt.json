@@ -1,0 +1,9 @@
+{
+    "cert" : "jwt-secret",
+    "certAccessPrivate" : "/home/www/key/loon-access.key",                       
+    "certAccessPublic" : "/home/www/key/loon-access.pem",                         
+    "algorithmAccess" : {"expiresIn": "1h" , "algorithm": "RS256"},    
+    "certRefreshPrivate" : "/home/www/key/loon-refresh.key",                  
+    "certRefreshPublic" : "/home/www/key/loon-refresh.pem",                        
+    "algorithmRefresh" : { "expiresIn" : "30d",  "algorithm": "RS256" } 
+}
