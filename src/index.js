@@ -1,3 +1,4 @@
+
 const { GraphQLServer }                   = require('graphql-yoga')
 const { Prisma }                          = require('prisma-binding')
 const { resolvers, fragmentReplacements}  = require('./resolver')
@@ -26,7 +27,7 @@ const server = new GraphQLServer({
     })
 });
 
-//view engine
+//view Engine
 server.express.set('views', path.join(__dirname, 'views'));
 server.express.set('view engine', 'ejs');
 
