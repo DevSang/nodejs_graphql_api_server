@@ -23,6 +23,9 @@ type Mutation {
     userId: Int!
     address: String!
     category: String!
+    contents: String!
+    coin: Int!
+    date: DateTime!
   ): User_coin_history!
 }
 
