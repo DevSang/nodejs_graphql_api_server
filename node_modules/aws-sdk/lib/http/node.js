@@ -3,7 +3,6 @@ var Stream = AWS.util.stream.Stream;
 var TransformStream = AWS.util.stream.Transform;
 var ReadableStream = AWS.util.stream.Readable;
 require('../http');
-var CONNECTION_REUSE_ENV_NAME = 'AWS_NODEJS_CONNECTION_REUSE_ENABLED';
 
 /**
  * @api private
@@ -32,10 +31,8 @@ AWS.NodeHttpClient = AWS.util.inherit({
       path: pathPrefix + httpRequest.path
     };
 
-    if (!httpOptions.agent) {
-      options.agent = this.getAgent(useSSL, {
-        keepAlive: process.env[CONNECTION_REUSE_ENV_NAME] === '1' ? true : false
-      });
+    if (useSSL && !httpOptions.agent) {
+      options.agent = this.sslAgent();
     }
 
     AWS.util.update(options, httpOptions);
@@ -58,10 +55,9 @@ AWS.NodeHttpClient = AWS.util.inherit({
 
     // connection timeout support
     if (httpOptions.connectTimeout) {
-      var connectTimeoutId;
       stream.on('socket', function(socket) {
         if (socket.connecting) {
-          connectTimeoutId = setTimeout(function connectTimeout() {
+          var timeoutId = setTimeout(function connectTimeout() {
             if (stream.didCallback) return; stream.didCallback = true;
 
             stream.abort();
@@ -70,10 +66,11 @@ AWS.NodeHttpClient = AWS.util.inherit({
               {code: 'TimeoutError'}
             ));
           }, httpOptions.connectTimeout);
-          socket.on('connect', function() {
-            clearTimeout(connectTimeoutId);
-            connectTimeoutId = null;
-          });
+          socket.on('connect', (function(tId) {
+            return function () {
+              clearTimeout(tId);
+            };
+          })(timeoutId));
         }
       });
     }
@@ -88,10 +85,6 @@ AWS.NodeHttpClient = AWS.util.inherit({
     });
 
     stream.on('error', function() {
-      if (connectTimeoutId) {
-        clearTimeout(connectTimeoutId);
-        connectTimeoutId = null;
-      }
       if (stream.didCallback) return; stream.didCallback = true;
       errCallback.apply(stream, arguments);
     });
@@ -141,39 +134,28 @@ AWS.NodeHttpClient = AWS.util.inherit({
     }
   },
 
-  /**
-   * Create the https.Agent or http.Agent according to the request schema.
-   */
-  getAgent: function getAgent(useSSL, agentOptions) {
-    var http = useSSL ? require('https') : require('http');
-    if (useSSL) {
-      if (!AWS.NodeHttpClient.sslAgent) {
-        AWS.NodeHttpClient.sslAgent = new http.Agent(AWS.util.merge({
-          rejectUnauthorized: true
-        }, agentOptions || {}));
-        AWS.NodeHttpClient.sslAgent.setMaxListeners(0);
+  sslAgent: function sslAgent() {
+    var https = require('https');
 
-        // delegate maxSockets to globalAgent, set a default limit of 50 if current value is Infinity.
-        // Users can bypass this default by supplying their own Agent as part of SDK configuration.
-        Object.defineProperty(AWS.NodeHttpClient.sslAgent, 'maxSockets', {
-          enumerable: true,
-          get: function() {
-            var defaultMaxSockets = 50;
-            var globalAgent = http.globalAgent;
-            if (globalAgent && globalAgent.maxSockets !== Infinity && typeof globalAgent.maxSockets === 'number') {
-              return globalAgent.maxSockets;
-            }
-            return defaultMaxSockets;
+    if (!AWS.NodeHttpClient.sslAgent) {
+      AWS.NodeHttpClient.sslAgent = new https.Agent({rejectUnauthorized: true});
+      AWS.NodeHttpClient.sslAgent.setMaxListeners(0);
+
+      // delegate maxSockets to globalAgent, set a default limit of 50 if current value is Infinity.
+      // Users can bypass this default by supplying their own Agent as part of SDK configuration.
+      Object.defineProperty(AWS.NodeHttpClient.sslAgent, 'maxSockets', {
+        enumerable: true,
+        get: function() {
+          var defaultMaxSockets = 50;
+          var globalAgent = https.globalAgent;
+          if (globalAgent && globalAgent.maxSockets !== Infinity && typeof globalAgent.maxSockets === 'number') {
+            return globalAgent.maxSockets;
           }
-        });
-      }
-      return AWS.NodeHttpClient.sslAgent;
-    } else {
-      if (!AWS.NodeHttpClient.agent) {
-        AWS.NodeHttpClient.agent = new http.Agent(agentOptions);
-      }
-      return AWS.NodeHttpClient.agent;
+          return defaultMaxSockets;
+        }
+      });
     }
+    return AWS.NodeHttpClient.sslAgent;
   },
 
   progressStream: function progressStream(stream, totalBytes) {

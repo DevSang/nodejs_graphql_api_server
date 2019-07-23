@@ -230,6 +230,7 @@ type User_coin_history @pgTable(name: "user_coin_history") {
   coin: Int!
   contents: String!
   date: DateTime!
+  // txhash: String!
   user: Users @pgRelation(column: "user_id")
   user_record_data_by_periods: [User_record_data_by_period!]!
 }

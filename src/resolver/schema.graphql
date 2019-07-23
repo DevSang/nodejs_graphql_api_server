@@ -10,15 +10,22 @@ type Mutation {
     given_birth: Boolean!
     first_name: String!
     last_name: String!
-    country_id:Int!
-    user_cups: User_cupsCreateManyWithoutUserInput): AuthPayload
+    country_id: Int!
+    user_cups: User_cupsCreateManyWithoutUserInput
+  ): AuthPayload
   getNewToken(email: String!): getNewTokenPayload
   gettesttoken(email: String!, password: String!): Tokens
   registerCup(anon_serial_number: Int!): CupInfo
   runPerlScript(userId: Int!): scriptResult
   getCupData(userId: Int!, mdateRowIdArray: String!): scriptResult
   signinDataAnalysis(userId: String!, password: String!): userResult
+  createUserCoinHistory(
+    userId: Int!
+    address: String!
+    category: String!
+  ): User_coin_history!
 }
+
 type getNewTokenPayload {
   accessToken: String
   refreshToken: String

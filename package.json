@@ -24,6 +24,10 @@
     "graphql-middleware": "^1.7.2",
     "graphql-yoga": "^1.16.2",
     "jsonwebtoken": "^8.3.0",
-    "prisma-binding": "^2.1.5"
+    "nodemon": "^1.19.1",
+    "prisma-binding": "^2.1.5",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "save": "^2.4.0"
   }
 }
