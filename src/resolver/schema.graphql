@@ -19,7 +19,7 @@ type Mutation {
   runPerlScript(userId: Int!): scriptResult
   getCupData(userId: Int!, mdateRowIdArray: String!): scriptResult
   signinDataAnalysis(userId: String!, password: String!): userResult
-  createUserCoinHistory(
+  createTxUserCoinHistory(
     userId: Int!
     address: String!
     category: String!

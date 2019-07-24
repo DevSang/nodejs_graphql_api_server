@@ -49,7 +49,7 @@ const resolvers = {
     runPerlScript: require('./mutation/runPerlScript'),
     getCupData: require('./mutation/getCupData'),
     signinDataAnalysis: require('./mutation/signinDataAnalysis'),
-    createUserCoinHistory: require('./mutation/createUserCoinHistory')
+    createTxUserCoinHistory: require('./mutation/createTxUserCoinHistory')
   }
 };
 

@@ -15754,7 +15754,7 @@ type User_coin_history {
   contents: String!
   date: DateTime!
   user: Users
-  # txhash: String!
+  txhash: String!
   user_record_data_by_periods(
     where: User_record_data_by_periodWhereInput
     orderBy: User_record_data_by_periodOrderByInput
@@ -15788,6 +15788,7 @@ input User_coin_historyCreateInput {
   contents: String!
   date: DateTime!
   user: UsersCreateOneWithoutUser_coin_historiesInput
+  txhash: String!
   user_record_data_by_periods: User_record_data_by_periodCreateManyWithoutCoin_history_rowInput
 }
 

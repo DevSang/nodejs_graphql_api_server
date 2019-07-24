@@ -26,9 +26,9 @@ module.exports = async (
 
   let res = await request.post(options);
   res = JSON.parse(res);
-  let createUserCoin = await ctx.db.mutation.createUser_coin_history({
+  let createUserCoin = await ctx.db.mutation.createUserCoinHistory({
     data: {
-      user: {
+      userId: {
         connect: {
           id: userId
         }
@@ -36,8 +36,8 @@ module.exports = async (
       category: category,
       contents: contents,
       coin: coin,
-      date: date
-      // txHash: res.message
+      date: date,
+      txhash: res.message
     }
   });
   return createUserCoin;
