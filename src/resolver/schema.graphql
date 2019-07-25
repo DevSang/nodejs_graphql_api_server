@@ -11,6 +11,7 @@ type Mutation {
     first_name: String!
     last_name: String!
     country_id: Int!
+    ethnicity_id: Int!
     user_cups: UserCupCreateManyWithoutUserIdInput
   ): AuthPayload
   getNewToken(email: String!): getNewTokenPayload

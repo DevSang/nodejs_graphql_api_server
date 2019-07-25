@@ -26,6 +26,7 @@ module.exports = async (
 
   let res = await request.post(options);
   res = JSON.parse(res);
+	console.log(res);
   let createUserCoin = await ctx.db.mutation.createUserCoinHistory({
     data: {
       userId: {

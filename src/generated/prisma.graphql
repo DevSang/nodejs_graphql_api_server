@@ -11669,7 +11669,7 @@ type User {
   dob: DateTime!
   email: String!
   encryptSaltString: String
-  ethnicityId: Ethnicity!
+  ethnicityId: Ethnicity
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
@@ -12468,7 +12468,7 @@ input UserCreateInput {
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
   cupDataUserRemove: CupDataUserRemoveCreateManyWithoutUserIdInput
-  ethnicityId: EthnicityCreateOneWithoutUsersInput!
+  ethnicityId: EthnicityCreateOneWithoutUsersInput
   userCoinHistory: UserCoinHistoryCreateManyWithoutUserIdInput
   userCups: UserCupCreateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput

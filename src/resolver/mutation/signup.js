@@ -12,15 +12,14 @@ var certRefreshPrivate = fs.readFileSync(path.resolve(jwtConfig.certRefreshPriva
 
 var timerHashmap = {};
 
-module.exports = async (parent, { email,password, dob, given_birth,last_name,first_name,country_id}, ctx, info) => {
+module.exports = async (parent, { email,password, dob, given_birth,last_name,first_name,country_id, ethnicity_id}, ctx, info) => {
     // exception:no firebase token
     if(!ctx.response.locals.user) throw new Error('NO_FIREBASE_TOKEN');
     else console.log(`>> [SIGNUP] ${email}`);
 
     // exception: duplicated email
     var user = await ctx.db.query.users({ where: { email : email } });
-
-    if(user){
+    if(user.length !== 0){
         try{
             console.log("User already exist");
             let fbUser = await admin.auth().getUserByEmail(email)
@@ -34,7 +33,7 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
                     let fbUser = await admin.auth().getUserByEmail(email);
                     if(!fbUser.toJSON().emailVerified || fbUser.toJSON().emailVerified === 'false'){
                         admin.auth().deleteUser(fbUser.toJSON().uid);
-                        let deleteResult = await ctx.db.mutation.deleteUsers({ where: { email : email } });
+                        let deleteResult = await ctx.db.mutation.deleteUser({ where: { email : email } });
                         console.log(">> [Delete User]" , deleteResult.email);
                         delete timerHashmap[email];
                     }
@@ -53,20 +52,25 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
             let salt = rand(160, 36);
             let hashPassword = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
 
-            user = await ctx.db.mutation.createUsers({
+            user = await ctx.db.mutation.createUser({
                 data:{
                     dob:dob,
-                    given_birth:given_birth,
+                    givenBirth:given_birth,
                     email:email,
                     password: hashPassword,
-                    last_name:last_name,
-                    first_name:first_name,
-                    country:{
-                        connect:{
-                            id:country_id
-                        }
-                    },
-                    encrypt_salt_string : salt
+                    lastName:last_name,
+                    firstName:first_name,
+                    countryId:{
+			    connect:{
+				    id:country_id
+			    }
+		    },
+		    ethnicityId:{
+			    connect:{
+				    id:ethnicity_id
+			    }
+		    },
+                    encryptSaltString : salt
                 }
             });
 

@@ -1,147 +1,147 @@
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-var prisma_lib_1 = require('prisma-client-lib');
-var typeDefs = require('./prisma-schema').typeDefs;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var prisma_lib_1 = require("prisma-client-lib");
+var typeDefs = require("./prisma-schema").typeDefs;
 
 var models = [
   {
-    name: 'AnswerType',
+    name: "AnswerType",
     embedded: false
   },
   {
-    name: 'AppServerSync',
+    name: "AppServerSync",
     embedded: false
   },
   {
-    name: 'AuthToken',
+    name: "AuthToken",
     embedded: false
   },
   {
-    name: 'Calibration',
+    name: "Calibration",
     embedded: false
   },
   {
-    name: 'Company',
+    name: "Company",
     embedded: false
   },
   {
-    name: 'Country',
+    name: "Country",
     embedded: false
   },
   {
-    name: 'Cup',
+    name: "Cup",
     embedded: false
   },
   {
-    name: 'CupAppSync',
+    name: "CupAppSync",
     embedded: false
   },
   {
-    name: 'CupDataAnswer',
+    name: "CupDataAnswer",
     embedded: false
   },
   {
-    name: 'CupDataColourCalc',
+    name: "CupDataColourCalc",
     embedded: false
   },
   {
-    name: 'CupDataColourCalib',
+    name: "CupDataColourCalib",
     embedded: false
   },
   {
-    name: 'CupDataManMdate',
+    name: "CupDataManMdate",
     embedded: false
   },
   {
-    name: 'CupDataProcFlow',
+    name: "CupDataProcFlow",
     embedded: false
   },
   {
-    name: 'CupDataProcMdate',
+    name: "CupDataProcMdate",
     embedded: false
   },
   {
-    name: 'CupDataProcVolume',
+    name: "CupDataProcVolume",
     embedded: false
   },
   {
-    name: 'CupDataQaResponse',
+    name: "CupDataQaResponse",
     embedded: false
   },
   {
-    name: 'CupDataQuestion',
+    name: "CupDataQuestion",
     embedded: false
   },
   {
-    name: 'CupDataRaw',
+    name: "CupDataRaw",
     embedded: false
   },
   {
-    name: 'CupDataRejection',
+    name: "CupDataRejection",
     embedded: false
   },
   {
-    name: 'CupDataUserRemove',
+    name: "CupDataUserRemove",
     embedded: false
   },
   {
-    name: 'CupDataUserRemoveExplain',
+    name: "CupDataUserRemoveExplain",
     embedded: false
   },
   {
-    name: 'CupDatum',
+    name: "CupDatum",
     embedded: false
   },
   {
-    name: 'Ethnicity',
+    name: "Ethnicity",
     embedded: false
   },
   {
-    name: 'Firmware',
+    name: "Firmware",
     embedded: false
   },
   {
-    name: 'Hardware',
+    name: "Hardware",
     embedded: false
   },
   {
-    name: 'PlatformComp',
+    name: "PlatformComp",
     embedded: false
   },
   {
-    name: 'User',
+    name: "User",
     embedded: false
   },
   {
-    name: 'UserCoinHistory',
+    name: "UserCoinHistory",
     embedded: false
   },
   {
-    name: 'UserCup',
+    name: "UserCup",
     embedded: false
   },
   {
-    name: 'UserInterviewDatum',
+    name: "UserInterviewDatum",
     embedded: false
   },
   {
-    name: 'UserInterviewQuestion',
+    name: "UserInterviewQuestion",
     embedded: false
   },
   {
-    name: 'UserRecordDataByDay',
+    name: "UserRecordDataByDay",
     embedded: false
   },
   {
-    name: 'UserRecordDataByPeriod',
+    name: "UserRecordDataByPeriod",
     embedded: false
   },
   {
-    name: 'UserRecordDataByTime',
+    name: "UserRecordDataByTime",
     embedded: false
   },
   {
-    name: 'UsersDataAnalysis',
+    name: "UsersDataAnalysis",
     embedded: false
   }
 ];

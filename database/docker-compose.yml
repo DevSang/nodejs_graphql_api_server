@@ -1,7 +1,7 @@
 version: '3'
 services:
   prisma:
-    image: prismagraphql/prisma:1.35-beta
+    image: prismagraphql/prisma:1.30
     restart: always
     ports:
     - "4466:4466"
@@ -13,7 +13,7 @@ services:
         databases:
           default:
             connector: postgres
-            host: 34.85.51.227
+            host: 10.148.80.5
             database: loon_dev
             schema: public
             user: loon

@@ -1,170 +1,170 @@
-type AnswerType @db(name: "answer_types") {
-  answer_type_id: Int! @id(strategy: SEQUENCE) @sequence(name: "answer_types_answer_type_id_seq", initialValue: 1, allocationSize: 1)
-  answerType: String! @db(name: "answer_type") @unique
-  userInterviewQuestions: [UserInterviewQuestion]
+type AnswerType @pgTable(name: "answer_types") {
+  id: Int! @pgColumn(name: "answer_type_id") @unique
+  answerType: String! @pgColumn(name: "answer_type") @unique
+  userInterviewQuestions: [UserInterviewQuestion] @pgColumn(name: "user_interview_questions")
 }
 
-type AppServerSync @db(name: "app_server_sync") {
-  app_server_sync_id: Int! @id(strategy: SEQUENCE) @sequence(name: "app_server_sync_app_server_sync_id_seq", initialValue: 1, allocationSize: 1)
-  serverSynchTime: DateTime! @db(name: "server_synch_time")
-  user: User! @db(name: "user_id")
+type AppServerSync @pgTable(name: "app_server_sync") {
+  id: Int! @pgColumn(name: "app_server_sync_id") @unique
+  serverSynchTime: DateTime! @pgColumn(name: "server_synch_time")
+  userId: User! @pgColumn(name: "user_id")
 }
 
-type AuthToken @db(name: "auth_token") {
-  user_id: Int! @id
+type AuthToken @pgTable(name: "auth_token") {
+  id: Int! @pgColumn(name: "user_id") @unique
 }
 
-type Calibration @db(name: "calibration") {
-  calib_id: Int! @id(strategy: SEQUENCE) @sequence(name: "calibration_calib_id_seq", initialValue: 1, allocationSize: 1)
+type Calibration @pgTable(name: "calibration") {
+  id: Int! @pgColumn(name: "calib_id") @unique
   # describes method of calibration
-  calibVersion: String! @db(name: "calib_version") @unique
+  calibVersion: String! @pgColumn(name: "calib_version") @unique
   cup: [Cup]
 }
 
-type Company @db(name: "company") {
-  company_id: Int! @id(strategy: SEQUENCE) @sequence(name: "company_company_id_seq", initialValue: 1, allocationSize: 1)
-  companyName: String! @db(name: "company_name") @unique
+type Company @pgTable(name: "company") {
+  id: Int! @pgColumn(name: "company_id") @unique
+  companyName: String! @pgColumn(name: "company_name") @unique
   cup: [Cup]
 }
 
-type Country @db(name: "country") {
-  country_id: Int! @id(strategy: SEQUENCE) @sequence(name: "country_country_id_seq", initialValue: 1, allocationSize: 1)
-  countryName: String! @db(name: "country_name") @unique
+type Country @pgTable(name: "country") {
+  id: Int! @pgColumn(name: "country_id") @unique
+  countryName: String! @pgColumn(name: "country_name") @unique
   users: [User]
 }
 
-type Cup @db(name: "cup") {
-  serial_number: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_serial_number_seq", initialValue: 1, allocationSize: 1)
-  anonSerialNumber: Int! @db(name: "anon_serial_number")
-  calib: Calibration @db(name: "calib_id")
-  company: Company @db(name: "company_id")
-  cupAppSync: [CupAppSync]
-  cupData: [CupDatum]
-  cupDataColourCalib: [CupDataColourCalib]
-  cupDataRaw: [CupDataRaw]
-  cupDataUserRemove: [CupDataUserRemove]
-  encryptionKey: Int! @db(name: "encryption_key")
-  fw: Firmware @db(name: "fw_id")
-  hw: Hardware @db(name: "hw_id")
-  userCups: [UserCup]
+type Cup @pgTable(name: "cup") {
+  id: Int! @pgColumn(name: "serial_number") @unique
+  anonSerialNumber: Int! @pgColumn(name: "anon_serial_number")
+  calibId: Calibration @pgColumn(name: "calib_id")
+  companyId: Company @pgColumn(name: "company_id")
+  cupAppSync: [CupAppSync] @pgColumn(name: "cup_app_sync")
+  cupData: [CupDatum] @pgColumn(name: "cup_data")
+  cupDataColourCalib: [CupDataColourCalib] @pgColumn(name: "cup_data_colour_calib")
+  cupDataRaw: [CupDataRaw] @pgColumn(name: "cup_data_raw")
+  cupDataUserRemove: [CupDataUserRemove] @pgColumn(name: "cup_data_user_remove")
+  encryptionKey: Int! @pgColumn(name: "encryption_key")
+  fwId: Firmware @pgColumn(name: "fw_id")
+  hwId: Hardware @pgColumn(name: "hw_id")
+  userCups: [UserCup] @pgColumn(name: "user_cups")
 }
 
-type CupAppSync @db(name: "cup_app_sync") {
-  cup_app_sync_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_app_sync_cup_app_sync_id_seq", initialValue: 1, allocationSize: 1)
-  appSynchTime: DateTime! @db(name: "app_synch_time")
-  serialNumber: Cup! @db(name: "serial_number")
+type CupAppSync @pgTable(name: "cup_app_sync") {
+  id: Int! @pgColumn(name: "cup_app_sync_id") @unique
+  appSynchTime: DateTime! @pgColumn(name: "app_synch_time")
+  serialNumber: Cup! @pgColumn(name: "serial_number")
 }
 
-type CupDataAnswer @db(name: "cup_data_answer") {
-  answer_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_answer_answer_id_seq", initialValue: 1, allocationSize: 1)
-  answerText: String! @db(name: "answer_text")
-  cupDataQaResponse: [CupDataQaResponse]
-  question: CupDataQuestion! @db(name: "question_id")
+type CupDataAnswer @pgTable(name: "cup_data_answer") {
+  id: Int! @pgColumn(name: "answer_id") @unique
+  answerText: String! @pgColumn(name: "answer_text")
+  cupDataQaResponse: [CupDataQaResponse] @pgColumn(name: "cup_data_qa_response")
+  questionId: CupDataQuestion! @pgColumn(name: "question_id")
 }
 
-type CupDataColourCalc @db(name: "cup_data_colour_calc") {
-  row_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_colour_calc_row_id_seq", initialValue: 1, allocationSize: 1)
+type CupDataColourCalc @pgTable(name: "cup_data_colour_calc") {
+  id: Int! @pgColumn(name: "row_id") @unique
   blue: Int!
-  cupDataRow: CupDatum! @db(name: "cup_data_row_id")
+  cupDataRowId: CupDatum! @pgColumn(name: "cup_data_row_id")
   green: Int!
   red: Int!
 }
 
-type CupDataColourCalib @db(name: "cup_data_colour_calib") {
-  cup_data_colour_calib_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_colour_calib_cup_data_colour_calib_id_seq", initialValue: 1, allocationSize: 1)
+type CupDataColourCalib @pgTable(name: "cup_data_colour_calib") {
+  id: Int! @pgColumn(name: "cup_data_colour_calib_id") @unique
   blue: Int!
   c: Int!
   green: Int!
   red: Int!
-  serialNumber: Cup! @db(name: "serial_number")
+  serialNumber: Cup! @pgColumn(name: "serial_number")
 }
 
-type CupDataManMdate @db(name: "cup_data_man_mdates") {
-  row_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_colour_calc_row_id_seq", initialValue: 1, allocationSize: 1)
-  mdateRow: CupDataProcMdate! @db(name: "mdate_row_id")
-  menFinish: DateTime @db(name: "men_finish")
-  menStart: DateTime @db(name: "men_start")
+type CupDataManMdate @pgTable(name: "cup_data_man_mdates") {
+  id: Int! @pgColumn(name: "row_id") @unique
+  mdateRowId: CupDataProcMdate! @pgColumn(name: "mdate_row_id")
+  menFinish: DateTime @pgColumn(name: "men_finish")
+  menStart: DateTime @pgColumn(name: "men_start")
 }
 
-type CupDataProcFlow @db(name: "cup_data_proc_flow") {
-  row_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_proc_flow_row_id_seq", initialValue: 1, allocationSize: 1)
+type CupDataProcFlow @pgTable(name: "cup_data_proc_flow") {
+  id: Int! @pgColumn(name: "row_id") @unique
   date: DateTime!
   # the flow is x 10 (the volume is also x 10) which allows us to avoid decimals and use smallint
-  hourlyFlow: Int! @db(name: "hourly_flow")
-  mdateRow: CupDataProcMdate! @db(name: "mdate_row_id")
-  user: User! @db(name: "user_id")
+  hourlyFlow: Int! @pgColumn(name: "hourly_flow")
+  mdateRowId: CupDataProcMdate! @pgColumn(name: "mdate_row_id")
+  userId: User! @pgColumn(name: "user_id")
 }
 
-type CupDataProcMdate @db(name: "cup_data_proc_mdates") {
-  mdate_row_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_proc_mdates_row_id_seq", initialValue: 1, allocationSize: 1)
-  cupDataManMdates: [CupDataManMdate]
-  cupDataProcFlow: [CupDataProcFlow]
-  dataRejected: Boolean @db(name: "data_rejected")
-  dataVerified: Boolean! @db(name: "data_verified")
-  menFinish: DateTime! @db(name: "men_finish")
-  menStart: DateTime! @db(name: "men_start")
-  reject: CupDataRejection @db(name: "reject_id")
-  rewardAmount: Int @db(name: "reward_amount")
-  user: User! @db(name: "user_id")
+type CupDataProcMdate @pgTable(name: "cup_data_proc_mdates") {
+  id: Int! @pgColumn(name: "mdate_row_id") @unique
+  cupDataManMdates: [CupDataManMdate] @pgColumn(name: "cup_data_man_mdates")
+  cupDataProcFlow: [CupDataProcFlow] @pgColumn(name: "cup_data_proc_flow")
+  dataRejected: Boolean @pgColumn(name: "data_rejected")
+  dataVerified: Boolean! @pgColumn(name: "data_verified")
+  menFinish: DateTime! @pgColumn(name: "men_finish")
+  menStart: DateTime! @pgColumn(name: "men_start")
+  rejectId: CupDataRejection @pgColumn(name: "reject_id")
+  rewardAmount: Int @pgColumn(name: "reward_amount")
+  userId: User! @pgColumn(name: "user_id")
 }
 
-type CupDataProcVolume @db(name: "cup_data_proc_volume") {
-  row_id: Int! @id
-  confidenceL: Int @db(name: "confidence_l")
-  confidenceR: Int @db(name: "confidence_r")
-  cupDataRow: CupDatum! @db(name: "cup_data_row_id")
-  inVitro: Boolean! @db(name: "in_vitro") @default(value: false)
+type CupDataProcVolume @pgTable(name: "cup_data_proc_volume") {
+  id: Int! @pgColumn(name: "row_id") @unique
+  confidenceL: Int @pgColumn(name: "confidence_l")
+  confidenceR: Int @pgColumn(name: "confidence_r")
+  cupDataRowId: CupDatum! @pgColumn(name: "cup_data_row_id")
+  inVitro: Boolean! @default(value: false) @pgColumn(name: "in_vitro")
   volume: Int
-  volumeAdj: Int @db(name: "volume_adj")
-  volumeL: Int @db(name: "volume_l")
-  volumeR: Int @db(name: "volume_r")
+  volumeAdj: Int @pgColumn(name: "volume_adj")
+  volumeL: Int @pgColumn(name: "volume_l")
+  volumeR: Int @pgColumn(name: "volume_r")
 }
 
-type CupDataQaResponse @db(name: "cup_data_qa_response") {
-  cup_data_qa_response_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_qa_response_cup_data_qa_response_id_seq", initialValue: 1, allocationSize: 1)
-  answer: CupDataAnswer! @db(name: "answer_id")
-  qaDate: DateTime! @db(name: "qa_date")
-  question: CupDataQuestion! @db(name: "question_id")
-  user: User! @db(name: "user_id")
+type CupDataQaResponse @pgTable(name: "cup_data_qa_response") {
+  id: Int! @pgColumn(name: "cup_data_qa_response_id") @unique
+  answerId: CupDataAnswer! @pgColumn(name: "answer_id")
+  qaDate: DateTime! @pgColumn(name: "qa_date")
+  questionId: CupDataQuestion! @pgColumn(name: "question_id")
+  userId: User! @pgColumn(name: "user_id")
 }
 
-type CupDataQuestion @db(name: "cup_data_question") {
-  question_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_question_question_id_seq", initialValue: 1, allocationSize: 1)
-  cupDataAnswer: [CupDataAnswer]
-  cupDataQaResponse: [CupDataQaResponse]
-  questionText: String! @db(name: "question_text")
+type CupDataQuestion @pgTable(name: "cup_data_question") {
+  id: Int! @pgColumn(name: "question_id") @unique
+  cupDataAnswer: [CupDataAnswer] @pgColumn(name: "cup_data_answer")
+  cupDataQaResponse: [CupDataQaResponse] @pgColumn(name: "cup_data_qa_response")
+  questionText: String! @pgColumn(name: "question_text")
 }
 
-type CupDataRaw @db(name: "cup_data_raw") {
-  row_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_raw_row_id_seq", initialValue: 1, allocationSize: 1)
-  pageData: String! @db(name: "page_data")
-  serialNumber: Cup @db(name: "serial_number")
+type CupDataRaw @pgTable(name: "cup_data_raw") {
+  id: Int! @pgColumn(name: "row_id") @unique
+  pageData: String! @pgColumn(name: "page_data")
+  serialNumber: Cup @pgColumn(name: "serial_number")
 }
 
-type CupDataRejection @db(name: "cup_data_rejection") {
-  reject_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_rejection_reject_id_seq", initialValue: 1, allocationSize: 1)
-  cupDataProcMdates: [CupDataProcMdate]
-  rejectionDescription: String! @db(name: "rejection_description") @unique
+type CupDataRejection @pgTable(name: "cup_data_rejection") {
+  id: Int! @pgColumn(name: "reject_id") @unique
+  cupDataProcMdates: [CupDataProcMdate] @pgColumn(name: "cup_data_proc_mdates")
+  rejectionDescription: String! @pgColumn(name: "rejection_description") @unique
 }
 
-type CupDataUserRemove @db(name: "cup_data_user_remove") {
-  row_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_user_remove_row_id_seq", initialValue: 1, allocationSize: 1)
-  changeTime: DateTime! @db(name: "change_time")
-  explain: CupDataUserRemoveExplain! @db(name: "explain_id")
-  serialNumber: Cup! @db(name: "serial_number")
-  user: User! @db(name: "user_id")
+type CupDataUserRemove @pgTable(name: "cup_data_user_remove") {
+  id: Int! @pgColumn(name: "row_id") @unique
+  changeTime: DateTime! @pgColumn(name: "change_time")
+  explainId: CupDataUserRemoveExplain! @pgColumn(name: "explain_id")
+  serialNumber: Cup! @pgColumn(name: "serial_number")
+  userId: User! @pgColumn(name: "user_id")
 }
 
-type CupDataUserRemoveExplain @db(name: "cup_data_user_remove_explain") {
-  explain_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_user_remove_explain_explain_id_seq", initialValue: 1, allocationSize: 1)
-  cupDataUserRemove: [CupDataUserRemove]
+type CupDataUserRemoveExplain @pgTable(name: "cup_data_user_remove_explain") {
+  id: Int! @pgColumn(name: "explain_id") @unique
+  cupDataUserRemove: [CupDataUserRemove] @pgColumn(name: "cup_data_user_remove")
   explain: String!
 }
 
-type CupDatum @db(name: "cup_data") {
-  row_id: Int! @id(strategy: SEQUENCE) @sequence(name: "cup_data_row_seq", initialValue: 1, allocationSize: 1)
+type CupDatum @pgTable(name: "cup_data") {
+  id: Int! @pgColumn(name: "row_id") @unique
   battery: Int!
-  calibFlag: Boolean! @db(name: "calib_flag")
+  calibFlag: Boolean! @pgColumn(name: "calib_flag")
   ch1: Int!
   ch10: Int!
   ch11: Int!
@@ -179,12 +179,12 @@ type CupDatum @db(name: "cup_data") {
   ch7: Int!
   ch8: Int!
   ch9: Int!
-  colourB: Int! @db(name: "colour_b")
-  colourC: Int! @db(name: "colour_c")
-  colourG: Int! @db(name: "colour_g")
-  colourR: Int! @db(name: "colour_r")
-  cupDataColourCalc: [CupDataColourCalc]
-  cupDataProcVolume: [CupDataProcVolume]
+  colourB: Int! @pgColumn(name: "colour_b")
+  colourC: Int! @pgColumn(name: "colour_c")
+  colourG: Int! @pgColumn(name: "colour_g")
+  colourR: Int! @pgColumn(name: "colour_r")
+  cupDataColourCalc: [CupDataColourCalc] @pgColumn(name: "cup_data_colour_calc")
+  cupDataProcVolume: [CupDataProcVolume] @pgColumn(name: "cup_data_proc_volume")
   date: DateTime!
   day: Int!
   hour: Int!
@@ -192,10 +192,10 @@ type CupDatum @db(name: "cup_data") {
   minute: Int!
   month: Int!
   page: Int!
-  rawTotalVolume: Int @db(name: "raw_total_volume")
-  rawVolumeL: Int @db(name: "raw_volume_l")
-  rawVolumeR: Int @db(name: "raw_volume_r")
-  serialNumber: Cup @db(name: "serial_number")
+  rawTotalVolume: Int @pgColumn(name: "raw_total_volume")
+  rawVolumeL: Int @pgColumn(name: "raw_volume_l")
+  rawVolumeR: Int @pgColumn(name: "raw_volume_r")
+  serialNumber: Cup @pgColumn(name: "serial_number")
   temperature: Int!
   x: Int!
   y: Int!
@@ -203,127 +203,127 @@ type CupDatum @db(name: "cup_data") {
   z: Int!
 }
 
-type Ethnicity @db(name: "ethnicity") {
-  ethnicity_id: Int! @id(strategy: SEQUENCE) @sequence(name: "ethnicity_ethnicity_id_seq", initialValue: 1, allocationSize: 1)
+type Ethnicity @pgTable(name: "ethnicity") {
+  id: Int! @pgColumn(name: "ethnicity_id") @unique
   ethnicity: String! @unique
   users: [User]
 }
 
-type Firmware @db(name: "firmware") {
-  fw_id: Int! @id(strategy: SEQUENCE) @sequence(name: "firmware_fw_id_seq", initialValue: 1, allocationSize: 1)
+type Firmware @pgTable(name: "firmware") {
+  id: Int! @pgColumn(name: "fw_id") @unique
   cup: [Cup]
-  fwVersion: String! @db(name: "fw_version") @unique
+  fwVersion: String! @pgColumn(name: "fw_version") @unique
 }
 
-type Hardware @db(name: "hardware") {
-  hw_id: Int! @id(strategy: SEQUENCE) @sequence(name: "hardware_hw_id_seq", initialValue: 1, allocationSize: 1)
+type Hardware @pgTable(name: "hardware") {
+  id: Int! @pgColumn(name: "hw_id") @unique
   cup: [Cup]
-  hwVersion: String! @db(name: "hw_version") @unique
+  hwVersion: String! @pgColumn(name: "hw_version") @unique
 }
 
-type PlatformComp @db(name: "platform_comp") {
-  row_id: Int! @id
-  phoneId: Int! @db(name: "phone_id")
-  platformId: Int! @db(name: "platform_id")
-  problemHistory: Boolean @db(name: "problem_history")
-  softwareId: Int! @db(name: "software_id")
-  successHistory: Boolean @db(name: "success_history")
+type PlatformComp @pgTable(name: "platform_comp") {
+  id: Int! @pgColumn(name: "row_id") @unique
+  phoneId: Int! @pgColumn(name: "phone_id")
+  platformId: Int! @pgColumn(name: "platform_id")
+  problemHistory: Boolean @pgColumn(name: "problem_history")
+  softwareId: Int! @pgColumn(name: "software_id")
+  successHistory: Boolean @pgColumn(name: "success_history")
 }
 
-type User @db(name: "users") {
-  user_id: Int! @id(strategy: SEQUENCE) @sequence(name: "user_user_id_seq", initialValue: 1, allocationSize: 1)
-  anonUserId: Int @db(name: "anon_user_id") @unique
-  appServerSync: [AppServerSync]
-  country: Country @db(name: "country_id")
-  cupDataProcFlow: [CupDataProcFlow]
-  cupDataProcMdates: [CupDataProcMdate]
-  cupDataQaResponse: [CupDataQaResponse]
-  cupDataUserRemove: [CupDataUserRemove]
+type User @pgTable(name: "users") {
+  id: Int! @pgColumn(name: "user_id") @unique
+  anonUserId: Int @pgColumn(name: "anon_user_id") @unique
+  appServerSync: [AppServerSync] @pgColumn(name: "app_server_sync")
+  countryId: Country @pgColumn(name: "country_id")
+  cupDataProcFlow: [CupDataProcFlow] @pgColumn(name: "cup_data_proc_flow")
+  cupDataProcMdates: [CupDataProcMdate] @pgColumn(name: "cup_data_proc_mdates")
+  cupDataQaResponse: [CupDataQaResponse] @pgColumn(name: "cup_data_qa_response")
+  cupDataUserRemove: [CupDataUserRemove] @pgColumn(name: "cup_data_user_remove")
   deleted: Boolean! @default(value: false)
   dob: DateTime!
   email: String! @unique
   # NULL
-  encryptSaltString: String @db(name: "encrypt_salt_string")
-  ethnicity: Ethnicity! @db(name: "ethnicity_id") @default(value: 0)
-  firstName: String! @db(name: "first_name")
-  givenBirth: Boolean! @db(name: "given_birth")
-  lastName: String! @db(name: "last_name")
+  encryptSaltString: String @pgColumn(name: "encrypt_salt_string")
+  ethnicityId: Ethnicity @pgColumn(name: "ethnicity_id")
+  firstName: String! @pgColumn(name: "first_name")
+  givenBirth: Boolean! @pgColumn(name: "given_birth")
+  lastName: String! @pgColumn(name: "last_name")
   password: String!
-  userCoinHistory: [UserCoinHistory]
-  userCups: [UserCup]
-  userInterviewData: [UserInterviewDatum]
-  userRecordDataByPeriod: [UserRecordDataByPeriod]
+  userCoinHistory: [UserCoinHistory] @pgColumn(name: "user_coin_history")
+  userCups: [UserCup] @pgColumn(name: "user_cups")
+  userInterviewData: [UserInterviewDatum] @pgColumn(name: "user_interview_data")
+  userRecordDataByPeriod: [UserRecordDataByPeriod] @pgColumn(name: "user_record_data_by_period")
 }
 
-type UserCoinHistory @db(name: "user_coin_history") {
-  row_id: Int! @id(strategy: SEQUENCE) @sequence(name: "user_coin_history_row_id_seq", initialValue: 1, allocationSize: 1)
+type UserCoinHistory @pgTable(name: "user_coin_history") {
+  id: Int! @pgColumn(name: "row_id") @unique
   category: String!
   coin: Int!
   contents: String!
   date: DateTime!
   txhash: String!
-  user: User @db(name: "user_id")
-  userRecordDataByPeriod: [UserRecordDataByPeriod]
+  userId: User @pgColumn(name: "user_id")
+  userRecordDataByPeriod: [UserRecordDataByPeriod] @pgColumn(name: "user_record_data_by_period")
 }
 
-type UserCup @db(name: "user_cups") @relationTable {
-  row_id: Int! @id(strategy: SEQUENCE) @sequence(name: "user_cups_row_id_seq", initialValue: 1, allocationSize: 1)
-  serialNumber: Cup @db(name: "serial_number")
-  user: User @db(name: "user_id")
+type UserCup @linkTable @pgTable(name: "user_cups") {
+  id: Int! @pgColumn(name: "row_id") @unique
+  serialNumber: Cup @pgColumn(name: "serial_number")
+  userId: User @pgColumn(name: "user_id")
 }
 
-type UserInterviewDatum @db(name: "user_interview_data") {
-  row_id: Int! @id
-  answerRange: Int @db(name: "answer_range")
-  answerText: String @db(name: "answer_text")
-  answerYn: Boolean @db(name: "answer_yn")
+type UserInterviewDatum @pgTable(name: "user_interview_data") {
+  id: Int! @pgColumn(name: "row_id") @unique
+  answerRange: Int @pgColumn(name: "answer_range")
+  answerText: String @pgColumn(name: "answer_text")
+  answerYn: Boolean @pgColumn(name: "answer_yn")
   date: DateTime!
-  question: UserInterviewQuestion! @db(name: "question_id")
-  user: User! @db(name: "user_id")
+  questionId: UserInterviewQuestion! @pgColumn(name: "question_id")
+  userId: User! @pgColumn(name: "user_id")
 }
 
-type UserInterviewQuestion @db(name: "user_interview_questions") {
-  question_id: Int! @id(strategy: SEQUENCE) @sequence(name: "user_interview_questions_question_id_seq", initialValue: 1, allocationSize: 1)
-  answerType: AnswerType! @db(name: "answer_type_id")
+type UserInterviewQuestion @pgTable(name: "user_interview_questions") {
+  id: Int! @pgColumn(name: "question_id") @unique
+  answerTypeId: AnswerType! @pgColumn(name: "answer_type_id")
   question: String! @unique
-  userInterviewData: [UserInterviewDatum]
+  userInterviewData: [UserInterviewDatum] @pgColumn(name: "user_interview_data")
 }
 
-type UserRecordDataByDay @db(name: "user_record_data_by_day") {
-  row_id: Int! @id(strategy: SEQUENCE) @sequence(name: "user_record_day_data_row_id_seq", initialValue: 1, allocationSize: 1)
-  crampsLevel: Int @db(name: "cramps_level")
-  recordDate: DateTime! @db(name: "record_date")
-  recordPeriodRow: UserRecordDataByPeriod @db(name: "record_period_row_id")
-  userRecordDataByTime: [UserRecordDataByTime]
+type UserRecordDataByDay @pgTable(name: "user_record_data_by_day") {
+  id: Int! @pgColumn(name: "row_id") @unique
+  crampsLevel: Int @pgColumn(name: "cramps_level")
+  recordDate: DateTime! @pgColumn(name: "record_date")
+  recordPeriodRowId: UserRecordDataByPeriod @pgColumn(name: "record_period_row_id")
+  userRecordDataByTime: [UserRecordDataByTime] @pgColumn(name: "user_record_data_by_time")
 }
 
-type UserRecordDataByPeriod @db(name: "user_record_data_by_period") {
-  row_id: Int! @id(strategy: SEQUENCE) @sequence(name: "user_record_period_data_row_id_seq", initialValue: 1, allocationSize: 1)
-  coinHistoryRow: UserCoinHistory @db(name: "coin_history_row_id")
-  isTakePill: Boolean @db(name: "is_take_pill")
-  mensFinish: DateTime! @db(name: "mens_finish")
-  mensStart: DateTime! @db(name: "mens_start")
-  user: User @db(name: "user_id")
-  userRecordDataByDay: [UserRecordDataByDay]
+type UserRecordDataByPeriod @pgTable(name: "user_record_data_by_period") {
+  id: Int! @pgColumn(name: "row_id") @unique
+  coinHistoryRowId: UserCoinHistory @pgColumn(name: "coin_history_row_id")
+  isTakePill: Boolean @pgColumn(name: "is_take_pill")
+  mensFinish: DateTime @pgColumn(name: "mens_finish")
+  mensStart: DateTime @pgColumn(name: "mens_start")
+  userId: User @pgColumn(name: "user_id")
+  userRecordDataByDay: [UserRecordDataByDay] @pgColumn(name: "user_record_data_by_day")
 }
 
-type UserRecordDataByTime @db(name: "user_record_data_by_time") {
-  row_id: Int! @id(strategy: SEQUENCE) @sequence(name: "user_record_time_data_row_id_seq", initialValue: 1, allocationSize: 1)
-  changeTime: DateTime! @db(name: "change_time")
-  colorB: Int @db(name: "color_b")
-  colorG: Int @db(name: "color_g")
-  colorR: Int @db(name: "color_r")
+type UserRecordDataByTime @pgTable(name: "user_record_data_by_time") {
+  id: Int! @pgColumn(name: "row_id") @unique
+  changeTime: DateTime! @pgColumn(name: "change_time")
+  colorB: Int @pgColumn(name: "color_b")
+  colorG: Int @pgColumn(name: "color_g")
+  colorR: Int @pgColumn(name: "color_r")
   leakage: String
-  recordDayRow: UserRecordDataByDay @db(name: "record_day_row_id")
-  startTime: DateTime @db(name: "start_time")
+  recordDayRowId: UserRecordDataByDay @pgColumn(name: "record_day_row_id")
+  startTime: DateTime @pgColumn(name: "start_time")
   volume: Float
 }
 
-type UsersDataAnalysis @db(name: "users_data_analysis") {
-  idx: Int! @id(strategy: SEQUENCE) @sequence(name: "user_data_analysys_id_seq", initialValue: 1, allocationSize: 1)
+type UsersDataAnalysis @pgTable(name: "users_data_analysis") {
+  id: Int! @pgColumn(name: "idx") @unique
   email: String!
-  firstName: String! @db(name: "first_name")
-  lastName: String! @db(name: "last_name")
+  firstName: String! @pgColumn(name: "first_name")
+  lastName: String! @pgColumn(name: "last_name")
   password: String!
-  userId: String! @db(name: "user_id")
+  userId: String! @pgColumn(name: "user_id")
 }
