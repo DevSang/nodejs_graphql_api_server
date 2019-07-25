@@ -4,7 +4,7 @@ const { Prisma } = require('prisma-binding');
 // const { prisma } = require('../database/generated/prisma-client/index');
 // var typeDefs = require('../database/generated/prisma-client/prisma-schema')
 //   .typeDefs;
-var typeDefs = require('./generated/prisma').typeDefs;
+//var typeDefs = require('./generated/prisma.graphql');
 const { resolvers, fragmentReplacements } = require('./resolver');
 const bodyParser = require('body-parser');
 const authMiddleware = require('./middleware/auth');
@@ -13,8 +13,8 @@ const express = require('express');
 
 module.exports = db = new Prisma({
   fragmentReplacements: fragmentReplacements,
-  // typeDefs: 'src/generated/prisma.graphql',
-  typeDefs,
+  typeDefs: 'src/generated/prisma.graphql',
+  //typeDefs,
   endpoint: 'http://localhost:4466/',
   secret: 'jwt-secret',
   debug: false

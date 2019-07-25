@@ -11,7 +11,7 @@ type Mutation {
     first_name: String!
     last_name: String!
     country_id: Int!
-    user_cups: User_cupsCreateManyWithoutUserInput
+    user_cups: UserCupCreateManyWithoutUserIdInput
   ): AuthPayload
   getNewToken(email: String!): getNewTokenPayload
   gettesttoken(email: String!, password: String!): Tokens
@@ -26,26 +26,26 @@ type Mutation {
     contents: String!
     coin: Int!
     date: DateTime!
-  ): User_coin_history!
+  ): UserCoinHistory!
 }
 
 type getNewTokenPayload {
   accessToken: String
   refreshToken: String
-  user: Users
-  cups: User_cups
+  user: User
+  cups: UserCup
 }
 type AuthPayload {
   accessToken: String
   refreshToken: String
-  user: Users
+  user: User
 }
 type Tokens {
   accessToken: String
   refreshToken: String
 }
 type CupInfo {
-  user_cup: User_cups
+  user_cup: UserCup
 }
 type scriptResult {
   result: String
