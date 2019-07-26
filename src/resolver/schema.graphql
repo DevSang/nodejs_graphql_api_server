@@ -54,3 +54,4 @@ type scriptResult {
 type userResult {
   result: Boolean
 }
+

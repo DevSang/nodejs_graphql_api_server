@@ -5,6 +5,7 @@ const resolvers = {
     user: forwardTo('db'),
     users: forwardTo('db'),
     userCup: forwardTo('db'),
+    userCups: forwardTo('db'),
     hardware: forwardTo('db'),
     cupData: forwardTo('db'),
     //cup_data_proc_volume: forwardTo('db'),
@@ -60,3 +61,4 @@ module.exports = {
   resolvers,
   fragmentReplacements
 };
+

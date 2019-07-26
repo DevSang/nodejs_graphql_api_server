@@ -29,13 +29,13 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 	// exception : password가 일치하지 않을 때
 	if(user.password != decodedPassword) throw new Error('INVALID_PASSWORD');
 	
-	var cups = await ctx.db.query.user_cupses(
+	var cups = await ctx.db.query.userCups(
 		{
 			where: { user: { id: user.id } }
 		},
 		`{
 				id
-				serial_number {
+				serialNumber {
 					id
 				}
 			}`
@@ -54,3 +54,4 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 		cups
 	};
 }
+

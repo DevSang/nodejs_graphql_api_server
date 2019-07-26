@@ -17,14 +17,14 @@ module.exports = async (parent, { email }, ctx, info) => {
 
     console.log('>> [SIGN IN] ',email);
     var refreshToken = ctx.response.locals.refreshToken;
-    var user = await ctx.db.query.users({ where: { email : email } });
-    var cups = await ctx.db.query.user_cupses(
+    var user = await ctx.db.query.user({ where: { email : email } });
+    var cups = await ctx.db.query.userCups(
                         { 
-                           where: { user : {id : user.id} } 
+                           where: { userId : {id : user.id} } 
                         }, 
                         `{
                             id
-                            serial_number {
+                            serialNumber {
                                 id
                             }
                         }`
@@ -55,3 +55,4 @@ module.exports = async (parent, { email }, ctx, info) => {
         cups
     }
 }
+
