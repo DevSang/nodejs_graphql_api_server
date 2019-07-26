@@ -13,7 +13,7 @@ services:
         databases:
           default:
             connector: postgres
-            host: 10.148.80.5
+            host: 34.85.51.227
             database: loon_dev
             schema: public
             user: loon
