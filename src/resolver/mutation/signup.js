@@ -18,7 +18,7 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
     else console.log(`>> [SIGNUP] ${email}`);
 
     // exception: duplicated email
-    var user = await ctx.db.query.users({ where: { email : email } });
+    var user = await ctx.db.query.user({ where: { email : email } });
     if(user.length !== 0){
         try{
             console.log("User already exist");
@@ -61,15 +61,15 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
                     lastName:last_name,
                     firstName:first_name,
                     countryId:{
-			    connect:{
-				    id:country_id
-			    }
-		    },
-		    ethnicityId:{
-			    connect:{
-				    id:ethnicity_id
-			    }
-		    },
+                        connect:{
+                            id:country_id
+                        }
+		            },
+                    ethnicityId:{
+                        connect:{
+                            id:ethnicity_id
+                        }
+                    },
                     encryptSaltString : salt
                 }
             });
