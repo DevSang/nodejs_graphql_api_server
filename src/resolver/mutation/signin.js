@@ -13,9 +13,7 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 	else console.log('>> [SIGN IN]', email);
 
 	const tokenUser = ctx.response.locals.user;
-	var user = await ctx.db.query.users({ where: { email: email } });
-	console.log(user);
-	console.log(user.id);
+	var user = await ctx.db.query.user({ where: { email: email } });
 
 	// exception : DB에 user가 없을 때
 	if (!user) throw new Error('NO_USER_IN_DB');
@@ -23,7 +21,7 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 	// exception : token email 과 param 으로 온 email이 다를 때
 	if (user.email != tokenUser.email) throw new Error(`NOT_USERS_TOKEN ${user.email}`);
 
-	let salt = user.encrypt_salt_string;
+	let salt = user.encryptSaltString;
 	let decodedPassword = crypto.createHash("sha512").update(password + salt).digest("hex");
 	
 	// exception : password가 일치하지 않을 때
@@ -31,7 +29,7 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 	
 	var cups = await ctx.db.query.userCups(
 		{
-			where: { user: { id: user.id } }
+			where: { userId: { id: user.id } }
 		},
 		`{
 				id
