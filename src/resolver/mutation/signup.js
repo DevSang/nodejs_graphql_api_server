@@ -103,7 +103,7 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
         let payload = {
             email:user.email
         }
-
+        console.log("##", user);
         return {
             accessToken : jwt.sign(payload, certAccessPrivate, jwtConfig.algorithmAccess),
             refreshToken: jwt.sign(payload, certRefreshPrivate, jwtConfig.algorithmRefresh),
