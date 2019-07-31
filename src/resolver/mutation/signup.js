@@ -19,7 +19,8 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
 
     // exception: duplicated email
     var user = await ctx.db.query.user({ where: { email : email } });
-    if(user.length !== 0){
+    console.log(user);
+    if(user){
         try{
             console.log("User already exist");
             let fbUser = await admin.auth().getUserByEmail(email)
