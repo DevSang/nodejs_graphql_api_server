@@ -1,57 +1,70 @@
 # import Query.*, Mutation.* from "../generated/prisma.graphql"
 
 type Mutation {
-  signin(email: String!, password: String!): getNewTokenPayload
-  signup(
-    email: String!
-    password: String!
-    deleted: Boolean
-    dob: DateTime!
-    given_birth: Boolean!
-    first_name: String!
-    last_name: String!
-    country_id: Int!
-    ethnicity_id: Int!
-    user_cups: UserCupCreateManyWithoutUserIdInput
-  ): AuthPayload
-  getNewToken(email: String!): getNewTokenPayload
-  gettesttoken(email: String!, password: String!): Tokens
-  registerCup(anon_serial_number: Int!): CupInfo
-  runPerlScript(userId: Int!): scriptResult
-  getCupData(userId: Int!, mdateRowIdArray: String!): scriptResult
-  signinDataAnalysis(userId: String!, password: String!): userResult
-  createTxUserCoinHistory(
-    userId: Int!
-    address: String!
-    category: String!
-    contents: String!
-    coin: Int!
-    date: DateTime!
-  ): UserCoinHistory!
+    signin(email: String!, password: String!): getNewTokenPayload
+    signup(
+        email: String!
+        password: String!
+        deleted: Boolean
+        dob: DateTime!
+        given_birth: Boolean!
+        first_name: String!
+        last_name: String!
+        country_id: Int!
+        ethnicity_id: Int!
+        user_cups: UserCupCreateManyWithoutUserIdInput
+    ): AuthPayload
+    getNewToken(email: String!): getNewTokenPayload
+    gettesttoken(email: String!, password: String!): Tokens
+    registerCup(anon_serial_number: Int!): CupInfo
+    runPerlScript(userId: Int!): scriptResult
+    getCupData(userId: Int!, mdateRowIdArray: String!): scriptResult
+    signinDataAnalysis(userId: String!, password: String!): userResult
+    createTxUserCoinHistory(
+        userId: Int!
+        address: String
+        category: String!
+        contents: String!
+        coin: Int!
+        date: DateTime!
+        fromAddress: String
+        fromPkey: String
+    ): UserCoinHistory!
+    createTxAmazonCouponBuyList(
+        userId: Int!
+        address: String!
+        pKey: String!
+        couponPrice: Int!
+        couponName: String!
+    ): MarketAmazonCouponBuyList!
+    changeCouponCount(
+        name: String!
+        price: Int!
+        plusYn: Boolean
+    ): MarketAmazonCouponBuyList!
 }
 
 type getNewTokenPayload {
-  accessToken: String
-  refreshToken: String
-  user: User
-  cups: UserCup
+    accessToken: String
+    refreshToken: String
+    user: User
+    cups: UserCup
 }
 type AuthPayload {
-  accessToken: String
-  refreshToken: String
-  user: User
+    accessToken: String
+    refreshToken: String
+    user: User
 }
 type Tokens {
-  accessToken: String
-  refreshToken: String
+    accessToken: String
+    refreshToken: String
 }
 type CupInfo {
-  user_cup: UserCup
+    user_cup: UserCup
 }
 type scriptResult {
-  result: String
+    result: String
 }
 type userResult {
-  result: Boolean
+    result: Boolean
 }
-
