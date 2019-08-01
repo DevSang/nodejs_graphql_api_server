@@ -18,18 +18,19 @@ module.exports = async (parent, { email }, ctx, info) => {
     console.log('>> [SIGN IN] ',email);
     var refreshToken = ctx.response.locals.refreshToken;
     var user = await ctx.db.query.user({ where: { email : email } });
-    var cups = await ctx.db.query.userCups(
-                        { 
-                           where: { userId : {id : user.id} } 
-                        }, 
-                        `{
-                            id
-                            serialNumber {
-                                id
-                            }
-                        }`
-                    );
-    cups = cups[0];
+    // var cups = await ctx.db.query.userCups(
+    //                     { 
+    //                        where: { userId : {id : user.id} } 
+    //                     }, 
+    //                     `{
+    //                         id
+    //                         serialNumber {
+    //                             id
+    //                         }
+    //                     }`
+    //                 );
+    // cups = cups[0];
+
 
     try {
         var decodedRefesh = jwt.verify(refreshToken, certRefreshPublic);
@@ -51,8 +52,8 @@ module.exports = async (parent, { email }, ctx, info) => {
     return {
         accessToken : jwt.sign(payload, certAccessPrivate, jwtConfig.algorithmAccess),
         refreshToken: refreshToken,
-        user,
-        cups
+        user
+        // cups
     }
 }
 

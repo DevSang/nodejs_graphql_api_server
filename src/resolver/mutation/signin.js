@@ -27,18 +27,18 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 	// exception : password가 일치하지 않을 때
 	if(user.password != decodedPassword) throw new Error('INVALID_PASSWORD');
 	
-	var cups = await ctx.db.query.userCups(
-		{
-			where: { userId: { id: user.id } }
-		},
-		`{
-				id
-				serialNumber {
-					id
-				}
-			}`
-	);
-	cups = cups[0];
+	// var cups = await ctx.db.query.userCups(
+	// 	{
+	// 		where: { userId: { id: user.id } }
+	// 	},
+	// 	`{
+	// 			id
+	// 			serialNumber {
+	// 				id
+	// 			}
+	// 		}`
+	// );
+	// cups = cups[0];
 
 	// jwt payload
 	let payload = {
@@ -48,8 +48,8 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 	return {
 		accessToken: jwt.sign(payload, certAccessPrivate, jwtConfig.algorithmAccess),
 		refreshToken: jwt.sign(payload, certRefreshPrivate, jwtConfig.algorithmRefresh),
-		user,
-		cups
+		user
+		// cups
 	};
 }
 
