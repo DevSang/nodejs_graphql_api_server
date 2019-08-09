@@ -31,7 +31,7 @@ module.exports = (req, res, next) => {
                 email: user.email
             }
             res.locals.user = payload;
-            console.log('>> [FIREBASE REQUEST]', user.id , user.email);
+            console.log('>> [FIREBASE REQUEST]', user.email);
             next();
         })
         .catch(err => {

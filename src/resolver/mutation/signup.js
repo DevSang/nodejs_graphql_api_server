@@ -18,8 +18,8 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
     else console.log(`>> [SIGNUP] ${email}`);
 
     // exception: duplicated email
-    var user = await ctx.db.query.users({ where: { email : email } });
-    if(user.length !== 0){
+    var user = await ctx.db.query.user({ where: { email : email } });
+    if(user){
         try{
             console.log("User already exist");
             let fbUser = await admin.auth().getUserByEmail(email)
@@ -37,7 +37,7 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
                         console.log(">> [Delete User]" , deleteResult.email);
                         delete timerHashmap[email];
                     }
-                }, 5 * 60 * 1000);
+                }, 48 * 60 * 60 * 1000);
 
             } else {
                 throw new Error('EMAIL_ALREADY_EXIST');
@@ -61,15 +61,15 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
                     lastName:last_name,
                     firstName:first_name,
                     countryId:{
-			    connect:{
-				    id:country_id
-			    }
-		    },
-		    ethnicityId:{
-			    connect:{
-				    id:ethnicity_id
-			    }
-		    },
+                        connect:{
+                            id:country_id
+                        }
+		            },
+                    ethnicityId:{
+                        connect:{
+                            id:ethnicity_id
+                        }
+                    },
                     encryptSaltString : salt
                 }
             });
@@ -84,11 +84,11 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
                         let fbUser = await admin.auth().getUserByEmail(email);
                         if(!fbUser.toJSON().emailVerified || fbUser.toJSON().emailVerified === 'false'){
                             admin.auth().deleteUser(fbUser.toJSON().uid);
-                            let deleteResult = await ctx.db.mutation.deleteUsers({ where: { email : email } });
+                            let deleteResult = await ctx.db.mutation.deleteUser({ where: { email : email } });
                             console.log(">> [Delete User]" , deleteResult.email);
                             delete timerHashmap[email];
                         }
-                    }, 5 * 60 * 1000);
+                    }, 48 * 60 * 60 * 1000);
                 } catch(err) {
                     throw err;
                 }
