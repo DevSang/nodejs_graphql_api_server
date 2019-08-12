@@ -43,11 +43,11 @@
         auth.applyActionCode(actionCode).then(function(resp) {
             document.getElementById('verifyButton').style.display = "none";
             document.getElementById('verifyText').style.display = "block";
-	           if(navigator.platform === 'iPhone'){
-                   location.href='https://looncupapp.page.link'
-                } else {
+	        //    if(navigator.platform === 'iPhone'){
+            //        location.href='https://looncupapp.page.link'
+            //     } else {
                    location.href='https://looncupapp.page.link/app'
-                }
+                // }
         }).catch(function(error) {
             document.getElementById('verifyButton').style.display = "none";
             document.getElementById('expiredText').style.display = "block";
