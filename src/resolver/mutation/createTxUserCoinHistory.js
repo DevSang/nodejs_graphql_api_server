@@ -17,7 +17,7 @@ module.exports = async (
     let options = {
         headers: { 'Content-Type': 'application/json' },
         // url: 'http://localhost:8080/api/token',
-        url: 'http://35.200.9.86:8080/api/token',
+        url: 'http://34.85.62.36:8080/api/token',
         body: JSON.stringify({
             toAddress: address,
             token: coin,
