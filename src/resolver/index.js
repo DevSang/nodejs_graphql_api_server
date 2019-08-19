@@ -25,7 +25,9 @@ const resolvers = {
         marketAmazonCoupons: forwardTo('db'),
         marketLists: forwardTo('db'),
         marketAmazonCouponBuyList: forwardTo('db'),
-        marketAmazonCouponBuyLists: forwardTo('db')
+        marketAmazonCouponBuyLists: forwardTo('db'),
+        userWallet: forwardTo('db'),
+        userWallets: forwardTo('db'),
     },
     Mutation: {
         //Use Prisma own mutation
@@ -53,6 +55,9 @@ const resolvers = {
         createMarketAmazonCouponBuyList: forwardTo('db'),
         updateMarketAmazonCouponBuyList: forwardTo('db'),
         deleteMarketAmazonCouponBuyList: forwardTo('db'),
+        createUserWallet: forwardTo('db'),
+        updateUserWallet: forwardTo('db'),
+        deleteUserWallet: forwardTo('db'),
 
         //Use Custom mutation
         signin: require('./mutation/signin'),

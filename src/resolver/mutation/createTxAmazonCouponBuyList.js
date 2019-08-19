@@ -38,7 +38,7 @@ module.exports = async (
 
     try {
         //토큰 구매 트랜잭션 요청
-        let date = moment().format('YYYY-MM-DDThh:mm:ss');
+        let date = new Date();
         const coinHistory = await createTxUserCoinHistory(
             parent,
             {
@@ -102,8 +102,8 @@ module.exports = async (
         changeCouponCount(
             parent,
             {
-                name: '10% 할인 Amazon Coupon',
-                price: 10,
+                name: couponName,
+                price: couponPrice,
                 plusYn: false
             },
             ctx,

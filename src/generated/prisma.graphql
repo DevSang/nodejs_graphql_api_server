@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue Jul 30 2019 16:33:42 GMT+0900 (GMT+09:00)
+# timestamp: Mon Aug 19 2019 16:12:39 GMT+0900 (GMT+09:00)
 
 type AggregateAnswerType {
   count: Int!
@@ -150,6 +150,10 @@ type AggregateUserRecordDataByTime {
 }
 
 type AggregateUsersDataAnalysis {
+  count: Int!
+}
+
+type AggregateUserWallet {
   count: Int!
 }
 
@@ -10747,6 +10751,7 @@ type Mutation {
   createUserRecordDataByDay(data: UserRecordDataByDayCreateInput!): UserRecordDataByDay!
   createUserRecordDataByPeriod(data: UserRecordDataByPeriodCreateInput!): UserRecordDataByPeriod!
   createUserRecordDataByTime(data: UserRecordDataByTimeCreateInput!): UserRecordDataByTime!
+  createUserWallet(data: UserWalletCreateInput!): UserWallet!
   createUsersDataAnalysis(data: UsersDataAnalysisCreateInput!): UsersDataAnalysis!
   updateAnswerType(data: AnswerTypeUpdateInput!, where: AnswerTypeWhereUniqueInput!): AnswerType
   updateAppServerSync(data: AppServerSyncUpdateInput!, where: AppServerSyncWhereUniqueInput!): AppServerSync
@@ -10784,6 +10789,7 @@ type Mutation {
   updateUserRecordDataByDay(data: UserRecordDataByDayUpdateInput!, where: UserRecordDataByDayWhereUniqueInput!): UserRecordDataByDay
   updateUserRecordDataByPeriod(data: UserRecordDataByPeriodUpdateInput!, where: UserRecordDataByPeriodWhereUniqueInput!): UserRecordDataByPeriod
   updateUserRecordDataByTime(data: UserRecordDataByTimeUpdateInput!, where: UserRecordDataByTimeWhereUniqueInput!): UserRecordDataByTime
+  updateUserWallet(data: UserWalletUpdateInput!, where: UserWalletWhereUniqueInput!): UserWallet
   updateUsersDataAnalysis(data: UsersDataAnalysisUpdateInput!, where: UsersDataAnalysisWhereUniqueInput!): UsersDataAnalysis
   deleteAnswerType(where: AnswerTypeWhereUniqueInput!): AnswerType
   deleteAppServerSync(where: AppServerSyncWhereUniqueInput!): AppServerSync
@@ -10822,6 +10828,7 @@ type Mutation {
   deleteUserRecordDataByDay(where: UserRecordDataByDayWhereUniqueInput!): UserRecordDataByDay
   deleteUserRecordDataByPeriod(where: UserRecordDataByPeriodWhereUniqueInput!): UserRecordDataByPeriod
   deleteUserRecordDataByTime(where: UserRecordDataByTimeWhereUniqueInput!): UserRecordDataByTime
+  deleteUserWallet(where: UserWalletWhereUniqueInput!): UserWallet
   deleteUsersDataAnalysis(where: UsersDataAnalysisWhereUniqueInput!): UsersDataAnalysis
   upsertAnswerType(where: AnswerTypeWhereUniqueInput!, create: AnswerTypeCreateInput!, update: AnswerTypeUpdateInput!): AnswerType!
   upsertAppServerSync(where: AppServerSyncWhereUniqueInput!, create: AppServerSyncCreateInput!, update: AppServerSyncUpdateInput!): AppServerSync!
@@ -10859,6 +10866,7 @@ type Mutation {
   upsertUserRecordDataByDay(where: UserRecordDataByDayWhereUniqueInput!, create: UserRecordDataByDayCreateInput!, update: UserRecordDataByDayUpdateInput!): UserRecordDataByDay!
   upsertUserRecordDataByPeriod(where: UserRecordDataByPeriodWhereUniqueInput!, create: UserRecordDataByPeriodCreateInput!, update: UserRecordDataByPeriodUpdateInput!): UserRecordDataByPeriod!
   upsertUserRecordDataByTime(where: UserRecordDataByTimeWhereUniqueInput!, create: UserRecordDataByTimeCreateInput!, update: UserRecordDataByTimeUpdateInput!): UserRecordDataByTime!
+  upsertUserWallet(where: UserWalletWhereUniqueInput!, create: UserWalletCreateInput!, update: UserWalletUpdateInput!): UserWallet!
   upsertUsersDataAnalysis(where: UsersDataAnalysisWhereUniqueInput!, create: UsersDataAnalysisCreateInput!, update: UsersDataAnalysisUpdateInput!): UsersDataAnalysis!
   updateManyAnswerTypes(data: AnswerTypeUpdateManyMutationInput!, where: AnswerTypeWhereInput): BatchPayload!
   updateManyAppServerSyncs(data: AppServerSyncUpdateManyMutationInput!, where: AppServerSyncWhereInput): BatchPayload!
@@ -10895,6 +10903,7 @@ type Mutation {
   updateManyUserRecordDataByDays(data: UserRecordDataByDayUpdateManyMutationInput!, where: UserRecordDataByDayWhereInput): BatchPayload!
   updateManyUserRecordDataByPeriods(data: UserRecordDataByPeriodUpdateManyMutationInput!, where: UserRecordDataByPeriodWhereInput): BatchPayload!
   updateManyUserRecordDataByTimes(data: UserRecordDataByTimeUpdateManyMutationInput!, where: UserRecordDataByTimeWhereInput): BatchPayload!
+  updateManyUserWallets(data: UserWalletUpdateManyMutationInput!, where: UserWalletWhereInput): BatchPayload!
   updateManyUsersDataAnalyses(data: UsersDataAnalysisUpdateManyMutationInput!, where: UsersDataAnalysisWhereInput): BatchPayload!
   deleteManyAnswerTypes(where: AnswerTypeWhereInput): BatchPayload!
   deleteManyAppServerSyncs(where: AppServerSyncWhereInput): BatchPayload!
@@ -10933,6 +10942,7 @@ type Mutation {
   deleteManyUserRecordDataByDays(where: UserRecordDataByDayWhereInput): BatchPayload!
   deleteManyUserRecordDataByPeriods(where: UserRecordDataByPeriodWhereInput): BatchPayload!
   deleteManyUserRecordDataByTimes(where: UserRecordDataByTimeWhereInput): BatchPayload!
+  deleteManyUserWallets(where: UserWalletWhereInput): BatchPayload!
   deleteManyUsersDataAnalyses(where: UsersDataAnalysisWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
@@ -11224,6 +11234,7 @@ type Query {
   userRecordDataByDays(where: UserRecordDataByDayWhereInput, orderBy: UserRecordDataByDayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRecordDataByDay]!
   userRecordDataByPeriods(where: UserRecordDataByPeriodWhereInput, orderBy: UserRecordDataByPeriodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRecordDataByPeriod]!
   userRecordDataByTimes(where: UserRecordDataByTimeWhereInput, orderBy: UserRecordDataByTimeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRecordDataByTime]!
+  userWallets(where: UserWalletWhereInput, orderBy: UserWalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserWallet]!
   usersDataAnalyses(where: UsersDataAnalysisWhereInput, orderBy: UsersDataAnalysisOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UsersDataAnalysis]!
   answerType(where: AnswerTypeWhereUniqueInput!): AnswerType
   appServerSync(where: AppServerSyncWhereUniqueInput!): AppServerSync
@@ -11262,6 +11273,7 @@ type Query {
   userRecordDataByDay(where: UserRecordDataByDayWhereUniqueInput!): UserRecordDataByDay
   userRecordDataByPeriod(where: UserRecordDataByPeriodWhereUniqueInput!): UserRecordDataByPeriod
   userRecordDataByTime(where: UserRecordDataByTimeWhereUniqueInput!): UserRecordDataByTime
+  userWallet(where: UserWalletWhereUniqueInput!): UserWallet
   usersDataAnalysis(where: UsersDataAnalysisWhereUniqueInput!): UsersDataAnalysis
   answerTypesConnection(where: AnswerTypeWhereInput, orderBy: AnswerTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AnswerTypeConnection!
   appServerSyncsConnection(where: AppServerSyncWhereInput, orderBy: AppServerSyncOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AppServerSyncConnection!
@@ -11300,6 +11312,7 @@ type Query {
   userRecordDataByDaysConnection(where: UserRecordDataByDayWhereInput, orderBy: UserRecordDataByDayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserRecordDataByDayConnection!
   userRecordDataByPeriodsConnection(where: UserRecordDataByPeriodWhereInput, orderBy: UserRecordDataByPeriodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserRecordDataByPeriodConnection!
   userRecordDataByTimesConnection(where: UserRecordDataByTimeWhereInput, orderBy: UserRecordDataByTimeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserRecordDataByTimeConnection!
+  userWalletsConnection(where: UserWalletWhereInput, orderBy: UserWalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserWalletConnection!
   usersDataAnalysesConnection(where: UsersDataAnalysisWhereInput, orderBy: UsersDataAnalysisOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UsersDataAnalysisConnection!
 }
 
@@ -11341,6 +11354,7 @@ type Subscription {
   userRecordDataByDay(where: UserRecordDataByDaySubscriptionWhereInput): UserRecordDataByDaySubscriptionPayload
   userRecordDataByPeriod(where: UserRecordDataByPeriodSubscriptionWhereInput): UserRecordDataByPeriodSubscriptionPayload
   userRecordDataByTime(where: UserRecordDataByTimeSubscriptionWhereInput): UserRecordDataByTimeSubscriptionPayload
+  userWallet(where: UserWalletSubscriptionWhereInput): UserWalletSubscriptionPayload
   usersDataAnalysis(where: UsersDataAnalysisSubscriptionWhereInput): UsersDataAnalysisSubscriptionPayload
 }
 
@@ -11361,11 +11375,13 @@ type User {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   userCoinHistory(where: UserCoinHistoryWhereInput, orderBy: UserCoinHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCoinHistory!]
   userCups(where: UserCupWhereInput, orderBy: UserCupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCup!]
   userInterviewData(where: UserInterviewDatumWhereInput, orderBy: UserInterviewDatumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserInterviewDatum!]
   userRecordDataByPeriod(where: UserRecordDataByPeriodWhereInput, orderBy: UserRecordDataByPeriodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRecordDataByPeriod!]
+  userWallet(where: UserWalletWhereInput, orderBy: UserWalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserWallet!]
 }
 
 type UserCoinHistory {
@@ -11377,6 +11393,7 @@ type UserCoinHistory {
   marketAmazonCouponBuyList(where: MarketAmazonCouponBuyListWhereInput, orderBy: MarketAmazonCouponBuyListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketAmazonCouponBuyList!]
   txhash: String!
   userId: User
+  walletId: Int
 }
 
 """A connection to a list of items."""
@@ -11395,6 +11412,7 @@ input UserCoinHistoryCreateInput {
   contents: String!
   date: DateTime!
   txhash: String!
+  walletId: Int
   marketAmazonCouponBuyList: MarketAmazonCouponBuyListCreateManyWithoutCoinHistoryRowIdInput
   userId: UserCreateOneWithoutUserCoinHistoryInput
 }
@@ -11415,6 +11433,7 @@ input UserCoinHistoryCreateWithoutMarketAmazonCouponBuyListInput {
   contents: String!
   date: DateTime!
   txhash: String!
+  walletId: Int
   userId: UserCreateOneWithoutUserCoinHistoryInput
 }
 
@@ -11424,6 +11443,7 @@ input UserCoinHistoryCreateWithoutUserIdInput {
   contents: String!
   date: DateTime!
   txhash: String!
+  walletId: Int
   marketAmazonCouponBuyList: MarketAmazonCouponBuyListCreateManyWithoutCoinHistoryRowIdInput
 }
 
@@ -11449,6 +11469,8 @@ enum UserCoinHistoryOrderByInput {
   date_DESC
   txhash_ASC
   txhash_DESC
+  walletId_ASC
+  walletId_DESC
 }
 
 type UserCoinHistoryPreviousValues {
@@ -11458,6 +11480,7 @@ type UserCoinHistoryPreviousValues {
   contents: String!
   date: DateTime!
   txhash: String!
+  walletId: Int
 }
 
 input UserCoinHistoryScalarWhereInput {
@@ -11655,6 +11678,28 @@ input UserCoinHistoryScalarWhereInput {
 
   """All values not ending with the given string."""
   txhash_not_ends_with: String
+  walletId: Int
+
+  """All values that are not equal to given value."""
+  walletId_not: Int
+
+  """All values that are contained in given list."""
+  walletId_in: [Int!]
+
+  """All values that are not contained in given list."""
+  walletId_not_in: [Int!]
+
+  """All values less than the given value."""
+  walletId_lt: Int
+
+  """All values less than or equal the given value."""
+  walletId_lte: Int
+
+  """All values greater than the given value."""
+  walletId_gt: Int
+
+  """All values greater than or equal the given value."""
+  walletId_gte: Int
 }
 
 type UserCoinHistorySubscriptionPayload {
@@ -11700,6 +11745,7 @@ input UserCoinHistoryUpdateInput {
   contents: String
   date: DateTime
   txhash: String
+  walletId: Int
   marketAmazonCouponBuyList: MarketAmazonCouponBuyListUpdateManyWithoutCoinHistoryRowIdInput
   userId: UserUpdateOneWithoutUserCoinHistoryInput
 }
@@ -11710,6 +11756,7 @@ input UserCoinHistoryUpdateManyDataInput {
   contents: String
   date: DateTime
   txhash: String
+  walletId: Int
 }
 
 input UserCoinHistoryUpdateManyMutationInput {
@@ -11718,6 +11765,7 @@ input UserCoinHistoryUpdateManyMutationInput {
   contents: String
   date: DateTime
   txhash: String
+  walletId: Int
 }
 
 input UserCoinHistoryUpdateManyWithoutUserIdInput {
@@ -11752,6 +11800,7 @@ input UserCoinHistoryUpdateWithoutMarketAmazonCouponBuyListDataInput {
   contents: String
   date: DateTime
   txhash: String
+  walletId: Int
   userId: UserUpdateOneWithoutUserCoinHistoryInput
 }
 
@@ -11761,6 +11810,7 @@ input UserCoinHistoryUpdateWithoutUserIdDataInput {
   contents: String
   date: DateTime
   txhash: String
+  walletId: Int
   marketAmazonCouponBuyList: MarketAmazonCouponBuyListUpdateManyWithoutCoinHistoryRowIdInput
 }
 
@@ -11975,6 +12025,28 @@ input UserCoinHistoryWhereInput {
 
   """All values not ending with the given string."""
   txhash_not_ends_with: String
+  walletId: Int
+
+  """All values that are not equal to given value."""
+  walletId_not: Int
+
+  """All values that are contained in given list."""
+  walletId_in: [Int!]
+
+  """All values that are not contained in given list."""
+  walletId_not_in: [Int!]
+
+  """All values less than the given value."""
+  walletId_lt: Int
+
+  """All values less than or equal the given value."""
+  walletId_lte: Int
+
+  """All values greater than the given value."""
+  walletId_gt: Int
+
+  """All values greater than or equal the given value."""
+  walletId_gte: Int
   marketAmazonCouponBuyList_every: MarketAmazonCouponBuyListWhereInput
   marketAmazonCouponBuyList_some: MarketAmazonCouponBuyListWhereInput
   marketAmazonCouponBuyList_none: MarketAmazonCouponBuyListWhereInput
@@ -12004,6 +12076,7 @@ input UserCreateInput {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   countryId: CountryCreateOneWithoutUsersInput
@@ -12016,6 +12089,7 @@ input UserCreateInput {
   userCups: UserCupCreateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
+  userWallet: UserWalletCreateManyWithoutUserIdInput
 }
 
 input UserCreateManyWithoutCountryIdInput {
@@ -12073,6 +12147,11 @@ input UserCreateOneWithoutUserRecordDataByPeriodInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateOneWithoutUserWalletInput {
+  create: UserCreateWithoutUserWalletInput
+  connect: UserWhereUniqueInput
+}
+
 input UserCreateWithoutAppServerSyncInput {
   anonUserId: Int
   deleted: Boolean
@@ -12082,6 +12161,7 @@ input UserCreateWithoutAppServerSyncInput {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   countryId: CountryCreateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -12093,6 +12173,7 @@ input UserCreateWithoutAppServerSyncInput {
   userCups: UserCupCreateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
+  userWallet: UserWalletCreateManyWithoutUserIdInput
 }
 
 input UserCreateWithoutCountryIdInput {
@@ -12104,6 +12185,7 @@ input UserCreateWithoutCountryIdInput {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -12115,6 +12197,7 @@ input UserCreateWithoutCountryIdInput {
   userCups: UserCupCreateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
+  userWallet: UserWalletCreateManyWithoutUserIdInput
 }
 
 input UserCreateWithoutCupDataProcFlowInput {
@@ -12126,6 +12209,7 @@ input UserCreateWithoutCupDataProcFlowInput {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   countryId: CountryCreateOneWithoutUsersInput
@@ -12137,6 +12221,7 @@ input UserCreateWithoutCupDataProcFlowInput {
   userCups: UserCupCreateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
+  userWallet: UserWalletCreateManyWithoutUserIdInput
 }
 
 input UserCreateWithoutCupDataProcMdatesInput {
@@ -12148,6 +12233,7 @@ input UserCreateWithoutCupDataProcMdatesInput {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   countryId: CountryCreateOneWithoutUsersInput
@@ -12159,6 +12245,7 @@ input UserCreateWithoutCupDataProcMdatesInput {
   userCups: UserCupCreateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
+  userWallet: UserWalletCreateManyWithoutUserIdInput
 }
 
 input UserCreateWithoutCupDataQaResponseInput {
@@ -12170,6 +12257,7 @@ input UserCreateWithoutCupDataQaResponseInput {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   countryId: CountryCreateOneWithoutUsersInput
@@ -12181,6 +12269,7 @@ input UserCreateWithoutCupDataQaResponseInput {
   userCups: UserCupCreateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
+  userWallet: UserWalletCreateManyWithoutUserIdInput
 }
 
 input UserCreateWithoutCupDataUserRemoveInput {
@@ -12192,6 +12281,7 @@ input UserCreateWithoutCupDataUserRemoveInput {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   countryId: CountryCreateOneWithoutUsersInput
@@ -12203,6 +12293,7 @@ input UserCreateWithoutCupDataUserRemoveInput {
   userCups: UserCupCreateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
+  userWallet: UserWalletCreateManyWithoutUserIdInput
 }
 
 input UserCreateWithoutEthnicityIdInput {
@@ -12214,6 +12305,7 @@ input UserCreateWithoutEthnicityIdInput {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   countryId: CountryCreateOneWithoutUsersInput
@@ -12225,6 +12317,7 @@ input UserCreateWithoutEthnicityIdInput {
   userCups: UserCupCreateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
+  userWallet: UserWalletCreateManyWithoutUserIdInput
 }
 
 input UserCreateWithoutUserCoinHistoryInput {
@@ -12236,6 +12329,7 @@ input UserCreateWithoutUserCoinHistoryInput {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   countryId: CountryCreateOneWithoutUsersInput
@@ -12247,6 +12341,7 @@ input UserCreateWithoutUserCoinHistoryInput {
   userCups: UserCupCreateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
+  userWallet: UserWalletCreateManyWithoutUserIdInput
 }
 
 input UserCreateWithoutUserCupsInput {
@@ -12258,6 +12353,7 @@ input UserCreateWithoutUserCupsInput {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   countryId: CountryCreateOneWithoutUsersInput
@@ -12269,6 +12365,7 @@ input UserCreateWithoutUserCupsInput {
   userCoinHistory: UserCoinHistoryCreateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
+  userWallet: UserWalletCreateManyWithoutUserIdInput
 }
 
 input UserCreateWithoutUserInterviewDataInput {
@@ -12280,6 +12377,7 @@ input UserCreateWithoutUserInterviewDataInput {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   countryId: CountryCreateOneWithoutUsersInput
@@ -12291,6 +12389,7 @@ input UserCreateWithoutUserInterviewDataInput {
   userCoinHistory: UserCoinHistoryCreateManyWithoutUserIdInput
   userCups: UserCupCreateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
+  userWallet: UserWalletCreateManyWithoutUserIdInput
 }
 
 input UserCreateWithoutUserRecordDataByPeriodInput {
@@ -12302,6 +12401,7 @@ input UserCreateWithoutUserRecordDataByPeriodInput {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   countryId: CountryCreateOneWithoutUsersInput
@@ -12313,6 +12413,31 @@ input UserCreateWithoutUserRecordDataByPeriodInput {
   userCoinHistory: UserCoinHistoryCreateManyWithoutUserIdInput
   userCups: UserCupCreateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
+  userWallet: UserWalletCreateManyWithoutUserIdInput
+}
+
+input UserCreateWithoutUserWalletInput {
+  anonUserId: Int
+  deleted: Boolean
+  dob: DateTime!
+  email: String!
+  encryptSaltString: String
+  firstName: String!
+  givenBirth: Boolean!
+  lastName: String!
+  macId: String
+  password: String!
+  appServerSync: AppServerSyncCreateManyWithoutUserIdInput
+  countryId: CountryCreateOneWithoutUsersInput
+  cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
+  cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
+  cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
+  cupDataUserRemove: CupDataUserRemoveCreateManyWithoutUserIdInput
+  ethnicityId: EthnicityCreateOneWithoutUsersInput
+  userCoinHistory: UserCoinHistoryCreateManyWithoutUserIdInput
+  userCups: UserCupCreateManyWithoutUserIdInput
+  userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
+  userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
 }
 
 type UserCup {
@@ -13346,6 +13471,8 @@ enum UserOrderByInput {
   givenBirth_DESC
   lastName_ASC
   lastName_DESC
+  macId_ASC
+  macId_DESC
   password_ASC
   password_DESC
 }
@@ -13360,6 +13487,7 @@ type UserPreviousValues {
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
+  macId: String
   password: String!
 }
 
@@ -14972,6 +15100,46 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   lastName_not_ends_with: String
+  macId: String
+
+  """All values that are not equal to given value."""
+  macId_not: String
+
+  """All values that are contained in given list."""
+  macId_in: [String!]
+
+  """All values that are not contained in given list."""
+  macId_not_in: [String!]
+
+  """All values less than the given value."""
+  macId_lt: String
+
+  """All values less than or equal the given value."""
+  macId_lte: String
+
+  """All values greater than the given value."""
+  macId_gt: String
+
+  """All values greater than or equal the given value."""
+  macId_gte: String
+
+  """All values containing the given string."""
+  macId_contains: String
+
+  """All values not containing the given string."""
+  macId_not_contains: String
+
+  """All values starting with the given string."""
+  macId_starts_with: String
+
+  """All values not starting with the given string."""
+  macId_not_starts_with: String
+
+  """All values ending with the given string."""
+  macId_ends_with: String
+
+  """All values not ending with the given string."""
+  macId_not_ends_with: String
   password: String
 
   """All values that are not equal to given value."""
@@ -15410,6 +15578,7 @@ input UserUpdateInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   countryId: CountryUpdateOneWithoutUsersInput
@@ -15422,6 +15591,7 @@ input UserUpdateInput {
   userCups: UserCupUpdateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
+  userWallet: UserWalletUpdateManyWithoutUserIdInput
 }
 
 input UserUpdateManyDataInput {
@@ -15433,6 +15603,7 @@ input UserUpdateManyDataInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
 }
 
@@ -15445,6 +15616,7 @@ input UserUpdateManyMutationInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
 }
 
@@ -15546,6 +15718,15 @@ input UserUpdateOneWithoutUserRecordDataByPeriodInput {
   upsert: UserUpsertWithoutUserRecordDataByPeriodInput
 }
 
+input UserUpdateOneWithoutUserWalletInput {
+  create: UserCreateWithoutUserWalletInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateWithoutUserWalletDataInput
+  upsert: UserUpsertWithoutUserWalletInput
+}
+
 input UserUpdateWithoutAppServerSyncDataInput {
   anonUserId: Int
   deleted: Boolean
@@ -15555,6 +15736,7 @@ input UserUpdateWithoutAppServerSyncDataInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
   countryId: CountryUpdateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -15566,6 +15748,7 @@ input UserUpdateWithoutAppServerSyncDataInput {
   userCups: UserCupUpdateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
+  userWallet: UserWalletUpdateManyWithoutUserIdInput
 }
 
 input UserUpdateWithoutCountryIdDataInput {
@@ -15577,6 +15760,7 @@ input UserUpdateWithoutCountryIdDataInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -15588,6 +15772,7 @@ input UserUpdateWithoutCountryIdDataInput {
   userCups: UserCupUpdateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
+  userWallet: UserWalletUpdateManyWithoutUserIdInput
 }
 
 input UserUpdateWithoutCupDataProcFlowDataInput {
@@ -15599,6 +15784,7 @@ input UserUpdateWithoutCupDataProcFlowDataInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   countryId: CountryUpdateOneWithoutUsersInput
@@ -15610,6 +15796,7 @@ input UserUpdateWithoutCupDataProcFlowDataInput {
   userCups: UserCupUpdateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
+  userWallet: UserWalletUpdateManyWithoutUserIdInput
 }
 
 input UserUpdateWithoutCupDataProcMdatesDataInput {
@@ -15621,6 +15808,7 @@ input UserUpdateWithoutCupDataProcMdatesDataInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   countryId: CountryUpdateOneWithoutUsersInput
@@ -15632,6 +15820,7 @@ input UserUpdateWithoutCupDataProcMdatesDataInput {
   userCups: UserCupUpdateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
+  userWallet: UserWalletUpdateManyWithoutUserIdInput
 }
 
 input UserUpdateWithoutCupDataQaResponseDataInput {
@@ -15643,6 +15832,7 @@ input UserUpdateWithoutCupDataQaResponseDataInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   countryId: CountryUpdateOneWithoutUsersInput
@@ -15654,6 +15844,7 @@ input UserUpdateWithoutCupDataQaResponseDataInput {
   userCups: UserCupUpdateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
+  userWallet: UserWalletUpdateManyWithoutUserIdInput
 }
 
 input UserUpdateWithoutCupDataUserRemoveDataInput {
@@ -15665,6 +15856,7 @@ input UserUpdateWithoutCupDataUserRemoveDataInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   countryId: CountryUpdateOneWithoutUsersInput
@@ -15676,6 +15868,7 @@ input UserUpdateWithoutCupDataUserRemoveDataInput {
   userCups: UserCupUpdateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
+  userWallet: UserWalletUpdateManyWithoutUserIdInput
 }
 
 input UserUpdateWithoutEthnicityIdDataInput {
@@ -15687,6 +15880,7 @@ input UserUpdateWithoutEthnicityIdDataInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   countryId: CountryUpdateOneWithoutUsersInput
@@ -15698,6 +15892,7 @@ input UserUpdateWithoutEthnicityIdDataInput {
   userCups: UserCupUpdateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
+  userWallet: UserWalletUpdateManyWithoutUserIdInput
 }
 
 input UserUpdateWithoutUserCoinHistoryDataInput {
@@ -15709,6 +15904,7 @@ input UserUpdateWithoutUserCoinHistoryDataInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   countryId: CountryUpdateOneWithoutUsersInput
@@ -15720,6 +15916,7 @@ input UserUpdateWithoutUserCoinHistoryDataInput {
   userCups: UserCupUpdateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
+  userWallet: UserWalletUpdateManyWithoutUserIdInput
 }
 
 input UserUpdateWithoutUserCupsDataInput {
@@ -15731,6 +15928,7 @@ input UserUpdateWithoutUserCupsDataInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   countryId: CountryUpdateOneWithoutUsersInput
@@ -15742,6 +15940,7 @@ input UserUpdateWithoutUserCupsDataInput {
   userCoinHistory: UserCoinHistoryUpdateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
+  userWallet: UserWalletUpdateManyWithoutUserIdInput
 }
 
 input UserUpdateWithoutUserInterviewDataDataInput {
@@ -15753,6 +15952,7 @@ input UserUpdateWithoutUserInterviewDataDataInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   countryId: CountryUpdateOneWithoutUsersInput
@@ -15764,6 +15964,7 @@ input UserUpdateWithoutUserInterviewDataDataInput {
   userCoinHistory: UserCoinHistoryUpdateManyWithoutUserIdInput
   userCups: UserCupUpdateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
+  userWallet: UserWalletUpdateManyWithoutUserIdInput
 }
 
 input UserUpdateWithoutUserRecordDataByPeriodDataInput {
@@ -15775,6 +15976,7 @@ input UserUpdateWithoutUserRecordDataByPeriodDataInput {
   firstName: String
   givenBirth: Boolean
   lastName: String
+  macId: String
   password: String
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   countryId: CountryUpdateOneWithoutUsersInput
@@ -15786,6 +15988,31 @@ input UserUpdateWithoutUserRecordDataByPeriodDataInput {
   userCoinHistory: UserCoinHistoryUpdateManyWithoutUserIdInput
   userCups: UserCupUpdateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
+  userWallet: UserWalletUpdateManyWithoutUserIdInput
+}
+
+input UserUpdateWithoutUserWalletDataInput {
+  anonUserId: Int
+  deleted: Boolean
+  dob: DateTime
+  email: String
+  encryptSaltString: String
+  firstName: String
+  givenBirth: Boolean
+  lastName: String
+  macId: String
+  password: String
+  appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
+  countryId: CountryUpdateOneWithoutUsersInput
+  cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
+  cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
+  cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
+  cupDataUserRemove: CupDataUserRemoveUpdateManyWithoutUserIdInput
+  ethnicityId: EthnicityUpdateOneWithoutUsersInput
+  userCoinHistory: UserCoinHistoryUpdateManyWithoutUserIdInput
+  userCups: UserCupUpdateManyWithoutUserIdInput
+  userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
+  userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
 }
 
 input UserUpdateWithWhereUniqueWithoutCountryIdInput {
@@ -15843,6 +16070,11 @@ input UserUpsertWithoutUserRecordDataByPeriodInput {
   create: UserCreateWithoutUserRecordDataByPeriodInput!
 }
 
+input UserUpsertWithoutUserWalletInput {
+  update: UserUpdateWithoutUserWalletDataInput!
+  create: UserCreateWithoutUserWalletInput!
+}
+
 input UserUpsertWithWhereUniqueWithoutCountryIdInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutCountryIdDataInput!
@@ -15853,6 +16085,344 @@ input UserUpsertWithWhereUniqueWithoutEthnicityIdInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutEthnicityIdDataInput!
   create: UserCreateWithoutEthnicityIdInput!
+}
+
+type UserWallet {
+  id: Int!
+  address: String
+  createDate: DateTime
+  userId: User
+}
+
+"""A connection to a list of items."""
+type UserWalletConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserWalletEdge]!
+  aggregate: AggregateUserWallet!
+}
+
+input UserWalletCreateInput {
+  address: String
+  createDate: DateTime
+  userId: UserCreateOneWithoutUserWalletInput
+}
+
+input UserWalletCreateManyWithoutUserIdInput {
+  create: [UserWalletCreateWithoutUserIdInput!]
+  connect: [UserWalletWhereUniqueInput!]
+}
+
+input UserWalletCreateWithoutUserIdInput {
+  address: String
+  createDate: DateTime
+}
+
+"""An edge in a connection."""
+type UserWalletEdge {
+  """The item at the end of the edge."""
+  node: UserWallet!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserWalletOrderByInput {
+  id_ASC
+  id_DESC
+  address_ASC
+  address_DESC
+  createDate_ASC
+  createDate_DESC
+}
+
+type UserWalletPreviousValues {
+  id: Int!
+  address: String
+  createDate: DateTime
+}
+
+input UserWalletScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWalletScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWalletScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWalletScalarWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  address: String
+
+  """All values that are not equal to given value."""
+  address_not: String
+
+  """All values that are contained in given list."""
+  address_in: [String!]
+
+  """All values that are not contained in given list."""
+  address_not_in: [String!]
+
+  """All values less than the given value."""
+  address_lt: String
+
+  """All values less than or equal the given value."""
+  address_lte: String
+
+  """All values greater than the given value."""
+  address_gt: String
+
+  """All values greater than or equal the given value."""
+  address_gte: String
+
+  """All values containing the given string."""
+  address_contains: String
+
+  """All values not containing the given string."""
+  address_not_contains: String
+
+  """All values starting with the given string."""
+  address_starts_with: String
+
+  """All values not starting with the given string."""
+  address_not_starts_with: String
+
+  """All values ending with the given string."""
+  address_ends_with: String
+
+  """All values not ending with the given string."""
+  address_not_ends_with: String
+  createDate: DateTime
+
+  """All values that are not equal to given value."""
+  createDate_not: DateTime
+
+  """All values that are contained in given list."""
+  createDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createDate_lte: DateTime
+
+  """All values greater than the given value."""
+  createDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createDate_gte: DateTime
+}
+
+type UserWalletSubscriptionPayload {
+  mutation: MutationType!
+  node: UserWallet
+  updatedFields: [String!]
+  previousValues: UserWalletPreviousValues
+}
+
+input UserWalletSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWalletSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWalletSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWalletSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWalletWhereInput
+}
+
+input UserWalletUpdateInput {
+  address: String
+  createDate: DateTime
+  userId: UserUpdateOneWithoutUserWalletInput
+}
+
+input UserWalletUpdateManyDataInput {
+  address: String
+  createDate: DateTime
+}
+
+input UserWalletUpdateManyMutationInput {
+  address: String
+  createDate: DateTime
+}
+
+input UserWalletUpdateManyWithoutUserIdInput {
+  create: [UserWalletCreateWithoutUserIdInput!]
+  connect: [UserWalletWhereUniqueInput!]
+  set: [UserWalletWhereUniqueInput!]
+  disconnect: [UserWalletWhereUniqueInput!]
+  delete: [UserWalletWhereUniqueInput!]
+  update: [UserWalletUpdateWithWhereUniqueWithoutUserIdInput!]
+  updateMany: [UserWalletUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserWalletScalarWhereInput!]
+  upsert: [UserWalletUpsertWithWhereUniqueWithoutUserIdInput!]
+}
+
+input UserWalletUpdateManyWithWhereNestedInput {
+  where: UserWalletScalarWhereInput!
+  data: UserWalletUpdateManyDataInput!
+}
+
+input UserWalletUpdateWithoutUserIdDataInput {
+  address: String
+  createDate: DateTime
+}
+
+input UserWalletUpdateWithWhereUniqueWithoutUserIdInput {
+  where: UserWalletWhereUniqueInput!
+  data: UserWalletUpdateWithoutUserIdDataInput!
+}
+
+input UserWalletUpsertWithWhereUniqueWithoutUserIdInput {
+  where: UserWalletWhereUniqueInput!
+  update: UserWalletUpdateWithoutUserIdDataInput!
+  create: UserWalletCreateWithoutUserIdInput!
+}
+
+input UserWalletWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWalletWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWalletWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWalletWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  address: String
+
+  """All values that are not equal to given value."""
+  address_not: String
+
+  """All values that are contained in given list."""
+  address_in: [String!]
+
+  """All values that are not contained in given list."""
+  address_not_in: [String!]
+
+  """All values less than the given value."""
+  address_lt: String
+
+  """All values less than or equal the given value."""
+  address_lte: String
+
+  """All values greater than the given value."""
+  address_gt: String
+
+  """All values greater than or equal the given value."""
+  address_gte: String
+
+  """All values containing the given string."""
+  address_contains: String
+
+  """All values not containing the given string."""
+  address_not_contains: String
+
+  """All values starting with the given string."""
+  address_starts_with: String
+
+  """All values not starting with the given string."""
+  address_not_starts_with: String
+
+  """All values ending with the given string."""
+  address_ends_with: String
+
+  """All values not ending with the given string."""
+  address_not_ends_with: String
+  createDate: DateTime
+
+  """All values that are not equal to given value."""
+  createDate_not: DateTime
+
+  """All values that are contained in given list."""
+  createDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createDate_lte: DateTime
+
+  """All values greater than the given value."""
+  createDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createDate_gte: DateTime
+  userId: UserWhereInput
+}
+
+input UserWalletWhereUniqueInput {
+  id: Int
 }
 
 input UserWhereInput {
@@ -16098,6 +16668,46 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   lastName_not_ends_with: String
+  macId: String
+
+  """All values that are not equal to given value."""
+  macId_not: String
+
+  """All values that are contained in given list."""
+  macId_in: [String!]
+
+  """All values that are not contained in given list."""
+  macId_not_in: [String!]
+
+  """All values less than the given value."""
+  macId_lt: String
+
+  """All values less than or equal the given value."""
+  macId_lte: String
+
+  """All values greater than the given value."""
+  macId_gt: String
+
+  """All values greater than or equal the given value."""
+  macId_gte: String
+
+  """All values containing the given string."""
+  macId_contains: String
+
+  """All values not containing the given string."""
+  macId_not_contains: String
+
+  """All values starting with the given string."""
+  macId_starts_with: String
+
+  """All values not starting with the given string."""
+  macId_not_starts_with: String
+
+  """All values ending with the given string."""
+  macId_ends_with: String
+
+  """All values not ending with the given string."""
+  macId_not_ends_with: String
   password: String
 
   """All values that are not equal to given value."""
@@ -16167,6 +16777,9 @@ input UserWhereInput {
   userRecordDataByPeriod_every: UserRecordDataByPeriodWhereInput
   userRecordDataByPeriod_some: UserRecordDataByPeriodWhereInput
   userRecordDataByPeriod_none: UserRecordDataByPeriodWhereInput
+  userWallet_every: UserWalletWhereInput
+  userWallet_some: UserWalletWhereInput
+  userWallet_none: UserWalletWhereInput
 }
 
 input UserWhereUniqueInput {

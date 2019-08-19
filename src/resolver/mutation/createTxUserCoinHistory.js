@@ -16,8 +16,8 @@ module.exports = async (
     //url : 172.31.0.13
     let options = {
         headers: { 'Content-Type': 'application/json' },
-        // url: 'http://localhost:8080/api/token',
-        url: 'http://34.85.62.36:8080/api/token',
+        url: 'http://localhost:8080/api/token',
+        // url: 'http://34.85.62.36:8080/api/token',
         body: JSON.stringify({
             toAddress: address,
             token: coin,
@@ -25,23 +25,29 @@ module.exports = async (
             fromPkey
         })
     };
+    let wallet = await ctx.db.query.userWallets({where: {userId: {id: userId}, address}})
 
     let res = await request.post(options);
     res = JSON.parse(res);
     console.log(res);
+    let data = {
+        userId: {
+            connect: {
+                id: userId
+            }
+        },
+        category: category,
+        contents: contents,
+        coin: coin,
+        date: date,
+        txhash: res.message,
+    }
+
+    if(wallet.length !== 0) {
+        data.walletId = wallet[0].id
+    }
     let createUserCoin = await ctx.db.mutation.createUserCoinHistory({
-        data: {
-            userId: {
-                connect: {
-                    id: userId
-                }
-            },
-            category: category,
-            contents: contents,
-            coin: coin,
-            date: date,
-            txhash: res.message
-        }
+        data
     });
     return createUserCoin;
 };
