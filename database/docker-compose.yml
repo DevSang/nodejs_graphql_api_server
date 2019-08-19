@@ -13,8 +13,8 @@ services:
         databases:
           default:
             connector: postgres
-            host: 34.85.23.87
-            database: loon_prod
+            host: host.docker.internal
+            database: loon_dev
             schema: public
             user: loon
             password: loonlab505
