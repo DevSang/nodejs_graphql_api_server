@@ -32,6 +32,7 @@ const resolvers = {
     Mutation: {
         //Use Prisma own mutation
         createUser: forwardTo('db'),
+        updateUser: forwardTo('db'),
         deleteUser: forwardTo('db'),
         createUserCup: forwardTo('db'),
         //createCup_data_raw: forwardTo('db'),
