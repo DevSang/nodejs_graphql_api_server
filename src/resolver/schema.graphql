@@ -51,6 +51,7 @@ type getNewTokenPayload {
     user: User
     country: Country
     wallet: UserWallet
+    
 }
 type AuthPayload {
     accessToken: String
