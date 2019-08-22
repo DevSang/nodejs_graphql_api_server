@@ -12,7 +12,7 @@ var certRefreshPrivate = fs.readFileSync(path.resolve(jwtConfig.certRefreshPriva
 
 var timerHashmap = {};
 
-module.exports = async (parent, { email,password, dob, given_birth,last_name,first_name,country_id, ethnicity_id}, ctx, info) => {
+module.exports = async (parent, { email,password, dob, given_birth,last_name,first_name,country_id, ethnicity_id, emailVerify}, ctx, info) => {
     // exception:no firebase token
     if(!ctx.response.locals.user) throw new Error('NO_FIREBASE_TOKEN');
     else console.log(`>> [SIGNUP] ${email}`);
@@ -70,7 +70,8 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
                             id:ethnicity_id
                         }
                     },
-                    encryptSaltString : salt
+                    encryptSaltString : salt,
+                    emailVerify : emailVerify
                 }
             });
 
