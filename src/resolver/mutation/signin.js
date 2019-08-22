@@ -27,6 +27,25 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 	// exception : password가 일치하지 않을 때
 	if(user.password != decodedPassword) throw new Error('INVALID_PASSWORD');
 	
+	var country = await ctx.db.query.country(
+        { 
+            where: { id : user.countryId} 
+        }, 
+        `{
+            id
+            countryName
+        }`
+    );
+    var wallet = await ctx.db.query.userWallets(
+        { 
+            where: { userId : {id : user.id} } 
+        }, 
+        `{
+            id
+            address
+        }`
+    );
+    wallet = wallet[0];
 	// var cups = await ctx.db.query.userCups(
 	// 	{
 	// 		where: { userId: { id: user.id } }
@@ -48,8 +67,9 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 	return {
 		accessToken: jwt.sign(payload, certAccessPrivate, jwtConfig.algorithmAccess),
 		refreshToken: jwt.sign(payload, certRefreshPrivate, jwtConfig.algorithmRefresh),
-		user
-		// cups
+		user,
+		country,
+        wallet
 	};
 }
 
