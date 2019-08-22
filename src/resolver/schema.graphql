@@ -49,7 +49,8 @@ type getNewTokenPayload {
     accessToken: String
     refreshToken: String
     user: User
-    # cups: UserCup
+    country: Country
+    wallet: UserWallet
 }
 type AuthPayload {
     accessToken: String

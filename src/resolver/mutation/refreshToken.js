@@ -38,10 +38,6 @@ module.exports = async (parent, { email }, ctx, info) => {
             address
         }`
     );
-        console.log(country);
-        console.log(wallet);
-        user.country = country;
-    user.wallet = wallet;
     // var cups = await ctx.db.query.userCups(
     //                     { 
     //                        where: { userId : {id : user.id} } 
@@ -55,7 +51,7 @@ module.exports = async (parent, { email }, ctx, info) => {
     //                 );
     // cups = cups[0];
 
-
+    console.log(user);
     try {
         var decodedRefesh = jwt.verify(refreshToken, certRefreshPublic);
     } catch(err) {
@@ -76,8 +72,9 @@ module.exports = async (parent, { email }, ctx, info) => {
     return {
         accessToken : jwt.sign(payload, certAccessPrivate, jwtConfig.algorithmAccess),
         refreshToken: refreshToken,
-        user
-        // cups
+        user,
+        country,
+        wallet
     }
 }
 
