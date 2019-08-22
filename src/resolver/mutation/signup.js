@@ -60,11 +60,7 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
                     password: hashPassword,
                     lastName:last_name,
                     firstName:first_name,
-                    countryId:{
-                        connect:{
-                            id:country_id
-                        }
-		            },
+                    countryId:country_id,
                     ethnicityId:{
                         connect:{
                             id:ethnicity_id
