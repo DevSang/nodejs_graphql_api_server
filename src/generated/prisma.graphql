@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Mon Aug 19 2019 16:12:39 GMT+0900 (GMT+09:00)
+# timestamp: Wed Aug 21 2019 11:37:28 GMT+0900 (GMT+09:00)
 
 type AggregateAnswerType {
   count: Int!
@@ -105,11 +105,15 @@ type AggregateMarketAmazonCoupon {
   count: Int!
 }
 
-type AggregateMarketAmazonCouponBuyList {
+type AggregateMarketBuyHistory {
   count: Int!
 }
 
 type AggregateMarketList {
+  count: Int!
+}
+
+type AggregateMarketListDetail {
   count: Int!
 }
 
@@ -9612,90 +9616,442 @@ scalar Long
 type MarketAmazonCoupon {
   id: Int!
   availability: Boolean!
-  couponId: String!
+  couponNumber: String!
   createTime: DateTime!
   endTime: DateTime!
-  marketAmazonCouponBuyList(where: MarketAmazonCouponBuyListWhereInput, orderBy: MarketAmazonCouponBuyListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketAmazonCouponBuyList!]
-  name: String
-  price: Int!
+  marketListId: Int
+  price: Int
   startTime: DateTime!
+  title: String
 }
 
-type MarketAmazonCouponBuyList {
+"""A connection to a list of items."""
+type MarketAmazonCouponConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [MarketAmazonCouponEdge]!
+  aggregate: AggregateMarketAmazonCoupon!
+}
+
+input MarketAmazonCouponCreateInput {
+  availability: Boolean
+  couponNumber: String!
+  createTime: DateTime!
+  endTime: DateTime!
+  marketListId: Int
+  price: Int
+  startTime: DateTime!
+  title: String
+}
+
+"""An edge in a connection."""
+type MarketAmazonCouponEdge {
+  """The item at the end of the edge."""
+  node: MarketAmazonCoupon!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum MarketAmazonCouponOrderByInput {
+  id_ASC
+  id_DESC
+  availability_ASC
+  availability_DESC
+  couponNumber_ASC
+  couponNumber_DESC
+  createTime_ASC
+  createTime_DESC
+  endTime_ASC
+  endTime_DESC
+  marketListId_ASC
+  marketListId_DESC
+  price_ASC
+  price_DESC
+  startTime_ASC
+  startTime_DESC
+  title_ASC
+  title_DESC
+}
+
+type MarketAmazonCouponPreviousValues {
+  id: Int!
+  availability: Boolean!
+  couponNumber: String!
+  createTime: DateTime!
+  endTime: DateTime!
+  marketListId: Int
+  price: Int
+  startTime: DateTime!
+  title: String
+}
+
+type MarketAmazonCouponSubscriptionPayload {
+  mutation: MutationType!
+  node: MarketAmazonCoupon
+  updatedFields: [String!]
+  previousValues: MarketAmazonCouponPreviousValues
+}
+
+input MarketAmazonCouponSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MarketAmazonCouponSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MarketAmazonCouponSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MarketAmazonCouponSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: MarketAmazonCouponWhereInput
+}
+
+input MarketAmazonCouponUpdateInput {
+  availability: Boolean
+  couponNumber: String
+  createTime: DateTime
+  endTime: DateTime
+  marketListId: Int
+  price: Int
+  startTime: DateTime
+  title: String
+}
+
+input MarketAmazonCouponUpdateManyMutationInput {
+  availability: Boolean
+  couponNumber: String
+  createTime: DateTime
+  endTime: DateTime
+  marketListId: Int
+  price: Int
+  startTime: DateTime
+  title: String
+}
+
+input MarketAmazonCouponWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MarketAmazonCouponWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MarketAmazonCouponWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MarketAmazonCouponWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  availability: Boolean
+
+  """All values that are not equal to given value."""
+  availability_not: Boolean
+  couponNumber: String
+
+  """All values that are not equal to given value."""
+  couponNumber_not: String
+
+  """All values that are contained in given list."""
+  couponNumber_in: [String!]
+
+  """All values that are not contained in given list."""
+  couponNumber_not_in: [String!]
+
+  """All values less than the given value."""
+  couponNumber_lt: String
+
+  """All values less than or equal the given value."""
+  couponNumber_lte: String
+
+  """All values greater than the given value."""
+  couponNumber_gt: String
+
+  """All values greater than or equal the given value."""
+  couponNumber_gte: String
+
+  """All values containing the given string."""
+  couponNumber_contains: String
+
+  """All values not containing the given string."""
+  couponNumber_not_contains: String
+
+  """All values starting with the given string."""
+  couponNumber_starts_with: String
+
+  """All values not starting with the given string."""
+  couponNumber_not_starts_with: String
+
+  """All values ending with the given string."""
+  couponNumber_ends_with: String
+
+  """All values not ending with the given string."""
+  couponNumber_not_ends_with: String
+  createTime: DateTime
+
+  """All values that are not equal to given value."""
+  createTime_not: DateTime
+
+  """All values that are contained in given list."""
+  createTime_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createTime_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createTime_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createTime_lte: DateTime
+
+  """All values greater than the given value."""
+  createTime_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createTime_gte: DateTime
+  endTime: DateTime
+
+  """All values that are not equal to given value."""
+  endTime_not: DateTime
+
+  """All values that are contained in given list."""
+  endTime_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  endTime_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  endTime_lt: DateTime
+
+  """All values less than or equal the given value."""
+  endTime_lte: DateTime
+
+  """All values greater than the given value."""
+  endTime_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  endTime_gte: DateTime
+  marketListId: Int
+
+  """All values that are not equal to given value."""
+  marketListId_not: Int
+
+  """All values that are contained in given list."""
+  marketListId_in: [Int!]
+
+  """All values that are not contained in given list."""
+  marketListId_not_in: [Int!]
+
+  """All values less than the given value."""
+  marketListId_lt: Int
+
+  """All values less than or equal the given value."""
+  marketListId_lte: Int
+
+  """All values greater than the given value."""
+  marketListId_gt: Int
+
+  """All values greater than or equal the given value."""
+  marketListId_gte: Int
+  price: Int
+
+  """All values that are not equal to given value."""
+  price_not: Int
+
+  """All values that are contained in given list."""
+  price_in: [Int!]
+
+  """All values that are not contained in given list."""
+  price_not_in: [Int!]
+
+  """All values less than the given value."""
+  price_lt: Int
+
+  """All values less than or equal the given value."""
+  price_lte: Int
+
+  """All values greater than the given value."""
+  price_gt: Int
+
+  """All values greater than or equal the given value."""
+  price_gte: Int
+  startTime: DateTime
+
+  """All values that are not equal to given value."""
+  startTime_not: DateTime
+
+  """All values that are contained in given list."""
+  startTime_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  startTime_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  startTime_lt: DateTime
+
+  """All values less than or equal the given value."""
+  startTime_lte: DateTime
+
+  """All values greater than the given value."""
+  startTime_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  startTime_gte: DateTime
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+}
+
+input MarketAmazonCouponWhereUniqueInput {
+  id: Int
+  couponNumber: String
+}
+
+type MarketBuyHistory {
   id: Int!
   cancelYn: Boolean
+  category: String
   coinHistoryRowId: UserCoinHistory
-  couponRowId: MarketAmazonCoupon
   createTime: DateTime!
+  orderNumber: String
+  productId: Int
   status: Boolean!
   updateTime: DateTime!
   userId: Int
 }
 
 """A connection to a list of items."""
-type MarketAmazonCouponBuyListConnection {
+type MarketBuyHistoryConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [MarketAmazonCouponBuyListEdge]!
-  aggregate: AggregateMarketAmazonCouponBuyList!
+  edges: [MarketBuyHistoryEdge]!
+  aggregate: AggregateMarketBuyHistory!
 }
 
-input MarketAmazonCouponBuyListCreateInput {
+input MarketBuyHistoryCreateInput {
   cancelYn: Boolean
+  category: String
   createTime: DateTime!
+  orderNumber: String
+  productId: Int
   status: Boolean
   updateTime: DateTime!
   userId: Int
-  coinHistoryRowId: UserCoinHistoryCreateOneWithoutMarketAmazonCouponBuyListInput
-  couponRowId: MarketAmazonCouponCreateOneWithoutMarketAmazonCouponBuyListInput
+  coinHistoryRowId: UserCoinHistoryCreateOneWithoutMarketBuyHistoryInput
 }
 
-input MarketAmazonCouponBuyListCreateManyWithoutCoinHistoryRowIdInput {
-  create: [MarketAmazonCouponBuyListCreateWithoutCoinHistoryRowIdInput!]
-  connect: [MarketAmazonCouponBuyListWhereUniqueInput!]
+input MarketBuyHistoryCreateManyWithoutCoinHistoryRowIdInput {
+  create: [MarketBuyHistoryCreateWithoutCoinHistoryRowIdInput!]
+  connect: [MarketBuyHistoryWhereUniqueInput!]
 }
 
-input MarketAmazonCouponBuyListCreateManyWithoutCouponRowIdInput {
-  create: [MarketAmazonCouponBuyListCreateWithoutCouponRowIdInput!]
-  connect: [MarketAmazonCouponBuyListWhereUniqueInput!]
-}
-
-input MarketAmazonCouponBuyListCreateWithoutCoinHistoryRowIdInput {
+input MarketBuyHistoryCreateWithoutCoinHistoryRowIdInput {
   cancelYn: Boolean
+  category: String
   createTime: DateTime!
+  orderNumber: String
+  productId: Int
   status: Boolean
   updateTime: DateTime!
   userId: Int
-  couponRowId: MarketAmazonCouponCreateOneWithoutMarketAmazonCouponBuyListInput
-}
-
-input MarketAmazonCouponBuyListCreateWithoutCouponRowIdInput {
-  cancelYn: Boolean
-  createTime: DateTime!
-  status: Boolean
-  updateTime: DateTime!
-  userId: Int
-  coinHistoryRowId: UserCoinHistoryCreateOneWithoutMarketAmazonCouponBuyListInput
 }
 
 """An edge in a connection."""
-type MarketAmazonCouponBuyListEdge {
+type MarketBuyHistoryEdge {
   """The item at the end of the edge."""
-  node: MarketAmazonCouponBuyList!
+  node: MarketBuyHistory!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum MarketAmazonCouponBuyListOrderByInput {
+enum MarketBuyHistoryOrderByInput {
   id_ASC
   id_DESC
   cancelYn_ASC
   cancelYn_DESC
+  category_ASC
+  category_DESC
   createTime_ASC
   createTime_DESC
+  orderNumber_ASC
+  orderNumber_DESC
+  productId_ASC
+  productId_DESC
   status_ASC
   status_DESC
   updateTime_ASC
@@ -9704,24 +10060,27 @@ enum MarketAmazonCouponBuyListOrderByInput {
   userId_DESC
 }
 
-type MarketAmazonCouponBuyListPreviousValues {
+type MarketBuyHistoryPreviousValues {
   id: Int!
   cancelYn: Boolean
+  category: String
   createTime: DateTime!
+  orderNumber: String
+  productId: Int
   status: Boolean!
   updateTime: DateTime!
   userId: Int
 }
 
-input MarketAmazonCouponBuyListScalarWhereInput {
+input MarketBuyHistoryScalarWhereInput {
   """Logical AND on all given filters."""
-  AND: [MarketAmazonCouponBuyListScalarWhereInput!]
+  AND: [MarketBuyHistoryScalarWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [MarketAmazonCouponBuyListScalarWhereInput!]
+  OR: [MarketBuyHistoryScalarWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [MarketAmazonCouponBuyListScalarWhereInput!]
+  NOT: [MarketBuyHistoryScalarWhereInput!]
   id: Int
 
   """All values that are not equal to given value."""
@@ -9748,6 +10107,46 @@ input MarketAmazonCouponBuyListScalarWhereInput {
 
   """All values that are not equal to given value."""
   cancelYn_not: Boolean
+  category: String
+
+  """All values that are not equal to given value."""
+  category_not: String
+
+  """All values that are contained in given list."""
+  category_in: [String!]
+
+  """All values that are not contained in given list."""
+  category_not_in: [String!]
+
+  """All values less than the given value."""
+  category_lt: String
+
+  """All values less than or equal the given value."""
+  category_lte: String
+
+  """All values greater than the given value."""
+  category_gt: String
+
+  """All values greater than or equal the given value."""
+  category_gte: String
+
+  """All values containing the given string."""
+  category_contains: String
+
+  """All values not containing the given string."""
+  category_not_contains: String
+
+  """All values starting with the given string."""
+  category_starts_with: String
+
+  """All values not starting with the given string."""
+  category_not_starts_with: String
+
+  """All values ending with the given string."""
+  category_ends_with: String
+
+  """All values not ending with the given string."""
+  category_not_ends_with: String
   createTime: DateTime
 
   """All values that are not equal to given value."""
@@ -9770,6 +10169,68 @@ input MarketAmazonCouponBuyListScalarWhereInput {
 
   """All values greater than or equal the given value."""
   createTime_gte: DateTime
+  orderNumber: String
+
+  """All values that are not equal to given value."""
+  orderNumber_not: String
+
+  """All values that are contained in given list."""
+  orderNumber_in: [String!]
+
+  """All values that are not contained in given list."""
+  orderNumber_not_in: [String!]
+
+  """All values less than the given value."""
+  orderNumber_lt: String
+
+  """All values less than or equal the given value."""
+  orderNumber_lte: String
+
+  """All values greater than the given value."""
+  orderNumber_gt: String
+
+  """All values greater than or equal the given value."""
+  orderNumber_gte: String
+
+  """All values containing the given string."""
+  orderNumber_contains: String
+
+  """All values not containing the given string."""
+  orderNumber_not_contains: String
+
+  """All values starting with the given string."""
+  orderNumber_starts_with: String
+
+  """All values not starting with the given string."""
+  orderNumber_not_starts_with: String
+
+  """All values ending with the given string."""
+  orderNumber_ends_with: String
+
+  """All values not ending with the given string."""
+  orderNumber_not_ends_with: String
+  productId: Int
+
+  """All values that are not equal to given value."""
+  productId_not: Int
+
+  """All values that are contained in given list."""
+  productId_in: [Int!]
+
+  """All values that are not contained in given list."""
+  productId_not_in: [Int!]
+
+  """All values less than the given value."""
+  productId_lt: Int
+
+  """All values less than or equal the given value."""
+  productId_lte: Int
+
+  """All values greater than the given value."""
+  productId_gt: Int
+
+  """All values greater than or equal the given value."""
+  productId_gte: Int
   status: Boolean
 
   """All values that are not equal to given value."""
@@ -9820,22 +10281,22 @@ input MarketAmazonCouponBuyListScalarWhereInput {
   userId_gte: Int
 }
 
-type MarketAmazonCouponBuyListSubscriptionPayload {
+type MarketBuyHistorySubscriptionPayload {
   mutation: MutationType!
-  node: MarketAmazonCouponBuyList
+  node: MarketBuyHistory
   updatedFields: [String!]
-  previousValues: MarketAmazonCouponBuyListPreviousValues
+  previousValues: MarketBuyHistoryPreviousValues
 }
 
-input MarketAmazonCouponBuyListSubscriptionWhereInput {
+input MarketBuyHistorySubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [MarketAmazonCouponBuyListSubscriptionWhereInput!]
+  AND: [MarketBuyHistorySubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [MarketAmazonCouponBuyListSubscriptionWhereInput!]
+  OR: [MarketBuyHistorySubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [MarketAmazonCouponBuyListSubscriptionWhereInput!]
+  NOT: [MarketBuyHistorySubscriptionWhereInput!]
 
   """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
@@ -9854,113 +10315,91 @@ input MarketAmazonCouponBuyListSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: MarketAmazonCouponBuyListWhereInput
+  node: MarketBuyHistoryWhereInput
 }
 
-input MarketAmazonCouponBuyListUpdateInput {
+input MarketBuyHistoryUpdateInput {
   cancelYn: Boolean
+  category: String
   createTime: DateTime
+  orderNumber: String
+  productId: Int
   status: Boolean
   updateTime: DateTime
   userId: Int
-  coinHistoryRowId: UserCoinHistoryUpdateOneWithoutMarketAmazonCouponBuyListInput
-  couponRowId: MarketAmazonCouponUpdateOneWithoutMarketAmazonCouponBuyListInput
+  coinHistoryRowId: UserCoinHistoryUpdateOneWithoutMarketBuyHistoryInput
 }
 
-input MarketAmazonCouponBuyListUpdateManyDataInput {
+input MarketBuyHistoryUpdateManyDataInput {
   cancelYn: Boolean
+  category: String
   createTime: DateTime
+  orderNumber: String
+  productId: Int
   status: Boolean
   updateTime: DateTime
   userId: Int
 }
 
-input MarketAmazonCouponBuyListUpdateManyMutationInput {
+input MarketBuyHistoryUpdateManyMutationInput {
   cancelYn: Boolean
+  category: String
   createTime: DateTime
+  orderNumber: String
+  productId: Int
   status: Boolean
   updateTime: DateTime
   userId: Int
 }
 
-input MarketAmazonCouponBuyListUpdateManyWithoutCoinHistoryRowIdInput {
-  create: [MarketAmazonCouponBuyListCreateWithoutCoinHistoryRowIdInput!]
-  connect: [MarketAmazonCouponBuyListWhereUniqueInput!]
-  set: [MarketAmazonCouponBuyListWhereUniqueInput!]
-  disconnect: [MarketAmazonCouponBuyListWhereUniqueInput!]
-  delete: [MarketAmazonCouponBuyListWhereUniqueInput!]
-  update: [MarketAmazonCouponBuyListUpdateWithWhereUniqueWithoutCoinHistoryRowIdInput!]
-  updateMany: [MarketAmazonCouponBuyListUpdateManyWithWhereNestedInput!]
-  deleteMany: [MarketAmazonCouponBuyListScalarWhereInput!]
-  upsert: [MarketAmazonCouponBuyListUpsertWithWhereUniqueWithoutCoinHistoryRowIdInput!]
+input MarketBuyHistoryUpdateManyWithoutCoinHistoryRowIdInput {
+  create: [MarketBuyHistoryCreateWithoutCoinHistoryRowIdInput!]
+  connect: [MarketBuyHistoryWhereUniqueInput!]
+  set: [MarketBuyHistoryWhereUniqueInput!]
+  disconnect: [MarketBuyHistoryWhereUniqueInput!]
+  delete: [MarketBuyHistoryWhereUniqueInput!]
+  update: [MarketBuyHistoryUpdateWithWhereUniqueWithoutCoinHistoryRowIdInput!]
+  updateMany: [MarketBuyHistoryUpdateManyWithWhereNestedInput!]
+  deleteMany: [MarketBuyHistoryScalarWhereInput!]
+  upsert: [MarketBuyHistoryUpsertWithWhereUniqueWithoutCoinHistoryRowIdInput!]
 }
 
-input MarketAmazonCouponBuyListUpdateManyWithoutCouponRowIdInput {
-  create: [MarketAmazonCouponBuyListCreateWithoutCouponRowIdInput!]
-  connect: [MarketAmazonCouponBuyListWhereUniqueInput!]
-  set: [MarketAmazonCouponBuyListWhereUniqueInput!]
-  disconnect: [MarketAmazonCouponBuyListWhereUniqueInput!]
-  delete: [MarketAmazonCouponBuyListWhereUniqueInput!]
-  update: [MarketAmazonCouponBuyListUpdateWithWhereUniqueWithoutCouponRowIdInput!]
-  updateMany: [MarketAmazonCouponBuyListUpdateManyWithWhereNestedInput!]
-  deleteMany: [MarketAmazonCouponBuyListScalarWhereInput!]
-  upsert: [MarketAmazonCouponBuyListUpsertWithWhereUniqueWithoutCouponRowIdInput!]
+input MarketBuyHistoryUpdateManyWithWhereNestedInput {
+  where: MarketBuyHistoryScalarWhereInput!
+  data: MarketBuyHistoryUpdateManyDataInput!
 }
 
-input MarketAmazonCouponBuyListUpdateManyWithWhereNestedInput {
-  where: MarketAmazonCouponBuyListScalarWhereInput!
-  data: MarketAmazonCouponBuyListUpdateManyDataInput!
-}
-
-input MarketAmazonCouponBuyListUpdateWithoutCoinHistoryRowIdDataInput {
+input MarketBuyHistoryUpdateWithoutCoinHistoryRowIdDataInput {
   cancelYn: Boolean
+  category: String
   createTime: DateTime
+  orderNumber: String
+  productId: Int
   status: Boolean
   updateTime: DateTime
   userId: Int
-  couponRowId: MarketAmazonCouponUpdateOneWithoutMarketAmazonCouponBuyListInput
 }
 
-input MarketAmazonCouponBuyListUpdateWithoutCouponRowIdDataInput {
-  cancelYn: Boolean
-  createTime: DateTime
-  status: Boolean
-  updateTime: DateTime
-  userId: Int
-  coinHistoryRowId: UserCoinHistoryUpdateOneWithoutMarketAmazonCouponBuyListInput
+input MarketBuyHistoryUpdateWithWhereUniqueWithoutCoinHistoryRowIdInput {
+  where: MarketBuyHistoryWhereUniqueInput!
+  data: MarketBuyHistoryUpdateWithoutCoinHistoryRowIdDataInput!
 }
 
-input MarketAmazonCouponBuyListUpdateWithWhereUniqueWithoutCoinHistoryRowIdInput {
-  where: MarketAmazonCouponBuyListWhereUniqueInput!
-  data: MarketAmazonCouponBuyListUpdateWithoutCoinHistoryRowIdDataInput!
+input MarketBuyHistoryUpsertWithWhereUniqueWithoutCoinHistoryRowIdInput {
+  where: MarketBuyHistoryWhereUniqueInput!
+  update: MarketBuyHistoryUpdateWithoutCoinHistoryRowIdDataInput!
+  create: MarketBuyHistoryCreateWithoutCoinHistoryRowIdInput!
 }
 
-input MarketAmazonCouponBuyListUpdateWithWhereUniqueWithoutCouponRowIdInput {
-  where: MarketAmazonCouponBuyListWhereUniqueInput!
-  data: MarketAmazonCouponBuyListUpdateWithoutCouponRowIdDataInput!
-}
-
-input MarketAmazonCouponBuyListUpsertWithWhereUniqueWithoutCoinHistoryRowIdInput {
-  where: MarketAmazonCouponBuyListWhereUniqueInput!
-  update: MarketAmazonCouponBuyListUpdateWithoutCoinHistoryRowIdDataInput!
-  create: MarketAmazonCouponBuyListCreateWithoutCoinHistoryRowIdInput!
-}
-
-input MarketAmazonCouponBuyListUpsertWithWhereUniqueWithoutCouponRowIdInput {
-  where: MarketAmazonCouponBuyListWhereUniqueInput!
-  update: MarketAmazonCouponBuyListUpdateWithoutCouponRowIdDataInput!
-  create: MarketAmazonCouponBuyListCreateWithoutCouponRowIdInput!
-}
-
-input MarketAmazonCouponBuyListWhereInput {
+input MarketBuyHistoryWhereInput {
   """Logical AND on all given filters."""
-  AND: [MarketAmazonCouponBuyListWhereInput!]
+  AND: [MarketBuyHistoryWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [MarketAmazonCouponBuyListWhereInput!]
+  OR: [MarketBuyHistoryWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [MarketAmazonCouponBuyListWhereInput!]
+  NOT: [MarketBuyHistoryWhereInput!]
   id: Int
 
   """All values that are not equal to given value."""
@@ -9987,6 +10426,46 @@ input MarketAmazonCouponBuyListWhereInput {
 
   """All values that are not equal to given value."""
   cancelYn_not: Boolean
+  category: String
+
+  """All values that are not equal to given value."""
+  category_not: String
+
+  """All values that are contained in given list."""
+  category_in: [String!]
+
+  """All values that are not contained in given list."""
+  category_not_in: [String!]
+
+  """All values less than the given value."""
+  category_lt: String
+
+  """All values less than or equal the given value."""
+  category_lte: String
+
+  """All values greater than the given value."""
+  category_gt: String
+
+  """All values greater than or equal the given value."""
+  category_gte: String
+
+  """All values containing the given string."""
+  category_contains: String
+
+  """All values not containing the given string."""
+  category_not_contains: String
+
+  """All values starting with the given string."""
+  category_starts_with: String
+
+  """All values not starting with the given string."""
+  category_not_starts_with: String
+
+  """All values ending with the given string."""
+  category_ends_with: String
+
+  """All values not ending with the given string."""
+  category_not_ends_with: String
   createTime: DateTime
 
   """All values that are not equal to given value."""
@@ -10009,6 +10488,68 @@ input MarketAmazonCouponBuyListWhereInput {
 
   """All values greater than or equal the given value."""
   createTime_gte: DateTime
+  orderNumber: String
+
+  """All values that are not equal to given value."""
+  orderNumber_not: String
+
+  """All values that are contained in given list."""
+  orderNumber_in: [String!]
+
+  """All values that are not contained in given list."""
+  orderNumber_not_in: [String!]
+
+  """All values less than the given value."""
+  orderNumber_lt: String
+
+  """All values less than or equal the given value."""
+  orderNumber_lte: String
+
+  """All values greater than the given value."""
+  orderNumber_gt: String
+
+  """All values greater than or equal the given value."""
+  orderNumber_gte: String
+
+  """All values containing the given string."""
+  orderNumber_contains: String
+
+  """All values not containing the given string."""
+  orderNumber_not_contains: String
+
+  """All values starting with the given string."""
+  orderNumber_starts_with: String
+
+  """All values not starting with the given string."""
+  orderNumber_not_starts_with: String
+
+  """All values ending with the given string."""
+  orderNumber_ends_with: String
+
+  """All values not ending with the given string."""
+  orderNumber_not_ends_with: String
+  productId: Int
+
+  """All values that are not equal to given value."""
+  productId_not: Int
+
+  """All values that are contained in given list."""
+  productId_in: [Int!]
+
+  """All values that are not contained in given list."""
+  productId_not_in: [Int!]
+
+  """All values less than the given value."""
+  productId_lt: Int
+
+  """All values less than or equal the given value."""
+  productId_lte: Int
+
+  """All values greater than the given value."""
+  productId_gt: Int
+
+  """All values greater than or equal the given value."""
+  productId_gte: Int
   status: Boolean
 
   """All values that are not equal to given value."""
@@ -10058,104 +10599,133 @@ input MarketAmazonCouponBuyListWhereInput {
   """All values greater than or equal the given value."""
   userId_gte: Int
   coinHistoryRowId: UserCoinHistoryWhereInput
-  couponRowId: MarketAmazonCouponWhereInput
 }
 
-input MarketAmazonCouponBuyListWhereUniqueInput {
+input MarketBuyHistoryWhereUniqueInput {
   id: Int
+  orderNumber: String
+}
+
+type MarketList {
+  id: Int!
+  count: Int!
+  endTime: DateTime!
+  image: String
+  price: Int!
+  startTime: DateTime!
+  title: String
 }
 
 """A connection to a list of items."""
-type MarketAmazonCouponConnection {
+type MarketListConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [MarketAmazonCouponEdge]!
-  aggregate: AggregateMarketAmazonCoupon!
+  edges: [MarketListEdge]!
+  aggregate: AggregateMarketList!
 }
 
-input MarketAmazonCouponCreateInput {
-  availability: Boolean
-  couponId: String!
-  createTime: DateTime!
+input MarketListCreateInput {
+  count: Int
   endTime: DateTime!
-  name: String
+  image: String
   price: Int
   startTime: DateTime!
-  marketAmazonCouponBuyList: MarketAmazonCouponBuyListCreateManyWithoutCouponRowIdInput
+  title: String
 }
 
-input MarketAmazonCouponCreateOneWithoutMarketAmazonCouponBuyListInput {
-  create: MarketAmazonCouponCreateWithoutMarketAmazonCouponBuyListInput
-  connect: MarketAmazonCouponWhereUniqueInput
-}
-
-input MarketAmazonCouponCreateWithoutMarketAmazonCouponBuyListInput {
-  availability: Boolean
-  couponId: String!
-  createTime: DateTime!
-  endTime: DateTime!
-  name: String
+type MarketListDetail {
+  id: Int!
+  contents: String
+  detailImage: String
+  mainImage: String
+  marketListId: Int
   price: Int
-  startTime: DateTime!
+  savingPrice: Int
+  subTitle: String
+  title: String
+}
+
+"""A connection to a list of items."""
+type MarketListDetailConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [MarketListDetailEdge]!
+  aggregate: AggregateMarketListDetail!
+}
+
+input MarketListDetailCreateInput {
+  contents: String
+  detailImage: String
+  mainImage: String
+  marketListId: Int
+  price: Int
+  savingPrice: Int
+  subTitle: String
+  title: String
 }
 
 """An edge in a connection."""
-type MarketAmazonCouponEdge {
+type MarketListDetailEdge {
   """The item at the end of the edge."""
-  node: MarketAmazonCoupon!
+  node: MarketListDetail!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum MarketAmazonCouponOrderByInput {
+enum MarketListDetailOrderByInput {
   id_ASC
   id_DESC
-  availability_ASC
-  availability_DESC
-  couponId_ASC
-  couponId_DESC
-  createTime_ASC
-  createTime_DESC
-  endTime_ASC
-  endTime_DESC
-  name_ASC
-  name_DESC
+  contents_ASC
+  contents_DESC
+  detailImage_ASC
+  detailImage_DESC
+  mainImage_ASC
+  mainImage_DESC
+  marketListId_ASC
+  marketListId_DESC
   price_ASC
   price_DESC
-  startTime_ASC
-  startTime_DESC
+  savingPrice_ASC
+  savingPrice_DESC
+  subTitle_ASC
+  subTitle_DESC
+  title_ASC
+  title_DESC
 }
 
-type MarketAmazonCouponPreviousValues {
+type MarketListDetailPreviousValues {
   id: Int!
-  availability: Boolean!
-  couponId: String!
-  createTime: DateTime!
-  endTime: DateTime!
-  name: String
-  price: Int!
-  startTime: DateTime!
+  contents: String
+  detailImage: String
+  mainImage: String
+  marketListId: Int
+  price: Int
+  savingPrice: Int
+  subTitle: String
+  title: String
 }
 
-type MarketAmazonCouponSubscriptionPayload {
+type MarketListDetailSubscriptionPayload {
   mutation: MutationType!
-  node: MarketAmazonCoupon
+  node: MarketListDetail
   updatedFields: [String!]
-  previousValues: MarketAmazonCouponPreviousValues
+  previousValues: MarketListDetailPreviousValues
 }
 
-input MarketAmazonCouponSubscriptionWhereInput {
+input MarketListDetailSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [MarketAmazonCouponSubscriptionWhereInput!]
+  AND: [MarketListDetailSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [MarketAmazonCouponSubscriptionWhereInput!]
+  OR: [MarketListDetailSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [MarketAmazonCouponSubscriptionWhereInput!]
+  NOT: [MarketListDetailSubscriptionWhereInput!]
 
   """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
@@ -10174,63 +10744,40 @@ input MarketAmazonCouponSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: MarketAmazonCouponWhereInput
+  node: MarketListDetailWhereInput
 }
 
-input MarketAmazonCouponUpdateInput {
-  availability: Boolean
-  couponId: String
-  createTime: DateTime
-  endTime: DateTime
-  name: String
+input MarketListDetailUpdateInput {
+  contents: String
+  detailImage: String
+  mainImage: String
+  marketListId: Int
   price: Int
-  startTime: DateTime
-  marketAmazonCouponBuyList: MarketAmazonCouponBuyListUpdateManyWithoutCouponRowIdInput
+  savingPrice: Int
+  subTitle: String
+  title: String
 }
 
-input MarketAmazonCouponUpdateManyMutationInput {
-  availability: Boolean
-  couponId: String
-  createTime: DateTime
-  endTime: DateTime
-  name: String
+input MarketListDetailUpdateManyMutationInput {
+  contents: String
+  detailImage: String
+  mainImage: String
+  marketListId: Int
   price: Int
-  startTime: DateTime
+  savingPrice: Int
+  subTitle: String
+  title: String
 }
 
-input MarketAmazonCouponUpdateOneWithoutMarketAmazonCouponBuyListInput {
-  create: MarketAmazonCouponCreateWithoutMarketAmazonCouponBuyListInput
-  connect: MarketAmazonCouponWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: MarketAmazonCouponUpdateWithoutMarketAmazonCouponBuyListDataInput
-  upsert: MarketAmazonCouponUpsertWithoutMarketAmazonCouponBuyListInput
-}
-
-input MarketAmazonCouponUpdateWithoutMarketAmazonCouponBuyListDataInput {
-  availability: Boolean
-  couponId: String
-  createTime: DateTime
-  endTime: DateTime
-  name: String
-  price: Int
-  startTime: DateTime
-}
-
-input MarketAmazonCouponUpsertWithoutMarketAmazonCouponBuyListInput {
-  update: MarketAmazonCouponUpdateWithoutMarketAmazonCouponBuyListDataInput!
-  create: MarketAmazonCouponCreateWithoutMarketAmazonCouponBuyListInput!
-}
-
-input MarketAmazonCouponWhereInput {
+input MarketListDetailWhereInput {
   """Logical AND on all given filters."""
-  AND: [MarketAmazonCouponWhereInput!]
+  AND: [MarketListDetailWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [MarketAmazonCouponWhereInput!]
+  OR: [MarketListDetailWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [MarketAmazonCouponWhereInput!]
+  NOT: [MarketListDetailWhereInput!]
   id: Int
 
   """All values that are not equal to given value."""
@@ -10253,134 +10800,148 @@ input MarketAmazonCouponWhereInput {
 
   """All values greater than or equal the given value."""
   id_gte: Int
-  availability: Boolean
+  contents: String
 
   """All values that are not equal to given value."""
-  availability_not: Boolean
-  couponId: String
-
-  """All values that are not equal to given value."""
-  couponId_not: String
+  contents_not: String
 
   """All values that are contained in given list."""
-  couponId_in: [String!]
+  contents_in: [String!]
 
   """All values that are not contained in given list."""
-  couponId_not_in: [String!]
+  contents_not_in: [String!]
 
   """All values less than the given value."""
-  couponId_lt: String
+  contents_lt: String
 
   """All values less than or equal the given value."""
-  couponId_lte: String
+  contents_lte: String
 
   """All values greater than the given value."""
-  couponId_gt: String
+  contents_gt: String
 
   """All values greater than or equal the given value."""
-  couponId_gte: String
+  contents_gte: String
 
   """All values containing the given string."""
-  couponId_contains: String
+  contents_contains: String
 
   """All values not containing the given string."""
-  couponId_not_contains: String
+  contents_not_contains: String
 
   """All values starting with the given string."""
-  couponId_starts_with: String
+  contents_starts_with: String
 
   """All values not starting with the given string."""
-  couponId_not_starts_with: String
+  contents_not_starts_with: String
 
   """All values ending with the given string."""
-  couponId_ends_with: String
+  contents_ends_with: String
 
   """All values not ending with the given string."""
-  couponId_not_ends_with: String
-  createTime: DateTime
+  contents_not_ends_with: String
+  detailImage: String
 
   """All values that are not equal to given value."""
-  createTime_not: DateTime
+  detailImage_not: String
 
   """All values that are contained in given list."""
-  createTime_in: [DateTime!]
+  detailImage_in: [String!]
 
   """All values that are not contained in given list."""
-  createTime_not_in: [DateTime!]
+  detailImage_not_in: [String!]
 
   """All values less than the given value."""
-  createTime_lt: DateTime
+  detailImage_lt: String
 
   """All values less than or equal the given value."""
-  createTime_lte: DateTime
+  detailImage_lte: String
 
   """All values greater than the given value."""
-  createTime_gt: DateTime
+  detailImage_gt: String
 
   """All values greater than or equal the given value."""
-  createTime_gte: DateTime
-  endTime: DateTime
-
-  """All values that are not equal to given value."""
-  endTime_not: DateTime
-
-  """All values that are contained in given list."""
-  endTime_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  endTime_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  endTime_lt: DateTime
-
-  """All values less than or equal the given value."""
-  endTime_lte: DateTime
-
-  """All values greater than the given value."""
-  endTime_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  endTime_gte: DateTime
-  name: String
-
-  """All values that are not equal to given value."""
-  name_not: String
-
-  """All values that are contained in given list."""
-  name_in: [String!]
-
-  """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
+  detailImage_gte: String
 
   """All values containing the given string."""
-  name_contains: String
+  detailImage_contains: String
 
   """All values not containing the given string."""
-  name_not_contains: String
+  detailImage_not_contains: String
 
   """All values starting with the given string."""
-  name_starts_with: String
+  detailImage_starts_with: String
 
   """All values not starting with the given string."""
-  name_not_starts_with: String
+  detailImage_not_starts_with: String
 
   """All values ending with the given string."""
-  name_ends_with: String
+  detailImage_ends_with: String
 
   """All values not ending with the given string."""
-  name_not_ends_with: String
+  detailImage_not_ends_with: String
+  mainImage: String
+
+  """All values that are not equal to given value."""
+  mainImage_not: String
+
+  """All values that are contained in given list."""
+  mainImage_in: [String!]
+
+  """All values that are not contained in given list."""
+  mainImage_not_in: [String!]
+
+  """All values less than the given value."""
+  mainImage_lt: String
+
+  """All values less than or equal the given value."""
+  mainImage_lte: String
+
+  """All values greater than the given value."""
+  mainImage_gt: String
+
+  """All values greater than or equal the given value."""
+  mainImage_gte: String
+
+  """All values containing the given string."""
+  mainImage_contains: String
+
+  """All values not containing the given string."""
+  mainImage_not_contains: String
+
+  """All values starting with the given string."""
+  mainImage_starts_with: String
+
+  """All values not starting with the given string."""
+  mainImage_not_starts_with: String
+
+  """All values ending with the given string."""
+  mainImage_ends_with: String
+
+  """All values not ending with the given string."""
+  mainImage_not_ends_with: String
+  marketListId: Int
+
+  """All values that are not equal to given value."""
+  marketListId_not: Int
+
+  """All values that are contained in given list."""
+  marketListId_in: [Int!]
+
+  """All values that are not contained in given list."""
+  marketListId_not_in: [Int!]
+
+  """All values less than the given value."""
+  marketListId_lt: Int
+
+  """All values less than or equal the given value."""
+  marketListId_lte: Int
+
+  """All values greater than the given value."""
+  marketListId_gt: Int
+
+  """All values greater than or equal the given value."""
+  marketListId_gte: Int
   price: Int
 
   """All values that are not equal to given value."""
@@ -10403,63 +10964,112 @@ input MarketAmazonCouponWhereInput {
 
   """All values greater than or equal the given value."""
   price_gte: Int
-  startTime: DateTime
+  savingPrice: Int
 
   """All values that are not equal to given value."""
-  startTime_not: DateTime
+  savingPrice_not: Int
 
   """All values that are contained in given list."""
-  startTime_in: [DateTime!]
+  savingPrice_in: [Int!]
 
   """All values that are not contained in given list."""
-  startTime_not_in: [DateTime!]
+  savingPrice_not_in: [Int!]
 
   """All values less than the given value."""
-  startTime_lt: DateTime
+  savingPrice_lt: Int
 
   """All values less than or equal the given value."""
-  startTime_lte: DateTime
+  savingPrice_lte: Int
 
   """All values greater than the given value."""
-  startTime_gt: DateTime
+  savingPrice_gt: Int
 
   """All values greater than or equal the given value."""
-  startTime_gte: DateTime
-  marketAmazonCouponBuyList_every: MarketAmazonCouponBuyListWhereInput
-  marketAmazonCouponBuyList_some: MarketAmazonCouponBuyListWhereInput
-  marketAmazonCouponBuyList_none: MarketAmazonCouponBuyListWhereInput
+  savingPrice_gte: Int
+  subTitle: String
+
+  """All values that are not equal to given value."""
+  subTitle_not: String
+
+  """All values that are contained in given list."""
+  subTitle_in: [String!]
+
+  """All values that are not contained in given list."""
+  subTitle_not_in: [String!]
+
+  """All values less than the given value."""
+  subTitle_lt: String
+
+  """All values less than or equal the given value."""
+  subTitle_lte: String
+
+  """All values greater than the given value."""
+  subTitle_gt: String
+
+  """All values greater than or equal the given value."""
+  subTitle_gte: String
+
+  """All values containing the given string."""
+  subTitle_contains: String
+
+  """All values not containing the given string."""
+  subTitle_not_contains: String
+
+  """All values starting with the given string."""
+  subTitle_starts_with: String
+
+  """All values not starting with the given string."""
+  subTitle_not_starts_with: String
+
+  """All values ending with the given string."""
+  subTitle_ends_with: String
+
+  """All values not ending with the given string."""
+  subTitle_not_ends_with: String
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
 }
 
-input MarketAmazonCouponWhereUniqueInput {
+input MarketListDetailWhereUniqueInput {
   id: Int
-  couponId: String
-}
-
-type MarketList {
-  id: Int!
-  count: Int!
-  endTime: DateTime!
-  name: String
-  price: Int!
-  startTime: DateTime!
-}
-
-"""A connection to a list of items."""
-type MarketListConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [MarketListEdge]!
-  aggregate: AggregateMarketList!
-}
-
-input MarketListCreateInput {
-  count: Int
-  endTime: DateTime!
-  name: String
-  price: Int
-  startTime: DateTime!
 }
 
 """An edge in a connection."""
@@ -10478,21 +11088,24 @@ enum MarketListOrderByInput {
   count_DESC
   endTime_ASC
   endTime_DESC
-  name_ASC
-  name_DESC
+  image_ASC
+  image_DESC
   price_ASC
   price_DESC
   startTime_ASC
   startTime_DESC
+  title_ASC
+  title_DESC
 }
 
 type MarketListPreviousValues {
   id: Int!
   count: Int!
   endTime: DateTime!
-  name: String
+  image: String
   price: Int!
   startTime: DateTime!
+  title: String
 }
 
 type MarketListSubscriptionPayload {
@@ -10535,17 +11148,19 @@ input MarketListSubscriptionWhereInput {
 input MarketListUpdateInput {
   count: Int
   endTime: DateTime
-  name: String
+  image: String
   price: Int
   startTime: DateTime
+  title: String
 }
 
 input MarketListUpdateManyMutationInput {
   count: Int
   endTime: DateTime
-  name: String
+  image: String
   price: Int
   startTime: DateTime
+  title: String
 }
 
 input MarketListWhereInput {
@@ -10623,46 +11238,46 @@ input MarketListWhereInput {
 
   """All values greater than or equal the given value."""
   endTime_gte: DateTime
-  name: String
+  image: String
 
   """All values that are not equal to given value."""
-  name_not: String
+  image_not: String
 
   """All values that are contained in given list."""
-  name_in: [String!]
+  image_in: [String!]
 
   """All values that are not contained in given list."""
-  name_not_in: [String!]
+  image_not_in: [String!]
 
   """All values less than the given value."""
-  name_lt: String
+  image_lt: String
 
   """All values less than or equal the given value."""
-  name_lte: String
+  image_lte: String
 
   """All values greater than the given value."""
-  name_gt: String
+  image_gt: String
 
   """All values greater than or equal the given value."""
-  name_gte: String
+  image_gte: String
 
   """All values containing the given string."""
-  name_contains: String
+  image_contains: String
 
   """All values not containing the given string."""
-  name_not_contains: String
+  image_not_contains: String
 
   """All values starting with the given string."""
-  name_starts_with: String
+  image_starts_with: String
 
   """All values not starting with the given string."""
-  name_not_starts_with: String
+  image_not_starts_with: String
 
   """All values ending with the given string."""
-  name_ends_with: String
+  image_ends_with: String
 
   """All values not ending with the given string."""
-  name_not_ends_with: String
+  image_not_ends_with: String
   price: Int
 
   """All values that are not equal to given value."""
@@ -10707,6 +11322,46 @@ input MarketListWhereInput {
 
   """All values greater than or equal the given value."""
   startTime_gte: DateTime
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
 }
 
 input MarketListWhereUniqueInput {
@@ -10740,8 +11395,9 @@ type Mutation {
   createFirmware(data: FirmwareCreateInput!): Firmware!
   createHardware(data: HardwareCreateInput!): Hardware!
   createMarketAmazonCoupon(data: MarketAmazonCouponCreateInput!): MarketAmazonCoupon!
-  createMarketAmazonCouponBuyList(data: MarketAmazonCouponBuyListCreateInput!): MarketAmazonCouponBuyList!
+  createMarketBuyHistory(data: MarketBuyHistoryCreateInput!): MarketBuyHistory!
   createMarketList(data: MarketListCreateInput!): MarketList!
+  createMarketListDetail(data: MarketListDetailCreateInput!): MarketListDetail!
   createPlatformComp(data: PlatformCompCreateInput!): PlatformComp!
   createUser(data: UserCreateInput!): User!
   createUserCoinHistory(data: UserCoinHistoryCreateInput!): UserCoinHistory!
@@ -10778,8 +11434,9 @@ type Mutation {
   updateFirmware(data: FirmwareUpdateInput!, where: FirmwareWhereUniqueInput!): Firmware
   updateHardware(data: HardwareUpdateInput!, where: HardwareWhereUniqueInput!): Hardware
   updateMarketAmazonCoupon(data: MarketAmazonCouponUpdateInput!, where: MarketAmazonCouponWhereUniqueInput!): MarketAmazonCoupon
-  updateMarketAmazonCouponBuyList(data: MarketAmazonCouponBuyListUpdateInput!, where: MarketAmazonCouponBuyListWhereUniqueInput!): MarketAmazonCouponBuyList
+  updateMarketBuyHistory(data: MarketBuyHistoryUpdateInput!, where: MarketBuyHistoryWhereUniqueInput!): MarketBuyHistory
   updateMarketList(data: MarketListUpdateInput!, where: MarketListWhereUniqueInput!): MarketList
+  updateMarketListDetail(data: MarketListDetailUpdateInput!, where: MarketListDetailWhereUniqueInput!): MarketListDetail
   updatePlatformComp(data: PlatformCompUpdateInput!, where: PlatformCompWhereUniqueInput!): PlatformComp
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateUserCoinHistory(data: UserCoinHistoryUpdateInput!, where: UserCoinHistoryWhereUniqueInput!): UserCoinHistory
@@ -10817,8 +11474,9 @@ type Mutation {
   deleteFirmware(where: FirmwareWhereUniqueInput!): Firmware
   deleteHardware(where: HardwareWhereUniqueInput!): Hardware
   deleteMarketAmazonCoupon(where: MarketAmazonCouponWhereUniqueInput!): MarketAmazonCoupon
-  deleteMarketAmazonCouponBuyList(where: MarketAmazonCouponBuyListWhereUniqueInput!): MarketAmazonCouponBuyList
+  deleteMarketBuyHistory(where: MarketBuyHistoryWhereUniqueInput!): MarketBuyHistory
   deleteMarketList(where: MarketListWhereUniqueInput!): MarketList
+  deleteMarketListDetail(where: MarketListDetailWhereUniqueInput!): MarketListDetail
   deletePlatformComp(where: PlatformCompWhereUniqueInput!): PlatformComp
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUserCoinHistory(where: UserCoinHistoryWhereUniqueInput!): UserCoinHistory
@@ -10855,8 +11513,9 @@ type Mutation {
   upsertFirmware(where: FirmwareWhereUniqueInput!, create: FirmwareCreateInput!, update: FirmwareUpdateInput!): Firmware!
   upsertHardware(where: HardwareWhereUniqueInput!, create: HardwareCreateInput!, update: HardwareUpdateInput!): Hardware!
   upsertMarketAmazonCoupon(where: MarketAmazonCouponWhereUniqueInput!, create: MarketAmazonCouponCreateInput!, update: MarketAmazonCouponUpdateInput!): MarketAmazonCoupon!
-  upsertMarketAmazonCouponBuyList(where: MarketAmazonCouponBuyListWhereUniqueInput!, create: MarketAmazonCouponBuyListCreateInput!, update: MarketAmazonCouponBuyListUpdateInput!): MarketAmazonCouponBuyList!
+  upsertMarketBuyHistory(where: MarketBuyHistoryWhereUniqueInput!, create: MarketBuyHistoryCreateInput!, update: MarketBuyHistoryUpdateInput!): MarketBuyHistory!
   upsertMarketList(where: MarketListWhereUniqueInput!, create: MarketListCreateInput!, update: MarketListUpdateInput!): MarketList!
+  upsertMarketListDetail(where: MarketListDetailWhereUniqueInput!, create: MarketListDetailCreateInput!, update: MarketListDetailUpdateInput!): MarketListDetail!
   upsertPlatformComp(where: PlatformCompWhereUniqueInput!, create: PlatformCompCreateInput!, update: PlatformCompUpdateInput!): PlatformComp!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertUserCoinHistory(where: UserCoinHistoryWhereUniqueInput!, create: UserCoinHistoryCreateInput!, update: UserCoinHistoryUpdateInput!): UserCoinHistory!
@@ -10893,8 +11552,9 @@ type Mutation {
   updateManyFirmwares(data: FirmwareUpdateManyMutationInput!, where: FirmwareWhereInput): BatchPayload!
   updateManyHardwares(data: HardwareUpdateManyMutationInput!, where: HardwareWhereInput): BatchPayload!
   updateManyMarketAmazonCoupons(data: MarketAmazonCouponUpdateManyMutationInput!, where: MarketAmazonCouponWhereInput): BatchPayload!
-  updateManyMarketAmazonCouponBuyLists(data: MarketAmazonCouponBuyListUpdateManyMutationInput!, where: MarketAmazonCouponBuyListWhereInput): BatchPayload!
+  updateManyMarketBuyHistories(data: MarketBuyHistoryUpdateManyMutationInput!, where: MarketBuyHistoryWhereInput): BatchPayload!
   updateManyMarketLists(data: MarketListUpdateManyMutationInput!, where: MarketListWhereInput): BatchPayload!
+  updateManyMarketListDetails(data: MarketListDetailUpdateManyMutationInput!, where: MarketListDetailWhereInput): BatchPayload!
   updateManyPlatformComps(data: PlatformCompUpdateManyMutationInput!, where: PlatformCompWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyUserCoinHistories(data: UserCoinHistoryUpdateManyMutationInput!, where: UserCoinHistoryWhereInput): BatchPayload!
@@ -10931,8 +11591,9 @@ type Mutation {
   deleteManyFirmwares(where: FirmwareWhereInput): BatchPayload!
   deleteManyHardwares(where: HardwareWhereInput): BatchPayload!
   deleteManyMarketAmazonCoupons(where: MarketAmazonCouponWhereInput): BatchPayload!
-  deleteManyMarketAmazonCouponBuyLists(where: MarketAmazonCouponBuyListWhereInput): BatchPayload!
+  deleteManyMarketBuyHistories(where: MarketBuyHistoryWhereInput): BatchPayload!
   deleteManyMarketLists(where: MarketListWhereInput): BatchPayload!
+  deleteManyMarketListDetails(where: MarketListDetailWhereInput): BatchPayload!
   deleteManyPlatformComps(where: PlatformCompWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyUserCoinHistories(where: UserCoinHistoryWhereInput): BatchPayload!
@@ -11223,8 +11884,9 @@ type Query {
   firmwares(where: FirmwareWhereInput, orderBy: FirmwareOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Firmware]!
   hardwares(where: HardwareWhereInput, orderBy: HardwareOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Hardware]!
   marketAmazonCoupons(where: MarketAmazonCouponWhereInput, orderBy: MarketAmazonCouponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketAmazonCoupon]!
-  marketAmazonCouponBuyLists(where: MarketAmazonCouponBuyListWhereInput, orderBy: MarketAmazonCouponBuyListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketAmazonCouponBuyList]!
+  marketBuyHistories(where: MarketBuyHistoryWhereInput, orderBy: MarketBuyHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketBuyHistory]!
   marketLists(where: MarketListWhereInput, orderBy: MarketListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketList]!
+  marketListDetails(where: MarketListDetailWhereInput, orderBy: MarketListDetailOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketListDetail]!
   platformComps(where: PlatformCompWhereInput, orderBy: PlatformCompOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlatformComp]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   userCoinHistories(where: UserCoinHistoryWhereInput, orderBy: UserCoinHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCoinHistory]!
@@ -11262,8 +11924,9 @@ type Query {
   firmware(where: FirmwareWhereUniqueInput!): Firmware
   hardware(where: HardwareWhereUniqueInput!): Hardware
   marketAmazonCoupon(where: MarketAmazonCouponWhereUniqueInput!): MarketAmazonCoupon
-  marketAmazonCouponBuyList(where: MarketAmazonCouponBuyListWhereUniqueInput!): MarketAmazonCouponBuyList
+  marketBuyHistory(where: MarketBuyHistoryWhereUniqueInput!): MarketBuyHistory
   marketList(where: MarketListWhereUniqueInput!): MarketList
+  marketListDetail(where: MarketListDetailWhereUniqueInput!): MarketListDetail
   platformComp(where: PlatformCompWhereUniqueInput!): PlatformComp
   user(where: UserWhereUniqueInput!): User
   userCoinHistory(where: UserCoinHistoryWhereUniqueInput!): UserCoinHistory
@@ -11301,8 +11964,9 @@ type Query {
   firmwaresConnection(where: FirmwareWhereInput, orderBy: FirmwareOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FirmwareConnection!
   hardwaresConnection(where: HardwareWhereInput, orderBy: HardwareOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): HardwareConnection!
   marketAmazonCouponsConnection(where: MarketAmazonCouponWhereInput, orderBy: MarketAmazonCouponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MarketAmazonCouponConnection!
-  marketAmazonCouponBuyListsConnection(where: MarketAmazonCouponBuyListWhereInput, orderBy: MarketAmazonCouponBuyListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MarketAmazonCouponBuyListConnection!
+  marketBuyHistoriesConnection(where: MarketBuyHistoryWhereInput, orderBy: MarketBuyHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MarketBuyHistoryConnection!
   marketListsConnection(where: MarketListWhereInput, orderBy: MarketListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MarketListConnection!
+  marketListDetailsConnection(where: MarketListDetailWhereInput, orderBy: MarketListDetailOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MarketListDetailConnection!
   platformCompsConnection(where: PlatformCompWhereInput, orderBy: PlatformCompOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlatformCompConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   userCoinHistoriesConnection(where: UserCoinHistoryWhereInput, orderBy: UserCoinHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserCoinHistoryConnection!
@@ -11343,8 +12007,9 @@ type Subscription {
   firmware(where: FirmwareSubscriptionWhereInput): FirmwareSubscriptionPayload
   hardware(where: HardwareSubscriptionWhereInput): HardwareSubscriptionPayload
   marketAmazonCoupon(where: MarketAmazonCouponSubscriptionWhereInput): MarketAmazonCouponSubscriptionPayload
-  marketAmazonCouponBuyList(where: MarketAmazonCouponBuyListSubscriptionWhereInput): MarketAmazonCouponBuyListSubscriptionPayload
+  marketBuyHistory(where: MarketBuyHistorySubscriptionWhereInput): MarketBuyHistorySubscriptionPayload
   marketList(where: MarketListSubscriptionWhereInput): MarketListSubscriptionPayload
+  marketListDetail(where: MarketListDetailSubscriptionWhereInput): MarketListDetailSubscriptionPayload
   platformComp(where: PlatformCompSubscriptionWhereInput): PlatformCompSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   userCoinHistory(where: UserCoinHistorySubscriptionWhereInput): UserCoinHistorySubscriptionPayload
@@ -11390,7 +12055,7 @@ type UserCoinHistory {
   coin: Int!
   contents: String!
   date: DateTime!
-  marketAmazonCouponBuyList(where: MarketAmazonCouponBuyListWhereInput, orderBy: MarketAmazonCouponBuyListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketAmazonCouponBuyList!]
+  marketBuyHistory(where: MarketBuyHistoryWhereInput, orderBy: MarketBuyHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketBuyHistory!]
   txhash: String!
   userId: User
   walletId: Int
@@ -11413,7 +12078,7 @@ input UserCoinHistoryCreateInput {
   date: DateTime!
   txhash: String!
   walletId: Int
-  marketAmazonCouponBuyList: MarketAmazonCouponBuyListCreateManyWithoutCoinHistoryRowIdInput
+  marketBuyHistory: MarketBuyHistoryCreateManyWithoutCoinHistoryRowIdInput
   userId: UserCreateOneWithoutUserCoinHistoryInput
 }
 
@@ -11422,12 +12087,12 @@ input UserCoinHistoryCreateManyWithoutUserIdInput {
   connect: [UserCoinHistoryWhereUniqueInput!]
 }
 
-input UserCoinHistoryCreateOneWithoutMarketAmazonCouponBuyListInput {
-  create: UserCoinHistoryCreateWithoutMarketAmazonCouponBuyListInput
+input UserCoinHistoryCreateOneWithoutMarketBuyHistoryInput {
+  create: UserCoinHistoryCreateWithoutMarketBuyHistoryInput
   connect: UserCoinHistoryWhereUniqueInput
 }
 
-input UserCoinHistoryCreateWithoutMarketAmazonCouponBuyListInput {
+input UserCoinHistoryCreateWithoutMarketBuyHistoryInput {
   category: String!
   coin: Int!
   contents: String!
@@ -11444,7 +12109,7 @@ input UserCoinHistoryCreateWithoutUserIdInput {
   date: DateTime!
   txhash: String!
   walletId: Int
-  marketAmazonCouponBuyList: MarketAmazonCouponBuyListCreateManyWithoutCoinHistoryRowIdInput
+  marketBuyHistory: MarketBuyHistoryCreateManyWithoutCoinHistoryRowIdInput
 }
 
 """An edge in a connection."""
@@ -11746,7 +12411,7 @@ input UserCoinHistoryUpdateInput {
   date: DateTime
   txhash: String
   walletId: Int
-  marketAmazonCouponBuyList: MarketAmazonCouponBuyListUpdateManyWithoutCoinHistoryRowIdInput
+  marketBuyHistory: MarketBuyHistoryUpdateManyWithoutCoinHistoryRowIdInput
   userId: UserUpdateOneWithoutUserCoinHistoryInput
 }
 
@@ -11785,16 +12450,16 @@ input UserCoinHistoryUpdateManyWithWhereNestedInput {
   data: UserCoinHistoryUpdateManyDataInput!
 }
 
-input UserCoinHistoryUpdateOneWithoutMarketAmazonCouponBuyListInput {
-  create: UserCoinHistoryCreateWithoutMarketAmazonCouponBuyListInput
+input UserCoinHistoryUpdateOneWithoutMarketBuyHistoryInput {
+  create: UserCoinHistoryCreateWithoutMarketBuyHistoryInput
   connect: UserCoinHistoryWhereUniqueInput
   disconnect: Boolean
   delete: Boolean
-  update: UserCoinHistoryUpdateWithoutMarketAmazonCouponBuyListDataInput
-  upsert: UserCoinHistoryUpsertWithoutMarketAmazonCouponBuyListInput
+  update: UserCoinHistoryUpdateWithoutMarketBuyHistoryDataInput
+  upsert: UserCoinHistoryUpsertWithoutMarketBuyHistoryInput
 }
 
-input UserCoinHistoryUpdateWithoutMarketAmazonCouponBuyListDataInput {
+input UserCoinHistoryUpdateWithoutMarketBuyHistoryDataInput {
   category: String
   coin: Int
   contents: String
@@ -11811,7 +12476,7 @@ input UserCoinHistoryUpdateWithoutUserIdDataInput {
   date: DateTime
   txhash: String
   walletId: Int
-  marketAmazonCouponBuyList: MarketAmazonCouponBuyListUpdateManyWithoutCoinHistoryRowIdInput
+  marketBuyHistory: MarketBuyHistoryUpdateManyWithoutCoinHistoryRowIdInput
 }
 
 input UserCoinHistoryUpdateWithWhereUniqueWithoutUserIdInput {
@@ -11819,9 +12484,9 @@ input UserCoinHistoryUpdateWithWhereUniqueWithoutUserIdInput {
   data: UserCoinHistoryUpdateWithoutUserIdDataInput!
 }
 
-input UserCoinHistoryUpsertWithoutMarketAmazonCouponBuyListInput {
-  update: UserCoinHistoryUpdateWithoutMarketAmazonCouponBuyListDataInput!
-  create: UserCoinHistoryCreateWithoutMarketAmazonCouponBuyListInput!
+input UserCoinHistoryUpsertWithoutMarketBuyHistoryInput {
+  update: UserCoinHistoryUpdateWithoutMarketBuyHistoryDataInput!
+  create: UserCoinHistoryCreateWithoutMarketBuyHistoryInput!
 }
 
 input UserCoinHistoryUpsertWithWhereUniqueWithoutUserIdInput {
@@ -12047,9 +12712,9 @@ input UserCoinHistoryWhereInput {
 
   """All values greater than or equal the given value."""
   walletId_gte: Int
-  marketAmazonCouponBuyList_every: MarketAmazonCouponBuyListWhereInput
-  marketAmazonCouponBuyList_some: MarketAmazonCouponBuyListWhereInput
-  marketAmazonCouponBuyList_none: MarketAmazonCouponBuyListWhereInput
+  marketBuyHistory_every: MarketBuyHistoryWhereInput
+  marketBuyHistory_some: MarketBuyHistoryWhereInput
+  marketBuyHistory_none: MarketBuyHistoryWhereInput
   userId: UserWhereInput
 }
 

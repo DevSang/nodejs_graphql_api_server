@@ -24,10 +24,12 @@ const resolvers = {
         marketAmazonCoupon: forwardTo('db'),
         marketAmazonCoupons: forwardTo('db'),
         marketLists: forwardTo('db'),
-        marketAmazonCouponBuyList: forwardTo('db'),
-        marketAmazonCouponBuyLists: forwardTo('db'),
+        marketBuyHistory: forwardTo('db'),
+        marketBuyHistories: forwardTo('db'),
         userWallet: forwardTo('db'),
         userWallets: forwardTo('db'),
+        marketListDetail: forwardTo('db'),
+        marketListDetails: forwardTo('db'),
     },
     Mutation: {
         //Use Prisma own mutation
@@ -52,12 +54,15 @@ const resolvers = {
         createMarketAmazonCoupon: forwardTo('db'),
         updateMarketAmazonCoupon: forwardTo('db'),
         deleteMarketAmazonCoupon: forwardTo('db'),
-        createMarketAmazonCouponBuyList: forwardTo('db'),
-        updateMarketAmazonCouponBuyList: forwardTo('db'),
-        deleteMarketAmazonCouponBuyList: forwardTo('db'),
+        createMarketBuyHistory: forwardTo('db'),
+        updateMarketBuyHistory: forwardTo('db'),
+        deleteMarketBuyHistory: forwardTo('db'),
         createUserWallet: forwardTo('db'),
         updateUserWallet: forwardTo('db'),
         deleteUserWallet: forwardTo('db'),
+        createMarketListDetail: forwardTo('db'),
+        updateMarketListDetail: forwardTo('db'),
+        deleteMarketListDetail: forwardTo('db'),
 
         //Use Custom mutation
         signin: require('./mutation/signin'),
@@ -69,7 +74,7 @@ const resolvers = {
         getCupData: require('./mutation/getCupData'),
         signinDataAnalysis: require('./mutation/signinDataAnalysis'),
         createTxUserCoinHistory: require('./mutation/createTxUserCoinHistory'),
-        createTxAmazonCouponBuyList: require('./mutation/createTxAmazonCouponBuyList'),
+        createTxMarketBuyHistory: require('./mutation/createTxMarketBuyHistory'),
         changeCouponCount: require('./mutation/changeCouponCount')
     }
 };
