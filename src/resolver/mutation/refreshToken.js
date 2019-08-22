@@ -22,7 +22,7 @@ module.exports = async (parent, { email }, ctx, info) => {
     
     var country = await ctx.db.query.country(
         { 
-            where: { id : {id : user.countryId} } 
+            where: { id : user.countryId} 
         }, 
         `{
             id
@@ -31,7 +31,7 @@ module.exports = async (parent, { email }, ctx, info) => {
     );
     var wallet = await ctx.db.query.userWallet(
         { 
-            where: { id : {userId : user.countryId} } 
+            where: { userId : user.id} 
         }, 
         `{
             id
