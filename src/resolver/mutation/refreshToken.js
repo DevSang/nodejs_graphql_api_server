@@ -29,7 +29,7 @@ module.exports = async (parent, { email }, ctx, info) => {
             countryName
         }`
     );
-    var wallet = await ctx.db.query.userWallet(
+    var wallet = await ctx.db.query.userWallets(
         { 
             where: { userId : user.id} 
         }, 
