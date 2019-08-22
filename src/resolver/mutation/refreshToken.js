@@ -38,6 +38,7 @@ module.exports = async (parent, { email }, ctx, info) => {
             address
         }`
     );
+    wallet = wallet[0];
     // var cups = await ctx.db.query.userCups(
     //                     { 
     //                        where: { userId : {id : user.id} } 
@@ -51,7 +52,6 @@ module.exports = async (parent, { email }, ctx, info) => {
     //                 );
     // cups = cups[0];
 
-    console.log(user);
     try {
         var decodedRefesh = jwt.verify(refreshToken, certRefreshPublic);
     } catch(err) {
