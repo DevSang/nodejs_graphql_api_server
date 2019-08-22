@@ -18,6 +18,30 @@ module.exports = async (parent, { email }, ctx, info) => {
     console.log('>> [SIGN IN] ',email);
     var refreshToken = ctx.response.locals.refreshToken;
     var user = await ctx.db.query.user({ where: { email : email } });
+    console.log("###", user);
+    
+    var country = await ctx.db.query.country(
+        { 
+            where: { id : {id : user.countryId} } 
+        }, 
+        `{
+            id
+            countryName
+        }`
+    );
+    var wallet = await ctx.db.query.userWallet(
+        { 
+            where: { id : {userId : user.countryId} } 
+        }, 
+        `{
+            id
+            address
+        }`
+    );
+        console.log(country);
+        console.log(wallet);
+        user.country = country;
+    user.wallet = wallet;
     // var cups = await ctx.db.query.userCups(
     //                     { 
     //                        where: { userId : {id : user.id} } 
