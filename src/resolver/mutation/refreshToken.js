@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const jwtConfig = require('../../../config/jwt.json');
 const fs = require('fs');
 const path = require('path');
+const crypto = require("crypto");
+
 // private key
 var certAccessPrivate = fs.readFileSync(path.resolve(jwtConfig.certAccessPrivate));
 var certRefreshPrivate = fs.readFileSync(path.resolve(jwtConfig.certRefreshPublic));
@@ -18,8 +20,11 @@ module.exports = async (parent, { email }, ctx, info) => {
     console.log('>> [SIGN IN] ',email);
     var refreshToken = ctx.response.locals.refreshToken;
     var user = await ctx.db.query.user({ where: { email : email } });
-    console.log("###", user);
     
+	let salt = user.encryptSaltString;
+	let decodedPassword = crypto.createHash("sha512").update(password + salt).digest("hex");
+    user.password = decodedPassword;
+
     var country = await ctx.db.query.country(
         { 
             where: { id : user.countryId} 
