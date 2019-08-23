@@ -31,20 +31,32 @@ type Mutation {
         fromAddress: String
         fromPkey: String
     ): UserCoinHistory!
-    createTxAmazonCouponBuyList(
+    createTxMarketBuyHistory(
         userId: Int!
         address: String!
         pKey: String!
-        couponPrice: Int!
-        couponName: String!
-    ): MarketAmazonCouponBuyList!
+        marketListId: Int!,
+        category: String,
+    ): TxMarketBuyHistory!
     changeCouponCount(
-        name: String!
-        price: Int!
+        marketListId: Int!
         plusYn: Boolean
-    ): MarketAmazonCouponBuyList!
+    ): MarketBuyHistory!
 }
 
+type TxMarketBuyHistory {
+    id: Int!
+    cancelYn: Boolean
+    category: String
+    coinHistoryRowId: UserCoinHistory
+    createTime: DateTime!
+    orderNumber: String
+    productId: Int
+    coupon: MarketAmazonCoupon
+    status: Boolean!
+    updateTime: DateTime!
+    userId: Int
+}
 type getNewTokenPayload {
     accessToken: String
     refreshToken: String
