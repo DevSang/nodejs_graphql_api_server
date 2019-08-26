@@ -63,12 +63,13 @@ type getNewTokenPayload {
     user: User
     country: Country
     wallet: UserWallet
-    
+
 }
 type AuthPayload {
     accessToken: String
     refreshToken: String
     user: User
+    country: Country
 }
 type Tokens {
     accessToken: String

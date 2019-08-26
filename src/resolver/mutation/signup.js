@@ -19,6 +19,7 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
 
     // exception: duplicated email
     var user = await ctx.db.query.user({ where: { email : email } });
+    let country= null;
     if(user){
         try{
             console.log("User already exist");
@@ -71,6 +72,16 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
                 }
             });
 
+            country = await ctx.db.query.country(
+                { 
+                    where: { id : country_id} 
+                }, 
+                `{
+                    id
+                    countryName
+                }`
+            );
+
             //Set signup expire time
             let fbUser = await admin.auth().getUserByEmail(email)
             let fbProvider = fbUser.toJSON().providerData[0].providerId;
@@ -103,7 +114,8 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
         return {
             accessToken : jwt.sign(payload, certAccessPrivate, jwtConfig.algorithmAccess),
             refreshToken: jwt.sign(payload, certRefreshPrivate, jwtConfig.algorithmRefresh),
-            user
+            user,
+            country
         }
     }
 }
