@@ -30,7 +30,6 @@ type Company @pgTable(name: "company") {
 type Country @pgTable(name: "country") {
   id: Int! @pgColumn(name: "country_id") @unique
   countryName: String! @pgColumn(name: "country_name") @unique
-  users: [User]
 }
 
 type Cup @pgTable(name: "cup") {
@@ -281,7 +280,7 @@ type User @pgTable(name: "users") {
   id: Int! @pgColumn(name: "user_id") @unique
   anonUserId: Int @pgColumn(name: "anon_user_id") @unique
   appServerSync: [AppServerSync] @pgColumn(name: "app_server_sync")
-  countryId: Country @pgColumn(name: "country_id")
+  countryId: Int @pgColumn(name: "country_id")
   cupDataProcFlow: [CupDataProcFlow] @pgColumn(name: "cup_data_proc_flow")
   cupDataProcMdates: [CupDataProcMdate] @pgColumn(name: "cup_data_proc_mdates")
   cupDataQaResponse: [CupDataQaResponse] @pgColumn(name: "cup_data_qa_response")
@@ -289,6 +288,7 @@ type User @pgTable(name: "users") {
   deleted: Boolean! @default(value: false)
   dob: DateTime!
   email: String! @unique
+  emailVerify: Boolean @default(value: false) @pgColumn(name: "email_verify")
   # NULL
   encryptSaltString: String @pgColumn(name: "encrypt_salt_string")
   ethnicityId: Ethnicity @pgColumn(name: "ethnicity_id")
@@ -297,6 +297,7 @@ type User @pgTable(name: "users") {
   lastName: String! @pgColumn(name: "last_name")
   macId: String @pgColumn(name: "mac_id")
   password: String!
+  tutorial: Boolean @default(value: false)
   userCoinHistory: [UserCoinHistory] @pgColumn(name: "user_coin_history")
   userCups: [UserCup] @pgColumn(name: "user_cups")
   userInterviewData: [UserInterviewDatum] @pgColumn(name: "user_interview_data")
