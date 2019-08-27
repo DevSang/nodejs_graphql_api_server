@@ -46,18 +46,6 @@ module.exports = async (parent, { email, password }, ctx, info) => {
         }`
     );
     wallet = wallet[0];
-	// var cups = await ctx.db.query.userCups(
-	// 	{
-	// 		where: { userId: { id: user.id } }
-	// 	},
-	// 	`{
-	// 			id
-	// 			serialNumber {
-	// 				id
-	// 			}
-	// 		}`
-	// );
-	// cups = cups[0];
 
 	// jwt payload
 	let payload = {
