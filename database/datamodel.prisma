@@ -30,7 +30,6 @@ type Company @pgTable(name: "company") {
 type Country @pgTable(name: "country") {
   id: Int! @pgColumn(name: "country_id") @unique
   countryName: String! @pgColumn(name: "country_name") @unique
-  users: [User]
 }
 
 type Cup @pgTable(name: "cup") {
@@ -224,21 +223,23 @@ type Hardware @pgTable(name: "hardware") {
 type MarketAmazonCoupon @pgTable(name: "market_amazon_coupon") {
   id: Int! @pgColumn(name: "row_id") @unique
   availability: Boolean! @default(value: true)
-  couponId: String! @pgColumn(name: "coupon_id") @unique
+  couponNumber: String! @pgColumn(name: "coupon_number") @unique
   createTime: DateTime! @pgColumn(name: "create_time")
   endTime: DateTime! @pgColumn(name: "end_time")
-  marketAmazonCouponBuyList: [MarketAmazonCouponBuyList] @pgColumn(name: "market_amazon_coupon_buy_list")
-  name: String
-  price: Int! @default(value: 0)
+  marketListId: Int @pgColumn(name: "market_list_id")
+  price: Int
   startTime: DateTime! @pgColumn(name: "start_time")
+  title: String
 }
 
-type MarketAmazonCouponBuyList @pgTable(name: "market_amazon_coupon_buy_list") {
+type MarketBuyHistory @pgTable(name: "market_buy_history") {
   id: Int! @unique
   cancelYn: Boolean @default(value: false) @pgColumn(name: "cancel_yn")
+  category: String @default(value: "''AMAZONCOUPON'")
   coinHistoryRowId: UserCoinHistory @pgColumn(name: "coin_history_row_id")
-  couponRowId: MarketAmazonCoupon @pgColumn(name: "coupon_row_id")
   createTime: DateTime! @pgColumn(name: "create_time")
+  orderNumber: String @pgColumn(name: "order_number") @unique
+  productId: Int @pgColumn(name: "product_id")
   status: Boolean! @default(value: true)
   updateTime: DateTime! @pgColumn(name: "update_time")
   userId: Int @pgColumn(name: "user_id")
@@ -248,9 +249,22 @@ type MarketList @pgTable(name: "market_list") {
   id: Int! @unique
   count: Int! @default(value: 0)
   endTime: DateTime! @pgColumn(name: "end_time")
-  name: String
+  image: String
   price: Int! @default(value: 0)
   startTime: DateTime! @pgColumn(name: "start_time")
+  title: String
+}
+
+type MarketListDetail @pgTable(name: "market_list_detail") {
+  id: Int! @unique
+  contents: String
+  detailImage: String @pgColumn(name: "detail_image")
+  mainImage: String @pgColumn(name: "main_image")
+  marketListId: Int @pgColumn(name: "market_list_id")
+  price: Int
+  savingPrice: Int @pgColumn(name: "saving_price")
+  subTitle: String @pgColumn(name: "sub_title")
+  title: String
 }
 
 type PlatformComp @pgTable(name: "platform_comp") {
@@ -266,7 +280,7 @@ type User @pgTable(name: "users") {
   id: Int! @pgColumn(name: "user_id") @unique
   anonUserId: Int @pgColumn(name: "anon_user_id") @unique
   appServerSync: [AppServerSync] @pgColumn(name: "app_server_sync")
-  countryId: Country @pgColumn(name: "country_id")
+  countryId: Int @pgColumn(name: "country_id")
   cupDataProcFlow: [CupDataProcFlow] @pgColumn(name: "cup_data_proc_flow")
   cupDataProcMdates: [CupDataProcMdate] @pgColumn(name: "cup_data_proc_mdates")
   cupDataQaResponse: [CupDataQaResponse] @pgColumn(name: "cup_data_qa_response")
@@ -274,6 +288,7 @@ type User @pgTable(name: "users") {
   deleted: Boolean! @default(value: false)
   dob: DateTime!
   email: String! @unique
+  emailVerify: Boolean @default(value: false) @pgColumn(name: "email_verify")
   # NULL
   encryptSaltString: String @pgColumn(name: "encrypt_salt_string")
   ethnicityId: Ethnicity @pgColumn(name: "ethnicity_id")
@@ -282,6 +297,7 @@ type User @pgTable(name: "users") {
   lastName: String! @pgColumn(name: "last_name")
   macId: String @pgColumn(name: "mac_id")
   password: String!
+  tutorial: Boolean @default(value: false)
   userCoinHistory: [UserCoinHistory] @pgColumn(name: "user_coin_history")
   userCups: [UserCup] @pgColumn(name: "user_cups")
   userInterviewData: [UserInterviewDatum] @pgColumn(name: "user_interview_data")
@@ -295,7 +311,7 @@ type UserCoinHistory @pgTable(name: "user_coin_history") {
   coin: Int!
   contents: String!
   date: DateTime!
-  marketAmazonCouponBuyList: [MarketAmazonCouponBuyList] @pgColumn(name: "market_amazon_coupon_buy_list")
+  marketBuyHistory: [MarketBuyHistory] @pgColumn(name: "market_buy_history")
   txhash: String!
   userId: User @pgColumn(name: "user_id")
   walletId: Int @pgColumn(name: "wallet_id")

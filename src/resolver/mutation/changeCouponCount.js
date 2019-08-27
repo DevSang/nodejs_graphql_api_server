@@ -1,10 +1,10 @@
-module.exports = async (parent, { name, price, plusYn }, ctx, info) => {
+module.exports = async (parent, { marketListId, plusYn }, ctx, info) => {
     const couponList = await ctx.db.query.marketLists({
-        where: { name, price }
+        where: { id: marketListId }
     });
     if (!couponList || couponList.length == 0) {
         throw new Error(
-            `Couldn't fine amazon coupon name ${name} price ${price}`
+            `Couldn't fine amazon coupon title ${title} price ${price}`
         );
     }
     let { count } = couponList[0];

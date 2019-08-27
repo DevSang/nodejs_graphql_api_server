@@ -5,20 +5,23 @@ const createTxUserCoinHistory = require('./createTxUserCoinHistory');
 
 module.exports = async (
     parent,
-    { userId, address, pKey, couponPrice, couponName },
+    { userId, address, pKey, marketListId, category },
     ctx,
     info
 ) => {
     console.log('>>[CREATE USER TOKEN HISTORY]');
     console.log('>>> userId : ' + userId);
-    console.log('>>> couponPrice : ' + couponPrice);
+    console.log('>>> marketListId : ' + marketListId);
 
     //url : 172.31.0.13
     // 쿠폰 조회
+    // 추후 쿠폰 외의 상품 검색 추가
+    // if(!category || category==='AMAZONECOUPON') {
+        
+    // }
     let coupon = await ctx.db.query.marketAmazonCoupons({
         where: {
-            price: couponPrice,
-            name: couponName,
+            marketListId,
             availability: true
         },
         orderBy: 'startTime_ASC',
@@ -48,23 +51,21 @@ module.exports = async (
                 date,
                 fromPkey: pKey,
                 fromAddress: address,
-                coin: coupon.price
+                coin: coupon.price * -1
             },
             ctx,
             info
         );
         tokenTxYn = true;
+        
+        const orderNumber = date.toISOString().split(/[-TL:\.Z]/).join('');
 
         // 쿠폰 구매 히스토리 저장
-        const result = await ctx.db.mutation.createMarketAmazonCouponBuyList(
+        const result = await ctx.db.mutation.createMarketBuyHistory(
             {
                 data: {
                     userId,
-                    couponRowId: {
-                        connect: {
-                            id: coupon.id
-                        }
-                    },
+                    productId: coupon.id,
                     createTime: date,
                     updateTime: date,
                     coinHistoryRowId: {
@@ -72,20 +73,15 @@ module.exports = async (
                             id: coinHistory.id
                         }
                     },
+                    orderNumber,
                     status: true
                 }
             },
             `
         {
           id
-          couponRowId {
-            id
-            couponId
-            name
-            price
-            startTime
-            endTime
-          }
+          productId
+          orderNumber
           coinHistoryRowId {
             id
             coin
@@ -97,13 +93,13 @@ module.exports = async (
         }
         `
         );
+        result.coupon = coupon;
 
         // 구매가능한 쿠폰 수 수정(-1)
         changeCouponCount(
             parent,
             {
-                name: couponName,
-                price: couponPrice,
+                marketListId,
                 plusYn: false
             },
             ctx,
