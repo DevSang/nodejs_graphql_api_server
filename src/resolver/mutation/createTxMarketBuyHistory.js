@@ -51,7 +51,7 @@ module.exports = async (
                 date,
                 fromPkey: pKey,
                 fromAddress: address,
-                coin: coupon.price * -1
+                coin: coupon.price
             },
             ctx,
             info

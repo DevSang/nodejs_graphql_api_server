@@ -43,6 +43,10 @@ module.exports = async (
         txhash: res.message,
     }
 
+    if(category === 'BUY') {
+        data.coin = data.coin * -1
+    }
+    
     if(wallet.length !== 0) {
         data.walletId = wallet[0].id
     }
