@@ -21,10 +21,6 @@ module.exports = async (parent, { email }, ctx, info) => {
     var refreshToken = ctx.response.locals.refreshToken;
     var user = await ctx.db.query.user({ where: { email : email } });
     
-	let salt = user.encryptSaltString;
-	let decodedPassword = crypto.createHash("sha512").update(password + salt).digest("hex");
-    user.password = decodedPassword;
-
     var country = await ctx.db.query.country(
         { 
             where: { id : user.countryId} 
