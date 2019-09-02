@@ -31,7 +31,7 @@
             break;
           default:
             // Error: invalid mode.
-            handleVerifyEmail(auth, actionCode, continueUrl, lang);
+            // handleVerifyEmail(auth, actionCode, continueUrl, lang);
         }
         document.getElementById('verifyButton').style.display = "block";
         document.getElementById('verifyText').style.display = "none";
@@ -71,7 +71,7 @@
     // });
     // }
     function handleResetPassword() {
-        alter('resetPassword')
+        alert('resetPassword')
         var isVerify = false;
 
         // Configure the Firebase SDK.
@@ -95,20 +95,20 @@
     }
   // 이메일 인증
     function handleVerifyEmail() {
-        var mode = getParameterByName('mode');
-        var actionCode = getParameterByName('oobCode');
-        var apiKey = getParameterByName('apiKey');
-        var continueUrl = getParameterByName('continueUrl');
-        var lang = getParameterByName('lang') || 'en';
+        // var mode = getParameterByName('mode');
+        // var actionCode = getParameterByName('oobCode');
+        // var apiKey = getParameterByName('apiKey');
+        // var continueUrl = getParameterByName('continueUrl');
+        // var lang = getParameterByName('lang') || 'en';
         var isVerify = false;
 
         // Configure the Firebase SDK.
         // This is the minimum configuration required for the API to be used.
-        var config = {
-            'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
-        };
-        var app = firebase.initializeApp(config);
-        var auth = app.auth();
+        // var config = {
+        //     'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+        // };
+        // var app = firebase.initializeApp(config);
+        // var auth = app.auth();
         auth.applyActionCode(actionCode).then(function(resp) {
             document.getElementById('verifyButton').style.display = "none";
             document.getElementById('verifyText').style.display = "block";
