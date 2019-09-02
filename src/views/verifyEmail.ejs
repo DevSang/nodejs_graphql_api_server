@@ -1,3 +1,64 @@
+<script>
+    function handleClick() {
+        var mode = getParameterByName('mode');
+        var actionCode = getParameterByName('oobCode');
+        // (Optional) Get the continue URL from the query parameter if available.
+        var continueUrl = getParameterByName('continueUrl');
+        // (Optional) Get the language code if available.
+        var lang = getParameterByName('lang') || 'en';
+
+        var config = {
+            'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+        };
+        var app = firebase.initializeApp(config);
+        var auth = app.auth()
+        // Get the one-time code from the query parameter.
+        // var actionCode = getParameterByName('oobCode');
+        // // (Optional) Get the continue URL from the query parameter if available.
+        // var continueUrl = getParameterByName('continueUrl');
+        // // (Optional) Get the language code if available.
+        // var lang = getParameterByName('lang') || 'en';
+
+        // var config = {
+        //     'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+        // };
+        // var app = firebase.initializeApp(config);
+        // var auth = app.auth()
+        // var mode = getParameterByName('mode');
+        // var actionCode = getParameterByName('oobCode');
+        // var apiKey = getParameterByName('apiKey');
+        // var continueUrl = getParameterByName('continueUrl');
+        // var lang = getParameterByName('lang') || 'en';
+        var isVerify = false;
+
+        // Configure the Firebase SDK.
+        // This is the minimum configuration required for the API to be used.
+        // var config = {
+        //     'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+        // };
+        // var app = firebase.initializeApp(config);
+        // var auth = app.auth();
+        auth.applyActionCode(actionCode).then(function(resp) {
+            document.getElementById('verifyButton').style.display = "none";
+            document.getElementById('verifyText').style.display = "block";
+            document.getElementById('verifyText2').style.display = "block";
+	        //    if(navigator.platform === 'iPhone'){
+            //        location.href='https://looncupapp.page.link'
+            //     } else {
+                   location.href='https://looncupapp.page.link/app'
+                // }
+        }).catch(function(error) {
+            document.getElementById('verifyButton').style.display = "none";
+            document.getElementById('expiredText').style.display = "block";
+            document.getElementById('expiredText2').style.display = "block";
+        });
+
+        //close the window
+        setTimeout(function() {
+            close();
+        }, 3000);
+    }
+</script>
 <img border="pixels" style="border-width: 1px; border-color: #aaa;" src="/asset/mailBox.png"/>
 <div>
     <p style="position: absolute;left: 130px; top: 1000px;font-size: 34pt;font-family:Brown-Bold; line-height:1.3em;">

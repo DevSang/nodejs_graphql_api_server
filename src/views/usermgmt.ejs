@@ -18,125 +18,124 @@
     }, false);
 
     // 비밀번호 재설정
-    function handleResetPassword(actionCode, continueUrl, lang, auth) {
-        // Get the one-time code from the query parameter.
-        var pw = document.getElementById('pw').value;
-        var pw2 = document.getElementById('pw2').value;
-        if(pw === pw2) {
-            alert('change Pw!!!', pw)
-            try{
-                auth.verifyPasswordResetCode(actionCode).then(function(pw) {
-                    auth.confirmPasswordReset(actionCode, pw).then(function(resp) {
-                    // Password reset has been confirmed and new password updated.
-                        alert('success Change PW')
-                    // TODO: Display a link back to the app, or sign-in the user directly
-                    // if the page belongs to the same domain as the app:
-                    // auth.signInWithEmailAndPassword(accountEmail, newPassword);
+    // function handleResetPassword(actionCode, continueUrl, lang, auth) {
+    //     // Get the one-time code from the query parameter.
+    //     var pw = document.getElementById('pw').value;
+    //     var pw2 = document.getElementById('pw2').value;
+    //     if(pw === pw2) {
+    //         alert('change Pw!!!', pw)
+    //             auth.verifyPasswordResetCode(actionCode).then(function(pw) {
+    //                 auth.confirmPasswordReset(actionCode, pw).then(function(resp) {
+    //                 // Password reset has been confirmed and new password updated.
+    //                     alert('success Change PW')
+    //                 // TODO: Display a link back to the app, or sign-in the user directly
+    //                 // if the page belongs to the same domain as the app:
+    //                 // auth.signInWithEmailAndPassword(accountEmail, newPassword);
 
-                    // TODO: If a continue URL is available, display a button which on
-                    // click redirects the user back to the app via continueUrl with
-                    // additional state determined from that URL's parameters.
-                    }).catch(function(error) {
-                        alert('error', error.message)
-                    // Error occurred during confirmation. The code might have expired or the
-                    // password is too weak.
-                    });
-                document.getElementById('changePassword').style.display = "none";
-                document.getElementById('verifyText').style.display = "block";
-                document.getElementById('verifyText2').style.display = "block";
-                // location.href='https://looncupapp.page.link/app'
-            }).catch(function(error) {
-                alert(error.message)
-                document.getElementById('changePassword').style.display = "none";
-                document.getElementById('expiredText').style.display = "block";
-                document.getElementById('expiredText2').style.display = "block";
-            });
+    //                 // TODO: If a continue URL is available, display a button which on
+    //                 // click redirects the user back to the app via continueUrl with
+    //                 // additional state determined from that URL's parameters.
+    //                 }).catch(function(error) {
+    //                     alert('error', error.message)
+    //                 // Error occurred during confirmation. The code might have expired or the
+    //                 // password is too weak.
+    //                 });
+    //             document.getElementById('changePassword').style.display = "none";
+    //             document.getElementById('verifyText').style.display = "block";
+    //             document.getElementById('verifyText2').style.display = "block";
+    //             // location.href='https://looncupapp.page.link/app'
+    //         }).catch(function(error) {
+    //             alert(error.message)
+    //             document.getElementById('changePassword').style.display = "none";
+    //             document.getElementById('expiredText').style.display = "block";
+    //             document.getElementById('expiredText2').style.display = "block";
+    //         });
 
-        //close the window
-        // setTimeout(function() {
-        //     close();
-        // }, 3000);
-        } else {
-            alert('fail pw!!!', pw, pw2)
-        }
-    }
+    //     //close the window
+    //     // setTimeout(function() {
+    //     //     close();
+    //     // }, 3000);
+    //     } else {
+    //         alert('fail pw!!!', pw, pw2)
+    //     }
+    // }
   // 이메일 인증
 
-    function handleVerifyEmail(actionCode, continueUrl, lang, auth) {
-        // Get the one-time code from the query parameter.
-        // var actionCode = getParameterByName('oobCode');
-        // // (Optional) Get the continue URL from the query parameter if available.
-        // var continueUrl = getParameterByName('continueUrl');
-        // // (Optional) Get the language code if available.
-        // var lang = getParameterByName('lang') || 'en';
+    // function handleVerifyEmail(actionCode, continueUrl, lang, auth) {
+    //     // Get the one-time code from the query parameter.
+    //     // var actionCode = getParameterByName('oobCode');
+    //     // // (Optional) Get the continue URL from the query parameter if available.
+    //     // var continueUrl = getParameterByName('continueUrl');
+    //     // // (Optional) Get the language code if available.
+    //     // var lang = getParameterByName('lang') || 'en';
 
-        // var config = {
-        //     'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
-        // };
-        // var app = firebase.initializeApp(config);
-        // var auth = app.auth()
-        // var mode = getParameterByName('mode');
-        // var actionCode = getParameterByName('oobCode');
-        // var apiKey = getParameterByName('apiKey');
-        // var continueUrl = getParameterByName('continueUrl');
-        // var lang = getParameterByName('lang') || 'en';
-        var isVerify = false;
+    //     // var config = {
+    //     //     'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+    //     // };
+    //     // var app = firebase.initializeApp(config);
+    //     // var auth = app.auth()
+    //     // var mode = getParameterByName('mode');
+    //     // var actionCode = getParameterByName('oobCode');
+    //     // var apiKey = getParameterByName('apiKey');
+    //     // var continueUrl = getParameterByName('continueUrl');
+    //     // var lang = getParameterByName('lang') || 'en';
+    //     var isVerify = false;
 
-        // Configure the Firebase SDK.
-        // This is the minimum configuration required for the API to be used.
-        // var config = {
-        //     'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
-        // };
-        // var app = firebase.initializeApp(config);
-        // var auth = app.auth();
-        auth.applyActionCode(actionCode).then(function(resp) {
-            document.getElementById('verifyButton').style.display = "none";
-            document.getElementById('verifyText').style.display = "block";
-            document.getElementById('verifyText2').style.display = "block";
-	        //    if(navigator.platform === 'iPhone'){
-            //        location.href='https://looncupapp.page.link'
-            //     } else {
-                   location.href='https://looncupapp.page.link/app'
-                // }
-        }).catch(function(error) {
-            document.getElementById('verifyButton').style.display = "none";
-            document.getElementById('expiredText').style.display = "block";
-            document.getElementById('expiredText2').style.display = "block";
-        });
+    //     // Configure the Firebase SDK.
+    //     // This is the minimum configuration required for the API to be used.
+    //     // var config = {
+    //     //     'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+    //     // };
+    //     // var app = firebase.initializeApp(config);
+    //     // var auth = app.auth();
+    //     auth.applyActionCode(actionCode).then(function(resp) {
+    //         document.getElementById('verifyButton').style.display = "none";
+    //         document.getElementById('verifyText').style.display = "block";
+    //         document.getElementById('verifyText2').style.display = "block";
+	//         //    if(navigator.platform === 'iPhone'){
+    //         //        location.href='https://looncupapp.page.link'
+    //         //     } else {
+    //                location.href='https://looncupapp.page.link/app'
+    //             // }
+    //     }).catch(function(error) {
+    //         document.getElementById('verifyButton').style.display = "none";
+    //         document.getElementById('expiredText').style.display = "block";
+    //         document.getElementById('expiredText2').style.display = "block";
+    //     });
 
-        //close the window
-        setTimeout(function() {
-            close();
-        }, 3000);
-    }
+    //     //close the window
+    //     setTimeout(function() {
+    //         close();
+    //     }, 3000);
+    // }
 
-    function handleClick() {
-        var mode = getParameterByName('mode');
-        var actionCode = getParameterByName('oobCode');
-        // (Optional) Get the continue URL from the query parameter if available.
-        var continueUrl = getParameterByName('continueUrl');
-        // (Optional) Get the language code if available.
-        var lang = getParameterByName('lang') || 'en';
+    // function handleClick() {
+    //     var mode = getParameterByName('mode');
+    //     var actionCode = getParameterByName('oobCode');
+    //     // (Optional) Get the continue URL from the query parameter if available.
+    //     var continueUrl = getParameterByName('continueUrl');
+    //     // (Optional) Get the language code if available.
+    //     var lang = getParameterByName('lang') || 'en';
 
-        var config = {
-            'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
-        };
-        var app = firebase.initializeApp(config);
-        var auth = app.auth()
-        if(mode === 'resetPassword') {
-            handleResetPassword(actionCode, continueUrl, lang, auth)
-        }else {
-            handleVerifyEmail(actionCode, continueUrl, lang, auth)
-        }
-    }
+    //     var config = {
+    //         'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+    //     };
+    //     var app = firebase.initializeApp(config);
+    //     var auth = app.auth()
+    //     if(mode === 'resetPassword') {
+    //         handleResetPassword(actionCode, continueUrl, lang, auth)
+    //     }else {
+    //         handleVerifyEmail(actionCode, continueUrl, lang, auth)
+    //     }
+    // }
 
-    function handleDeleteButton1() {
-        document.getElementById('pw').value = "";
-    }
+    // function handleDeleteButton1() {
+    //     document.getElementById('pw').value = "";
+    // }
 
-    function handleDeleteButton2() {
-        document.getElementById('pw2').value = "";
-    }
+    // function handleDeleteButton2() {
+    //     document.getElementById('pw2').value = "";
+    // }
 
     function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -145,30 +144,26 @@
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
-    function modeCheck() {
-        return getParameterByName('mode');
-    }
+    // function checkPwLength(target) {
+    //     var text = target.value;
+    //     if(text.length >= 5 && text.length <= 10) {
+    //         document.getElementById('pwL').style.color = "white";
+    //     } else {
+    //         document.getElementById('pwL').style.color = "#eb454f";
+    //     }
+    //     return '';
+    // }
 
-    function checkPwLength(target) {
-        var text = target.value;
-        if(text.length >= 5 && text.length <= 10) {
-            document.getElementById('pwL').style.color = "white";
-        } else {
-            document.getElementById('pwL').style.color = "#eb454f";
-        }
-        return '';
-    }
-
-    function checkPw(target) {
-        var text = target.value;
-        var pw = document.getElementById('pw').value;
-        if(text == pw) {
-            document.getElementById('pwM').style.color = "white";
-        } else {
-            document.getElementById('pwM').style.color = "#eb454f";
-        }
-        return '';
-    }
+    // function checkPw(target) {
+    //     var text = target.value;
+    //     var pw = document.getElementById('pw').value;
+    //     if(text == pw) {
+    //         document.getElementById('pwM').style.color = "white";
+    //     } else {
+    //         document.getElementById('pwM').style.color = "#eb454f";
+    //     }
+    //     return '';
+    // }
 
 </script>
 
