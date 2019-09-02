@@ -77,7 +77,7 @@
 
         // Configure the Firebase SDK.
         // This is the minimum configuration required for the API to be used.
-        auth.applyActionCode(actionCode).then(function(resp) {
+        auth.verifyPasswordResetCode(actionCode).then(function(email) {
             document.getElementById('verifyButton').style.display = "none";
             document.getElementById('verifyText').style.display = "block";
             document.getElementById('verifyText2').style.display = "block";
