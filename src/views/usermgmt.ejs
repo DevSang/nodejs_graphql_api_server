@@ -3,37 +3,25 @@
 <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        var mode = getParameterByName('mode');
+        
         // TODO: Implement getParameterByName()
         // Get the action to complete.
-        var mode = getParameterByName('mode');
-        // Get the one-time code from the query parameter.
-        var actionCode = getParameterByName('oobCode');
-        // (Optional) Get the continue URL from the query parameter if available.
-        var continueUrl = getParameterByName('continueUrl');
-        // (Optional) Get the language code if available.
-        var lang = getParameterByName('lang') || 'en';
-
-        var config = {
-            'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
-        };
-        var app = firebase.initializeApp(config);
-        var auth = app.auth();
-
-        switch (mode) {
-          case 'resetPassword':
-            handleResetPassword(auth, actionCode, continueUrl, lang);
-            break;
-          case 'recoverEmail':
-            handleVerifyEmail(auth, actionCode, continueUrl, lang);
-            break;
-          case 'verifyEmail':
-            handleVerifyEmail(auth, actionCode, continueUrl, lang);
-            break;
-          default:
-            // Error: invalid mode.
-            // handleVerifyEmail(auth, actionCode, continueUrl, lang);
-            break;
-        }
+        // switch (mode) {
+        //   case 'resetPassword':
+        //     handleResetPassword(auth, actionCode, continueUrl, lang);
+        //     break;
+        //   case 'recoverEmail':
+        //     handleVerifyEmail(auth, actionCode, continueUrl, lang);
+        //     break;
+        //   case 'verifyEmail':
+        //     handleVerifyEmail(auth, actionCode, continueUrl, lang);
+        //     break;
+        //   default:
+        //     // Error: invalid mode.
+        //     // handleVerifyEmail(auth, actionCode, continueUrl, lang);
+        //     break;
+        // }
         document.getElementById('verifyButton').style.display = "block";
         document.getElementById('verifyText').style.display = "none";
         document.getElementById('expiredText').style.display = "none";
@@ -71,10 +59,21 @@
     //     // again.
     // });
     // }
-    function handleResetPassword(auth, actionCode, continueUrl, lang) {
-        var isVerify = false;
-        alert('reset password')
+    function handleResetPassword() {
+        // Get the one-time code from the query parameter.
+        var actionCode = getParameterByName('oobCode');
+        // (Optional) Get the continue URL from the query parameter if available.
+        var continueUrl = getParameterByName('continueUrl');
+        // (Optional) Get the language code if available.
+        var lang = getParameterByName('lang') || 'en';
 
+        var config = {
+            'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+        };
+        var app = firebase.initializeApp(config);
+        var auth = app.auth()
+
+        var isVerify = false;
         // Configure the Firebase SDK.
         // This is the minimum configuration required for the API to be used.
         auth.verifyPasswordResetCode(actionCode).then(function(email) {
@@ -95,7 +94,19 @@
         // }, 3000);
     }
   // 이메일 인증
-    function handleVerifyEmail(auth, actionCode, continueUrl, lang) {
+    function handleVerifyEmail() {
+        // Get the one-time code from the query parameter.
+        var actionCode = getParameterByName('oobCode');
+        // (Optional) Get the continue URL from the query parameter if available.
+        var continueUrl = getParameterByName('continueUrl');
+        // (Optional) Get the language code if available.
+        var lang = getParameterByName('lang') || 'en';
+
+        var config = {
+            'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+        };
+        var app = firebase.initializeApp(config);
+        var auth = app.auth()
         // var mode = getParameterByName('mode');
         // var actionCode = getParameterByName('oobCode');
         // var apiKey = getParameterByName('apiKey');
