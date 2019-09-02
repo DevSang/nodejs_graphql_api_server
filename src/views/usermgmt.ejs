@@ -3,8 +3,6 @@
 <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var mode = getParameterByName('mode');
-        
         // TODO: Implement getParameterByName()
         // Get the action to complete.
         // switch (mode) {
@@ -94,6 +92,7 @@
         // }, 3000);
     }
   // 이메일 인증
+
     function handleVerifyEmail() {
         // Get the one-time code from the query parameter.
         var actionCode = getParameterByName('oobCode');
@@ -142,6 +141,15 @@
         }, 3000);
     }
 
+    function handleClick() {
+        var mode = getParameterByName('mode');
+        if(mode === 'resetPassword') {
+            handleResetPassword()
+        }else {
+            handleVerifyEmail()
+        }
+    }
+
     function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -164,7 +172,7 @@
                 your account.
             </p>
         </div>
-        <input id="verifyButton" style="width:1000px;position:absolute; top:1400px;left:67px" type="image" src="/asset/verifyMailButton.png" onclick="handleVerifyEmail();"/>
+        <input id="verifyButton" style="width:1000px;position:absolute; top:1400px;left:67px" type="image" src="/asset/verifyMailButton.png" onclick="handleClick();"/>
         <p id="verifyText" style="display:none; position: absolute;top:1400px;left:390px;font-size: 38pt;font-family:Brown-Bold; line-height:1.3em">
             Success verify.
         </p>
