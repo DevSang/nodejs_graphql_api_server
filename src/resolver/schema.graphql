@@ -42,10 +42,10 @@ type Mutation {
         marketListId: Int!
         plusYn: Boolean
     ): MarketBuyHistory!
-    # changePassword(
-    #     email: String!
-    #     password: String!
-    # ): User!
+    changePasswordSignIn(
+        email: String!
+        password: String!
+    ): getNewTokenPayload
 }
 
 type TxMarketBuyHistory {
