@@ -76,7 +76,8 @@ const resolvers = {
         signinDataAnalysis: require('./mutation/signinDataAnalysis'),
         createTxUserCoinHistory: require('./mutation/createTxUserCoinHistory'),
         createTxMarketBuyHistory: require('./mutation/createTxMarketBuyHistory'),
-        changeCouponCount: require('./mutation/changeCouponCount')
+        changeCouponCount: require('./mutation/changeCouponCount'),
+        // changePassword: require('./mutation/changePassword')
     }
 };
 

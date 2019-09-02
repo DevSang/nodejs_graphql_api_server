@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Wed Aug 21 2019 11:37:28 GMT+0900 (GMT+09:00)
+# timestamp: Tue Sep 03 2019 01:08:23 GMT+0900 (GMT+09:00)
 
 type AggregateAnswerType {
   count: Int!
@@ -1109,7 +1109,6 @@ input CompanyWhereUniqueInput {
 type Country {
   id: Int!
   countryName: String!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 """A connection to a list of items."""
@@ -1123,16 +1122,6 @@ type CountryConnection {
 }
 
 input CountryCreateInput {
-  countryName: String!
-  users: UserCreateManyWithoutCountryIdInput
-}
-
-input CountryCreateOneWithoutUsersInput {
-  create: CountryCreateWithoutUsersInput
-  connect: CountryWhereUniqueInput
-}
-
-input CountryCreateWithoutUsersInput {
   countryName: String!
 }
 
@@ -1196,29 +1185,10 @@ input CountrySubscriptionWhereInput {
 
 input CountryUpdateInput {
   countryName: String
-  users: UserUpdateManyWithoutCountryIdInput
 }
 
 input CountryUpdateManyMutationInput {
   countryName: String
-}
-
-input CountryUpdateOneWithoutUsersInput {
-  create: CountryCreateWithoutUsersInput
-  connect: CountryWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: CountryUpdateWithoutUsersDataInput
-  upsert: CountryUpsertWithoutUsersInput
-}
-
-input CountryUpdateWithoutUsersDataInput {
-  countryName: String
-}
-
-input CountryUpsertWithoutUsersInput {
-  update: CountryUpdateWithoutUsersDataInput!
-  create: CountryCreateWithoutUsersInput!
 }
 
 input CountryWhereInput {
@@ -1292,9 +1262,6 @@ input CountryWhereInput {
 
   """All values not ending with the given string."""
   countryName_not_ends_with: String
-  users_every: UserWhereInput
-  users_some: UserWhereInput
-  users_none: UserWhereInput
 }
 
 input CountryWhereUniqueInput {
@@ -12027,7 +11994,7 @@ type User {
   id: Int!
   anonUserId: Int
   appServerSync(where: AppServerSyncWhereInput, orderBy: AppServerSyncOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AppServerSync!]
-  countryId: Country
+  countryId: Int
   cupDataProcFlow(where: CupDataProcFlowWhereInput, orderBy: CupDataProcFlowOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CupDataProcFlow!]
   cupDataProcMdates(where: CupDataProcMdateWhereInput, orderBy: CupDataProcMdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CupDataProcMdate!]
   cupDataQaResponse(where: CupDataQaResponseWhereInput, orderBy: CupDataQaResponseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CupDataQaResponse!]
@@ -12035,6 +12002,7 @@ type User {
   deleted: Boolean!
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   ethnicityId: Ethnicity
   firstName: String!
@@ -12042,6 +12010,7 @@ type User {
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
   userCoinHistory(where: UserCoinHistoryWhereInput, orderBy: UserCoinHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCoinHistory!]
   userCups(where: UserCupWhereInput, orderBy: UserCupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCup!]
   userInterviewData(where: UserInterviewDatumWhereInput, orderBy: UserInterviewDatumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserInterviewDatum!]
@@ -12734,17 +12703,19 @@ type UserConnection {
 
 input UserCreateInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
-  countryId: CountryCreateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
@@ -12755,11 +12726,6 @@ input UserCreateInput {
   userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
   userWallet: UserWalletCreateManyWithoutUserIdInput
-}
-
-input UserCreateManyWithoutCountryIdInput {
-  create: [UserCreateWithoutCountryIdInput!]
-  connect: [UserWhereUniqueInput!]
 }
 
 input UserCreateManyWithoutEthnicityIdInput {
@@ -12819,40 +12785,18 @@ input UserCreateOneWithoutUserWalletInput {
 
 input UserCreateWithoutAppServerSyncInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
-  countryId: CountryCreateOneWithoutUsersInput
-  cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
-  cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
-  cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
-  cupDataUserRemove: CupDataUserRemoveCreateManyWithoutUserIdInput
-  ethnicityId: EthnicityCreateOneWithoutUsersInput
-  userCoinHistory: UserCoinHistoryCreateManyWithoutUserIdInput
-  userCups: UserCupCreateManyWithoutUserIdInput
-  userInterviewData: UserInterviewDatumCreateManyWithoutUserIdInput
-  userRecordDataByPeriod: UserRecordDataByPeriodCreateManyWithoutUserIdInput
-  userWallet: UserWalletCreateManyWithoutUserIdInput
-}
-
-input UserCreateWithoutCountryIdInput {
-  anonUserId: Int
-  deleted: Boolean
-  dob: DateTime!
-  email: String!
-  encryptSaltString: String
-  firstName: String!
-  givenBirth: Boolean!
-  lastName: String!
-  macId: String
-  password: String!
-  appServerSync: AppServerSyncCreateManyWithoutUserIdInput
+  tutorial: Boolean
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
@@ -12867,17 +12811,19 @@ input UserCreateWithoutCountryIdInput {
 
 input UserCreateWithoutCupDataProcFlowInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
-  countryId: CountryCreateOneWithoutUsersInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
   cupDataUserRemove: CupDataUserRemoveCreateManyWithoutUserIdInput
@@ -12891,17 +12837,19 @@ input UserCreateWithoutCupDataProcFlowInput {
 
 input UserCreateWithoutCupDataProcMdatesInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
-  countryId: CountryCreateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
   cupDataUserRemove: CupDataUserRemoveCreateManyWithoutUserIdInput
@@ -12915,17 +12863,19 @@ input UserCreateWithoutCupDataProcMdatesInput {
 
 input UserCreateWithoutCupDataQaResponseInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
-  countryId: CountryCreateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
   cupDataUserRemove: CupDataUserRemoveCreateManyWithoutUserIdInput
@@ -12939,17 +12889,19 @@ input UserCreateWithoutCupDataQaResponseInput {
 
 input UserCreateWithoutCupDataUserRemoveInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
-  countryId: CountryCreateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
@@ -12963,17 +12915,19 @@ input UserCreateWithoutCupDataUserRemoveInput {
 
 input UserCreateWithoutEthnicityIdInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
-  countryId: CountryCreateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
@@ -12987,17 +12941,19 @@ input UserCreateWithoutEthnicityIdInput {
 
 input UserCreateWithoutUserCoinHistoryInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
-  countryId: CountryCreateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
@@ -13011,17 +12967,19 @@ input UserCreateWithoutUserCoinHistoryInput {
 
 input UserCreateWithoutUserCupsInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
-  countryId: CountryCreateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
@@ -13035,17 +12993,19 @@ input UserCreateWithoutUserCupsInput {
 
 input UserCreateWithoutUserInterviewDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
-  countryId: CountryCreateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
@@ -13059,17 +13019,19 @@ input UserCreateWithoutUserInterviewDataInput {
 
 input UserCreateWithoutUserRecordDataByPeriodInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
-  countryId: CountryCreateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
@@ -13083,17 +13045,19 @@ input UserCreateWithoutUserRecordDataByPeriodInput {
 
 input UserCreateWithoutUserWalletInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
-  countryId: CountryCreateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseCreateManyWithoutUserIdInput
@@ -14122,12 +14086,16 @@ enum UserOrderByInput {
   id_DESC
   anonUserId_ASC
   anonUserId_DESC
+  countryId_ASC
+  countryId_DESC
   deleted_ASC
   deleted_DESC
   dob_ASC
   dob_DESC
   email_ASC
   email_DESC
+  emailVerify_ASC
+  emailVerify_DESC
   encryptSaltString_ASC
   encryptSaltString_DESC
   firstName_ASC
@@ -14140,20 +14108,25 @@ enum UserOrderByInput {
   macId_DESC
   password_ASC
   password_DESC
+  tutorial_ASC
+  tutorial_DESC
 }
 
 type UserPreviousValues {
   id: Int!
   anonUserId: Int
+  countryId: Int
   deleted: Boolean!
   dob: DateTime!
   email: String!
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String!
   givenBirth: Boolean!
   lastName: String!
   macId: String
   password: String!
+  tutorial: Boolean
 }
 
 type UserRecordDataByDay {
@@ -15575,6 +15548,28 @@ input UserScalarWhereInput {
 
   """All values greater than or equal the given value."""
   anonUserId_gte: Int
+  countryId: Int
+
+  """All values that are not equal to given value."""
+  countryId_not: Int
+
+  """All values that are contained in given list."""
+  countryId_in: [Int!]
+
+  """All values that are not contained in given list."""
+  countryId_not_in: [Int!]
+
+  """All values less than the given value."""
+  countryId_lt: Int
+
+  """All values less than or equal the given value."""
+  countryId_lte: Int
+
+  """All values greater than the given value."""
+  countryId_gt: Int
+
+  """All values greater than or equal the given value."""
+  countryId_gte: Int
   deleted: Boolean
 
   """All values that are not equal to given value."""
@@ -15641,6 +15636,10 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   email_not_ends_with: String
+  emailVerify: Boolean
+
+  """All values that are not equal to given value."""
+  emailVerify_not: Boolean
   encryptSaltString: String
 
   """All values that are not equal to given value."""
@@ -15845,6 +15844,10 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  tutorial: Boolean
+
+  """All values that are not equal to given value."""
+  tutorial_not: Boolean
 }
 
 type UsersDataAnalysis {
@@ -16236,17 +16239,19 @@ input UserSubscriptionWhereInput {
 
 input UserUpdateInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
+  tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
-  countryId: CountryUpdateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
@@ -16261,40 +16266,34 @@ input UserUpdateInput {
 
 input UserUpdateManyDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
+  tutorial: Boolean
 }
 
 input UserUpdateManyMutationInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
-}
-
-input UserUpdateManyWithoutCountryIdInput {
-  create: [UserCreateWithoutCountryIdInput!]
-  connect: [UserWhereUniqueInput!]
-  set: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutCountryIdInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-  deleteMany: [UserScalarWhereInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutCountryIdInput!]
+  tutorial: Boolean
 }
 
 input UserUpdateManyWithoutEthnicityIdInput {
@@ -16394,40 +16393,18 @@ input UserUpdateOneWithoutUserWalletInput {
 
 input UserUpdateWithoutAppServerSyncDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
-  countryId: CountryUpdateOneWithoutUsersInput
-  cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
-  cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
-  cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
-  cupDataUserRemove: CupDataUserRemoveUpdateManyWithoutUserIdInput
-  ethnicityId: EthnicityUpdateOneWithoutUsersInput
-  userCoinHistory: UserCoinHistoryUpdateManyWithoutUserIdInput
-  userCups: UserCupUpdateManyWithoutUserIdInput
-  userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
-  userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
-  userWallet: UserWalletUpdateManyWithoutUserIdInput
-}
-
-input UserUpdateWithoutCountryIdDataInput {
-  anonUserId: Int
-  deleted: Boolean
-  dob: DateTime
-  email: String
-  encryptSaltString: String
-  firstName: String
-  givenBirth: Boolean
-  lastName: String
-  macId: String
-  password: String
-  appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
+  tutorial: Boolean
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
@@ -16442,17 +16419,19 @@ input UserUpdateWithoutCountryIdDataInput {
 
 input UserUpdateWithoutCupDataProcFlowDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
+  tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
-  countryId: CountryUpdateOneWithoutUsersInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
   cupDataUserRemove: CupDataUserRemoveUpdateManyWithoutUserIdInput
@@ -16466,17 +16445,19 @@ input UserUpdateWithoutCupDataProcFlowDataInput {
 
 input UserUpdateWithoutCupDataProcMdatesDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
+  tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
-  countryId: CountryUpdateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
   cupDataUserRemove: CupDataUserRemoveUpdateManyWithoutUserIdInput
@@ -16490,17 +16471,19 @@ input UserUpdateWithoutCupDataProcMdatesDataInput {
 
 input UserUpdateWithoutCupDataQaResponseDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
+  tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
-  countryId: CountryUpdateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
   cupDataUserRemove: CupDataUserRemoveUpdateManyWithoutUserIdInput
@@ -16514,17 +16497,19 @@ input UserUpdateWithoutCupDataQaResponseDataInput {
 
 input UserUpdateWithoutCupDataUserRemoveDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
+  tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
-  countryId: CountryUpdateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
@@ -16538,17 +16523,19 @@ input UserUpdateWithoutCupDataUserRemoveDataInput {
 
 input UserUpdateWithoutEthnicityIdDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
+  tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
-  countryId: CountryUpdateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
@@ -16562,17 +16549,19 @@ input UserUpdateWithoutEthnicityIdDataInput {
 
 input UserUpdateWithoutUserCoinHistoryDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
+  tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
-  countryId: CountryUpdateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
@@ -16586,17 +16575,19 @@ input UserUpdateWithoutUserCoinHistoryDataInput {
 
 input UserUpdateWithoutUserCupsDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
+  tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
-  countryId: CountryUpdateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
@@ -16610,17 +16601,19 @@ input UserUpdateWithoutUserCupsDataInput {
 
 input UserUpdateWithoutUserInterviewDataDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
+  tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
-  countryId: CountryUpdateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
@@ -16634,17 +16627,19 @@ input UserUpdateWithoutUserInterviewDataDataInput {
 
 input UserUpdateWithoutUserRecordDataByPeriodDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
+  tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
-  countryId: CountryUpdateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
@@ -16658,17 +16653,19 @@ input UserUpdateWithoutUserRecordDataByPeriodDataInput {
 
 input UserUpdateWithoutUserWalletDataInput {
   anonUserId: Int
+  countryId: Int
   deleted: Boolean
   dob: DateTime
   email: String
+  emailVerify: Boolean
   encryptSaltString: String
   firstName: String
   givenBirth: Boolean
   lastName: String
   macId: String
   password: String
+  tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
-  countryId: CountryUpdateOneWithoutUsersInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
   cupDataQaResponse: CupDataQaResponseUpdateManyWithoutUserIdInput
@@ -16678,11 +16675,6 @@ input UserUpdateWithoutUserWalletDataInput {
   userCups: UserCupUpdateManyWithoutUserIdInput
   userInterviewData: UserInterviewDatumUpdateManyWithoutUserIdInput
   userRecordDataByPeriod: UserRecordDataByPeriodUpdateManyWithoutUserIdInput
-}
-
-input UserUpdateWithWhereUniqueWithoutCountryIdInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutCountryIdDataInput!
 }
 
 input UserUpdateWithWhereUniqueWithoutEthnicityIdInput {
@@ -16738,12 +16730,6 @@ input UserUpsertWithoutUserRecordDataByPeriodInput {
 input UserUpsertWithoutUserWalletInput {
   update: UserUpdateWithoutUserWalletDataInput!
   create: UserCreateWithoutUserWalletInput!
-}
-
-input UserUpsertWithWhereUniqueWithoutCountryIdInput {
-  where: UserWhereUniqueInput!
-  update: UserUpdateWithoutCountryIdDataInput!
-  create: UserCreateWithoutCountryIdInput!
 }
 
 input UserUpsertWithWhereUniqueWithoutEthnicityIdInput {
@@ -17143,6 +17129,28 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   anonUserId_gte: Int
+  countryId: Int
+
+  """All values that are not equal to given value."""
+  countryId_not: Int
+
+  """All values that are contained in given list."""
+  countryId_in: [Int!]
+
+  """All values that are not contained in given list."""
+  countryId_not_in: [Int!]
+
+  """All values less than the given value."""
+  countryId_lt: Int
+
+  """All values less than or equal the given value."""
+  countryId_lte: Int
+
+  """All values greater than the given value."""
+  countryId_gt: Int
+
+  """All values greater than or equal the given value."""
+  countryId_gte: Int
   deleted: Boolean
 
   """All values that are not equal to given value."""
@@ -17209,6 +17217,10 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   email_not_ends_with: String
+  emailVerify: Boolean
+
+  """All values that are not equal to given value."""
+  emailVerify_not: Boolean
   encryptSaltString: String
 
   """All values that are not equal to given value."""
@@ -17413,10 +17425,13 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  tutorial: Boolean
+
+  """All values that are not equal to given value."""
+  tutorial_not: Boolean
   appServerSync_every: AppServerSyncWhereInput
   appServerSync_some: AppServerSyncWhereInput
   appServerSync_none: AppServerSyncWhereInput
-  countryId: CountryWhereInput
   cupDataProcFlow_every: CupDataProcFlowWhereInput
   cupDataProcFlow_some: CupDataProcFlowWhereInput
   cupDataProcFlow_none: CupDataProcFlowWhereInput

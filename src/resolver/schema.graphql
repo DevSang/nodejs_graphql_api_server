@@ -42,6 +42,10 @@ type Mutation {
         marketListId: Int!
         plusYn: Boolean
     ): MarketBuyHistory!
+    # changePassword(
+    #     email: String!
+    #     password: String!
+    # ): User!
 }
 
 type TxMarketBuyHistory {
@@ -63,7 +67,6 @@ type getNewTokenPayload {
     user: User
     country: Country
     wallet: UserWallet
-
 }
 type AuthPayload {
     accessToken: String
