@@ -37,6 +37,7 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
 
 server.express.get('/api/usermgmt', function(req, res) {
+    res.locals.mode = req.query.mode;
     res.render('usermgmt.ejs');
 });
 

@@ -3,109 +3,78 @@
 <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // TODO: Implement getParameterByName()
-        // Get the action to complete.
-        // switch (mode) {
-        //   case 'resetPassword':
-        //     handleResetPassword(auth, actionCode, continueUrl, lang);
-        //     break;
-        //   case 'recoverEmail':
-        //     handleVerifyEmail(auth, actionCode, continueUrl, lang);
-        //     break;
-        //   case 'verifyEmail':
-        //     handleVerifyEmail(auth, actionCode, continueUrl, lang);
-        //     break;
-        //   default:
-        //     // Error: invalid mode.
-        //     // handleVerifyEmail(auth, actionCode, continueUrl, lang);
-        //     break;
-        // }
-        document.getElementById('verifyButton').style.display = "block";
-        document.getElementById('verifyText').style.display = "none";
-        document.getElementById('expiredText').style.display = "none";
+        var mode = getParameterByName('mode');
+        if(mode === 'resetPassword') {
+            console.log('reset')
+            document.getElementById('changePassword').style.display = "block";
+            document.getElementById('successText').style.display = "none";
+            document.getElementById('failText').style.display = "none";
+        } else {
+            document.getElementById('verifyButton').style.display = "block";
+            document.getElementById('verifyText').style.display = "none";
+            document.getElementById('expiredText').style.display = "none";
+        }
+        
     }, false);
 
-  // 비밀번호 재설정
-    // function handleResetPassword(auth, actionCode, continueUrl, lang) {
-    // // Localize the UI to the selected language as determined by the lang
-    // // parameter.
-    // var accountEmail;
-    // // Verify the password reset code is valid.
-    // auth.verifyPasswordResetCode(actionCode).then(function(email) {
-    //     var accountEmail = email;
-
-    //     // TODO: Show the reset screen with the user's email and ask the user for
-    //     // the new password.
-
-    //     // Save the new password.
-    //     auth.confirmPasswordReset(actionCode, newPassword).then(function(resp) {
-    //     // Password reset has been confirmed and new password updated.
-
-    //     // TODO: Display a link back to the app, or sign-in the user directly
-    //     // if the page belongs to the same domain as the app:
-    //     // auth.signInWithEmailAndPassword(accountEmail, newPassword);
-
-    //     // TODO: If a continue URL is available, display a button which on
-    //     // click redirects the user back to the app via continueUrl with
-    //     // additional state determined from that URL's parameters.
-    //     }).catch(function(error) {
-    //     // Error occurred during confirmation. The code might have expired or the
-    //     // password is too weak.
-    //     });
-    // }).catch(function(error) {
-    //     // Invalid or expired action code. Ask user to try to reset the password
-    //     // again.
-    // });
-    // }
-    function handleResetPassword() {
+    // 비밀번호 재설정
+    function handleResetPassword(actionCode, continueUrl, lang, auth) {
         // Get the one-time code from the query parameter.
-        var actionCode = getParameterByName('oobCode');
-        // (Optional) Get the continue URL from the query parameter if available.
-        var continueUrl = getParameterByName('continueUrl');
-        // (Optional) Get the language code if available.
-        var lang = getParameterByName('lang') || 'en';
+        var pw = document.getElementById('pw').value;
+        var pw2 = document.getElementById('pw2').value;
+        if(pw === pw2) {
+            alert('change Pw!!!', pw)
+            try{
+                auth.verifyPasswordResetCode(actionCode).then(function(pw) {
+                    auth.confirmPasswordReset(actionCode, pw).then(function(resp) {
+                    // Password reset has been confirmed and new password updated.
+                        alert('success Change PW')
+                    // TODO: Display a link back to the app, or sign-in the user directly
+                    // if the page belongs to the same domain as the app:
+                    // auth.signInWithEmailAndPassword(accountEmail, newPassword);
 
-        var config = {
-            'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
-        };
-        var app = firebase.initializeApp(config);
-        var auth = app.auth()
-
-        var isVerify = false;
-        // Configure the Firebase SDK.
-        // This is the minimum configuration required for the API to be used.
-        auth.verifyPasswordResetCode(actionCode).then(function(email) {
-            document.getElementById('verifyButton').style.display = "none";
-            document.getElementById('verifyText').style.display = "block";
-            document.getElementById('verifyText2').style.display = "block";
-            location.href='https://looncupapp.page.link/app'
-        }).catch(function(error) {
-            alert(error.message)
-            document.getElementById('verifyButton').style.display = "none";
-            document.getElementById('expiredText').style.display = "block";
-            document.getElementById('expiredText2').style.display = "block";
-        });
+                    // TODO: If a continue URL is available, display a button which on
+                    // click redirects the user back to the app via continueUrl with
+                    // additional state determined from that URL's parameters.
+                    }).catch(function(error) {
+                        alert('error', error.message)
+                    // Error occurred during confirmation. The code might have expired or the
+                    // password is too weak.
+                    });
+                document.getElementById('changePassword').style.display = "none";
+                document.getElementById('verifyText').style.display = "block";
+                document.getElementById('verifyText2').style.display = "block";
+                // location.href='https://looncupapp.page.link/app'
+            }).catch(function(error) {
+                alert(error.message)
+                document.getElementById('changePassword').style.display = "none";
+                document.getElementById('expiredText').style.display = "block";
+                document.getElementById('expiredText2').style.display = "block";
+            });
 
         //close the window
         // setTimeout(function() {
         //     close();
         // }, 3000);
+        } else {
+            alert('fail pw!!!', pw, pw2)
+        }
     }
   // 이메일 인증
 
-    function handleVerifyEmail() {
+    function handleVerifyEmail(actionCode, continueUrl, lang, auth) {
         // Get the one-time code from the query parameter.
-        var actionCode = getParameterByName('oobCode');
-        // (Optional) Get the continue URL from the query parameter if available.
-        var continueUrl = getParameterByName('continueUrl');
-        // (Optional) Get the language code if available.
-        var lang = getParameterByName('lang') || 'en';
+        // var actionCode = getParameterByName('oobCode');
+        // // (Optional) Get the continue URL from the query parameter if available.
+        // var continueUrl = getParameterByName('continueUrl');
+        // // (Optional) Get the language code if available.
+        // var lang = getParameterByName('lang') || 'en';
 
-        var config = {
-            'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
-        };
-        var app = firebase.initializeApp(config);
-        var auth = app.auth()
+        // var config = {
+        //     'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+        // };
+        // var app = firebase.initializeApp(config);
+        // var auth = app.auth()
         // var mode = getParameterByName('mode');
         // var actionCode = getParameterByName('oobCode');
         // var apiKey = getParameterByName('apiKey');
@@ -143,11 +112,30 @@
 
     function handleClick() {
         var mode = getParameterByName('mode');
+        var actionCode = getParameterByName('oobCode');
+        // (Optional) Get the continue URL from the query parameter if available.
+        var continueUrl = getParameterByName('continueUrl');
+        // (Optional) Get the language code if available.
+        var lang = getParameterByName('lang') || 'en';
+
+        var config = {
+            'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+        };
+        var app = firebase.initializeApp(config);
+        var auth = app.auth()
         if(mode === 'resetPassword') {
-            handleResetPassword()
+            handleResetPassword(actionCode, continueUrl, lang, auth)
         }else {
-            handleVerifyEmail()
+            handleVerifyEmail(actionCode, continueUrl, lang, auth)
         }
+    }
+
+    function handleDeleteButton1() {
+        document.getElementById('pw').value = "";
+    }
+
+    function handleDeleteButton2() {
+        document.getElementById('pw2').value = "";
     }
 
     function getParameterByName(name) {
@@ -156,36 +144,48 @@
         results = regex.exec(location.search);
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
+
+    function modeCheck() {
+        return getParameterByName('mode');
+    }
+
+    function checkPwLength(target) {
+        var text = target.value;
+        if(text.length >= 5 && text.length <= 10) {
+            document.getElementById('pwL').style.color = "white";
+        } else {
+            document.getElementById('pwL').style.color = "#eb454f";
+        }
+        return '';
+    }
+
+    function checkPw(target) {
+        var text = target.value;
+        var pw = document.getElementById('pw').value;
+        if(text == pw) {
+            document.getElementById('pwM').style.color = "white";
+        } else {
+            document.getElementById('pwM').style.color = "#eb454f";
+        }
+        return '';
+    }
+
 </script>
 
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="/styles/styles.css"/>
+        <style>
+            input::placeholder {
+                color: #bdbdbd;
+            }
+        </style>
     </head>
     <body>
-        <img border="pixels" style="border-width: 1px; border-color: #aaa;" src="/asset/mailBox.png"/>
-        <div>
-            <p style="position: absolute;left: 130px; top: 1000px;font-size: 34pt;font-family:Brown-Bold; line-height:1.3em;">
-                Hi!<br>
-                Welcome to LOON.<br>
-                Please click the button below to verify<br>
-                your account.
-            </p>
-        </div>
-        <input id="verifyButton" style="width:1000px;position:absolute; top:1400px;left:67px" type="image" src="/asset/verifyMailButton.png" onclick="handleClick();"/>
-        <p id="verifyText" style="display:none; position: absolute;top:1400px;left:390px;font-size: 38pt;font-family:Brown-Bold; line-height:1.3em">
-            Success verify.
-        </p>
-        <p id="verifyText2" style="display:none;position: absolute;top:1480px;left:345px;font-size: 30pt;font-family:Brown-Bold; line-height:1.3em">
-            The window will close.
-        </p>
-        <p id="expiredText" style="display:none;position: absolute;top:1400px;left:290px;font-size: 38pt;font-family:Brown-Bold; line-height:1.3em">
-            This mail was expired.
-        </p>
-        <p id="expiredText2" style="display:none;position: absolute;top:1480px;left:345px;font-size: 30pt;font-family:Brown-Bold; line-height:1.3em">
-            The window will close.
-        </p>
-        <!-- <button style="position:absolute;top:670px;left:700px;font-family:Brown-Regular; font-size :13pt; border:0; outline:0" >Contact</button>
-        <button style="position:absolute;top:670px;left:800px;font-family:Brown-Regular; font-size :13pt; border:0; outline:0">Not my account</button> -->
+        <% if (mode === 'resetPassword') { %>
+            <%- include('resetPassword'); %>
+        <% } else { %>
+            <%- include('verifyEmail'); %>
+        <% } %>
     </body>
 </html>
