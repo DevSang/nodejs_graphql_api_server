@@ -4,7 +4,21 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // TODO: Implement getParameterByName()
+        // Get the action to complete.
+        var mode = getParameterByName('mode');
+        // Get the one-time code from the query parameter.
+        var actionCode = getParameterByName('oobCode');
+        // (Optional) Get the continue URL from the query parameter if available.
+        var continueUrl = getParameterByName('continueUrl');
+        // (Optional) Get the language code if available.
+        var lang = getParameterByName('lang') || 'en';
 
+        var config = {
+            'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+        };
+        var app = firebase.initializeApp(config);
+        var auth = app.auth();
+        
         switch (mode) {
           case 'resetPassword':
             handleResetPassword(auth, actionCode, continueUrl, lang);
@@ -58,20 +72,10 @@
     // }
     function handleResetPassword() {
         alter('resetPassword')
-        var mode = getParameterByName('mode');
-        var actionCode = getParameterByName('oobCode');
-        var apiKey = getParameterByName('apiKey');
-        var continueUrl = getParameterByName('continueUrl');
-        var lang = getParameterByName('lang') || 'en';
         var isVerify = false;
 
         // Configure the Firebase SDK.
         // This is the minimum configuration required for the API to be used.
-        var config = {
-            'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
-        };
-        var app = firebase.initializeApp(config);
-        var auth = app.auth();
         auth.applyActionCode(actionCode).then(function(resp) {
             document.getElementById('verifyButton').style.display = "none";
             document.getElementById('verifyText').style.display = "block";
