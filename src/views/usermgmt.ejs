@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" appunwraptag="" >
-<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // TODO: Implement getParameterByName()
@@ -24,7 +24,7 @@
             handleResetPassword(auth, actionCode, continueUrl, lang);
             break;
           case 'recoverEmail':
-            handleRecoverEmail(auth, actionCode, lang);
+            handleVerifyEmail(auth, actionCode, continueUrl, lang);
             break;
           case 'verifyEmail':
             handleVerifyEmail(auth, actionCode, continueUrl, lang);
