@@ -70,7 +70,7 @@
     //     // again.
     // });
     // }
-    function handleResetPassword() {
+    function handleResetPassword(auth, actionCode, continueUrl, lang) {
         alert('resetPassword')
         var isVerify = false;
 
@@ -94,7 +94,7 @@
         }, 3000);
     }
   // 이메일 인증
-    function handleVerifyEmail() {
+    function handleVerifyEmail(auth, actionCode, continueUrl, lang) {
         // var mode = getParameterByName('mode');
         // var actionCode = getParameterByName('oobCode');
         // var apiKey = getParameterByName('apiKey');
