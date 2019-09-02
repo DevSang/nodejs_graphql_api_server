@@ -5,6 +5,7 @@ const path = require('path');
 var certAccessPrivate = fs.readFileSync(path.resolve(jwtConfig.certAccessPrivate));
 var certRefreshPrivate = fs.readFileSync(path.resolve(jwtConfig.certRefreshPrivate));
 const crypto = require("crypto");
+var rand = require('csprng');
 
 module.exports = async (parent, { email, password }, ctx, info) => {
 	// exception : no firebase token
