@@ -18,7 +18,7 @@
         };
         var app = firebase.initializeApp(config);
         var auth = app.auth();
-        
+
         switch (mode) {
           case 'resetPassword':
             handleResetPassword(auth, actionCode, continueUrl, lang);
@@ -82,7 +82,7 @@
             document.getElementById('verifyText2').style.display = "block";
             location.href='https://looncupapp.page.link/app'
         }).catch(function(error) {
-            alert(error)
+            alert(error.message)
             document.getElementById('verifyButton').style.display = "none";
             document.getElementById('expiredText').style.display = "block";
             document.getElementById('expiredText2').style.display = "block";
