@@ -15,10 +15,17 @@
         })
         .catch(function(error) {
             alert('The link is invalid. This can happen if the link is malformed, expired, or has already been used.\n The window will close.');
-
+            try {
+            //close the window
             setTimeout(function() {
-                window.close();
-            }, 5000);
+                        window.close();
+                    }, 3000);
+        } catch(err) {
+            alert(err)
+        }
+            // setTimeout(function() {
+            //     window.close();
+            // }, 3000);
         })
 
         var mode = getParameterByName('mode');
