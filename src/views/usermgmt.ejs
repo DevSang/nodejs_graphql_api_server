@@ -2,7 +2,6 @@
 <html lang="ko" appunwraptag="" >
 <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase.js"></script>
 <script>
-    window.addEventListener("load", window.close);
     document.addEventListener('DOMContentLoaded', function () {
         var actionCode = getParameterByName('oobCode');
         var config = {
@@ -18,7 +17,7 @@
             alert('The link is invalid. This can happen if the link is malformed, expired, or has already been used.\n The window will close.');
 
             setTimeout(function() {
-                close();
+                window.close();
             }, 5000);
         })
 
