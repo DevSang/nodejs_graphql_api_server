@@ -10,8 +10,7 @@
         var config = {
             'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
         };
-        var app = firebase.initializeApp(config);
-        var auth = app.auth()
+        var auth = firebase.auth()
         var isVerify = false;
 
         auth.applyActionCode(actionCode).then(function(resp) {
