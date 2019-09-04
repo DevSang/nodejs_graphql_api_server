@@ -2,7 +2,26 @@
 <html lang="ko" appunwraptag="" >
 <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase.js"></script>
 <script>
+    window.addEventListener("load", window.close);
     document.addEventListener('DOMContentLoaded', function () {
+        var actionCode = getParameterByName('oobCode');
+        var config = {
+            'apiKey': 'AIzaSyARn8P7lNVY0DnVHj_haa321Wyzm9HMKeo'
+        };
+        var app = firebase.initializeApp(config);
+        var auth = app.auth()
+        auth.checkActionCode(actionCode)
+        .then(function(result) {
+            return;
+        })
+        .catch(function(error) {
+            alert('The link is invalid. This can happen if the link is malformed, expired, or has already been used.\n The window will close.');
+
+            setTimeout(function() {
+                close();
+            }, 3000);
+        })
+
         var mode = getParameterByName('mode');
         if(mode === 'resetPassword') {
             document.getElementById('changePassword').style.display = "block";
