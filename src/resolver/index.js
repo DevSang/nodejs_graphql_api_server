@@ -30,6 +30,8 @@ const resolvers = {
         userWallets: forwardTo('db'),
         marketListDetail: forwardTo('db'),
         marketListDetails: forwardTo('db'),
+        additionalInfo: forwardTo('db'),
+        additionalInfoes: forwardTo('db'),
     },
     Mutation: {
         //Use Prisma own mutation
@@ -64,6 +66,9 @@ const resolvers = {
         createMarketListDetail: forwardTo('db'),
         updateMarketListDetail: forwardTo('db'),
         deleteMarketListDetail: forwardTo('db'),
+        createAdditionalInfo: forwardTo('db'),
+        updateAdditionalInfo: forwardTo('db'),
+        deleteAdditionalInfo: forwardTo('db'),
 
         //Use Custom mutation
         signin: require('./mutation/signin'),
