@@ -1,5 +1,530 @@
 # source: http://localhost:4466
-# timestamp: Tue Sep 03 2019 01:08:23 GMT+0900 (GMT+09:00)
+# timestamp: Tue Sep 24 2019 10:07:43 GMT+0900 (GMT+09:00)
+
+type AdditionalInfo {
+  id: Int!
+  abnormalUltrasoundFinding: Boolean!
+  conditionSurgicalHistory: String
+  cycle: Int
+  cycleIrregular: Boolean!
+  ethnicity: String
+  height: Float!
+  iudImplanonExpireDate: DateTime
+  iudImplanonInsertDate: DateTime
+  lastPeriodDate: DateTime!
+  medicineList: String
+  period: Int
+  periodIrregular: Boolean!
+  userId: Int
+  weight: Float!
+}
+
+"""A connection to a list of items."""
+type AdditionalInfoConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AdditionalInfoEdge]!
+  aggregate: AggregateAdditionalInfo!
+}
+
+input AdditionalInfoCreateInput {
+  abnormalUltrasoundFinding: Boolean!
+  conditionSurgicalHistory: String
+  cycle: Int
+  cycleIrregular: Boolean!
+  ethnicity: String
+  height: Float!
+  iudImplanonExpireDate: DateTime
+  iudImplanonInsertDate: DateTime
+  lastPeriodDate: DateTime!
+  medicineList: String
+  period: Int
+  periodIrregular: Boolean!
+  userId: Int
+  weight: Float!
+}
+
+"""An edge in a connection."""
+type AdditionalInfoEdge {
+  """The item at the end of the edge."""
+  node: AdditionalInfo!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AdditionalInfoOrderByInput {
+  id_ASC
+  id_DESC
+  abnormalUltrasoundFinding_ASC
+  abnormalUltrasoundFinding_DESC
+  conditionSurgicalHistory_ASC
+  conditionSurgicalHistory_DESC
+  cycle_ASC
+  cycle_DESC
+  cycleIrregular_ASC
+  cycleIrregular_DESC
+  ethnicity_ASC
+  ethnicity_DESC
+  height_ASC
+  height_DESC
+  iudImplanonExpireDate_ASC
+  iudImplanonExpireDate_DESC
+  iudImplanonInsertDate_ASC
+  iudImplanonInsertDate_DESC
+  lastPeriodDate_ASC
+  lastPeriodDate_DESC
+  medicineList_ASC
+  medicineList_DESC
+  period_ASC
+  period_DESC
+  periodIrregular_ASC
+  periodIrregular_DESC
+  userId_ASC
+  userId_DESC
+  weight_ASC
+  weight_DESC
+}
+
+type AdditionalInfoPreviousValues {
+  id: Int!
+  abnormalUltrasoundFinding: Boolean!
+  conditionSurgicalHistory: String
+  cycle: Int
+  cycleIrregular: Boolean!
+  ethnicity: String
+  height: Float!
+  iudImplanonExpireDate: DateTime
+  iudImplanonInsertDate: DateTime
+  lastPeriodDate: DateTime!
+  medicineList: String
+  period: Int
+  periodIrregular: Boolean!
+  userId: Int
+  weight: Float!
+}
+
+type AdditionalInfoSubscriptionPayload {
+  mutation: MutationType!
+  node: AdditionalInfo
+  updatedFields: [String!]
+  previousValues: AdditionalInfoPreviousValues
+}
+
+input AdditionalInfoSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AdditionalInfoSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AdditionalInfoSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AdditionalInfoSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AdditionalInfoWhereInput
+}
+
+input AdditionalInfoUpdateInput {
+  abnormalUltrasoundFinding: Boolean
+  conditionSurgicalHistory: String
+  cycle: Int
+  cycleIrregular: Boolean
+  ethnicity: String
+  height: Float
+  iudImplanonExpireDate: DateTime
+  iudImplanonInsertDate: DateTime
+  lastPeriodDate: DateTime
+  medicineList: String
+  period: Int
+  periodIrregular: Boolean
+  userId: Int
+  weight: Float
+}
+
+input AdditionalInfoUpdateManyMutationInput {
+  abnormalUltrasoundFinding: Boolean
+  conditionSurgicalHistory: String
+  cycle: Int
+  cycleIrregular: Boolean
+  ethnicity: String
+  height: Float
+  iudImplanonExpireDate: DateTime
+  iudImplanonInsertDate: DateTime
+  lastPeriodDate: DateTime
+  medicineList: String
+  period: Int
+  periodIrregular: Boolean
+  userId: Int
+  weight: Float
+}
+
+input AdditionalInfoWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AdditionalInfoWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AdditionalInfoWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AdditionalInfoWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  abnormalUltrasoundFinding: Boolean
+
+  """All values that are not equal to given value."""
+  abnormalUltrasoundFinding_not: Boolean
+  conditionSurgicalHistory: String
+
+  """All values that are not equal to given value."""
+  conditionSurgicalHistory_not: String
+
+  """All values that are contained in given list."""
+  conditionSurgicalHistory_in: [String!]
+
+  """All values that are not contained in given list."""
+  conditionSurgicalHistory_not_in: [String!]
+
+  """All values less than the given value."""
+  conditionSurgicalHistory_lt: String
+
+  """All values less than or equal the given value."""
+  conditionSurgicalHistory_lte: String
+
+  """All values greater than the given value."""
+  conditionSurgicalHistory_gt: String
+
+  """All values greater than or equal the given value."""
+  conditionSurgicalHistory_gte: String
+
+  """All values containing the given string."""
+  conditionSurgicalHistory_contains: String
+
+  """All values not containing the given string."""
+  conditionSurgicalHistory_not_contains: String
+
+  """All values starting with the given string."""
+  conditionSurgicalHistory_starts_with: String
+
+  """All values not starting with the given string."""
+  conditionSurgicalHistory_not_starts_with: String
+
+  """All values ending with the given string."""
+  conditionSurgicalHistory_ends_with: String
+
+  """All values not ending with the given string."""
+  conditionSurgicalHistory_not_ends_with: String
+  cycle: Int
+
+  """All values that are not equal to given value."""
+  cycle_not: Int
+
+  """All values that are contained in given list."""
+  cycle_in: [Int!]
+
+  """All values that are not contained in given list."""
+  cycle_not_in: [Int!]
+
+  """All values less than the given value."""
+  cycle_lt: Int
+
+  """All values less than or equal the given value."""
+  cycle_lte: Int
+
+  """All values greater than the given value."""
+  cycle_gt: Int
+
+  """All values greater than or equal the given value."""
+  cycle_gte: Int
+  cycleIrregular: Boolean
+
+  """All values that are not equal to given value."""
+  cycleIrregular_not: Boolean
+  ethnicity: String
+
+  """All values that are not equal to given value."""
+  ethnicity_not: String
+
+  """All values that are contained in given list."""
+  ethnicity_in: [String!]
+
+  """All values that are not contained in given list."""
+  ethnicity_not_in: [String!]
+
+  """All values less than the given value."""
+  ethnicity_lt: String
+
+  """All values less than or equal the given value."""
+  ethnicity_lte: String
+
+  """All values greater than the given value."""
+  ethnicity_gt: String
+
+  """All values greater than or equal the given value."""
+  ethnicity_gte: String
+
+  """All values containing the given string."""
+  ethnicity_contains: String
+
+  """All values not containing the given string."""
+  ethnicity_not_contains: String
+
+  """All values starting with the given string."""
+  ethnicity_starts_with: String
+
+  """All values not starting with the given string."""
+  ethnicity_not_starts_with: String
+
+  """All values ending with the given string."""
+  ethnicity_ends_with: String
+
+  """All values not ending with the given string."""
+  ethnicity_not_ends_with: String
+  height: Float
+
+  """All values that are not equal to given value."""
+  height_not: Float
+
+  """All values that are contained in given list."""
+  height_in: [Float!]
+
+  """All values that are not contained in given list."""
+  height_not_in: [Float!]
+
+  """All values less than the given value."""
+  height_lt: Float
+
+  """All values less than or equal the given value."""
+  height_lte: Float
+
+  """All values greater than the given value."""
+  height_gt: Float
+
+  """All values greater than or equal the given value."""
+  height_gte: Float
+  iudImplanonExpireDate: DateTime
+
+  """All values that are not equal to given value."""
+  iudImplanonExpireDate_not: DateTime
+
+  """All values that are contained in given list."""
+  iudImplanonExpireDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  iudImplanonExpireDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  iudImplanonExpireDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  iudImplanonExpireDate_lte: DateTime
+
+  """All values greater than the given value."""
+  iudImplanonExpireDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  iudImplanonExpireDate_gte: DateTime
+  iudImplanonInsertDate: DateTime
+
+  """All values that are not equal to given value."""
+  iudImplanonInsertDate_not: DateTime
+
+  """All values that are contained in given list."""
+  iudImplanonInsertDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  iudImplanonInsertDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  iudImplanonInsertDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  iudImplanonInsertDate_lte: DateTime
+
+  """All values greater than the given value."""
+  iudImplanonInsertDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  iudImplanonInsertDate_gte: DateTime
+  lastPeriodDate: DateTime
+
+  """All values that are not equal to given value."""
+  lastPeriodDate_not: DateTime
+
+  """All values that are contained in given list."""
+  lastPeriodDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  lastPeriodDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  lastPeriodDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  lastPeriodDate_lte: DateTime
+
+  """All values greater than the given value."""
+  lastPeriodDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  lastPeriodDate_gte: DateTime
+  medicineList: String
+
+  """All values that are not equal to given value."""
+  medicineList_not: String
+
+  """All values that are contained in given list."""
+  medicineList_in: [String!]
+
+  """All values that are not contained in given list."""
+  medicineList_not_in: [String!]
+
+  """All values less than the given value."""
+  medicineList_lt: String
+
+  """All values less than or equal the given value."""
+  medicineList_lte: String
+
+  """All values greater than the given value."""
+  medicineList_gt: String
+
+  """All values greater than or equal the given value."""
+  medicineList_gte: String
+
+  """All values containing the given string."""
+  medicineList_contains: String
+
+  """All values not containing the given string."""
+  medicineList_not_contains: String
+
+  """All values starting with the given string."""
+  medicineList_starts_with: String
+
+  """All values not starting with the given string."""
+  medicineList_not_starts_with: String
+
+  """All values ending with the given string."""
+  medicineList_ends_with: String
+
+  """All values not ending with the given string."""
+  medicineList_not_ends_with: String
+  period: Int
+
+  """All values that are not equal to given value."""
+  period_not: Int
+
+  """All values that are contained in given list."""
+  period_in: [Int!]
+
+  """All values that are not contained in given list."""
+  period_not_in: [Int!]
+
+  """All values less than the given value."""
+  period_lt: Int
+
+  """All values less than or equal the given value."""
+  period_lte: Int
+
+  """All values greater than the given value."""
+  period_gt: Int
+
+  """All values greater than or equal the given value."""
+  period_gte: Int
+  periodIrregular: Boolean
+
+  """All values that are not equal to given value."""
+  periodIrregular_not: Boolean
+  userId: Int
+
+  """All values that are not equal to given value."""
+  userId_not: Int
+
+  """All values that are contained in given list."""
+  userId_in: [Int!]
+
+  """All values that are not contained in given list."""
+  userId_not_in: [Int!]
+
+  """All values less than the given value."""
+  userId_lt: Int
+
+  """All values less than or equal the given value."""
+  userId_lte: Int
+
+  """All values greater than the given value."""
+  userId_gt: Int
+
+  """All values greater than or equal the given value."""
+  userId_gte: Int
+  weight: Float
+
+  """All values that are not equal to given value."""
+  weight_not: Float
+
+  """All values that are contained in given list."""
+  weight_in: [Float!]
+
+  """All values that are not contained in given list."""
+  weight_not_in: [Float!]
+
+  """All values less than the given value."""
+  weight_lt: Float
+
+  """All values less than or equal the given value."""
+  weight_lte: Float
+
+  """All values greater than the given value."""
+  weight_gt: Float
+
+  """All values greater than or equal the given value."""
+  weight_gte: Float
+}
+
+input AdditionalInfoWhereUniqueInput {
+  id: Int
+}
+
+type AggregateAdditionalInfo {
+  count: Int!
+}
 
 type AggregateAnswerType {
   count: Int!
@@ -10578,6 +11103,7 @@ type MarketList {
   count: Int!
   endTime: DateTime!
   image: String
+  marketListDetail(where: MarketListDetailWhereInput, orderBy: MarketListDetailOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketListDetail!]
   price: Int!
   startTime: DateTime!
   title: String
@@ -10600,6 +11126,21 @@ input MarketListCreateInput {
   price: Int
   startTime: DateTime!
   title: String
+  marketListDetail: MarketListDetailCreateManyWithoutMarketListIdInput
+}
+
+input MarketListCreateOneWithoutMarketListDetailInput {
+  create: MarketListCreateWithoutMarketListDetailInput
+  connect: MarketListWhereUniqueInput
+}
+
+input MarketListCreateWithoutMarketListDetailInput {
+  count: Int
+  endTime: DateTime!
+  image: String
+  price: Int
+  startTime: DateTime!
+  title: String
 }
 
 type MarketListDetail {
@@ -10607,7 +11148,7 @@ type MarketListDetail {
   contents: String
   detailImage: String
   mainImage: String
-  marketListId: Int
+  marketListId: MarketList
   price: Int
   savingPrice: Int
   subTitle: String
@@ -10628,7 +11169,22 @@ input MarketListDetailCreateInput {
   contents: String
   detailImage: String
   mainImage: String
-  marketListId: Int
+  price: Int
+  savingPrice: Int
+  subTitle: String
+  title: String
+  marketListId: MarketListCreateOneWithoutMarketListDetailInput
+}
+
+input MarketListDetailCreateManyWithoutMarketListIdInput {
+  create: [MarketListDetailCreateWithoutMarketListIdInput!]
+  connect: [MarketListDetailWhereUniqueInput!]
+}
+
+input MarketListDetailCreateWithoutMarketListIdInput {
+  contents: String
+  detailImage: String
+  mainImage: String
   price: Int
   savingPrice: Int
   subTitle: String
@@ -10653,8 +11209,6 @@ enum MarketListDetailOrderByInput {
   detailImage_DESC
   mainImage_ASC
   mainImage_DESC
-  marketListId_ASC
-  marketListId_DESC
   price_ASC
   price_DESC
   savingPrice_ASC
@@ -10670,11 +11224,287 @@ type MarketListDetailPreviousValues {
   contents: String
   detailImage: String
   mainImage: String
-  marketListId: Int
   price: Int
   savingPrice: Int
   subTitle: String
   title: String
+}
+
+input MarketListDetailScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MarketListDetailScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MarketListDetailScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MarketListDetailScalarWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  contents: String
+
+  """All values that are not equal to given value."""
+  contents_not: String
+
+  """All values that are contained in given list."""
+  contents_in: [String!]
+
+  """All values that are not contained in given list."""
+  contents_not_in: [String!]
+
+  """All values less than the given value."""
+  contents_lt: String
+
+  """All values less than or equal the given value."""
+  contents_lte: String
+
+  """All values greater than the given value."""
+  contents_gt: String
+
+  """All values greater than or equal the given value."""
+  contents_gte: String
+
+  """All values containing the given string."""
+  contents_contains: String
+
+  """All values not containing the given string."""
+  contents_not_contains: String
+
+  """All values starting with the given string."""
+  contents_starts_with: String
+
+  """All values not starting with the given string."""
+  contents_not_starts_with: String
+
+  """All values ending with the given string."""
+  contents_ends_with: String
+
+  """All values not ending with the given string."""
+  contents_not_ends_with: String
+  detailImage: String
+
+  """All values that are not equal to given value."""
+  detailImage_not: String
+
+  """All values that are contained in given list."""
+  detailImage_in: [String!]
+
+  """All values that are not contained in given list."""
+  detailImage_not_in: [String!]
+
+  """All values less than the given value."""
+  detailImage_lt: String
+
+  """All values less than or equal the given value."""
+  detailImage_lte: String
+
+  """All values greater than the given value."""
+  detailImage_gt: String
+
+  """All values greater than or equal the given value."""
+  detailImage_gte: String
+
+  """All values containing the given string."""
+  detailImage_contains: String
+
+  """All values not containing the given string."""
+  detailImage_not_contains: String
+
+  """All values starting with the given string."""
+  detailImage_starts_with: String
+
+  """All values not starting with the given string."""
+  detailImage_not_starts_with: String
+
+  """All values ending with the given string."""
+  detailImage_ends_with: String
+
+  """All values not ending with the given string."""
+  detailImage_not_ends_with: String
+  mainImage: String
+
+  """All values that are not equal to given value."""
+  mainImage_not: String
+
+  """All values that are contained in given list."""
+  mainImage_in: [String!]
+
+  """All values that are not contained in given list."""
+  mainImage_not_in: [String!]
+
+  """All values less than the given value."""
+  mainImage_lt: String
+
+  """All values less than or equal the given value."""
+  mainImage_lte: String
+
+  """All values greater than the given value."""
+  mainImage_gt: String
+
+  """All values greater than or equal the given value."""
+  mainImage_gte: String
+
+  """All values containing the given string."""
+  mainImage_contains: String
+
+  """All values not containing the given string."""
+  mainImage_not_contains: String
+
+  """All values starting with the given string."""
+  mainImage_starts_with: String
+
+  """All values not starting with the given string."""
+  mainImage_not_starts_with: String
+
+  """All values ending with the given string."""
+  mainImage_ends_with: String
+
+  """All values not ending with the given string."""
+  mainImage_not_ends_with: String
+  price: Int
+
+  """All values that are not equal to given value."""
+  price_not: Int
+
+  """All values that are contained in given list."""
+  price_in: [Int!]
+
+  """All values that are not contained in given list."""
+  price_not_in: [Int!]
+
+  """All values less than the given value."""
+  price_lt: Int
+
+  """All values less than or equal the given value."""
+  price_lte: Int
+
+  """All values greater than the given value."""
+  price_gt: Int
+
+  """All values greater than or equal the given value."""
+  price_gte: Int
+  savingPrice: Int
+
+  """All values that are not equal to given value."""
+  savingPrice_not: Int
+
+  """All values that are contained in given list."""
+  savingPrice_in: [Int!]
+
+  """All values that are not contained in given list."""
+  savingPrice_not_in: [Int!]
+
+  """All values less than the given value."""
+  savingPrice_lt: Int
+
+  """All values less than or equal the given value."""
+  savingPrice_lte: Int
+
+  """All values greater than the given value."""
+  savingPrice_gt: Int
+
+  """All values greater than or equal the given value."""
+  savingPrice_gte: Int
+  subTitle: String
+
+  """All values that are not equal to given value."""
+  subTitle_not: String
+
+  """All values that are contained in given list."""
+  subTitle_in: [String!]
+
+  """All values that are not contained in given list."""
+  subTitle_not_in: [String!]
+
+  """All values less than the given value."""
+  subTitle_lt: String
+
+  """All values less than or equal the given value."""
+  subTitle_lte: String
+
+  """All values greater than the given value."""
+  subTitle_gt: String
+
+  """All values greater than or equal the given value."""
+  subTitle_gte: String
+
+  """All values containing the given string."""
+  subTitle_contains: String
+
+  """All values not containing the given string."""
+  subTitle_not_contains: String
+
+  """All values starting with the given string."""
+  subTitle_starts_with: String
+
+  """All values not starting with the given string."""
+  subTitle_not_starts_with: String
+
+  """All values ending with the given string."""
+  subTitle_ends_with: String
+
+  """All values not ending with the given string."""
+  subTitle_not_ends_with: String
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
 }
 
 type MarketListDetailSubscriptionPayload {
@@ -10718,7 +11548,17 @@ input MarketListDetailUpdateInput {
   contents: String
   detailImage: String
   mainImage: String
-  marketListId: Int
+  price: Int
+  savingPrice: Int
+  subTitle: String
+  title: String
+  marketListId: MarketListUpdateOneWithoutMarketListDetailInput
+}
+
+input MarketListDetailUpdateManyDataInput {
+  contents: String
+  detailImage: String
+  mainImage: String
   price: Int
   savingPrice: Int
   subTitle: String
@@ -10729,11 +11569,48 @@ input MarketListDetailUpdateManyMutationInput {
   contents: String
   detailImage: String
   mainImage: String
-  marketListId: Int
   price: Int
   savingPrice: Int
   subTitle: String
   title: String
+}
+
+input MarketListDetailUpdateManyWithoutMarketListIdInput {
+  create: [MarketListDetailCreateWithoutMarketListIdInput!]
+  connect: [MarketListDetailWhereUniqueInput!]
+  set: [MarketListDetailWhereUniqueInput!]
+  disconnect: [MarketListDetailWhereUniqueInput!]
+  delete: [MarketListDetailWhereUniqueInput!]
+  update: [MarketListDetailUpdateWithWhereUniqueWithoutMarketListIdInput!]
+  updateMany: [MarketListDetailUpdateManyWithWhereNestedInput!]
+  deleteMany: [MarketListDetailScalarWhereInput!]
+  upsert: [MarketListDetailUpsertWithWhereUniqueWithoutMarketListIdInput!]
+}
+
+input MarketListDetailUpdateManyWithWhereNestedInput {
+  where: MarketListDetailScalarWhereInput!
+  data: MarketListDetailUpdateManyDataInput!
+}
+
+input MarketListDetailUpdateWithoutMarketListIdDataInput {
+  contents: String
+  detailImage: String
+  mainImage: String
+  price: Int
+  savingPrice: Int
+  subTitle: String
+  title: String
+}
+
+input MarketListDetailUpdateWithWhereUniqueWithoutMarketListIdInput {
+  where: MarketListDetailWhereUniqueInput!
+  data: MarketListDetailUpdateWithoutMarketListIdDataInput!
+}
+
+input MarketListDetailUpsertWithWhereUniqueWithoutMarketListIdInput {
+  where: MarketListDetailWhereUniqueInput!
+  update: MarketListDetailUpdateWithoutMarketListIdDataInput!
+  create: MarketListDetailCreateWithoutMarketListIdInput!
 }
 
 input MarketListDetailWhereInput {
@@ -10887,28 +11764,6 @@ input MarketListDetailWhereInput {
 
   """All values not ending with the given string."""
   mainImage_not_ends_with: String
-  marketListId: Int
-
-  """All values that are not equal to given value."""
-  marketListId_not: Int
-
-  """All values that are contained in given list."""
-  marketListId_in: [Int!]
-
-  """All values that are not contained in given list."""
-  marketListId_not_in: [Int!]
-
-  """All values less than the given value."""
-  marketListId_lt: Int
-
-  """All values less than or equal the given value."""
-  marketListId_lte: Int
-
-  """All values greater than the given value."""
-  marketListId_gt: Int
-
-  """All values greater than or equal the given value."""
-  marketListId_gte: Int
   price: Int
 
   """All values that are not equal to given value."""
@@ -11033,6 +11888,7 @@ input MarketListDetailWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
+  marketListId: MarketListWhereInput
 }
 
 input MarketListDetailWhereUniqueInput {
@@ -11119,6 +11975,7 @@ input MarketListUpdateInput {
   price: Int
   startTime: DateTime
   title: String
+  marketListDetail: MarketListDetailUpdateManyWithoutMarketListIdInput
 }
 
 input MarketListUpdateManyMutationInput {
@@ -11128,6 +11985,29 @@ input MarketListUpdateManyMutationInput {
   price: Int
   startTime: DateTime
   title: String
+}
+
+input MarketListUpdateOneWithoutMarketListDetailInput {
+  create: MarketListCreateWithoutMarketListDetailInput
+  connect: MarketListWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: MarketListUpdateWithoutMarketListDetailDataInput
+  upsert: MarketListUpsertWithoutMarketListDetailInput
+}
+
+input MarketListUpdateWithoutMarketListDetailDataInput {
+  count: Int
+  endTime: DateTime
+  image: String
+  price: Int
+  startTime: DateTime
+  title: String
+}
+
+input MarketListUpsertWithoutMarketListDetailInput {
+  update: MarketListUpdateWithoutMarketListDetailDataInput!
+  create: MarketListCreateWithoutMarketListDetailInput!
 }
 
 input MarketListWhereInput {
@@ -11329,6 +12209,9 @@ input MarketListWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
+  marketListDetail_every: MarketListDetailWhereInput
+  marketListDetail_some: MarketListDetailWhereInput
+  marketListDetail_none: MarketListDetailWhereInput
 }
 
 input MarketListWhereUniqueInput {
@@ -11336,6 +12219,7 @@ input MarketListWhereUniqueInput {
 }
 
 type Mutation {
+  createAdditionalInfo(data: AdditionalInfoCreateInput!): AdditionalInfo!
   createAnswerType(data: AnswerTypeCreateInput!): AnswerType!
   createAppServerSync(data: AppServerSyncCreateInput!): AppServerSync!
   createAuthToken: AuthToken!
@@ -11376,6 +12260,7 @@ type Mutation {
   createUserRecordDataByTime(data: UserRecordDataByTimeCreateInput!): UserRecordDataByTime!
   createUserWallet(data: UserWalletCreateInput!): UserWallet!
   createUsersDataAnalysis(data: UsersDataAnalysisCreateInput!): UsersDataAnalysis!
+  updateAdditionalInfo(data: AdditionalInfoUpdateInput!, where: AdditionalInfoWhereUniqueInput!): AdditionalInfo
   updateAnswerType(data: AnswerTypeUpdateInput!, where: AnswerTypeWhereUniqueInput!): AnswerType
   updateAppServerSync(data: AppServerSyncUpdateInput!, where: AppServerSyncWhereUniqueInput!): AppServerSync
   updateCalibration(data: CalibrationUpdateInput!, where: CalibrationWhereUniqueInput!): Calibration
@@ -11415,6 +12300,7 @@ type Mutation {
   updateUserRecordDataByTime(data: UserRecordDataByTimeUpdateInput!, where: UserRecordDataByTimeWhereUniqueInput!): UserRecordDataByTime
   updateUserWallet(data: UserWalletUpdateInput!, where: UserWalletWhereUniqueInput!): UserWallet
   updateUsersDataAnalysis(data: UsersDataAnalysisUpdateInput!, where: UsersDataAnalysisWhereUniqueInput!): UsersDataAnalysis
+  deleteAdditionalInfo(where: AdditionalInfoWhereUniqueInput!): AdditionalInfo
   deleteAnswerType(where: AnswerTypeWhereUniqueInput!): AnswerType
   deleteAppServerSync(where: AppServerSyncWhereUniqueInput!): AppServerSync
   deleteAuthToken(where: AuthTokenWhereUniqueInput!): AuthToken
@@ -11455,6 +12341,7 @@ type Mutation {
   deleteUserRecordDataByTime(where: UserRecordDataByTimeWhereUniqueInput!): UserRecordDataByTime
   deleteUserWallet(where: UserWalletWhereUniqueInput!): UserWallet
   deleteUsersDataAnalysis(where: UsersDataAnalysisWhereUniqueInput!): UsersDataAnalysis
+  upsertAdditionalInfo(where: AdditionalInfoWhereUniqueInput!, create: AdditionalInfoCreateInput!, update: AdditionalInfoUpdateInput!): AdditionalInfo!
   upsertAnswerType(where: AnswerTypeWhereUniqueInput!, create: AnswerTypeCreateInput!, update: AnswerTypeUpdateInput!): AnswerType!
   upsertAppServerSync(where: AppServerSyncWhereUniqueInput!, create: AppServerSyncCreateInput!, update: AppServerSyncUpdateInput!): AppServerSync!
   upsertCalibration(where: CalibrationWhereUniqueInput!, create: CalibrationCreateInput!, update: CalibrationUpdateInput!): Calibration!
@@ -11494,6 +12381,7 @@ type Mutation {
   upsertUserRecordDataByTime(where: UserRecordDataByTimeWhereUniqueInput!, create: UserRecordDataByTimeCreateInput!, update: UserRecordDataByTimeUpdateInput!): UserRecordDataByTime!
   upsertUserWallet(where: UserWalletWhereUniqueInput!, create: UserWalletCreateInput!, update: UserWalletUpdateInput!): UserWallet!
   upsertUsersDataAnalysis(where: UsersDataAnalysisWhereUniqueInput!, create: UsersDataAnalysisCreateInput!, update: UsersDataAnalysisUpdateInput!): UsersDataAnalysis!
+  updateManyAdditionalInfoes(data: AdditionalInfoUpdateManyMutationInput!, where: AdditionalInfoWhereInput): BatchPayload!
   updateManyAnswerTypes(data: AnswerTypeUpdateManyMutationInput!, where: AnswerTypeWhereInput): BatchPayload!
   updateManyAppServerSyncs(data: AppServerSyncUpdateManyMutationInput!, where: AppServerSyncWhereInput): BatchPayload!
   updateManyCalibrations(data: CalibrationUpdateManyMutationInput!, where: CalibrationWhereInput): BatchPayload!
@@ -11532,6 +12420,7 @@ type Mutation {
   updateManyUserRecordDataByTimes(data: UserRecordDataByTimeUpdateManyMutationInput!, where: UserRecordDataByTimeWhereInput): BatchPayload!
   updateManyUserWallets(data: UserWalletUpdateManyMutationInput!, where: UserWalletWhereInput): BatchPayload!
   updateManyUsersDataAnalyses(data: UsersDataAnalysisUpdateManyMutationInput!, where: UsersDataAnalysisWhereInput): BatchPayload!
+  deleteManyAdditionalInfoes(where: AdditionalInfoWhereInput): BatchPayload!
   deleteManyAnswerTypes(where: AnswerTypeWhereInput): BatchPayload!
   deleteManyAppServerSyncs(where: AppServerSyncWhereInput): BatchPayload!
   deleteManyAuthTokens(where: AuthTokenWhereInput): BatchPayload!
@@ -11825,6 +12714,7 @@ enum PrismaDatabase {
 }
 
 type Query {
+  additionalInfoes(where: AdditionalInfoWhereInput, orderBy: AdditionalInfoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdditionalInfo]!
   answerTypes(where: AnswerTypeWhereInput, orderBy: AnswerTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AnswerType]!
   appServerSyncs(where: AppServerSyncWhereInput, orderBy: AppServerSyncOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AppServerSync]!
   authTokens(where: AuthTokenWhereInput, orderBy: AuthTokenOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AuthToken]!
@@ -11865,6 +12755,7 @@ type Query {
   userRecordDataByTimes(where: UserRecordDataByTimeWhereInput, orderBy: UserRecordDataByTimeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRecordDataByTime]!
   userWallets(where: UserWalletWhereInput, orderBy: UserWalletOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserWallet]!
   usersDataAnalyses(where: UsersDataAnalysisWhereInput, orderBy: UsersDataAnalysisOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UsersDataAnalysis]!
+  additionalInfo(where: AdditionalInfoWhereUniqueInput!): AdditionalInfo
   answerType(where: AnswerTypeWhereUniqueInput!): AnswerType
   appServerSync(where: AppServerSyncWhereUniqueInput!): AppServerSync
   authToken(where: AuthTokenWhereUniqueInput!): AuthToken
@@ -11905,6 +12796,7 @@ type Query {
   userRecordDataByTime(where: UserRecordDataByTimeWhereUniqueInput!): UserRecordDataByTime
   userWallet(where: UserWalletWhereUniqueInput!): UserWallet
   usersDataAnalysis(where: UsersDataAnalysisWhereUniqueInput!): UsersDataAnalysis
+  additionalInfoesConnection(where: AdditionalInfoWhereInput, orderBy: AdditionalInfoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdditionalInfoConnection!
   answerTypesConnection(where: AnswerTypeWhereInput, orderBy: AnswerTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AnswerTypeConnection!
   appServerSyncsConnection(where: AppServerSyncWhereInput, orderBy: AppServerSyncOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AppServerSyncConnection!
   authTokensConnection(where: AuthTokenWhereInput, orderBy: AuthTokenOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AuthTokenConnection!
@@ -11948,6 +12840,7 @@ type Query {
 }
 
 type Subscription {
+  additionalInfo(where: AdditionalInfoSubscriptionWhereInput): AdditionalInfoSubscriptionPayload
   answerType(where: AnswerTypeSubscriptionWhereInput): AnswerTypeSubscriptionPayload
   appServerSync(where: AppServerSyncSubscriptionWhereInput): AppServerSyncSubscriptionPayload
   authToken(where: AuthTokenSubscriptionWhereInput): AuthTokenSubscriptionPayload
@@ -12010,6 +12903,7 @@ type User {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   userCoinHistory(where: UserCoinHistoryWhereInput, orderBy: UserCoinHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCoinHistory!]
   userCups(where: UserCupWhereInput, orderBy: UserCupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCup!]
@@ -12714,6 +13608,7 @@ input UserCreateInput {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -12796,6 +13691,7 @@ input UserCreateWithoutAppServerSyncInput {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
@@ -12822,6 +13718,7 @@ input UserCreateWithoutCupDataProcFlowInput {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
@@ -12848,6 +13745,7 @@ input UserCreateWithoutCupDataProcMdatesInput {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -12874,6 +13772,7 @@ input UserCreateWithoutCupDataQaResponseInput {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -12900,6 +13799,7 @@ input UserCreateWithoutCupDataUserRemoveInput {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -12926,6 +13826,7 @@ input UserCreateWithoutEthnicityIdInput {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -12952,6 +13853,7 @@ input UserCreateWithoutUserCoinHistoryInput {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -12978,6 +13880,7 @@ input UserCreateWithoutUserCupsInput {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -13004,6 +13907,7 @@ input UserCreateWithoutUserInterviewDataInput {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -13030,6 +13934,7 @@ input UserCreateWithoutUserRecordDataByPeriodInput {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -13056,6 +13961,7 @@ input UserCreateWithoutUserWalletInput {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -14108,6 +15014,8 @@ enum UserOrderByInput {
   macId_DESC
   password_ASC
   password_DESC
+  personalHealthRecord_ASC
+  personalHealthRecord_DESC
   tutorial_ASC
   tutorial_DESC
 }
@@ -14126,6 +15034,7 @@ type UserPreviousValues {
   lastName: String!
   macId: String
   password: String!
+  personalHealthRecord: Boolean
   tutorial: Boolean
 }
 
@@ -14893,6 +15802,7 @@ type UserRecordDataByTime {
   colorB: Int
   colorG: Int
   colorR: Int
+  imagePath: String
   leakage: String
   recordDayRowId: UserRecordDataByDay
   startTime: DateTime
@@ -14914,6 +15824,7 @@ input UserRecordDataByTimeCreateInput {
   colorB: Int
   colorG: Int
   colorR: Int
+  imagePath: String
   leakage: String
   startTime: DateTime
   volume: Float
@@ -14930,6 +15841,7 @@ input UserRecordDataByTimeCreateWithoutRecordDayRowIdInput {
   colorB: Int
   colorG: Int
   colorR: Int
+  imagePath: String
   leakage: String
   startTime: DateTime
   volume: Float
@@ -14955,6 +15867,8 @@ enum UserRecordDataByTimeOrderByInput {
   colorG_DESC
   colorR_ASC
   colorR_DESC
+  imagePath_ASC
+  imagePath_DESC
   leakage_ASC
   leakage_DESC
   startTime_ASC
@@ -14969,6 +15883,7 @@ type UserRecordDataByTimePreviousValues {
   colorB: Int
   colorG: Int
   colorR: Int
+  imagePath: String
   leakage: String
   startTime: DateTime
   volume: Float
@@ -15093,6 +16008,46 @@ input UserRecordDataByTimeScalarWhereInput {
 
   """All values greater than or equal the given value."""
   colorR_gte: Int
+  imagePath: String
+
+  """All values that are not equal to given value."""
+  imagePath_not: String
+
+  """All values that are contained in given list."""
+  imagePath_in: [String!]
+
+  """All values that are not contained in given list."""
+  imagePath_not_in: [String!]
+
+  """All values less than the given value."""
+  imagePath_lt: String
+
+  """All values less than or equal the given value."""
+  imagePath_lte: String
+
+  """All values greater than the given value."""
+  imagePath_gt: String
+
+  """All values greater than or equal the given value."""
+  imagePath_gte: String
+
+  """All values containing the given string."""
+  imagePath_contains: String
+
+  """All values not containing the given string."""
+  imagePath_not_contains: String
+
+  """All values starting with the given string."""
+  imagePath_starts_with: String
+
+  """All values not starting with the given string."""
+  imagePath_not_starts_with: String
+
+  """All values ending with the given string."""
+  imagePath_ends_with: String
+
+  """All values not ending with the given string."""
+  imagePath_not_ends_with: String
   leakage: String
 
   """All values that are not equal to given value."""
@@ -15221,6 +16176,7 @@ input UserRecordDataByTimeUpdateInput {
   colorB: Int
   colorG: Int
   colorR: Int
+  imagePath: String
   leakage: String
   startTime: DateTime
   volume: Float
@@ -15232,6 +16188,7 @@ input UserRecordDataByTimeUpdateManyDataInput {
   colorB: Int
   colorG: Int
   colorR: Int
+  imagePath: String
   leakage: String
   startTime: DateTime
   volume: Float
@@ -15242,6 +16199,7 @@ input UserRecordDataByTimeUpdateManyMutationInput {
   colorB: Int
   colorG: Int
   colorR: Int
+  imagePath: String
   leakage: String
   startTime: DateTime
   volume: Float
@@ -15269,6 +16227,7 @@ input UserRecordDataByTimeUpdateWithoutRecordDayRowIdDataInput {
   colorB: Int
   colorG: Int
   colorR: Int
+  imagePath: String
   leakage: String
   startTime: DateTime
   volume: Float
@@ -15404,6 +16363,46 @@ input UserRecordDataByTimeWhereInput {
 
   """All values greater than or equal the given value."""
   colorR_gte: Int
+  imagePath: String
+
+  """All values that are not equal to given value."""
+  imagePath_not: String
+
+  """All values that are contained in given list."""
+  imagePath_in: [String!]
+
+  """All values that are not contained in given list."""
+  imagePath_not_in: [String!]
+
+  """All values less than the given value."""
+  imagePath_lt: String
+
+  """All values less than or equal the given value."""
+  imagePath_lte: String
+
+  """All values greater than the given value."""
+  imagePath_gt: String
+
+  """All values greater than or equal the given value."""
+  imagePath_gte: String
+
+  """All values containing the given string."""
+  imagePath_contains: String
+
+  """All values not containing the given string."""
+  imagePath_not_contains: String
+
+  """All values starting with the given string."""
+  imagePath_starts_with: String
+
+  """All values not starting with the given string."""
+  imagePath_not_starts_with: String
+
+  """All values ending with the given string."""
+  imagePath_ends_with: String
+
+  """All values not ending with the given string."""
+  imagePath_not_ends_with: String
   leakage: String
 
   """All values that are not equal to given value."""
@@ -15844,6 +16843,10 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  personalHealthRecord: Boolean
+
+  """All values that are not equal to given value."""
+  personalHealthRecord_not: Boolean
   tutorial: Boolean
 
   """All values that are not equal to given value."""
@@ -16250,6 +17253,7 @@ input UserUpdateInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -16277,6 +17281,7 @@ input UserUpdateManyDataInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
 }
 
@@ -16293,6 +17298,7 @@ input UserUpdateManyMutationInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
 }
 
@@ -16404,6 +17410,7 @@ input UserUpdateWithoutAppServerSyncDataInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
@@ -16430,6 +17437,7 @@ input UserUpdateWithoutCupDataProcFlowDataInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
@@ -16456,6 +17464,7 @@ input UserUpdateWithoutCupDataProcMdatesDataInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -16482,6 +17491,7 @@ input UserUpdateWithoutCupDataQaResponseDataInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -16508,6 +17518,7 @@ input UserUpdateWithoutCupDataUserRemoveDataInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -16534,6 +17545,7 @@ input UserUpdateWithoutEthnicityIdDataInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -16560,6 +17572,7 @@ input UserUpdateWithoutUserCoinHistoryDataInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -16586,6 +17599,7 @@ input UserUpdateWithoutUserCupsDataInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -16612,6 +17626,7 @@ input UserUpdateWithoutUserInterviewDataDataInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -16638,6 +17653,7 @@ input UserUpdateWithoutUserRecordDataByPeriodDataInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -16664,6 +17680,7 @@ input UserUpdateWithoutUserWalletDataInput {
   lastName: String
   macId: String
   password: String
+  personalHealthRecord: Boolean
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -17425,6 +18442,10 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  personalHealthRecord: Boolean
+
+  """All values that are not equal to given value."""
+  personalHealthRecord_not: Boolean
   tutorial: Boolean
 
   """All values that are not equal to given value."""

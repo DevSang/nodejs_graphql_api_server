@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const authMiddleware = require('./middleware/auth');
 var path = require('path');
 const express = require('express');
+const Multer = require('multer');
+const imgUpload = require('./util/gcp');
 
 module.exports = db = new Prisma({
     fragmentReplacements: fragmentReplacements,
@@ -52,6 +54,19 @@ server.express.post(
         next();
     }
 );
+
+const multer = Multer({
+    storage: Multer.MemoryStorage,
+    fileSize: 5 * 1024 * 1024
+  });
+
+server.express.post('/api/image-upload', multer.single('image'), imgUpload.uploadToGcs, function(request, response, next) {
+const data = request.body;
+if (request.file && request.file.cloudStoragePublicUrl) {
+    data.imageUrl = request.file.cloudStoragePublicUrl;
+}
+response.send(data);
+})
 
 server.start(() => {
     console.log(`>> Server is running on http://localhost:4000`);
