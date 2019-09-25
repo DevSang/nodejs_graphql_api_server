@@ -8,8 +8,9 @@ const gcs = new Storage({
 const bucketName = 'loon_img'
 const bucket = gcs.bucket(bucketName);
 
-const ImgDelete = (deleteFile) => {
-  console.log(`imgDelete ${deleteFile}`)
+const ImgDelete = (imgPath) => {
+  console.log(`imgDelete ${imgPath}`)
+  const deleteFile = imgPath.replace('https://storage.googleapis.com/loon_img/', '')
   const df = bucket.file(deleteFile);
   df.delete()
   .then(data => {
