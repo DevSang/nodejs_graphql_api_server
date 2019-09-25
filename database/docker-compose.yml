@@ -13,12 +13,12 @@ services:
         databases:
           default:
             connector: postgres
-            host: host.docker.internal
-            database: loon_dev
+            host: 10.148.80.7
+            database: loon_prod
             schema: public
             user: loon
             password: loonlab505
-            ssl: false
+            ssl: true
             rawAccess: true
             port: '5432'
             migrations: false
