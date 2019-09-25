@@ -44,7 +44,11 @@ server.express.get('/api/usermgmt', function(req, res) {
     res.render('usermgmt.ejs');
 });
 
-
+const multer = Multer({
+    storage: Multer.MemoryStorage,
+    fileSize: 5 * 1024 * 1024
+  });
+  
 server.express.post('/api/upload/image', multer.single('image'), imgUpload.uploadToGcs, function(request, response, next) {
     const data = request.body;
     if (request.file && request.file.cloudStoragePublicUrl) {
@@ -75,10 +79,6 @@ server.express.post(
     }
 );
 
-const multer = Multer({
-    storage: Multer.MemoryStorage,
-    fileSize: 5 * 1024 * 1024
-  });
 
 
 server.start(() => {
