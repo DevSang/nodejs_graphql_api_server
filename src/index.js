@@ -6,7 +6,8 @@ const authMiddleware = require('./middleware/auth');
 var path = require('path');
 const express = require('express');
 const Multer = require('multer');
-const imgUpload = require('./util/gcp');
+const imgUpload = require('./util/ImgUpload');
+const ImgDelete = require('./util/ImgDelete');
 
 module.exports = db = new Prisma({
     fragmentReplacements: fragmentReplacements,
@@ -60,13 +61,24 @@ const multer = Multer({
     fileSize: 5 * 1024 * 1024
   });
 
-server.express.post('/api/image-upload', multer.single('image'), imgUpload.uploadToGcs, function(request, response, next) {
+server.express.post('/api/update/image', multer.single('image'), imgUpload.uploadToGcs, function(request, response, next) {
 const data = request.body;
 if (request.file && request.file.cloudStoragePublicUrl) {
     data.imageUrl = request.file.cloudStoragePublicUrl;
 }
 response.send(data);
 })
+
+server.post('/api/delete/image', function (req, res, next) {
+    try {
+        ImgDelete(req.body.path);
+        return res.status(200).send();
+    } catch(err) {
+        console.log(err)
+        return res.status(401).send(err);
+    }
+});
+
 
 server.start(() => {
     console.log(`>> Server is running on http://localhost:4000`);
