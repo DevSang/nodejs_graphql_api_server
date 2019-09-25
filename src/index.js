@@ -61,7 +61,7 @@ const multer = Multer({
     fileSize: 5 * 1024 * 1024
   });
 
-server.express.post('/api/update/image', multer.single('image'), imgUpload.uploadToGcs, function(request, response, next) {
+server.post('/api/update/image', multer.single('image'), imgUpload.uploadToGcs, function(request, response, next) {
 const data = request.body;
 if (request.file && request.file.cloudStoragePublicUrl) {
     data.imageUrl = request.file.cloudStoragePublicUrl;
