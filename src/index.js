@@ -44,6 +44,25 @@ server.express.get('/api/usermgmt', function(req, res) {
     res.render('usermgmt.ejs');
 });
 
+
+server.express.post('/api/upload/image', multer.single('image'), imgUpload.uploadToGcs, function(request, response, next) {
+    const data = request.body;
+    if (request.file && request.file.cloudStoragePublicUrl) {
+        data.imageUrl = request.file.cloudStoragePublicUrl;
+    }
+    response.send(data);
+})
+
+server.post('/api/delete/image', function (req, res, next) {
+    try {
+        ImgDelete(req.body.path);
+        return res.status(200).send();
+    } catch(err) {
+        console.log(err)
+        return res.status(401).send(err);
+    }
+});
+
 server.express.post(
     server.options.endpoint,
     authMiddleware,
@@ -60,24 +79,6 @@ const multer = Multer({
     storage: Multer.MemoryStorage,
     fileSize: 5 * 1024 * 1024
   });
-
-server.post('/api/update/image', multer.single('image'), imgUpload.uploadToGcs, function(request, response, next) {
-const data = request.body;
-if (request.file && request.file.cloudStoragePublicUrl) {
-    data.imageUrl = request.file.cloudStoragePublicUrl;
-}
-response.send(data);
-})
-
-server.post('/api/delete/image', function (req, res, next) {
-    try {
-        ImgDelete(req.body.path);
-        return res.status(200).send();
-    } catch(err) {
-        console.log(err)
-        return res.status(401).send(err);
-    }
-});
 
 
 server.start(() => {
