@@ -19,6 +19,16 @@ ImgUpload.uploadToGcs = (req, res, next) => {
   if(!req.file) return next();
   // Can optionally add a path to the gcsname below by concatenating it before the filename
   const gcsname = req.body.name;
+  const deleteFile = req.body.deleteFile;
+
+  if(deleteFile) {
+    const df = bucket.file(deleteFile);
+    df.delete()
+    .then(data => {
+        console.log(`delete file ${deleteFile}`)
+    })
+    .catch(err => console.log(err))
+  }
   const file = bucket.file(gcsname);
 
   const stream = file.createWriteStream({
