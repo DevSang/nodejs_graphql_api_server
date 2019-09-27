@@ -54,6 +54,7 @@ const resolvers = {
         deleteUserCoinRewardsFee: forwardTo('db'),
         createUserRecordDataByTime: forwardTo('db'),
         createUserRecordCameraDataByTime: forwardTo('db'),
+        upsertUserRecordCameraDataByTime: forwardTo('db'),
         updateUserRecordCameraDataByTime: forwardTo('db'),
         deleteUserRecordCameraDataByTime: forwardTo('db'),
         createUserRecordDataByDay: forwardTo('db'),
