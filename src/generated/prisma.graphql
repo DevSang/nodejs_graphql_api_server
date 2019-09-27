@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue Sep 24 2019 10:07:43 GMT+0900 (GMT+09:00)
+# timestamp: Fri Sep 27 2019 15:16:34 GMT+0900 (GMT+09:00)
 
 type AdditionalInfo {
   id: Int!
@@ -654,6 +654,10 @@ type AggregateUserCoinHistory {
   count: Int!
 }
 
+type AggregateUserCoinRewardsFee {
+  count: Int!
+}
+
 type AggregateUserCup {
   count: Int!
 }
@@ -663,6 +667,10 @@ type AggregateUserInterviewDatum {
 }
 
 type AggregateUserInterviewQuestion {
+  count: Int!
+}
+
+type AggregateUserRecordCameraDataByTime {
   count: Int!
 }
 
@@ -12252,9 +12260,11 @@ type Mutation {
   createPlatformComp(data: PlatformCompCreateInput!): PlatformComp!
   createUser(data: UserCreateInput!): User!
   createUserCoinHistory(data: UserCoinHistoryCreateInput!): UserCoinHistory!
+  createUserCoinRewardsFee(data: UserCoinRewardsFeeCreateInput!): UserCoinRewardsFee!
   createUserCup(data: UserCupCreateInput!): UserCup!
   createUserInterviewDatum(data: UserInterviewDatumCreateInput!): UserInterviewDatum!
   createUserInterviewQuestion(data: UserInterviewQuestionCreateInput!): UserInterviewQuestion!
+  createUserRecordCameraDataByTime(data: UserRecordCameraDataByTimeCreateInput!): UserRecordCameraDataByTime!
   createUserRecordDataByDay(data: UserRecordDataByDayCreateInput!): UserRecordDataByDay!
   createUserRecordDataByPeriod(data: UserRecordDataByPeriodCreateInput!): UserRecordDataByPeriod!
   createUserRecordDataByTime(data: UserRecordDataByTimeCreateInput!): UserRecordDataByTime!
@@ -12292,9 +12302,11 @@ type Mutation {
   updatePlatformComp(data: PlatformCompUpdateInput!, where: PlatformCompWhereUniqueInput!): PlatformComp
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateUserCoinHistory(data: UserCoinHistoryUpdateInput!, where: UserCoinHistoryWhereUniqueInput!): UserCoinHistory
+  updateUserCoinRewardsFee(data: UserCoinRewardsFeeUpdateInput!, where: UserCoinRewardsFeeWhereUniqueInput!): UserCoinRewardsFee
   updateUserCup(data: UserCupUpdateInput!, where: UserCupWhereUniqueInput!): UserCup
   updateUserInterviewDatum(data: UserInterviewDatumUpdateInput!, where: UserInterviewDatumWhereUniqueInput!): UserInterviewDatum
   updateUserInterviewQuestion(data: UserInterviewQuestionUpdateInput!, where: UserInterviewQuestionWhereUniqueInput!): UserInterviewQuestion
+  updateUserRecordCameraDataByTime(data: UserRecordCameraDataByTimeUpdateInput!, where: UserRecordCameraDataByTimeWhereUniqueInput!): UserRecordCameraDataByTime
   updateUserRecordDataByDay(data: UserRecordDataByDayUpdateInput!, where: UserRecordDataByDayWhereUniqueInput!): UserRecordDataByDay
   updateUserRecordDataByPeriod(data: UserRecordDataByPeriodUpdateInput!, where: UserRecordDataByPeriodWhereUniqueInput!): UserRecordDataByPeriod
   updateUserRecordDataByTime(data: UserRecordDataByTimeUpdateInput!, where: UserRecordDataByTimeWhereUniqueInput!): UserRecordDataByTime
@@ -12333,9 +12345,11 @@ type Mutation {
   deletePlatformComp(where: PlatformCompWhereUniqueInput!): PlatformComp
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUserCoinHistory(where: UserCoinHistoryWhereUniqueInput!): UserCoinHistory
+  deleteUserCoinRewardsFee(where: UserCoinRewardsFeeWhereUniqueInput!): UserCoinRewardsFee
   deleteUserCup(where: UserCupWhereUniqueInput!): UserCup
   deleteUserInterviewDatum(where: UserInterviewDatumWhereUniqueInput!): UserInterviewDatum
   deleteUserInterviewQuestion(where: UserInterviewQuestionWhereUniqueInput!): UserInterviewQuestion
+  deleteUserRecordCameraDataByTime(where: UserRecordCameraDataByTimeWhereUniqueInput!): UserRecordCameraDataByTime
   deleteUserRecordDataByDay(where: UserRecordDataByDayWhereUniqueInput!): UserRecordDataByDay
   deleteUserRecordDataByPeriod(where: UserRecordDataByPeriodWhereUniqueInput!): UserRecordDataByPeriod
   deleteUserRecordDataByTime(where: UserRecordDataByTimeWhereUniqueInput!): UserRecordDataByTime
@@ -12373,9 +12387,11 @@ type Mutation {
   upsertPlatformComp(where: PlatformCompWhereUniqueInput!, create: PlatformCompCreateInput!, update: PlatformCompUpdateInput!): PlatformComp!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertUserCoinHistory(where: UserCoinHistoryWhereUniqueInput!, create: UserCoinHistoryCreateInput!, update: UserCoinHistoryUpdateInput!): UserCoinHistory!
+  upsertUserCoinRewardsFee(where: UserCoinRewardsFeeWhereUniqueInput!, create: UserCoinRewardsFeeCreateInput!, update: UserCoinRewardsFeeUpdateInput!): UserCoinRewardsFee!
   upsertUserCup(where: UserCupWhereUniqueInput!, create: UserCupCreateInput!, update: UserCupUpdateInput!): UserCup!
   upsertUserInterviewDatum(where: UserInterviewDatumWhereUniqueInput!, create: UserInterviewDatumCreateInput!, update: UserInterviewDatumUpdateInput!): UserInterviewDatum!
   upsertUserInterviewQuestion(where: UserInterviewQuestionWhereUniqueInput!, create: UserInterviewQuestionCreateInput!, update: UserInterviewQuestionUpdateInput!): UserInterviewQuestion!
+  upsertUserRecordCameraDataByTime(where: UserRecordCameraDataByTimeWhereUniqueInput!, create: UserRecordCameraDataByTimeCreateInput!, update: UserRecordCameraDataByTimeUpdateInput!): UserRecordCameraDataByTime!
   upsertUserRecordDataByDay(where: UserRecordDataByDayWhereUniqueInput!, create: UserRecordDataByDayCreateInput!, update: UserRecordDataByDayUpdateInput!): UserRecordDataByDay!
   upsertUserRecordDataByPeriod(where: UserRecordDataByPeriodWhereUniqueInput!, create: UserRecordDataByPeriodCreateInput!, update: UserRecordDataByPeriodUpdateInput!): UserRecordDataByPeriod!
   upsertUserRecordDataByTime(where: UserRecordDataByTimeWhereUniqueInput!, create: UserRecordDataByTimeCreateInput!, update: UserRecordDataByTimeUpdateInput!): UserRecordDataByTime!
@@ -12413,8 +12429,10 @@ type Mutation {
   updateManyPlatformComps(data: PlatformCompUpdateManyMutationInput!, where: PlatformCompWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyUserCoinHistories(data: UserCoinHistoryUpdateManyMutationInput!, where: UserCoinHistoryWhereInput): BatchPayload!
+  updateManyUserCoinRewardsFees(data: UserCoinRewardsFeeUpdateManyMutationInput!, where: UserCoinRewardsFeeWhereInput): BatchPayload!
   updateManyUserInterviewData(data: UserInterviewDatumUpdateManyMutationInput!, where: UserInterviewDatumWhereInput): BatchPayload!
   updateManyUserInterviewQuestions(data: UserInterviewQuestionUpdateManyMutationInput!, where: UserInterviewQuestionWhereInput): BatchPayload!
+  updateManyUserRecordCameraDataByTimes(data: UserRecordCameraDataByTimeUpdateManyMutationInput!, where: UserRecordCameraDataByTimeWhereInput): BatchPayload!
   updateManyUserRecordDataByDays(data: UserRecordDataByDayUpdateManyMutationInput!, where: UserRecordDataByDayWhereInput): BatchPayload!
   updateManyUserRecordDataByPeriods(data: UserRecordDataByPeriodUpdateManyMutationInput!, where: UserRecordDataByPeriodWhereInput): BatchPayload!
   updateManyUserRecordDataByTimes(data: UserRecordDataByTimeUpdateManyMutationInput!, where: UserRecordDataByTimeWhereInput): BatchPayload!
@@ -12453,9 +12471,11 @@ type Mutation {
   deleteManyPlatformComps(where: PlatformCompWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyUserCoinHistories(where: UserCoinHistoryWhereInput): BatchPayload!
+  deleteManyUserCoinRewardsFees(where: UserCoinRewardsFeeWhereInput): BatchPayload!
   deleteManyUserCups(where: UserCupWhereInput): BatchPayload!
   deleteManyUserInterviewData(where: UserInterviewDatumWhereInput): BatchPayload!
   deleteManyUserInterviewQuestions(where: UserInterviewQuestionWhereInput): BatchPayload!
+  deleteManyUserRecordCameraDataByTimes(where: UserRecordCameraDataByTimeWhereInput): BatchPayload!
   deleteManyUserRecordDataByDays(where: UserRecordDataByDayWhereInput): BatchPayload!
   deleteManyUserRecordDataByPeriods(where: UserRecordDataByPeriodWhereInput): BatchPayload!
   deleteManyUserRecordDataByTimes(where: UserRecordDataByTimeWhereInput): BatchPayload!
@@ -12747,9 +12767,11 @@ type Query {
   platformComps(where: PlatformCompWhereInput, orderBy: PlatformCompOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlatformComp]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   userCoinHistories(where: UserCoinHistoryWhereInput, orderBy: UserCoinHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCoinHistory]!
+  userCoinRewardsFees(where: UserCoinRewardsFeeWhereInput, orderBy: UserCoinRewardsFeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCoinRewardsFee]!
   userCups(where: UserCupWhereInput, orderBy: UserCupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCup]!
   userInterviewData(where: UserInterviewDatumWhereInput, orderBy: UserInterviewDatumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserInterviewDatum]!
   userInterviewQuestions(where: UserInterviewQuestionWhereInput, orderBy: UserInterviewQuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserInterviewQuestion]!
+  userRecordCameraDataByTimes(where: UserRecordCameraDataByTimeWhereInput, orderBy: UserRecordCameraDataByTimeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRecordCameraDataByTime]!
   userRecordDataByDays(where: UserRecordDataByDayWhereInput, orderBy: UserRecordDataByDayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRecordDataByDay]!
   userRecordDataByPeriods(where: UserRecordDataByPeriodWhereInput, orderBy: UserRecordDataByPeriodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRecordDataByPeriod]!
   userRecordDataByTimes(where: UserRecordDataByTimeWhereInput, orderBy: UserRecordDataByTimeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRecordDataByTime]!
@@ -12788,9 +12810,11 @@ type Query {
   platformComp(where: PlatformCompWhereUniqueInput!): PlatformComp
   user(where: UserWhereUniqueInput!): User
   userCoinHistory(where: UserCoinHistoryWhereUniqueInput!): UserCoinHistory
+  userCoinRewardsFee(where: UserCoinRewardsFeeWhereUniqueInput!): UserCoinRewardsFee
   userCup(where: UserCupWhereUniqueInput!): UserCup
   userInterviewDatum(where: UserInterviewDatumWhereUniqueInput!): UserInterviewDatum
   userInterviewQuestion(where: UserInterviewQuestionWhereUniqueInput!): UserInterviewQuestion
+  userRecordCameraDataByTime(where: UserRecordCameraDataByTimeWhereUniqueInput!): UserRecordCameraDataByTime
   userRecordDataByDay(where: UserRecordDataByDayWhereUniqueInput!): UserRecordDataByDay
   userRecordDataByPeriod(where: UserRecordDataByPeriodWhereUniqueInput!): UserRecordDataByPeriod
   userRecordDataByTime(where: UserRecordDataByTimeWhereUniqueInput!): UserRecordDataByTime
@@ -12829,9 +12853,11 @@ type Query {
   platformCompsConnection(where: PlatformCompWhereInput, orderBy: PlatformCompOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlatformCompConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   userCoinHistoriesConnection(where: UserCoinHistoryWhereInput, orderBy: UserCoinHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserCoinHistoryConnection!
+  userCoinRewardsFeesConnection(where: UserCoinRewardsFeeWhereInput, orderBy: UserCoinRewardsFeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserCoinRewardsFeeConnection!
   userCupsConnection(where: UserCupWhereInput, orderBy: UserCupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserCupConnection!
   userInterviewDataConnection(where: UserInterviewDatumWhereInput, orderBy: UserInterviewDatumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserInterviewDatumConnection!
   userInterviewQuestionsConnection(where: UserInterviewQuestionWhereInput, orderBy: UserInterviewQuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserInterviewQuestionConnection!
+  userRecordCameraDataByTimesConnection(where: UserRecordCameraDataByTimeWhereInput, orderBy: UserRecordCameraDataByTimeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserRecordCameraDataByTimeConnection!
   userRecordDataByDaysConnection(where: UserRecordDataByDayWhereInput, orderBy: UserRecordDataByDayOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserRecordDataByDayConnection!
   userRecordDataByPeriodsConnection(where: UserRecordDataByPeriodWhereInput, orderBy: UserRecordDataByPeriodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserRecordDataByPeriodConnection!
   userRecordDataByTimesConnection(where: UserRecordDataByTimeWhereInput, orderBy: UserRecordDataByTimeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserRecordDataByTimeConnection!
@@ -12873,9 +12899,11 @@ type Subscription {
   platformComp(where: PlatformCompSubscriptionWhereInput): PlatformCompSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   userCoinHistory(where: UserCoinHistorySubscriptionWhereInput): UserCoinHistorySubscriptionPayload
+  userCoinRewardsFee(where: UserCoinRewardsFeeSubscriptionWhereInput): UserCoinRewardsFeeSubscriptionPayload
   userCup(where: UserCupSubscriptionWhereInput): UserCupSubscriptionPayload
   userInterviewDatum(where: UserInterviewDatumSubscriptionWhereInput): UserInterviewDatumSubscriptionPayload
   userInterviewQuestion(where: UserInterviewQuestionSubscriptionWhereInput): UserInterviewQuestionSubscriptionPayload
+  userRecordCameraDataByTime(where: UserRecordCameraDataByTimeSubscriptionWhereInput): UserRecordCameraDataByTimeSubscriptionPayload
   userRecordDataByDay(where: UserRecordDataByDaySubscriptionWhereInput): UserRecordDataByDaySubscriptionPayload
   userRecordDataByPeriod(where: UserRecordDataByPeriodSubscriptionWhereInput): UserRecordDataByPeriodSubscriptionPayload
   userRecordDataByTime(where: UserRecordDataByTimeSubscriptionWhereInput): UserRecordDataByTimeSubscriptionPayload
@@ -13582,6 +13610,302 @@ input UserCoinHistoryWhereInput {
 }
 
 input UserCoinHistoryWhereUniqueInput {
+  id: Int
+}
+
+type UserCoinRewardsFee {
+  id: Int!
+  amount: Int
+  category: String
+  contents: String
+  createTime: DateTime
+  updateTime: DateTime
+}
+
+"""A connection to a list of items."""
+type UserCoinRewardsFeeConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserCoinRewardsFeeEdge]!
+  aggregate: AggregateUserCoinRewardsFee!
+}
+
+input UserCoinRewardsFeeCreateInput {
+  amount: Int
+  category: String
+  contents: String
+  createTime: DateTime
+  updateTime: DateTime
+}
+
+"""An edge in a connection."""
+type UserCoinRewardsFeeEdge {
+  """The item at the end of the edge."""
+  node: UserCoinRewardsFee!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserCoinRewardsFeeOrderByInput {
+  id_ASC
+  id_DESC
+  amount_ASC
+  amount_DESC
+  category_ASC
+  category_DESC
+  contents_ASC
+  contents_DESC
+  createTime_ASC
+  createTime_DESC
+  updateTime_ASC
+  updateTime_DESC
+}
+
+type UserCoinRewardsFeePreviousValues {
+  id: Int!
+  amount: Int
+  category: String
+  contents: String
+  createTime: DateTime
+  updateTime: DateTime
+}
+
+type UserCoinRewardsFeeSubscriptionPayload {
+  mutation: MutationType!
+  node: UserCoinRewardsFee
+  updatedFields: [String!]
+  previousValues: UserCoinRewardsFeePreviousValues
+}
+
+input UserCoinRewardsFeeSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserCoinRewardsFeeSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserCoinRewardsFeeSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserCoinRewardsFeeSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserCoinRewardsFeeWhereInput
+}
+
+input UserCoinRewardsFeeUpdateInput {
+  amount: Int
+  category: String
+  contents: String
+  createTime: DateTime
+  updateTime: DateTime
+}
+
+input UserCoinRewardsFeeUpdateManyMutationInput {
+  amount: Int
+  category: String
+  contents: String
+  createTime: DateTime
+  updateTime: DateTime
+}
+
+input UserCoinRewardsFeeWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserCoinRewardsFeeWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserCoinRewardsFeeWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserCoinRewardsFeeWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  amount: Int
+
+  """All values that are not equal to given value."""
+  amount_not: Int
+
+  """All values that are contained in given list."""
+  amount_in: [Int!]
+
+  """All values that are not contained in given list."""
+  amount_not_in: [Int!]
+
+  """All values less than the given value."""
+  amount_lt: Int
+
+  """All values less than or equal the given value."""
+  amount_lte: Int
+
+  """All values greater than the given value."""
+  amount_gt: Int
+
+  """All values greater than or equal the given value."""
+  amount_gte: Int
+  category: String
+
+  """All values that are not equal to given value."""
+  category_not: String
+
+  """All values that are contained in given list."""
+  category_in: [String!]
+
+  """All values that are not contained in given list."""
+  category_not_in: [String!]
+
+  """All values less than the given value."""
+  category_lt: String
+
+  """All values less than or equal the given value."""
+  category_lte: String
+
+  """All values greater than the given value."""
+  category_gt: String
+
+  """All values greater than or equal the given value."""
+  category_gte: String
+
+  """All values containing the given string."""
+  category_contains: String
+
+  """All values not containing the given string."""
+  category_not_contains: String
+
+  """All values starting with the given string."""
+  category_starts_with: String
+
+  """All values not starting with the given string."""
+  category_not_starts_with: String
+
+  """All values ending with the given string."""
+  category_ends_with: String
+
+  """All values not ending with the given string."""
+  category_not_ends_with: String
+  contents: String
+
+  """All values that are not equal to given value."""
+  contents_not: String
+
+  """All values that are contained in given list."""
+  contents_in: [String!]
+
+  """All values that are not contained in given list."""
+  contents_not_in: [String!]
+
+  """All values less than the given value."""
+  contents_lt: String
+
+  """All values less than or equal the given value."""
+  contents_lte: String
+
+  """All values greater than the given value."""
+  contents_gt: String
+
+  """All values greater than or equal the given value."""
+  contents_gte: String
+
+  """All values containing the given string."""
+  contents_contains: String
+
+  """All values not containing the given string."""
+  contents_not_contains: String
+
+  """All values starting with the given string."""
+  contents_starts_with: String
+
+  """All values not starting with the given string."""
+  contents_not_starts_with: String
+
+  """All values ending with the given string."""
+  contents_ends_with: String
+
+  """All values not ending with the given string."""
+  contents_not_ends_with: String
+  createTime: DateTime
+
+  """All values that are not equal to given value."""
+  createTime_not: DateTime
+
+  """All values that are contained in given list."""
+  createTime_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createTime_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createTime_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createTime_lte: DateTime
+
+  """All values greater than the given value."""
+  createTime_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createTime_gte: DateTime
+  updateTime: DateTime
+
+  """All values that are not equal to given value."""
+  updateTime_not: DateTime
+
+  """All values that are contained in given list."""
+  updateTime_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updateTime_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updateTime_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updateTime_lte: DateTime
+
+  """All values greater than the given value."""
+  updateTime_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updateTime_gte: DateTime
+}
+
+input UserCoinRewardsFeeWhereUniqueInput {
   id: Int
 }
 
@@ -15038,6 +15362,470 @@ type UserPreviousValues {
   tutorial: Boolean
 }
 
+type UserRecordCameraDataByTime {
+  id: Int!
+  height: Float
+  locationX: Float
+  locationY: Float
+  size: Float
+  userRecordDataByTimeId: UserRecordDataByTime
+  width: Float
+}
+
+"""A connection to a list of items."""
+type UserRecordCameraDataByTimeConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserRecordCameraDataByTimeEdge]!
+  aggregate: AggregateUserRecordCameraDataByTime!
+}
+
+input UserRecordCameraDataByTimeCreateInput {
+  height: Float
+  locationX: Float
+  locationY: Float
+  size: Float
+  width: Float
+  userRecordDataByTimeId: UserRecordDataByTimeCreateOneWithoutUserRecordCameraDataByTimeInput
+}
+
+input UserRecordCameraDataByTimeCreateManyWithoutUserRecordDataByTimeIdInput {
+  create: [UserRecordCameraDataByTimeCreateWithoutUserRecordDataByTimeIdInput!]
+  connect: [UserRecordCameraDataByTimeWhereUniqueInput!]
+}
+
+input UserRecordCameraDataByTimeCreateWithoutUserRecordDataByTimeIdInput {
+  height: Float
+  locationX: Float
+  locationY: Float
+  size: Float
+  width: Float
+}
+
+"""An edge in a connection."""
+type UserRecordCameraDataByTimeEdge {
+  """The item at the end of the edge."""
+  node: UserRecordCameraDataByTime!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserRecordCameraDataByTimeOrderByInput {
+  id_ASC
+  id_DESC
+  height_ASC
+  height_DESC
+  locationX_ASC
+  locationX_DESC
+  locationY_ASC
+  locationY_DESC
+  size_ASC
+  size_DESC
+  width_ASC
+  width_DESC
+}
+
+type UserRecordCameraDataByTimePreviousValues {
+  id: Int!
+  height: Float
+  locationX: Float
+  locationY: Float
+  size: Float
+  width: Float
+}
+
+input UserRecordCameraDataByTimeScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserRecordCameraDataByTimeScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserRecordCameraDataByTimeScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserRecordCameraDataByTimeScalarWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  height: Float
+
+  """All values that are not equal to given value."""
+  height_not: Float
+
+  """All values that are contained in given list."""
+  height_in: [Float!]
+
+  """All values that are not contained in given list."""
+  height_not_in: [Float!]
+
+  """All values less than the given value."""
+  height_lt: Float
+
+  """All values less than or equal the given value."""
+  height_lte: Float
+
+  """All values greater than the given value."""
+  height_gt: Float
+
+  """All values greater than or equal the given value."""
+  height_gte: Float
+  locationX: Float
+
+  """All values that are not equal to given value."""
+  locationX_not: Float
+
+  """All values that are contained in given list."""
+  locationX_in: [Float!]
+
+  """All values that are not contained in given list."""
+  locationX_not_in: [Float!]
+
+  """All values less than the given value."""
+  locationX_lt: Float
+
+  """All values less than or equal the given value."""
+  locationX_lte: Float
+
+  """All values greater than the given value."""
+  locationX_gt: Float
+
+  """All values greater than or equal the given value."""
+  locationX_gte: Float
+  locationY: Float
+
+  """All values that are not equal to given value."""
+  locationY_not: Float
+
+  """All values that are contained in given list."""
+  locationY_in: [Float!]
+
+  """All values that are not contained in given list."""
+  locationY_not_in: [Float!]
+
+  """All values less than the given value."""
+  locationY_lt: Float
+
+  """All values less than or equal the given value."""
+  locationY_lte: Float
+
+  """All values greater than the given value."""
+  locationY_gt: Float
+
+  """All values greater than or equal the given value."""
+  locationY_gte: Float
+  size: Float
+
+  """All values that are not equal to given value."""
+  size_not: Float
+
+  """All values that are contained in given list."""
+  size_in: [Float!]
+
+  """All values that are not contained in given list."""
+  size_not_in: [Float!]
+
+  """All values less than the given value."""
+  size_lt: Float
+
+  """All values less than or equal the given value."""
+  size_lte: Float
+
+  """All values greater than the given value."""
+  size_gt: Float
+
+  """All values greater than or equal the given value."""
+  size_gte: Float
+  width: Float
+
+  """All values that are not equal to given value."""
+  width_not: Float
+
+  """All values that are contained in given list."""
+  width_in: [Float!]
+
+  """All values that are not contained in given list."""
+  width_not_in: [Float!]
+
+  """All values less than the given value."""
+  width_lt: Float
+
+  """All values less than or equal the given value."""
+  width_lte: Float
+
+  """All values greater than the given value."""
+  width_gt: Float
+
+  """All values greater than or equal the given value."""
+  width_gte: Float
+}
+
+type UserRecordCameraDataByTimeSubscriptionPayload {
+  mutation: MutationType!
+  node: UserRecordCameraDataByTime
+  updatedFields: [String!]
+  previousValues: UserRecordCameraDataByTimePreviousValues
+}
+
+input UserRecordCameraDataByTimeSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserRecordCameraDataByTimeSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserRecordCameraDataByTimeSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserRecordCameraDataByTimeSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserRecordCameraDataByTimeWhereInput
+}
+
+input UserRecordCameraDataByTimeUpdateInput {
+  height: Float
+  locationX: Float
+  locationY: Float
+  size: Float
+  width: Float
+  userRecordDataByTimeId: UserRecordDataByTimeUpdateOneWithoutUserRecordCameraDataByTimeInput
+}
+
+input UserRecordCameraDataByTimeUpdateManyDataInput {
+  height: Float
+  locationX: Float
+  locationY: Float
+  size: Float
+  width: Float
+}
+
+input UserRecordCameraDataByTimeUpdateManyMutationInput {
+  height: Float
+  locationX: Float
+  locationY: Float
+  size: Float
+  width: Float
+}
+
+input UserRecordCameraDataByTimeUpdateManyWithoutUserRecordDataByTimeIdInput {
+  create: [UserRecordCameraDataByTimeCreateWithoutUserRecordDataByTimeIdInput!]
+  connect: [UserRecordCameraDataByTimeWhereUniqueInput!]
+  set: [UserRecordCameraDataByTimeWhereUniqueInput!]
+  disconnect: [UserRecordCameraDataByTimeWhereUniqueInput!]
+  delete: [UserRecordCameraDataByTimeWhereUniqueInput!]
+  update: [UserRecordCameraDataByTimeUpdateWithWhereUniqueWithoutUserRecordDataByTimeIdInput!]
+  updateMany: [UserRecordCameraDataByTimeUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserRecordCameraDataByTimeScalarWhereInput!]
+  upsert: [UserRecordCameraDataByTimeUpsertWithWhereUniqueWithoutUserRecordDataByTimeIdInput!]
+}
+
+input UserRecordCameraDataByTimeUpdateManyWithWhereNestedInput {
+  where: UserRecordCameraDataByTimeScalarWhereInput!
+  data: UserRecordCameraDataByTimeUpdateManyDataInput!
+}
+
+input UserRecordCameraDataByTimeUpdateWithoutUserRecordDataByTimeIdDataInput {
+  height: Float
+  locationX: Float
+  locationY: Float
+  size: Float
+  width: Float
+}
+
+input UserRecordCameraDataByTimeUpdateWithWhereUniqueWithoutUserRecordDataByTimeIdInput {
+  where: UserRecordCameraDataByTimeWhereUniqueInput!
+  data: UserRecordCameraDataByTimeUpdateWithoutUserRecordDataByTimeIdDataInput!
+}
+
+input UserRecordCameraDataByTimeUpsertWithWhereUniqueWithoutUserRecordDataByTimeIdInput {
+  where: UserRecordCameraDataByTimeWhereUniqueInput!
+  update: UserRecordCameraDataByTimeUpdateWithoutUserRecordDataByTimeIdDataInput!
+  create: UserRecordCameraDataByTimeCreateWithoutUserRecordDataByTimeIdInput!
+}
+
+input UserRecordCameraDataByTimeWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserRecordCameraDataByTimeWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserRecordCameraDataByTimeWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserRecordCameraDataByTimeWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  height: Float
+
+  """All values that are not equal to given value."""
+  height_not: Float
+
+  """All values that are contained in given list."""
+  height_in: [Float!]
+
+  """All values that are not contained in given list."""
+  height_not_in: [Float!]
+
+  """All values less than the given value."""
+  height_lt: Float
+
+  """All values less than or equal the given value."""
+  height_lte: Float
+
+  """All values greater than the given value."""
+  height_gt: Float
+
+  """All values greater than or equal the given value."""
+  height_gte: Float
+  locationX: Float
+
+  """All values that are not equal to given value."""
+  locationX_not: Float
+
+  """All values that are contained in given list."""
+  locationX_in: [Float!]
+
+  """All values that are not contained in given list."""
+  locationX_not_in: [Float!]
+
+  """All values less than the given value."""
+  locationX_lt: Float
+
+  """All values less than or equal the given value."""
+  locationX_lte: Float
+
+  """All values greater than the given value."""
+  locationX_gt: Float
+
+  """All values greater than or equal the given value."""
+  locationX_gte: Float
+  locationY: Float
+
+  """All values that are not equal to given value."""
+  locationY_not: Float
+
+  """All values that are contained in given list."""
+  locationY_in: [Float!]
+
+  """All values that are not contained in given list."""
+  locationY_not_in: [Float!]
+
+  """All values less than the given value."""
+  locationY_lt: Float
+
+  """All values less than or equal the given value."""
+  locationY_lte: Float
+
+  """All values greater than the given value."""
+  locationY_gt: Float
+
+  """All values greater than or equal the given value."""
+  locationY_gte: Float
+  size: Float
+
+  """All values that are not equal to given value."""
+  size_not: Float
+
+  """All values that are contained in given list."""
+  size_in: [Float!]
+
+  """All values that are not contained in given list."""
+  size_not_in: [Float!]
+
+  """All values less than the given value."""
+  size_lt: Float
+
+  """All values less than or equal the given value."""
+  size_lte: Float
+
+  """All values greater than the given value."""
+  size_gt: Float
+
+  """All values greater than or equal the given value."""
+  size_gte: Float
+  width: Float
+
+  """All values that are not equal to given value."""
+  width_not: Float
+
+  """All values that are contained in given list."""
+  width_in: [Float!]
+
+  """All values that are not contained in given list."""
+  width_not_in: [Float!]
+
+  """All values less than the given value."""
+  width_lt: Float
+
+  """All values less than or equal the given value."""
+  width_lte: Float
+
+  """All values greater than the given value."""
+  width_gt: Float
+
+  """All values greater than or equal the given value."""
+  width_gte: Float
+  userRecordDataByTimeId: UserRecordDataByTimeWhereInput
+}
+
+input UserRecordCameraDataByTimeWhereUniqueInput {
+  id: Int
+}
+
 type UserRecordDataByDay {
   id: Int!
   crampsLevel: Int
@@ -15806,6 +16594,7 @@ type UserRecordDataByTime {
   leakage: String
   recordDayRowId: UserRecordDataByDay
   startTime: DateTime
+  userRecordCameraDataByTime(where: UserRecordCameraDataByTimeWhereInput, orderBy: UserRecordCameraDataByTimeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRecordCameraDataByTime!]
   volume: Float
 }
 
@@ -15829,11 +16618,17 @@ input UserRecordDataByTimeCreateInput {
   startTime: DateTime
   volume: Float
   recordDayRowId: UserRecordDataByDayCreateOneWithoutUserRecordDataByTimeInput
+  userRecordCameraDataByTime: UserRecordCameraDataByTimeCreateManyWithoutUserRecordDataByTimeIdInput
 }
 
 input UserRecordDataByTimeCreateManyWithoutRecordDayRowIdInput {
   create: [UserRecordDataByTimeCreateWithoutRecordDayRowIdInput!]
   connect: [UserRecordDataByTimeWhereUniqueInput!]
+}
+
+input UserRecordDataByTimeCreateOneWithoutUserRecordCameraDataByTimeInput {
+  create: UserRecordDataByTimeCreateWithoutUserRecordCameraDataByTimeInput
+  connect: UserRecordDataByTimeWhereUniqueInput
 }
 
 input UserRecordDataByTimeCreateWithoutRecordDayRowIdInput {
@@ -15845,6 +16640,19 @@ input UserRecordDataByTimeCreateWithoutRecordDayRowIdInput {
   leakage: String
   startTime: DateTime
   volume: Float
+  userRecordCameraDataByTime: UserRecordCameraDataByTimeCreateManyWithoutUserRecordDataByTimeIdInput
+}
+
+input UserRecordDataByTimeCreateWithoutUserRecordCameraDataByTimeInput {
+  changeTime: DateTime!
+  colorB: Int
+  colorG: Int
+  colorR: Int
+  imagePath: String
+  leakage: String
+  startTime: DateTime
+  volume: Float
+  recordDayRowId: UserRecordDataByDayCreateOneWithoutUserRecordDataByTimeInput
 }
 
 """An edge in a connection."""
@@ -16181,6 +16989,7 @@ input UserRecordDataByTimeUpdateInput {
   startTime: DateTime
   volume: Float
   recordDayRowId: UserRecordDataByDayUpdateOneWithoutUserRecordDataByTimeInput
+  userRecordCameraDataByTime: UserRecordCameraDataByTimeUpdateManyWithoutUserRecordDataByTimeIdInput
 }
 
 input UserRecordDataByTimeUpdateManyDataInput {
@@ -16222,6 +17031,15 @@ input UserRecordDataByTimeUpdateManyWithWhereNestedInput {
   data: UserRecordDataByTimeUpdateManyDataInput!
 }
 
+input UserRecordDataByTimeUpdateOneWithoutUserRecordCameraDataByTimeInput {
+  create: UserRecordDataByTimeCreateWithoutUserRecordCameraDataByTimeInput
+  connect: UserRecordDataByTimeWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserRecordDataByTimeUpdateWithoutUserRecordCameraDataByTimeDataInput
+  upsert: UserRecordDataByTimeUpsertWithoutUserRecordCameraDataByTimeInput
+}
+
 input UserRecordDataByTimeUpdateWithoutRecordDayRowIdDataInput {
   changeTime: DateTime
   colorB: Int
@@ -16231,11 +17049,29 @@ input UserRecordDataByTimeUpdateWithoutRecordDayRowIdDataInput {
   leakage: String
   startTime: DateTime
   volume: Float
+  userRecordCameraDataByTime: UserRecordCameraDataByTimeUpdateManyWithoutUserRecordDataByTimeIdInput
+}
+
+input UserRecordDataByTimeUpdateWithoutUserRecordCameraDataByTimeDataInput {
+  changeTime: DateTime
+  colorB: Int
+  colorG: Int
+  colorR: Int
+  imagePath: String
+  leakage: String
+  startTime: DateTime
+  volume: Float
+  recordDayRowId: UserRecordDataByDayUpdateOneWithoutUserRecordDataByTimeInput
 }
 
 input UserRecordDataByTimeUpdateWithWhereUniqueWithoutRecordDayRowIdInput {
   where: UserRecordDataByTimeWhereUniqueInput!
   data: UserRecordDataByTimeUpdateWithoutRecordDayRowIdDataInput!
+}
+
+input UserRecordDataByTimeUpsertWithoutUserRecordCameraDataByTimeInput {
+  update: UserRecordDataByTimeUpdateWithoutUserRecordCameraDataByTimeDataInput!
+  create: UserRecordDataByTimeCreateWithoutUserRecordCameraDataByTimeInput!
 }
 
 input UserRecordDataByTimeUpsertWithWhereUniqueWithoutRecordDayRowIdInput {
@@ -16488,6 +17324,9 @@ input UserRecordDataByTimeWhereInput {
   """All values greater than or equal the given value."""
   volume_gte: Float
   recordDayRowId: UserRecordDataByDayWhereInput
+  userRecordCameraDataByTime_every: UserRecordCameraDataByTimeWhereInput
+  userRecordCameraDataByTime_some: UserRecordCameraDataByTimeWhereInput
+  userRecordCameraDataByTime_none: UserRecordCameraDataByTimeWhereInput
 }
 
 input UserRecordDataByTimeWhereUniqueInput {
