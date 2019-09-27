@@ -353,6 +353,15 @@ type UserCoinHistory @pgTable(name: "user_coin_history") {
   walletId: Int @pgColumn(name: "wallet_id")
 }
 
+type UserCoinRewardsFee @pgTable(name: "user_coin_rewards_fee") {
+  id: Int! @unique
+  amount: Int
+  category: String
+  contents: String
+  createTime: DateTime @pgColumn(name: "create_time")
+  updateTime: DateTime @pgColumn(name: "update_time")
+}
+
 type UserCup @linkTable @pgTable(name: "user_cups") {
   id: Int! @pgColumn(name: "row_id") @unique
   serialNumber: Cup @pgColumn(name: "serial_number")
@@ -374,6 +383,16 @@ type UserInterviewQuestion @pgTable(name: "user_interview_questions") {
   answerTypeId: AnswerType! @pgColumn(name: "answer_type_id")
   question: String! @unique
   userInterviewData: [UserInterviewDatum] @pgColumn(name: "user_interview_data")
+}
+
+type UserRecordCameraDataByTime @pgTable(name: "user_record_camera_data_by_time") {
+  id: Int! @unique
+  height: Float
+  locationX: Float @pgColumn(name: "location_x")
+  locationY: Float @pgColumn(name: "location_y")
+  size: Float
+  userRecordDataByTimeId: UserRecordDataByTime @pgColumn(name: "user_record_data_by_time_id")
+  width: Float
 }
 
 type UserRecordDataByDay @pgTable(name: "user_record_data_by_day") {
@@ -404,6 +423,7 @@ type UserRecordDataByTime @pgTable(name: "user_record_data_by_time") {
   leakage: String
   recordDayRowId: UserRecordDataByDay @pgColumn(name: "record_day_row_id")
   startTime: DateTime @pgColumn(name: "start_time")
+  userRecordCameraDataByTime: [UserRecordCameraDataByTime] @pgColumn(name: "user_record_camera_data_by_time")
   volume: Float
 }
 
