@@ -372,10 +372,11 @@ type UserInterviewQuestion @pgTable(name: "user_interview_questions") {
 type UserRecordCameraDataByTime @pgTable(name: "user_record_camera_data_by_time") {
   id: Int! @unique
   height: Float
+  imagePath: String @pgColumn(name: "image_path")
   locationX: Float @pgColumn(name: "location_x")
   locationY: Float @pgColumn(name: "location_y")
   size: Float
-  userRecordDataByTimeId: UserRecordDataByTime @pgColumn(name: "user_record_data_by_time_id")
+  userRecordDataByTime: [UserRecordDataByTime] @pgColumn(name: "user_record_data_by_time")
   width: Float
 }
 
@@ -399,15 +400,14 @@ type UserRecordDataByPeriod @pgTable(name: "user_record_data_by_period") {
 
 type UserRecordDataByTime @pgTable(name: "user_record_data_by_time") {
   id: Int! @pgColumn(name: "row_id") @unique
+  cameraId: UserRecordCameraDataByTime @pgColumn(name: "camera_id")
   changeTime: DateTime! @pgColumn(name: "change_time")
   colorB: Int @pgColumn(name: "color_b")
   colorG: Int @pgColumn(name: "color_g")
   colorR: Int @pgColumn(name: "color_r")
-  imagePath: String @pgColumn(name: "image_path")
   leakage: String
   recordDayRowId: UserRecordDataByDay @pgColumn(name: "record_day_row_id")
   startTime: DateTime @pgColumn(name: "start_time")
-  userRecordCameraDataByTime: [UserRecordCameraDataByTime] @pgColumn(name: "user_record_camera_data_by_time")
   volume: Float
 }
 
