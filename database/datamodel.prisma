@@ -392,7 +392,6 @@ type UserRecordCameraDataByTime @pgTable(name: "user_record_camera_data_by_time"
   locationX: Float @pgColumn(name: "location_x")
   locationY: Float @pgColumn(name: "location_y")
   size: Float
-  userRecordDataByTime: [UserRecordDataByTime] @pgColumn(name: "user_record_data_by_time")
   width: Float
 }
 
@@ -416,7 +415,7 @@ type UserRecordDataByPeriod @pgTable(name: "user_record_data_by_period") {
 
 type UserRecordDataByTime @pgTable(name: "user_record_data_by_time") {
   id: Int! @pgColumn(name: "row_id") @unique
-  cameraId: UserRecordCameraDataByTime @pgColumn(name: "camera_id")
+  cameraId: Int @pgColumn(name: "camera_id")
   changeTime: DateTime! @pgColumn(name: "change_time")
   colorB: Int @pgColumn(name: "color_b")
   colorG: Int @pgColumn(name: "color_g")
