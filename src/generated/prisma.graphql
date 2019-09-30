@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Fri Sep 27 2019 16:05:59 GMT+0900 (GMT+09:00)
+# timestamp: Mon Sep 30 2019 14:43:28 GMT+0900 (GMT+09:00)
 
 type AdditionalInfo {
   id: Int!
@@ -15369,7 +15369,6 @@ type UserRecordCameraDataByTime {
   locationX: Float
   locationY: Float
   size: Float
-  userRecordDataByTime(where: UserRecordDataByTimeWhereInput, orderBy: UserRecordDataByTimeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRecordDataByTime!]
   width: Float
 }
 
@@ -15384,21 +15383,6 @@ type UserRecordCameraDataByTimeConnection {
 }
 
 input UserRecordCameraDataByTimeCreateInput {
-  height: Float
-  imagePath: String
-  locationX: Float
-  locationY: Float
-  size: Float
-  width: Float
-  userRecordDataByTime: UserRecordDataByTimeCreateManyWithoutCameraIdInput
-}
-
-input UserRecordCameraDataByTimeCreateOneWithoutUserRecordDataByTimeInput {
-  create: UserRecordCameraDataByTimeCreateWithoutUserRecordDataByTimeInput
-  connect: UserRecordCameraDataByTimeWhereUniqueInput
-}
-
-input UserRecordCameraDataByTimeCreateWithoutUserRecordDataByTimeInput {
   height: Float
   imagePath: String
   locationX: Float
@@ -15487,7 +15471,6 @@ input UserRecordCameraDataByTimeUpdateInput {
   locationY: Float
   size: Float
   width: Float
-  userRecordDataByTime: UserRecordDataByTimeUpdateManyWithoutCameraIdInput
 }
 
 input UserRecordCameraDataByTimeUpdateManyMutationInput {
@@ -15497,29 +15480,6 @@ input UserRecordCameraDataByTimeUpdateManyMutationInput {
   locationY: Float
   size: Float
   width: Float
-}
-
-input UserRecordCameraDataByTimeUpdateOneWithoutUserRecordDataByTimeInput {
-  create: UserRecordCameraDataByTimeCreateWithoutUserRecordDataByTimeInput
-  connect: UserRecordCameraDataByTimeWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: UserRecordCameraDataByTimeUpdateWithoutUserRecordDataByTimeDataInput
-  upsert: UserRecordCameraDataByTimeUpsertWithoutUserRecordDataByTimeInput
-}
-
-input UserRecordCameraDataByTimeUpdateWithoutUserRecordDataByTimeDataInput {
-  height: Float
-  imagePath: String
-  locationX: Float
-  locationY: Float
-  size: Float
-  width: Float
-}
-
-input UserRecordCameraDataByTimeUpsertWithoutUserRecordDataByTimeInput {
-  update: UserRecordCameraDataByTimeUpdateWithoutUserRecordDataByTimeDataInput!
-  create: UserRecordCameraDataByTimeCreateWithoutUserRecordDataByTimeInput!
 }
 
 input UserRecordCameraDataByTimeWhereInput {
@@ -15703,9 +15663,6 @@ input UserRecordCameraDataByTimeWhereInput {
 
   """All values greater than or equal the given value."""
   width_gte: Float
-  userRecordDataByTime_every: UserRecordDataByTimeWhereInput
-  userRecordDataByTime_some: UserRecordDataByTimeWhereInput
-  userRecordDataByTime_none: UserRecordDataByTimeWhereInput
 }
 
 input UserRecordCameraDataByTimeWhereUniqueInput {
@@ -16472,7 +16429,7 @@ input UserRecordDataByPeriodWhereUniqueInput {
 
 type UserRecordDataByTime {
   id: Int!
-  cameraId: UserRecordCameraDataByTime
+  cameraId: Int
   changeTime: DateTime!
   colorB: Int
   colorG: Int
@@ -16494,6 +16451,7 @@ type UserRecordDataByTimeConnection {
 }
 
 input UserRecordDataByTimeCreateInput {
+  cameraId: Int
   changeTime: DateTime!
   colorB: Int
   colorG: Int
@@ -16501,13 +16459,7 @@ input UserRecordDataByTimeCreateInput {
   leakage: String
   startTime: DateTime
   volume: Float
-  cameraId: UserRecordCameraDataByTimeCreateOneWithoutUserRecordDataByTimeInput
   recordDayRowId: UserRecordDataByDayCreateOneWithoutUserRecordDataByTimeInput
-}
-
-input UserRecordDataByTimeCreateManyWithoutCameraIdInput {
-  create: [UserRecordDataByTimeCreateWithoutCameraIdInput!]
-  connect: [UserRecordDataByTimeWhereUniqueInput!]
 }
 
 input UserRecordDataByTimeCreateManyWithoutRecordDayRowIdInput {
@@ -16515,18 +16467,8 @@ input UserRecordDataByTimeCreateManyWithoutRecordDayRowIdInput {
   connect: [UserRecordDataByTimeWhereUniqueInput!]
 }
 
-input UserRecordDataByTimeCreateWithoutCameraIdInput {
-  changeTime: DateTime!
-  colorB: Int
-  colorG: Int
-  colorR: Int
-  leakage: String
-  startTime: DateTime
-  volume: Float
-  recordDayRowId: UserRecordDataByDayCreateOneWithoutUserRecordDataByTimeInput
-}
-
 input UserRecordDataByTimeCreateWithoutRecordDayRowIdInput {
+  cameraId: Int
   changeTime: DateTime!
   colorB: Int
   colorG: Int
@@ -16534,7 +16476,6 @@ input UserRecordDataByTimeCreateWithoutRecordDayRowIdInput {
   leakage: String
   startTime: DateTime
   volume: Float
-  cameraId: UserRecordCameraDataByTimeCreateOneWithoutUserRecordDataByTimeInput
 }
 
 """An edge in a connection."""
@@ -16549,6 +16490,8 @@ type UserRecordDataByTimeEdge {
 enum UserRecordDataByTimeOrderByInput {
   id_ASC
   id_DESC
+  cameraId_ASC
+  cameraId_DESC
   changeTime_ASC
   changeTime_DESC
   colorB_ASC
@@ -16567,6 +16510,7 @@ enum UserRecordDataByTimeOrderByInput {
 
 type UserRecordDataByTimePreviousValues {
   id: Int!
+  cameraId: Int
   changeTime: DateTime!
   colorB: Int
   colorG: Int
@@ -16607,6 +16551,28 @@ input UserRecordDataByTimeScalarWhereInput {
 
   """All values greater than or equal the given value."""
   id_gte: Int
+  cameraId: Int
+
+  """All values that are not equal to given value."""
+  cameraId_not: Int
+
+  """All values that are contained in given list."""
+  cameraId_in: [Int!]
+
+  """All values that are not contained in given list."""
+  cameraId_not_in: [Int!]
+
+  """All values less than the given value."""
+  cameraId_lt: Int
+
+  """All values less than or equal the given value."""
+  cameraId_lte: Int
+
+  """All values greater than the given value."""
+  cameraId_gt: Int
+
+  """All values greater than or equal the given value."""
+  cameraId_gte: Int
   changeTime: DateTime
 
   """All values that are not equal to given value."""
@@ -16819,6 +16785,7 @@ input UserRecordDataByTimeSubscriptionWhereInput {
 }
 
 input UserRecordDataByTimeUpdateInput {
+  cameraId: Int
   changeTime: DateTime
   colorB: Int
   colorG: Int
@@ -16826,11 +16793,11 @@ input UserRecordDataByTimeUpdateInput {
   leakage: String
   startTime: DateTime
   volume: Float
-  cameraId: UserRecordCameraDataByTimeUpdateOneWithoutUserRecordDataByTimeInput
   recordDayRowId: UserRecordDataByDayUpdateOneWithoutUserRecordDataByTimeInput
 }
 
 input UserRecordDataByTimeUpdateManyDataInput {
+  cameraId: Int
   changeTime: DateTime
   colorB: Int
   colorG: Int
@@ -16841,6 +16808,7 @@ input UserRecordDataByTimeUpdateManyDataInput {
 }
 
 input UserRecordDataByTimeUpdateManyMutationInput {
+  cameraId: Int
   changeTime: DateTime
   colorB: Int
   colorG: Int
@@ -16848,18 +16816,6 @@ input UserRecordDataByTimeUpdateManyMutationInput {
   leakage: String
   startTime: DateTime
   volume: Float
-}
-
-input UserRecordDataByTimeUpdateManyWithoutCameraIdInput {
-  create: [UserRecordDataByTimeCreateWithoutCameraIdInput!]
-  connect: [UserRecordDataByTimeWhereUniqueInput!]
-  set: [UserRecordDataByTimeWhereUniqueInput!]
-  disconnect: [UserRecordDataByTimeWhereUniqueInput!]
-  delete: [UserRecordDataByTimeWhereUniqueInput!]
-  update: [UserRecordDataByTimeUpdateWithWhereUniqueWithoutCameraIdInput!]
-  updateMany: [UserRecordDataByTimeUpdateManyWithWhereNestedInput!]
-  deleteMany: [UserRecordDataByTimeScalarWhereInput!]
-  upsert: [UserRecordDataByTimeUpsertWithWhereUniqueWithoutCameraIdInput!]
 }
 
 input UserRecordDataByTimeUpdateManyWithoutRecordDayRowIdInput {
@@ -16879,18 +16835,8 @@ input UserRecordDataByTimeUpdateManyWithWhereNestedInput {
   data: UserRecordDataByTimeUpdateManyDataInput!
 }
 
-input UserRecordDataByTimeUpdateWithoutCameraIdDataInput {
-  changeTime: DateTime
-  colorB: Int
-  colorG: Int
-  colorR: Int
-  leakage: String
-  startTime: DateTime
-  volume: Float
-  recordDayRowId: UserRecordDataByDayUpdateOneWithoutUserRecordDataByTimeInput
-}
-
 input UserRecordDataByTimeUpdateWithoutRecordDayRowIdDataInput {
+  cameraId: Int
   changeTime: DateTime
   colorB: Int
   colorG: Int
@@ -16898,23 +16844,11 @@ input UserRecordDataByTimeUpdateWithoutRecordDayRowIdDataInput {
   leakage: String
   startTime: DateTime
   volume: Float
-  cameraId: UserRecordCameraDataByTimeUpdateOneWithoutUserRecordDataByTimeInput
-}
-
-input UserRecordDataByTimeUpdateWithWhereUniqueWithoutCameraIdInput {
-  where: UserRecordDataByTimeWhereUniqueInput!
-  data: UserRecordDataByTimeUpdateWithoutCameraIdDataInput!
 }
 
 input UserRecordDataByTimeUpdateWithWhereUniqueWithoutRecordDayRowIdInput {
   where: UserRecordDataByTimeWhereUniqueInput!
   data: UserRecordDataByTimeUpdateWithoutRecordDayRowIdDataInput!
-}
-
-input UserRecordDataByTimeUpsertWithWhereUniqueWithoutCameraIdInput {
-  where: UserRecordDataByTimeWhereUniqueInput!
-  update: UserRecordDataByTimeUpdateWithoutCameraIdDataInput!
-  create: UserRecordDataByTimeCreateWithoutCameraIdInput!
 }
 
 input UserRecordDataByTimeUpsertWithWhereUniqueWithoutRecordDayRowIdInput {
@@ -16954,6 +16888,28 @@ input UserRecordDataByTimeWhereInput {
 
   """All values greater than or equal the given value."""
   id_gte: Int
+  cameraId: Int
+
+  """All values that are not equal to given value."""
+  cameraId_not: Int
+
+  """All values that are contained in given list."""
+  cameraId_in: [Int!]
+
+  """All values that are not contained in given list."""
+  cameraId_not_in: [Int!]
+
+  """All values less than the given value."""
+  cameraId_lt: Int
+
+  """All values less than or equal the given value."""
+  cameraId_lte: Int
+
+  """All values greater than the given value."""
+  cameraId_gt: Int
+
+  """All values greater than or equal the given value."""
+  cameraId_gte: Int
   changeTime: DateTime
 
   """All values that are not equal to given value."""
@@ -17126,7 +17082,6 @@ input UserRecordDataByTimeWhereInput {
 
   """All values greater than or equal the given value."""
   volume_gte: Float
-  cameraId: UserRecordCameraDataByTimeWhereInput
   recordDayRowId: UserRecordDataByDayWhereInput
 }
 
