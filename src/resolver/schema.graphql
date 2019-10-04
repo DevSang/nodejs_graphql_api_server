@@ -26,8 +26,10 @@ type Mutation {
         address: String
         category: String!
         contents: String!
-        coin: Int!
         date: DateTime!
+        price: Int
+        recordedDayCount: Int
+        isImageColorCount: Int
         fromAddress: String
         fromPkey: String
     ): UserCoinHistory!
