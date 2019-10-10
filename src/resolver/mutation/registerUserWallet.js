@@ -19,7 +19,7 @@ module.exports = async (
     let options = {
         headers: { 'Content-Type': 'application/json', 'LOON-HEADER-ACCESSTOKEN':  accesstoken},
         // url: 'http://localhost:8080/api/user',
-        url: 'http://34.85.62.36:8080/api/token',
+        url: 'http://34.85.62.36:8080/api/user',
         body: JSON.stringify({
             "user_id" : Number(userId),
             "email" : email,
