@@ -1,6 +1,7 @@
 type AdditionalInfo @pgTable(name: "additional_info") {
   id: Int! @pgColumn(name: "row_id") @unique
   abnormalUltrasoundFinding: Boolean! @pgColumn(name: "abnormal_ultrasound_finding")
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   conditionSurgicalHistory: String @default(value: "NUL") @pgColumn(name: "condition_surgical_history")
   cycle: Int
@@ -12,15 +13,27 @@ type AdditionalInfo @pgTable(name: "additional_info") {
   cycleIrregular: Boolean! @pgColumn(name: "cycle_irregular")
   ethnicity: String
 >>>>>>> Stashed changes
+=======
+  conditionSurgicalHistory: String @pgColumn(name: "condition_surgical_history")
+  cycle: Int
+  cycleIrregular: Boolean! @pgColumn(name: "cycle_irregular")
+  ethnicity: String
+>>>>>>> d30ebe7466025e6185316d4f4d37492770fb60e3
   height: Float!
+  inUseMenstrualCup: String @pgColumn(name: "in_use_menstrual_cup")
+  inUseMenstrualCupSize: String @pgColumn(name: "in_use_menstrual_cup_size")
   iudImplanonExpireDate: DateTime @pgColumn(name: "iud_implanon_expire_date")
   iudImplanonInsertDate: DateTime @pgColumn(name: "iud_implanon_insert_date")
   lastPeriodDate: DateTime! @pgColumn(name: "last_period_date")
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   medicineList: String @default(value: "NUL") @pgColumn(name: "medicine_list")
 =======
   medicineList: String @pgColumn(name: "medicine_list")
 >>>>>>> Stashed changes
+=======
+  medicineList: String @pgColumn(name: "medicine_list")
+>>>>>>> d30ebe7466025e6185316d4f4d37492770fb60e3
   period: Int
   periodIrregular: Boolean! @pgColumn(name: "period_irregular")
   userId: Int @pgColumn(name: "user_id")
@@ -291,6 +304,7 @@ type MarketListDetail @pgTable(name: "market_list_detail") {
   detailImage: String @pgColumn(name: "detail_image")
   mainImage: String @pgColumn(name: "main_image")
   marketListId: MarketList @pgColumn(name: "market_list_id")
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   price: Int
   savingPrice: Int @pgColumn(name: "saving_price")
@@ -298,6 +312,10 @@ type MarketListDetail @pgTable(name: "market_list_detail") {
   price: Int @default(value: 0)
   savingPrice: Int @default(value: 0) @pgColumn(name: "saving_price")
 >>>>>>> Stashed changes
+=======
+  price: Int @default(value: 0)
+  savingPrice: Int @default(value: 0) @pgColumn(name: "saving_price")
+>>>>>>> d30ebe7466025e6185316d4f4d37492770fb60e3
   subTitle: String @pgColumn(name: "sub_title")
   title: String
 }
@@ -356,7 +374,6 @@ type UserCoinHistory @pgTable(name: "user_coin_history") {
 type UserCoinRewardsFee @pgTable(name: "user_coin_rewards_fee") {
   id: Int! @unique
   amount: Int
-  category: String
   contents: String
   createTime: DateTime @pgColumn(name: "create_time")
   updateTime: DateTime @pgColumn(name: "update_time")
@@ -415,7 +432,7 @@ type UserRecordDataByPeriod @pgTable(name: "user_record_data_by_period") {
 
 type UserRecordDataByTime @pgTable(name: "user_record_data_by_time") {
   id: Int! @pgColumn(name: "row_id") @unique
-  cameraId: Int @pgColumn(name: "camera_id")
+  cameraDataId: Int @pgColumn(name: "camera_data_id")
   changeTime: DateTime! @pgColumn(name: "change_time")
   colorB: Int @pgColumn(name: "color_b")
   colorG: Int @pgColumn(name: "color_g")

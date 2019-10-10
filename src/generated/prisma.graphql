@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Mon Sep 30 2019 14:43:28 GMT+0900 (GMT+09:00)
+# timestamp: Fri Oct 04 2019 12:10:12 GMT+0900 (GMT+09:00)
 
 type AdditionalInfo {
   id: Int!
@@ -9,6 +9,8 @@ type AdditionalInfo {
   cycleIrregular: Boolean!
   ethnicity: String
   height: Float!
+  inUseMenstrualCup: String
+  inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
   iudImplanonInsertDate: DateTime
   lastPeriodDate: DateTime!
@@ -36,6 +38,8 @@ input AdditionalInfoCreateInput {
   cycleIrregular: Boolean!
   ethnicity: String
   height: Float!
+  inUseMenstrualCup: String
+  inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
   iudImplanonInsertDate: DateTime
   lastPeriodDate: DateTime!
@@ -70,6 +74,10 @@ enum AdditionalInfoOrderByInput {
   ethnicity_DESC
   height_ASC
   height_DESC
+  inUseMenstrualCup_ASC
+  inUseMenstrualCup_DESC
+  inUseMenstrualCupSize_ASC
+  inUseMenstrualCupSize_DESC
   iudImplanonExpireDate_ASC
   iudImplanonExpireDate_DESC
   iudImplanonInsertDate_ASC
@@ -96,6 +104,8 @@ type AdditionalInfoPreviousValues {
   cycleIrregular: Boolean!
   ethnicity: String
   height: Float!
+  inUseMenstrualCup: String
+  inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
   iudImplanonInsertDate: DateTime
   lastPeriodDate: DateTime!
@@ -150,6 +160,8 @@ input AdditionalInfoUpdateInput {
   cycleIrregular: Boolean
   ethnicity: String
   height: Float
+  inUseMenstrualCup: String
+  inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
   iudImplanonInsertDate: DateTime
   lastPeriodDate: DateTime
@@ -167,6 +179,8 @@ input AdditionalInfoUpdateManyMutationInput {
   cycleIrregular: Boolean
   ethnicity: String
   height: Float
+  inUseMenstrualCup: String
+  inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
   iudImplanonInsertDate: DateTime
   lastPeriodDate: DateTime
@@ -340,6 +354,86 @@ input AdditionalInfoWhereInput {
 
   """All values greater than or equal the given value."""
   height_gte: Float
+  inUseMenstrualCup: String
+
+  """All values that are not equal to given value."""
+  inUseMenstrualCup_not: String
+
+  """All values that are contained in given list."""
+  inUseMenstrualCup_in: [String!]
+
+  """All values that are not contained in given list."""
+  inUseMenstrualCup_not_in: [String!]
+
+  """All values less than the given value."""
+  inUseMenstrualCup_lt: String
+
+  """All values less than or equal the given value."""
+  inUseMenstrualCup_lte: String
+
+  """All values greater than the given value."""
+  inUseMenstrualCup_gt: String
+
+  """All values greater than or equal the given value."""
+  inUseMenstrualCup_gte: String
+
+  """All values containing the given string."""
+  inUseMenstrualCup_contains: String
+
+  """All values not containing the given string."""
+  inUseMenstrualCup_not_contains: String
+
+  """All values starting with the given string."""
+  inUseMenstrualCup_starts_with: String
+
+  """All values not starting with the given string."""
+  inUseMenstrualCup_not_starts_with: String
+
+  """All values ending with the given string."""
+  inUseMenstrualCup_ends_with: String
+
+  """All values not ending with the given string."""
+  inUseMenstrualCup_not_ends_with: String
+  inUseMenstrualCupSize: String
+
+  """All values that are not equal to given value."""
+  inUseMenstrualCupSize_not: String
+
+  """All values that are contained in given list."""
+  inUseMenstrualCupSize_in: [String!]
+
+  """All values that are not contained in given list."""
+  inUseMenstrualCupSize_not_in: [String!]
+
+  """All values less than the given value."""
+  inUseMenstrualCupSize_lt: String
+
+  """All values less than or equal the given value."""
+  inUseMenstrualCupSize_lte: String
+
+  """All values greater than the given value."""
+  inUseMenstrualCupSize_gt: String
+
+  """All values greater than or equal the given value."""
+  inUseMenstrualCupSize_gte: String
+
+  """All values containing the given string."""
+  inUseMenstrualCupSize_contains: String
+
+  """All values not containing the given string."""
+  inUseMenstrualCupSize_not_contains: String
+
+  """All values starting with the given string."""
+  inUseMenstrualCupSize_starts_with: String
+
+  """All values not starting with the given string."""
+  inUseMenstrualCupSize_not_starts_with: String
+
+  """All values ending with the given string."""
+  inUseMenstrualCupSize_ends_with: String
+
+  """All values not ending with the given string."""
+  inUseMenstrualCupSize_not_ends_with: String
   iudImplanonExpireDate: DateTime
 
   """All values that are not equal to given value."""
@@ -10120,7 +10214,7 @@ type MarketAmazonCoupon {
   createTime: DateTime!
   endTime: DateTime!
   marketListId: Int
-  price: Int
+  price: Int!
   startTime: DateTime!
   title: String
 }
@@ -10183,7 +10277,7 @@ type MarketAmazonCouponPreviousValues {
   createTime: DateTime!
   endTime: DateTime!
   marketListId: Int
-  price: Int
+  price: Int!
   startTime: DateTime!
   title: String
 }
@@ -11103,7 +11197,6 @@ input MarketBuyHistoryWhereInput {
 
 input MarketBuyHistoryWhereUniqueInput {
   id: Int
-  orderNumber: String
 }
 
 type MarketList {
@@ -13616,7 +13709,6 @@ input UserCoinHistoryWhereUniqueInput {
 type UserCoinRewardsFee {
   id: Int!
   amount: Int
-  category: String
   contents: String
   createTime: DateTime
   updateTime: DateTime
@@ -13634,7 +13726,6 @@ type UserCoinRewardsFeeConnection {
 
 input UserCoinRewardsFeeCreateInput {
   amount: Int
-  category: String
   contents: String
   createTime: DateTime
   updateTime: DateTime
@@ -13654,8 +13745,6 @@ enum UserCoinRewardsFeeOrderByInput {
   id_DESC
   amount_ASC
   amount_DESC
-  category_ASC
-  category_DESC
   contents_ASC
   contents_DESC
   createTime_ASC
@@ -13667,7 +13756,6 @@ enum UserCoinRewardsFeeOrderByInput {
 type UserCoinRewardsFeePreviousValues {
   id: Int!
   amount: Int
-  category: String
   contents: String
   createTime: DateTime
   updateTime: DateTime
@@ -13712,7 +13800,6 @@ input UserCoinRewardsFeeSubscriptionWhereInput {
 
 input UserCoinRewardsFeeUpdateInput {
   amount: Int
-  category: String
   contents: String
   createTime: DateTime
   updateTime: DateTime
@@ -13720,7 +13807,6 @@ input UserCoinRewardsFeeUpdateInput {
 
 input UserCoinRewardsFeeUpdateManyMutationInput {
   amount: Int
-  category: String
   contents: String
   createTime: DateTime
   updateTime: DateTime
@@ -13779,46 +13865,6 @@ input UserCoinRewardsFeeWhereInput {
 
   """All values greater than or equal the given value."""
   amount_gte: Int
-  category: String
-
-  """All values that are not equal to given value."""
-  category_not: String
-
-  """All values that are contained in given list."""
-  category_in: [String!]
-
-  """All values that are not contained in given list."""
-  category_not_in: [String!]
-
-  """All values less than the given value."""
-  category_lt: String
-
-  """All values less than or equal the given value."""
-  category_lte: String
-
-  """All values greater than the given value."""
-  category_gt: String
-
-  """All values greater than or equal the given value."""
-  category_gte: String
-
-  """All values containing the given string."""
-  category_contains: String
-
-  """All values not containing the given string."""
-  category_not_contains: String
-
-  """All values starting with the given string."""
-  category_starts_with: String
-
-  """All values not starting with the given string."""
-  category_not_starts_with: String
-
-  """All values ending with the given string."""
-  category_ends_with: String
-
-  """All values not ending with the given string."""
-  category_not_ends_with: String
   contents: String
 
   """All values that are not equal to given value."""
@@ -16429,7 +16475,7 @@ input UserRecordDataByPeriodWhereUniqueInput {
 
 type UserRecordDataByTime {
   id: Int!
-  cameraId: Int
+  cameraDataId: Int
   changeTime: DateTime!
   colorB: Int
   colorG: Int
@@ -16451,7 +16497,7 @@ type UserRecordDataByTimeConnection {
 }
 
 input UserRecordDataByTimeCreateInput {
-  cameraId: Int
+  cameraDataId: Int
   changeTime: DateTime!
   colorB: Int
   colorG: Int
@@ -16468,7 +16514,7 @@ input UserRecordDataByTimeCreateManyWithoutRecordDayRowIdInput {
 }
 
 input UserRecordDataByTimeCreateWithoutRecordDayRowIdInput {
-  cameraId: Int
+  cameraDataId: Int
   changeTime: DateTime!
   colorB: Int
   colorG: Int
@@ -16490,8 +16536,8 @@ type UserRecordDataByTimeEdge {
 enum UserRecordDataByTimeOrderByInput {
   id_ASC
   id_DESC
-  cameraId_ASC
-  cameraId_DESC
+  cameraDataId_ASC
+  cameraDataId_DESC
   changeTime_ASC
   changeTime_DESC
   colorB_ASC
@@ -16510,7 +16556,7 @@ enum UserRecordDataByTimeOrderByInput {
 
 type UserRecordDataByTimePreviousValues {
   id: Int!
-  cameraId: Int
+  cameraDataId: Int
   changeTime: DateTime!
   colorB: Int
   colorG: Int
@@ -16551,28 +16597,28 @@ input UserRecordDataByTimeScalarWhereInput {
 
   """All values greater than or equal the given value."""
   id_gte: Int
-  cameraId: Int
+  cameraDataId: Int
 
   """All values that are not equal to given value."""
-  cameraId_not: Int
+  cameraDataId_not: Int
 
   """All values that are contained in given list."""
-  cameraId_in: [Int!]
+  cameraDataId_in: [Int!]
 
   """All values that are not contained in given list."""
-  cameraId_not_in: [Int!]
+  cameraDataId_not_in: [Int!]
 
   """All values less than the given value."""
-  cameraId_lt: Int
+  cameraDataId_lt: Int
 
   """All values less than or equal the given value."""
-  cameraId_lte: Int
+  cameraDataId_lte: Int
 
   """All values greater than the given value."""
-  cameraId_gt: Int
+  cameraDataId_gt: Int
 
   """All values greater than or equal the given value."""
-  cameraId_gte: Int
+  cameraDataId_gte: Int
   changeTime: DateTime
 
   """All values that are not equal to given value."""
@@ -16785,7 +16831,7 @@ input UserRecordDataByTimeSubscriptionWhereInput {
 }
 
 input UserRecordDataByTimeUpdateInput {
-  cameraId: Int
+  cameraDataId: Int
   changeTime: DateTime
   colorB: Int
   colorG: Int
@@ -16797,7 +16843,7 @@ input UserRecordDataByTimeUpdateInput {
 }
 
 input UserRecordDataByTimeUpdateManyDataInput {
-  cameraId: Int
+  cameraDataId: Int
   changeTime: DateTime
   colorB: Int
   colorG: Int
@@ -16808,7 +16854,7 @@ input UserRecordDataByTimeUpdateManyDataInput {
 }
 
 input UserRecordDataByTimeUpdateManyMutationInput {
-  cameraId: Int
+  cameraDataId: Int
   changeTime: DateTime
   colorB: Int
   colorG: Int
@@ -16836,7 +16882,7 @@ input UserRecordDataByTimeUpdateManyWithWhereNestedInput {
 }
 
 input UserRecordDataByTimeUpdateWithoutRecordDayRowIdDataInput {
-  cameraId: Int
+  cameraDataId: Int
   changeTime: DateTime
   colorB: Int
   colorG: Int
@@ -16888,28 +16934,28 @@ input UserRecordDataByTimeWhereInput {
 
   """All values greater than or equal the given value."""
   id_gte: Int
-  cameraId: Int
+  cameraDataId: Int
 
   """All values that are not equal to given value."""
-  cameraId_not: Int
+  cameraDataId_not: Int
 
   """All values that are contained in given list."""
-  cameraId_in: [Int!]
+  cameraDataId_in: [Int!]
 
   """All values that are not contained in given list."""
-  cameraId_not_in: [Int!]
+  cameraDataId_not_in: [Int!]
 
   """All values less than the given value."""
-  cameraId_lt: Int
+  cameraDataId_lt: Int
 
   """All values less than or equal the given value."""
-  cameraId_lte: Int
+  cameraDataId_lte: Int
 
   """All values greater than the given value."""
-  cameraId_gt: Int
+  cameraDataId_gt: Int
 
   """All values greater than or equal the given value."""
-  cameraId_gte: Int
+  cameraDataId_gte: Int
   changeTime: DateTime
 
   """All values that are not equal to given value."""
