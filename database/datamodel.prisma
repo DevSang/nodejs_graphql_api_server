@@ -446,7 +446,8 @@ type UserRecordDataByTime @pgTable(name: "user_record_data_by_time") {
 type UserWallet @pgTable(name: "user_wallet") {
   id: Int! @unique
   address: String
-  createDate: DateTime @pgColumn(name: "create_date")
+  createTime: DateTime @pgColumn(name: "create_time")
+  status: Boolean @default(value: true)
   userId: User @pgColumn(name: "user_id")
 }
 

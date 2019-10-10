@@ -72,6 +72,7 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
                 }
             });
 
+            // loon hemo db
             country = await ctx.db.query.country(
                 { 
                     where: { id : country_id} 

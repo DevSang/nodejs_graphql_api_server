@@ -15,29 +15,49 @@ module.exports = async (
     console.log('>>> price : ' + price);
     console.log('>>> recordedDayCount : ' + recordedDayCount);
     console.log('>>> isImageColorCount : ' + isImageColorCount);
-
+    try {
     let reqBody = {
         toAddress: address,
         fromAddress,
         fromPkey,
-        token: 0
+        category,
+        contents,
+        token: 0,
+        recordedDayCount,
+        isImageColorCount
     }
     console.log(`category ${category}`)
     console.log(`contents ${contents}`)
     console.log(`recordedDayCount ${recordedDayCount}`)
     console.log(`isImageColorCount ${isImageColorCount}`)
-    // coin 가격 확인
+    // 지불해야할 coin 확인
     if(category == 'REWARDS') {
-        let feeQuery = contents.includes('Data record') ? {contents_in: ['DATA', 'CAMERA DATA']} : {contents};
+        let feeQuery = contents.includes('Data record') ? {contents_in: ['RECORD', 'CAMERA RECORD']} : {contents};
         let rewards = await ctx.db.query.userCoinRewardsFees({where: feeQuery, orderBy: 'contents_DESC'});
-
+        const paidHistory = await ctx.db.query.userCoinHistories({where: {contents: contents.includes('Data record') ? 'RECORD' : contents, userId: {id: userId}},
+                                                                  orderBy: 'date_DESC'});
         if(contents.includes('Data record')) {
-            if(rewards[0].contents == 'Data') {
+            if (paidHistory.length > 0) {
+                const today = new Date();
+                const paidDate = new Date(paidHistory[0].date);
+                if(today.getFullYear() == paidDate.getFullYear() && today.getMonth() == paidDate.getMonth()) {
+                    console.log('ALREADY PAID')
+                    return Error('ALREADY PAID');
+                }
+            }
+            if(rewards[0].contents == 'RECORD') {
+                reqBody.contents = rewards[0].contents;
                 reqBody.token = rewards[0].amount * recordedDayCount + rewards[1].amount * isImageColorCount;
             } else {
+                reqBody.contents = rewards[1].contents;
                 reqBody.token = rewards[1].amount * recordedDayCount + rewards[0].amount * isImageColorCount;
             }
         } else {
+            if (paidHistory.length > 0) {
+                console.log('ALREADY PAID')
+                return null;
+            }
+            reqBody.contents = rewards[0].contents;
             reqBody.token = rewards[0].amount;
         }
         console.log(`reqBody.token ${reqBody.token}`)
@@ -48,16 +68,17 @@ module.exports = async (
     }
 
     //url : 172.31.0.13
+    // console.log(parent)
+    // console.log(info)
+    const accesstoken = ctx.request.header('LOON-HEADER-ACCESSTOKEN');
     let options = {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'LOON-HEADER-ACCESSTOKEN':  accesstoken},
         // url: 'http://localhost:8080/api/token',
         url: 'http://34.85.62.36:8080/api/token',
         body: JSON.stringify(reqBody)
     };
-    
     let res = await request.post(options);
     res = JSON.parse(res);
-    console.log(res);
     let data = {
         userId: {
             connect: {
@@ -75,7 +96,7 @@ module.exports = async (
         data.coin = data.coin * -1
     }
 
-    let wallet = await ctx.db.query.userWallets({where: {userId: {id: userId}, address}})
+    let wallet = await ctx.db.query.userWallets({where: {userId: {id: userId}, address, status: true}})
     if(wallet.length !== 0) {
         data.walletId = wallet[0].id
     }
@@ -83,4 +104,8 @@ module.exports = async (
         data
     });
     return createUserCoin;
+} catch(err) {
+    console.log(`[ERROR] : ${err}`)
+    return null;
+}
 };

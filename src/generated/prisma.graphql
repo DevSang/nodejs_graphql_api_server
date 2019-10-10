@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Fri Oct 04 2019 12:10:12 GMT+0900 (GMT+09:00)
+# timestamp: Tue Oct 08 2019 15:50:11 GMT+0900 (GMT+09:00)
 
 type AdditionalInfo {
   id: Int!
@@ -18399,7 +18399,8 @@ input UserUpsertWithWhereUniqueWithoutEthnicityIdInput {
 type UserWallet {
   id: Int!
   address: String
-  createDate: DateTime
+  createTime: DateTime
+  status: Boolean
   userId: User
 }
 
@@ -18415,7 +18416,8 @@ type UserWalletConnection {
 
 input UserWalletCreateInput {
   address: String
-  createDate: DateTime
+  createTime: DateTime
+  status: Boolean
   userId: UserCreateOneWithoutUserWalletInput
 }
 
@@ -18426,7 +18428,8 @@ input UserWalletCreateManyWithoutUserIdInput {
 
 input UserWalletCreateWithoutUserIdInput {
   address: String
-  createDate: DateTime
+  createTime: DateTime
+  status: Boolean
 }
 
 """An edge in a connection."""
@@ -18443,14 +18446,17 @@ enum UserWalletOrderByInput {
   id_DESC
   address_ASC
   address_DESC
-  createDate_ASC
-  createDate_DESC
+  createTime_ASC
+  createTime_DESC
+  status_ASC
+  status_DESC
 }
 
 type UserWalletPreviousValues {
   id: Int!
   address: String
-  createDate: DateTime
+  createTime: DateTime
+  status: Boolean
 }
 
 input UserWalletScalarWhereInput {
@@ -18524,28 +18530,32 @@ input UserWalletScalarWhereInput {
 
   """All values not ending with the given string."""
   address_not_ends_with: String
-  createDate: DateTime
+  createTime: DateTime
 
   """All values that are not equal to given value."""
-  createDate_not: DateTime
+  createTime_not: DateTime
 
   """All values that are contained in given list."""
-  createDate_in: [DateTime!]
+  createTime_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  createDate_not_in: [DateTime!]
+  createTime_not_in: [DateTime!]
 
   """All values less than the given value."""
-  createDate_lt: DateTime
+  createTime_lt: DateTime
 
   """All values less than or equal the given value."""
-  createDate_lte: DateTime
+  createTime_lte: DateTime
 
   """All values greater than the given value."""
-  createDate_gt: DateTime
+  createTime_gt: DateTime
 
   """All values greater than or equal the given value."""
-  createDate_gte: DateTime
+  createTime_gte: DateTime
+  status: Boolean
+
+  """All values that are not equal to given value."""
+  status_not: Boolean
 }
 
 type UserWalletSubscriptionPayload {
@@ -18587,18 +18597,21 @@ input UserWalletSubscriptionWhereInput {
 
 input UserWalletUpdateInput {
   address: String
-  createDate: DateTime
+  createTime: DateTime
+  status: Boolean
   userId: UserUpdateOneWithoutUserWalletInput
 }
 
 input UserWalletUpdateManyDataInput {
   address: String
-  createDate: DateTime
+  createTime: DateTime
+  status: Boolean
 }
 
 input UserWalletUpdateManyMutationInput {
   address: String
-  createDate: DateTime
+  createTime: DateTime
+  status: Boolean
 }
 
 input UserWalletUpdateManyWithoutUserIdInput {
@@ -18620,7 +18633,8 @@ input UserWalletUpdateManyWithWhereNestedInput {
 
 input UserWalletUpdateWithoutUserIdDataInput {
   address: String
-  createDate: DateTime
+  createTime: DateTime
+  status: Boolean
 }
 
 input UserWalletUpdateWithWhereUniqueWithoutUserIdInput {
@@ -18705,28 +18719,32 @@ input UserWalletWhereInput {
 
   """All values not ending with the given string."""
   address_not_ends_with: String
-  createDate: DateTime
+  createTime: DateTime
 
   """All values that are not equal to given value."""
-  createDate_not: DateTime
+  createTime_not: DateTime
 
   """All values that are contained in given list."""
-  createDate_in: [DateTime!]
+  createTime_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  createDate_not_in: [DateTime!]
+  createTime_not_in: [DateTime!]
 
   """All values less than the given value."""
-  createDate_lt: DateTime
+  createTime_lt: DateTime
 
   """All values less than or equal the given value."""
-  createDate_lte: DateTime
+  createTime_lte: DateTime
 
   """All values greater than the given value."""
-  createDate_gt: DateTime
+  createTime_gt: DateTime
 
   """All values greater than or equal the given value."""
-  createDate_gte: DateTime
+  createTime_gte: DateTime
+  status: Boolean
+
+  """All values that are not equal to given value."""
+  status_not: Boolean
   userId: UserWhereInput
 }
 
