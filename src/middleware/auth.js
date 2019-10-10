@@ -46,7 +46,7 @@ module.exports = (req, res, next) => {
             next();
             return;
         }
-
+        
         jwt.verify(parsed, certAccessPublic, function(err, decoded) {
             //Loon data 분석 시스템 로그인 시 
             if(decoded.email === 'admin@looncup.com'){

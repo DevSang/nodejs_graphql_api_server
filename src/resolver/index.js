@@ -74,6 +74,8 @@ const resolvers = {
         createUserWallet: forwardTo('db'),
         updateUserWallet: forwardTo('db'),
         deleteUserWallet: forwardTo('db'),
+        upsertUserWallet: forwardTo('db'),
+        updateManyUserWallets: forwardTo('db'),
         createMarketListDetail: forwardTo('db'),
         updateMarketListDetail: forwardTo('db'),
         deleteMarketListDetail: forwardTo('db'),
@@ -94,7 +96,9 @@ const resolvers = {
         createTxMarketBuyHistory: require('./mutation/createTxMarketBuyHistory'),
         changeCouponCount: require('./mutation/changeCouponCount'),
         changePasswordSignIn: require('./mutation/changePasswordSignIn'),
-        removeUserRecordCameraData: require('./mutation/removeUserRecordCameraData')
+        removeUserRecordCameraData: require('./mutation/removeUserRecordCameraData'),
+        registerUserWallet: require('./mutation/registerUserWallet'),
+        recoverUserWallet: require('./mutation/recoverUserWallet'),
     }
 };
 

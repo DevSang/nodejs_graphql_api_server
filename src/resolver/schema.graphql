@@ -32,14 +32,14 @@ type Mutation {
         isImageColorCount: Int
         fromAddress: String
         fromPkey: String
-    ): UserCoinHistory!
+    ): UserCoinHistory
     createTxMarketBuyHistory(
         userId: Int!
         address: String!
         pKey: String!
         marketListId: Int!,
         category: String,
-    ): TxMarketBuyHistory!
+    ): TxMarketBuyHistory
     changeCouponCount(
         marketListId: Int!
         plusYn: Boolean
@@ -49,6 +49,16 @@ type Mutation {
         password: String!
     ): getNewTokenPayload
     removeUserRecordCameraData(id: Int!): UserRecordCameraDataByTime
+    registerUserWallet(
+        email: String!
+        userId: String!
+        address: String!
+    ): UserWallet
+    recoverUserWallet(
+        email: String!
+        userId: Int
+        address: String!
+    ): UserWallet
 }
 
 type TxMarketBuyHistory {
