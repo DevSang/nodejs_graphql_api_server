@@ -34,17 +34,28 @@ module.exports = async (
     if(category == 'REWARDS') {
         let feeQuery = contents.includes('Data record') ? {contents_in: ['RECORD', 'CAMERA RECORD']} : {contents};
         let rewards = await ctx.db.query.userCoinRewardsFees({where: feeQuery, orderBy: 'contents_DESC'});
-        const paidHistory = await ctx.db.query.userCoinHistories({where: {contents: contents.includes('Data record') ? 'RECORD' : contents, userId: {id: userId}},
-                                                                  orderBy: 'date_DESC'});
+        const today = new Date();
+        
+        // history 확인
         if(contents.includes('Data record')) {
-            if (paidHistory.length > 0) {
-                const today = new Date();
-                const paidDate = new Date(paidHistory[0].date);
-                if(today.getFullYear() == paidDate.getFullYear() && today.getMonth() == paidDate.getMonth()) {
-                    console.log('ALREADY PAID')
-                    return Error('ALREADY PAID');
+            const paidHistory = await ctx.db.query.userCoinHistories({where: {contents: contents, 
+                                                                    userId: {id: userId},
+                                                                    date_gte: new Date(`${today.getFullYear()}-${today.getMonth()}-01`)
+                                                                    },
+                                                                    orderBy: 'date_DESC'});
+            
+            if(paidHistory.length > 0) {
+                let paidGem = 0;
+                const check = await paidHistory.some((old) => {
+                    paidGem += old.coin;
+                    if(paidGem >= 50) return true;
+                })
+                if(check) {
+                    console.log(`paidGem ${paidHistory}`)
+                    return res.status(401).json({message: 'ALREADY PAID'});
                 }
             }
+
             if(rewards[0].contents == 'RECORD') {
                 reqBody.contents = rewards[0].contents;
                 reqBody.token = rewards[0].amount * recordedDayCount + rewards[1].amount * isImageColorCount;
@@ -53,6 +64,7 @@ module.exports = async (
                 reqBody.token = rewards[1].amount * recordedDayCount + rewards[0].amount * isImageColorCount;
             }
         } else {
+            const paidHistory = await ctx.db.query.userCoinHistories({where: {contents: contents, userId: {id: userId}}, orderBy: 'date_DESC'});
             if (paidHistory.length > 0) {
                 console.log('ALREADY PAID')
                 return null;
@@ -67,9 +79,7 @@ module.exports = async (
         return Error('No Data')
     }
 
-    //url : 172.31.0.13
-    // console.log(parent)
-    // console.log(info)
+    // url : 172.31.0.13
     const accesstoken = ctx.request.header('LOON-HEADER-ACCESSTOKEN');
     let options = {
         headers: { 'Content-Type': 'application/json', 'LOON-HEADER-ACCESSTOKEN':  accesstoken},
@@ -104,6 +114,7 @@ module.exports = async (
         data
     });
     return createUserCoin;
+    return null;
 } catch(err) {
     console.log(`[ERROR] : ${err}`)
     return null;
