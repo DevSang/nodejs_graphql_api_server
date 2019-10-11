@@ -43,9 +43,8 @@ module.exports = async (
                                                                     date_gte: new Date(`${today.getFullYear()}-${today.getMonth()}-01`)
                                                                     },
                                                                     orderBy: 'date_DESC'});
-            
+            let paidGem = 0;
             if(paidHistory.length > 0) {
-                let paidGem = 0;
                 const check = await paidHistory.some((old) => {
                     paidGem += old.coin;
                     if(paidGem >= 50) return true;
@@ -53,12 +52,15 @@ module.exports = async (
                 if(check) {
                     console.log(`paidGem ${paidHistory}`)
                     return res.status(401).json({message: 'ALREADY PAID'});
-                }
+                } 
             }
 
             if(rewards[0].contents == 'RECORD') {
                 reqBody.contents = rewards[0].contents;
                 reqBody.token = rewards[0].amount * recordedDayCount + rewards[1].amount * isImageColorCount;
+                if(reqBody.token + paidGem >= 50) {
+                    reqBody.token = 50 - paidGem;
+                }
             } else {
                 reqBody.contents = rewards[1].contents;
                 reqBody.token = rewards[1].amount * recordedDayCount + rewards[0].amount * isImageColorCount;
