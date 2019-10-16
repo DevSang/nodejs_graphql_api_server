@@ -27,6 +27,7 @@ module.exports = (req, res, next) => {
         let parsed = firebaseAuth.split('Bearer ')[1];
         admin.auth().verifyIdToken(parsed)
         .then((user) => {
+            console.log(`user ${JSON.stringify(user)}`)
             let payload = {
                 email: user.email
             }
