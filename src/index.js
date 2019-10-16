@@ -41,7 +41,7 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
 
 // cors 설정
-app.use(cors())
+server.use(cors())
 
 server.express.get('/api/usermgmt', function(req, res) {
     res.locals.mode = req.query.mode;
