@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
     const firebaseAuth = req.header('Authorization');
     const accessToken = req.header('LOON-HEADER-ACCESSTOKEN');
     const refreshToken = req.header('LOON-HEADER-REFRESHTOKEN');
-    const adminToken = req.header('LOON-ADMIN-TOKEN');
+    const marketToken = req.header('LOON-MARKET-TOKEN');
 
     console.log('>> [REQUEST]');
     console.log('>>> accessToken  : ', accessToken);
@@ -57,8 +57,9 @@ module.exports = (req, res, next) => {
             else if (err) {
                 if(err.name=='TokenExpiredError') {
                     next({message:'EXPIRED_ACCESS_TOKEN'});
-                }
-                else next(err);
+                } else if(marketToken) {
+                    next();
+                } else next(err);
                 return;
             }
             console.log('>> [COMMON REQUEST] from :', decoded.email);
