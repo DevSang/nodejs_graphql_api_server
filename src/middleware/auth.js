@@ -17,17 +17,16 @@ module.exports = (req, res, next) => {
     const refreshToken = req.header('LOON-HEADER-REFRESHTOKEN');
     const adminToken = req.header('LOON-ADMIN-TOKEN');
 
-    // console.log('>> [REQUEST]');
-    // console.log('>>> accessToken  : ', accessToken);
-    // console.log('>>> refreshToken : ', refreshToken);
-    // console.log('>>> firebaseAuth : ', firebaseAuth);
+    console.log('>> [REQUEST]');
+    console.log('>>> accessToken  : ', accessToken);
+    console.log('>>> refreshToken : ', refreshToken);
+    console.log('>>> firebaseAuth : ', firebaseAuth);
     // console.log('');
 
     if (firebaseAuth) {
         let parsed = firebaseAuth.split('Bearer ')[1];
         admin.auth().verifyIdToken(parsed)
         .then((user) => {
-            console.log(`user ${JSON.stringify(user)}`)
             let payload = {
                 email: user.email
             }
