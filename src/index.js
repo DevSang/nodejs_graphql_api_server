@@ -8,6 +8,7 @@ const express = require('express');
 const Multer = require('multer');
 const imgUpload = require('./util/ImgUpload');
 const ImgDelete = require('./util/ImgDelete');
+const cors = require('cors');
 
 module.exports = db = new Prisma({
     fragmentReplacements: fragmentReplacements,
@@ -38,6 +39,9 @@ server.express.use(express.static(path.join(__dirname, '../resource')));
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
+
+// cors 설정
+app.use(cors())
 
 server.express.get('/api/usermgmt', function(req, res) {
     res.locals.mode = req.query.mode;
