@@ -6,8 +6,9 @@ const authMiddleware = require('./middleware/auth');
 var path = require('path');
 const express = require('express');
 const Multer = require('multer');
-const imgUpload = require('./util/ImgUpload');
-const ImgDelete = require('./util/ImgDelete');
+const imgUpload = require('./api/ImgUpload');
+const ImgDelete = require('./api/ImgDelete');
+const InviteFriend = require('./api/InviteFriend');
 const cors = require('cors');
 
 module.exports = db = new Prisma({
@@ -69,6 +70,13 @@ server.post('/api/delete/image', function (req, res, next) {
         console.log(err)
         return res.status(401).send(err);
     }
+});
+
+server.get('/api/invite' , InviteFriend, (req, res, next) => {
+    res.statusCode = 302;
+	res.setHeader('Location', 'https://loonlab.com');
+	res.end();
+    next();
 });
 
 server.express.post(
