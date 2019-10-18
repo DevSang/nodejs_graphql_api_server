@@ -319,6 +319,7 @@ type User @pgTable(name: "users") {
   macId: String @pgColumn(name: "mac_id")
   password: String!
   personalHealthRecord: Boolean @default(value: false) @pgColumn(name: "personal_health_record")
+  referralCode: String @pgColumn(name: "referral_code") @unique
   tutorial: Boolean @default(value: false)
   userCoinHistory: [UserCoinHistory] @pgColumn(name: "user_coin_history")
   userCups: [UserCup] @pgColumn(name: "user_cups")
