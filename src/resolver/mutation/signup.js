@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require("crypto");
 var rand = require('csprng');
+var voucher_codes = require('voucher-code-generator');
 
 // private key
 var certAccessPrivate = fs.readFileSync(path.resolve(jwtConfig.certAccessPrivate));
@@ -14,8 +15,8 @@ var timerHashmap = {};
 
 module.exports = async (parent, { email,password, dob, given_birth,last_name,first_name,country_id, ethnicity_id, emailVerify}, ctx, info) => {
     // exception:no firebase token
-    if(!ctx.response.locals.user) throw new Error('NO_FIREBASE_TOKEN');
-    else console.log(`>> [SIGNUP] ${email}`);
+    // if(!ctx.response.locals.user) throw new Error('NO_FIREBASE_TOKEN');
+    // else console.log(`>> [SIGNUP] ${email}`);
 
     // exception: duplicated email
     var user = await ctx.db.query.user({ where: { email : email } });
@@ -52,6 +53,13 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
             let inputPassword = password;
             let salt = rand(160, 36);
             let hashPassword = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
+            let referralCode;
+            let data;
+            do { 
+                referralCode = voucher_codes.generate({length: 6, count: 1});
+                referralCode = referralCode[0].toUpperCase();
+                data = await ctx.db.query.user({ where: { referralCode } });
+            } while(data)
 
             user = await ctx.db.mutation.createUser({
                 data:{
@@ -68,7 +76,8 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
                         }
                     },
                     encryptSaltString : salt,
-                    emailVerify : emailVerify
+                    emailVerify : emailVerify,
+                    referralCode
                 }
             });
 
@@ -107,7 +116,7 @@ module.exports = async (parent, { email,password, dob, given_birth,last_name,fir
             throw err;
         }
 
-        // jwt payload
+        // // jwt payload
         let payload = {
             email:user.email
         }

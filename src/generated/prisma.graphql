@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue Oct 08 2019 15:50:11 GMT+0900 (GMT+09:00)
+# timestamp: Fri Oct 18 2019 14:06:39 GMT+0900 (GMT+09:00)
 
 type AdditionalInfo {
   id: Int!
@@ -13025,6 +13025,7 @@ type User {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   userCoinHistory(where: UserCoinHistoryWhereInput, orderBy: UserCoinHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCoinHistory!]
   userCups(where: UserCupWhereInput, orderBy: UserCupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCup!]
@@ -13979,6 +13980,7 @@ input UserCreateInput {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -14062,6 +14064,7 @@ input UserCreateWithoutAppServerSyncInput {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
@@ -14089,6 +14092,7 @@ input UserCreateWithoutCupDataProcFlowInput {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateCreateManyWithoutUserIdInput
@@ -14116,6 +14120,7 @@ input UserCreateWithoutCupDataProcMdatesInput {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -14143,6 +14148,7 @@ input UserCreateWithoutCupDataQaResponseInput {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -14170,6 +14176,7 @@ input UserCreateWithoutCupDataUserRemoveInput {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -14197,6 +14204,7 @@ input UserCreateWithoutEthnicityIdInput {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -14224,6 +14232,7 @@ input UserCreateWithoutUserCoinHistoryInput {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -14251,6 +14260,7 @@ input UserCreateWithoutUserCupsInput {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -14278,6 +14288,7 @@ input UserCreateWithoutUserInterviewDataInput {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -14305,6 +14316,7 @@ input UserCreateWithoutUserRecordDataByPeriodInput {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -14332,6 +14344,7 @@ input UserCreateWithoutUserWalletInput {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncCreateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowCreateManyWithoutUserIdInput
@@ -15386,6 +15399,8 @@ enum UserOrderByInput {
   password_DESC
   personalHealthRecord_ASC
   personalHealthRecord_DESC
+  referralCode_ASC
+  referralCode_DESC
   tutorial_ASC
   tutorial_DESC
 }
@@ -15405,6 +15420,7 @@ type UserPreviousValues {
   macId: String
   password: String!
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
 }
 
@@ -17488,6 +17504,46 @@ input UserScalarWhereInput {
 
   """All values that are not equal to given value."""
   personalHealthRecord_not: Boolean
+  referralCode: String
+
+  """All values that are not equal to given value."""
+  referralCode_not: String
+
+  """All values that are contained in given list."""
+  referralCode_in: [String!]
+
+  """All values that are not contained in given list."""
+  referralCode_not_in: [String!]
+
+  """All values less than the given value."""
+  referralCode_lt: String
+
+  """All values less than or equal the given value."""
+  referralCode_lte: String
+
+  """All values greater than the given value."""
+  referralCode_gt: String
+
+  """All values greater than or equal the given value."""
+  referralCode_gte: String
+
+  """All values containing the given string."""
+  referralCode_contains: String
+
+  """All values not containing the given string."""
+  referralCode_not_contains: String
+
+  """All values starting with the given string."""
+  referralCode_starts_with: String
+
+  """All values not starting with the given string."""
+  referralCode_not_starts_with: String
+
+  """All values ending with the given string."""
+  referralCode_ends_with: String
+
+  """All values not ending with the given string."""
+  referralCode_not_ends_with: String
   tutorial: Boolean
 
   """All values that are not equal to given value."""
@@ -17895,6 +17951,7 @@ input UserUpdateInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -17923,6 +17980,7 @@ input UserUpdateManyDataInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
 }
 
@@ -17940,6 +17998,7 @@ input UserUpdateManyMutationInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
 }
 
@@ -18052,6 +18111,7 @@ input UserUpdateWithoutAppServerSyncDataInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
@@ -18079,6 +18139,7 @@ input UserUpdateWithoutCupDataProcFlowDataInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcMdates: CupDataProcMdateUpdateManyWithoutUserIdInput
@@ -18106,6 +18167,7 @@ input UserUpdateWithoutCupDataProcMdatesDataInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -18133,6 +18195,7 @@ input UserUpdateWithoutCupDataQaResponseDataInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -18160,6 +18223,7 @@ input UserUpdateWithoutCupDataUserRemoveDataInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -18187,6 +18251,7 @@ input UserUpdateWithoutEthnicityIdDataInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -18214,6 +18279,7 @@ input UserUpdateWithoutUserCoinHistoryDataInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -18241,6 +18307,7 @@ input UserUpdateWithoutUserCupsDataInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -18268,6 +18335,7 @@ input UserUpdateWithoutUserInterviewDataDataInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -18295,6 +18363,7 @@ input UserUpdateWithoutUserRecordDataByPeriodDataInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -18322,6 +18391,7 @@ input UserUpdateWithoutUserWalletDataInput {
   macId: String
   password: String
   personalHealthRecord: Boolean
+  referralCode: String
   tutorial: Boolean
   appServerSync: AppServerSyncUpdateManyWithoutUserIdInput
   cupDataProcFlow: CupDataProcFlowUpdateManyWithoutUserIdInput
@@ -19105,6 +19175,46 @@ input UserWhereInput {
 
   """All values that are not equal to given value."""
   personalHealthRecord_not: Boolean
+  referralCode: String
+
+  """All values that are not equal to given value."""
+  referralCode_not: String
+
+  """All values that are contained in given list."""
+  referralCode_in: [String!]
+
+  """All values that are not contained in given list."""
+  referralCode_not_in: [String!]
+
+  """All values less than the given value."""
+  referralCode_lt: String
+
+  """All values less than or equal the given value."""
+  referralCode_lte: String
+
+  """All values greater than the given value."""
+  referralCode_gt: String
+
+  """All values greater than or equal the given value."""
+  referralCode_gte: String
+
+  """All values containing the given string."""
+  referralCode_contains: String
+
+  """All values not containing the given string."""
+  referralCode_not_contains: String
+
+  """All values starting with the given string."""
+  referralCode_starts_with: String
+
+  """All values not starting with the given string."""
+  referralCode_not_starts_with: String
+
+  """All values ending with the given string."""
+  referralCode_ends_with: String
+
+  """All values not ending with the given string."""
+  referralCode_not_ends_with: String
   tutorial: Boolean
 
   """All values that are not equal to given value."""
@@ -19146,4 +19256,5 @@ input UserWhereUniqueInput {
   id: Int
   anonUserId: Int
   email: String
+  referralCode: String
 }
