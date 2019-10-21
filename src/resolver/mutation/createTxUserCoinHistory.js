@@ -65,6 +65,27 @@ module.exports = async (
                 reqBody.contents = rewards[1].contents;
                 reqBody.token = rewards[1].amount * recordedDayCount + rewards[0].amount * isImageColorCount;
             }
+        } else if(contents == 'INVITE FRIEND') {
+            const refferalUser = await ctx.db.query.users({where: {referralCode : address}}, '{ id userWallet{id address status}}');
+            if(!refferalUser || refferalUser.length == 0) {
+                console.log(`NO REFFERAL CODE: ${address} USER`)
+                return null;
+            }
+            let refferalAddress;
+            await refferalUser[0].userWallet.some((data) => {
+                if(data.status) {
+                    refferalAddress = data.address;
+                    return data.address
+                }
+            })
+            
+            if(!refferalAddress) {
+                console.log('NO REFFERAL USER WALLET')
+                return null;
+            }
+            reqBody.toAddress = refferalAddress;
+            reqBody.contents = rewards[0].contents;
+            reqBody.token = rewards[0].amount;
         } else {
             const paidHistory = await ctx.db.query.userCoinHistories({where: {contents: contents, userId: {id: userId}}, orderBy: 'date_DESC'});
             if (paidHistory.length > 0) {
@@ -80,7 +101,6 @@ module.exports = async (
     } else {
         return Error('No Data')
     }
-
     // url : 172.31.0.13
     const accesstoken = ctx.request.header('LOON-HEADER-ACCESSTOKEN');
     let options = {
@@ -116,7 +136,7 @@ module.exports = async (
         data
     });
     return createUserCoin;
-    return null;
+    // return null;
 } catch(err) {
     console.log(`[ERROR] : ${err}`)
     return null;
