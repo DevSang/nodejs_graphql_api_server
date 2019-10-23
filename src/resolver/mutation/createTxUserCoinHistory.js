@@ -31,7 +31,6 @@ module.exports = async (
     console.log(`recordedDayCount ${recordedDayCount}`)
     console.log(`isImageColorCount ${isImageColorCount}`)
     let user_id = userId;
-    let address = address;
     // 지불해야할 coin 확인
     if(category == 'REWARDS') {
         let feeQuery = contents.includes('Data record') ? {contents_in: ['RECORD', 'CAMERA RECORD']} : {contents};
@@ -86,7 +85,6 @@ module.exports = async (
                 return null;
             }
             user_id = referralUser[0].id;
-            address = toAddress;
             reqBody.toAddress = refferalAddress;
             reqBody.contents = rewards[0].contents;
             reqBody.token = rewards[0].amount;
@@ -132,7 +130,7 @@ module.exports = async (
         data.coin = data.coin * -1
     }
 
-    let wallet = await ctx.db.query.userWallets({where: {userId: {id: user_id}, address, status: true}})
+    let wallet = await ctx.db.query.userWallets({where: {userId: {id: user_id}, address: reqBody.toAddress, status: true}})
     if(wallet.length !== 0) {
         data.walletId = wallet[0].id
     }
