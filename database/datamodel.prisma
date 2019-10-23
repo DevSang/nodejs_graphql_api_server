@@ -1,43 +1,23 @@
 type AdditionalInfo @pgTable(name: "additional_info") {
   id: Int! @pgColumn(name: "row_id") @unique
   abnormalUltrasoundFinding: Boolean! @pgColumn(name: "abnormal_ultrasound_finding")
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  conditionSurgicalHistory: String @default(value: "NUL") @pgColumn(name: "condition_surgical_history")
-  cycle: Int
-  cycleIrregular: Boolean! @pgColumn(name: "cycle_irregular")
-  ethnicity: String @default(value: "NUL")
-=======
   conditionSurgicalHistory: String @pgColumn(name: "condition_surgical_history")
   cycle: Int
   cycleIrregular: Boolean! @pgColumn(name: "cycle_irregular")
   ethnicity: String
->>>>>>> Stashed changes
-=======
-  conditionSurgicalHistory: String @pgColumn(name: "condition_surgical_history")
-  cycle: Int
-  cycleIrregular: Boolean! @pgColumn(name: "cycle_irregular")
-  ethnicity: String
->>>>>>> d30ebe7466025e6185316d4f4d37492770fb60e3
   height: Float!
+  heightUnit: String
   inUseMenstrualCup: String @pgColumn(name: "in_use_menstrual_cup")
   inUseMenstrualCupSize: String @pgColumn(name: "in_use_menstrual_cup_size")
   iudImplanonExpireDate: DateTime @pgColumn(name: "iud_implanon_expire_date")
   iudImplanonInsertDate: DateTime @pgColumn(name: "iud_implanon_insert_date")
   lastPeriodDate: DateTime! @pgColumn(name: "last_period_date")
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  medicineList: String @default(value: "NUL") @pgColumn(name: "medicine_list")
-=======
   medicineList: String @pgColumn(name: "medicine_list")
->>>>>>> Stashed changes
-=======
-  medicineList: String @pgColumn(name: "medicine_list")
->>>>>>> d30ebe7466025e6185316d4f4d37492770fb60e3
   period: Int
   periodIrregular: Boolean! @pgColumn(name: "period_irregular")
   userId: Int @pgColumn(name: "user_id")
   weight: Float!
+  weightUnit: String
 }
 
 type AnswerType @pgTable(name: "answer_types") {
@@ -304,18 +284,8 @@ type MarketListDetail @pgTable(name: "market_list_detail") {
   detailImage: String @pgColumn(name: "detail_image")
   mainImage: String @pgColumn(name: "main_image")
   marketListId: MarketList @pgColumn(name: "market_list_id")
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  price: Int
-  savingPrice: Int @pgColumn(name: "saving_price")
-=======
   price: Int @default(value: 0)
   savingPrice: Int @default(value: 0) @pgColumn(name: "saving_price")
->>>>>>> Stashed changes
-=======
-  price: Int @default(value: 0)
-  savingPrice: Int @default(value: 0) @pgColumn(name: "saving_price")
->>>>>>> d30ebe7466025e6185316d4f4d37492770fb60e3
   subTitle: String @pgColumn(name: "sub_title")
   title: String
 }
