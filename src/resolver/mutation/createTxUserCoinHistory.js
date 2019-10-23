@@ -83,6 +83,7 @@ module.exports = async (
                 console.log('NO REFFERAL USER WALLET')
                 return null;
             }
+            userId = refferalUser[0].id;
             reqBody.toAddress = refferalAddress;
             reqBody.contents = rewards[0].contents;
             reqBody.token = rewards[0].amount;
