@@ -30,6 +30,7 @@ module.exports = async (
     console.log(`contents ${contents}`)
     console.log(`recordedDayCount ${recordedDayCount}`)
     console.log(`isImageColorCount ${isImageColorCount}`)
+    let user_id = userId;
     // 지불해야할 coin 확인
     if(category == 'REWARDS') {
         let feeQuery = contents.includes('Data record') ? {contents_in: ['RECORD', 'CAMERA RECORD']} : {contents};
@@ -39,7 +40,7 @@ module.exports = async (
         // history 확인
         if(contents.includes('Data record')) {
             const paidHistory = await ctx.db.query.userCoinHistories({where: {contents: contents, 
-                                                                    userId: {id: userId},
+                                                                    userId: {id: user_id},
                                                                     date_gte: new Date(`${today.getFullYear()}-${today.getMonth()}-01`)
                                                                     },
                                                                     orderBy: 'date_DESC'});
@@ -66,13 +67,13 @@ module.exports = async (
                 reqBody.token = rewards[1].amount * recordedDayCount + rewards[0].amount * isImageColorCount;
             }
         } else if(contents == 'INVITE FRIEND') {
-            const refferalUser = await ctx.db.query.users({where: {referralCode : address}}, '{ id userWallet{id address status}}');
-            if(!refferalUser || refferalUser.length == 0) {
+            const referralUser = await ctx.db.query.users({where: {referralCode : address}}, '{ id userWallet{id address status}}');
+            if(!referralUser || referralUser.length == 0) {
                 console.log(`NO REFFERAL CODE: ${address} USER`)
                 return null;
             }
             let refferalAddress;
-            await refferalUser[0].userWallet.some((data) => {
+            await referralUser[0].userWallet.some((data) => {
                 if(data.status) {
                     refferalAddress = data.address;
                     return data.address
@@ -83,12 +84,12 @@ module.exports = async (
                 console.log('NO REFFERAL USER WALLET')
                 return null;
             }
-            userId = refferalUser[0].id;
+            user_id = referralUser[0].id;
             reqBody.toAddress = refferalAddress;
             reqBody.contents = rewards[0].contents;
             reqBody.token = rewards[0].amount;
         } else {
-            const paidHistory = await ctx.db.query.userCoinHistories({where: {contents: contents, userId: {id: userId}}, orderBy: 'date_DESC'});
+            const paidHistory = await ctx.db.query.userCoinHistories({where: {contents: contents, userId: {id: user_id}}, orderBy: 'date_DESC'});
             if (paidHistory.length > 0) {
                 console.log('ALREADY PAID')
                 return null;
@@ -115,7 +116,7 @@ module.exports = async (
     let data = {
         userId: {
             connect: {
-                id: userId
+                id: user_id
             }
         },
         category: category,
@@ -129,7 +130,7 @@ module.exports = async (
         data.coin = data.coin * -1
     }
 
-    let wallet = await ctx.db.query.userWallets({where: {userId: {id: userId}, address, status: true}})
+    let wallet = await ctx.db.query.userWallets({where: {userId: {id: user_id}, address, status: true}})
     if(wallet.length !== 0) {
         data.walletId = wallet[0].id
     }
