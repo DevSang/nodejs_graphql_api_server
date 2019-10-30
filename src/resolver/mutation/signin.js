@@ -12,8 +12,9 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 		throw new Error('NO_FIREBASE_TOKEN');
 	else console.log('>> [SIGN IN]', email);
 
+	const lowerEmail = email.toLowerCase();
 	const tokenUser = ctx.response.locals.user;
-	var user = await ctx.db.query.user({ where: { email: email } });
+	var user = await ctx.db.query.user({ where: { email: lowerEmail } });
 
 	// exception : DB에 user가 없을 때
 	if (!user) throw new Error('NO_USER_IN_DB');
