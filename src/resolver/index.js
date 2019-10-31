@@ -57,6 +57,7 @@ const resolvers = {
         upsertUserRecordCameraDataByTime: forwardTo('db'),
         updateUserRecordCameraDataByTime: forwardTo('db'),
         deleteUserRecordCameraDataByTime: forwardTo('db'),
+        updateManyUserRecordCameraDataByTimes: forwardTo('db'),
         createUserRecordDataByDay: forwardTo('db'),
         createUserRecordDataByPeriod: forwardTo('db'),
         updateUserRecordDataByTime: forwardTo('db'),

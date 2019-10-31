@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Fri Oct 18 2019 14:06:39 GMT+0900 (GMT+09:00)
+# timestamp: Wed Oct 30 2019 02:51:09 GMT+0000 (UTC)
 
 type AdditionalInfo {
   id: Int!
@@ -9,6 +9,7 @@ type AdditionalInfo {
   cycleIrregular: Boolean!
   ethnicity: String
   height: Float!
+  heightUnit: String
   inUseMenstrualCup: String
   inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
@@ -19,6 +20,7 @@ type AdditionalInfo {
   periodIrregular: Boolean!
   userId: Int
   weight: Float!
+  weightUnit: String
 }
 
 """A connection to a list of items."""
@@ -38,6 +40,7 @@ input AdditionalInfoCreateInput {
   cycleIrregular: Boolean!
   ethnicity: String
   height: Float!
+  heightUnit: String
   inUseMenstrualCup: String
   inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
@@ -48,6 +51,7 @@ input AdditionalInfoCreateInput {
   periodIrregular: Boolean!
   userId: Int
   weight: Float!
+  weightUnit: String
 }
 
 """An edge in a connection."""
@@ -74,6 +78,8 @@ enum AdditionalInfoOrderByInput {
   ethnicity_DESC
   height_ASC
   height_DESC
+  heightUnit_ASC
+  heightUnit_DESC
   inUseMenstrualCup_ASC
   inUseMenstrualCup_DESC
   inUseMenstrualCupSize_ASC
@@ -94,6 +100,8 @@ enum AdditionalInfoOrderByInput {
   userId_DESC
   weight_ASC
   weight_DESC
+  weightUnit_ASC
+  weightUnit_DESC
 }
 
 type AdditionalInfoPreviousValues {
@@ -104,6 +112,7 @@ type AdditionalInfoPreviousValues {
   cycleIrregular: Boolean!
   ethnicity: String
   height: Float!
+  heightUnit: String
   inUseMenstrualCup: String
   inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
@@ -114,6 +123,7 @@ type AdditionalInfoPreviousValues {
   periodIrregular: Boolean!
   userId: Int
   weight: Float!
+  weightUnit: String
 }
 
 type AdditionalInfoSubscriptionPayload {
@@ -160,6 +170,7 @@ input AdditionalInfoUpdateInput {
   cycleIrregular: Boolean
   ethnicity: String
   height: Float
+  heightUnit: String
   inUseMenstrualCup: String
   inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
@@ -170,6 +181,7 @@ input AdditionalInfoUpdateInput {
   periodIrregular: Boolean
   userId: Int
   weight: Float
+  weightUnit: String
 }
 
 input AdditionalInfoUpdateManyMutationInput {
@@ -179,6 +191,7 @@ input AdditionalInfoUpdateManyMutationInput {
   cycleIrregular: Boolean
   ethnicity: String
   height: Float
+  heightUnit: String
   inUseMenstrualCup: String
   inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
@@ -189,6 +202,7 @@ input AdditionalInfoUpdateManyMutationInput {
   periodIrregular: Boolean
   userId: Int
   weight: Float
+  weightUnit: String
 }
 
 input AdditionalInfoWhereInput {
@@ -354,6 +368,46 @@ input AdditionalInfoWhereInput {
 
   """All values greater than or equal the given value."""
   height_gte: Float
+  heightUnit: String
+
+  """All values that are not equal to given value."""
+  heightUnit_not: String
+
+  """All values that are contained in given list."""
+  heightUnit_in: [String!]
+
+  """All values that are not contained in given list."""
+  heightUnit_not_in: [String!]
+
+  """All values less than the given value."""
+  heightUnit_lt: String
+
+  """All values less than or equal the given value."""
+  heightUnit_lte: String
+
+  """All values greater than the given value."""
+  heightUnit_gt: String
+
+  """All values greater than or equal the given value."""
+  heightUnit_gte: String
+
+  """All values containing the given string."""
+  heightUnit_contains: String
+
+  """All values not containing the given string."""
+  heightUnit_not_contains: String
+
+  """All values starting with the given string."""
+  heightUnit_starts_with: String
+
+  """All values not starting with the given string."""
+  heightUnit_not_starts_with: String
+
+  """All values ending with the given string."""
+  heightUnit_ends_with: String
+
+  """All values not ending with the given string."""
+  heightUnit_not_ends_with: String
   inUseMenstrualCup: String
 
   """All values that are not equal to given value."""
@@ -610,6 +664,46 @@ input AdditionalInfoWhereInput {
 
   """All values greater than or equal the given value."""
   weight_gte: Float
+  weightUnit: String
+
+  """All values that are not equal to given value."""
+  weightUnit_not: String
+
+  """All values that are contained in given list."""
+  weightUnit_in: [String!]
+
+  """All values that are not contained in given list."""
+  weightUnit_not_in: [String!]
+
+  """All values less than the given value."""
+  weightUnit_lt: String
+
+  """All values less than or equal the given value."""
+  weightUnit_lte: String
+
+  """All values greater than the given value."""
+  weightUnit_gt: String
+
+  """All values greater than or equal the given value."""
+  weightUnit_gte: String
+
+  """All values containing the given string."""
+  weightUnit_contains: String
+
+  """All values not containing the given string."""
+  weightUnit_not_contains: String
+
+  """All values starting with the given string."""
+  weightUnit_starts_with: String
+
+  """All values not starting with the given string."""
+  weightUnit_not_starts_with: String
+
+  """All values ending with the given string."""
+  weightUnit_ends_with: String
+
+  """All values not ending with the given string."""
+  weightUnit_not_ends_with: String
 }
 
 input AdditionalInfoWhereUniqueInput {
@@ -13014,6 +13108,7 @@ type User {
   cupDataQaResponse(where: CupDataQaResponseWhereInput, orderBy: CupDataQaResponseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CupDataQaResponse!]
   cupDataUserRemove(where: CupDataUserRemoveWhereInput, orderBy: CupDataUserRemoveOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CupDataUserRemove!]
   deleted: Boolean!
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -13970,6 +14065,7 @@ input UserCreateInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -14054,6 +14150,7 @@ input UserCreateWithoutAppServerSyncInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -14082,6 +14179,7 @@ input UserCreateWithoutCupDataProcFlowInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -14110,6 +14208,7 @@ input UserCreateWithoutCupDataProcMdatesInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -14138,6 +14237,7 @@ input UserCreateWithoutCupDataQaResponseInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -14166,6 +14266,7 @@ input UserCreateWithoutCupDataUserRemoveInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -14194,6 +14295,7 @@ input UserCreateWithoutEthnicityIdInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -14222,6 +14324,7 @@ input UserCreateWithoutUserCoinHistoryInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -14250,6 +14353,7 @@ input UserCreateWithoutUserCupsInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -14278,6 +14382,7 @@ input UserCreateWithoutUserInterviewDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -14306,6 +14411,7 @@ input UserCreateWithoutUserRecordDataByPeriodInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -14334,6 +14440,7 @@ input UserCreateWithoutUserWalletInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -15379,6 +15486,8 @@ enum UserOrderByInput {
   countryId_DESC
   deleted_ASC
   deleted_DESC
+  deviceModel_ASC
+  deviceModel_DESC
   dob_ASC
   dob_DESC
   email_ASC
@@ -15410,6 +15519,7 @@ type UserPreviousValues {
   anonUserId: Int
   countryId: Int
   deleted: Boolean!
+  deviceModel: String
   dob: DateTime!
   email: String!
   emailVerify: Boolean
@@ -17230,6 +17340,46 @@ input UserScalarWhereInput {
 
   """All values that are not equal to given value."""
   deleted_not: Boolean
+  deviceModel: String
+
+  """All values that are not equal to given value."""
+  deviceModel_not: String
+
+  """All values that are contained in given list."""
+  deviceModel_in: [String!]
+
+  """All values that are not contained in given list."""
+  deviceModel_not_in: [String!]
+
+  """All values less than the given value."""
+  deviceModel_lt: String
+
+  """All values less than or equal the given value."""
+  deviceModel_lte: String
+
+  """All values greater than the given value."""
+  deviceModel_gt: String
+
+  """All values greater than or equal the given value."""
+  deviceModel_gte: String
+
+  """All values containing the given string."""
+  deviceModel_contains: String
+
+  """All values not containing the given string."""
+  deviceModel_not_contains: String
+
+  """All values starting with the given string."""
+  deviceModel_starts_with: String
+
+  """All values not starting with the given string."""
+  deviceModel_not_starts_with: String
+
+  """All values ending with the given string."""
+  deviceModel_ends_with: String
+
+  """All values not ending with the given string."""
+  deviceModel_not_ends_with: String
   dob: DateTime
 
   """All values that are not equal to given value."""
@@ -17941,6 +18091,7 @@ input UserUpdateInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -17970,6 +18121,7 @@ input UserUpdateManyDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -17988,6 +18140,7 @@ input UserUpdateManyMutationInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -18101,6 +18254,7 @@ input UserUpdateWithoutAppServerSyncDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -18129,6 +18283,7 @@ input UserUpdateWithoutCupDataProcFlowDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -18157,6 +18312,7 @@ input UserUpdateWithoutCupDataProcMdatesDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -18185,6 +18341,7 @@ input UserUpdateWithoutCupDataQaResponseDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -18213,6 +18370,7 @@ input UserUpdateWithoutCupDataUserRemoveDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -18241,6 +18399,7 @@ input UserUpdateWithoutEthnicityIdDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -18269,6 +18428,7 @@ input UserUpdateWithoutUserCoinHistoryDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -18297,6 +18457,7 @@ input UserUpdateWithoutUserCupsDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -18325,6 +18486,7 @@ input UserUpdateWithoutUserInterviewDataDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -18353,6 +18515,7 @@ input UserUpdateWithoutUserRecordDataByPeriodDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -18381,6 +18544,7 @@ input UserUpdateWithoutUserWalletDataInput {
   anonUserId: Int
   countryId: Int
   deleted: Boolean
+  deviceModel: String
   dob: DateTime
   email: String
   emailVerify: Boolean
@@ -18901,6 +19065,46 @@ input UserWhereInput {
 
   """All values that are not equal to given value."""
   deleted_not: Boolean
+  deviceModel: String
+
+  """All values that are not equal to given value."""
+  deviceModel_not: String
+
+  """All values that are contained in given list."""
+  deviceModel_in: [String!]
+
+  """All values that are not contained in given list."""
+  deviceModel_not_in: [String!]
+
+  """All values less than the given value."""
+  deviceModel_lt: String
+
+  """All values less than or equal the given value."""
+  deviceModel_lte: String
+
+  """All values greater than the given value."""
+  deviceModel_gt: String
+
+  """All values greater than or equal the given value."""
+  deviceModel_gte: String
+
+  """All values containing the given string."""
+  deviceModel_contains: String
+
+  """All values not containing the given string."""
+  deviceModel_not_contains: String
+
+  """All values starting with the given string."""
+  deviceModel_starts_with: String
+
+  """All values not starting with the given string."""
+  deviceModel_not_starts_with: String
+
+  """All values ending with the given string."""
+  deviceModel_ends_with: String
+
+  """All values not ending with the given string."""
+  deviceModel_not_ends_with: String
   dob: DateTime
 
   """All values that are not equal to given value."""

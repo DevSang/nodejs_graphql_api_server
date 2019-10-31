@@ -309,6 +309,7 @@ type User @pgTable(name: "users") {
   cupDataQaResponse: [CupDataQaResponse] @pgColumn(name: "cup_data_qa_response")
   cupDataUserRemove: [CupDataUserRemove] @pgColumn(name: "cup_data_user_remove")
   deleted: Boolean! @default(value: false)
+  deviceModel: String @pgColumn(name: "device_model")
   dob: DateTime!
   email: String! @unique
   emailVerify: Boolean @default(value: false) @pgColumn(name: "email_verify")
