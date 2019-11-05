@@ -376,14 +376,13 @@ type UserInterviewQuestion @pgTable(name: "user_interview_questions") {
 type UserRecordCameraDataByTime @pgTable(name: "user_record_camera_data_by_time") {
   id: Int! @unique
   coinHistoryRowId: UserCoinHistory @pgColumn(name: "coin_history_row_id")
-  confirm1Yn: Boolean @default(value: false) @pgColumn(name: "confirm1_yn")
-  confirm2Yn: Boolean @default(value: false) @pgColumn(name: "confirm2_yn")
+  confirmYn: Boolean @pgColumn(name: "confirm_yn")
+  deleteYn: Boolean @default(value: false) @pgColumn(name: "delete_yn")
   height: Float
   imagePath: String @pgColumn(name: "image_path")
   locationX: Float @pgColumn(name: "location_x")
   locationY: Float @pgColumn(name: "location_y")
   size: Float
-  userRecordDataByTime: [UserRecordDataByTime] @pgColumn(name: "user_record_data_by_time")
   width: Float
 }
 
@@ -407,7 +406,7 @@ type UserRecordDataByPeriod @pgTable(name: "user_record_data_by_period") {
 
 type UserRecordDataByTime @pgTable(name: "user_record_data_by_time") {
   id: Int! @pgColumn(name: "row_id") @unique
-  cameraDataId: UserRecordCameraDataByTime @pgColumn(name: "camera_data_id")
+  cameraDataId: Int @pgColumn(name: "camera_data_id")
   changeTime: DateTime! @pgColumn(name: "change_time")
   colorB: Int @pgColumn(name: "color_b")
   colorG: Int @pgColumn(name: "color_g")

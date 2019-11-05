@@ -48,7 +48,7 @@ type Mutation {
         email: String!
         password: String!
     ): getNewTokenPayload
-    removeUserRecordCameraData(id: Int!): UserRecordCameraDataByTime
+    removeUserRecordCameraData(id: Int! deleteYn: Boolean): UserRecordCameraDataByTime
     registerUserWallet(
         email: String!
         userId: String!
@@ -59,6 +59,34 @@ type Mutation {
         userId: Int
         address: String!
     ): UserWallet
+    createCameraCoinHistory(
+        cameraId: Int!
+        userId: Int!
+        periodCoinHistoryRowId: Int!
+    ): UserCoinHistory
+    getCameraDatas(
+        changeTime: DateTime!
+    ): [ CameraData ]
+}
+
+type CameraData {
+    periodDataId: Int
+    user: User
+    coinHistoryRowId: Int
+    cameraCoinHistoryId: Int
+    timeDataId: Int
+    changeTime: DateTime
+    color: String
+    cameraDataId: Int
+    id: Int
+    confirmYn: Boolean
+    deleteYn: Boolean
+    height: Int
+    imagePath: String
+    locationX: Float
+    locationY: Float
+    size: Int
+    width: Int
 }
 
 type TxMarketBuyHistory {

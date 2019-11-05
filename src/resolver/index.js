@@ -17,6 +17,7 @@ const resolvers = {
         //cup_datasConnection: forwardTo('db'),
         //cup_data_proc_flows: forwardTo('db'),
         usersDataAnalysis: forwardTo('db'),
+        userCoinHistory: forwardTo('db'),
         userCoinHistories: forwardTo('db'),
         userCoinRewardsFee: forwardTo('db'),
         userCoinRewardsFees: forwardTo('db'),
@@ -100,6 +101,8 @@ const resolvers = {
         removeUserRecordCameraData: require('./mutation/removeUserRecordCameraData'),
         registerUserWallet: require('./mutation/registerUserWallet'),
         recoverUserWallet: require('./mutation/recoverUserWallet'),
+        createCameraCoinHistory: require('./mutation/createCameraCoinHistory'),
+        getCameraDatas: require('./mutation/getCameraDatas'),
     }
 };
 
