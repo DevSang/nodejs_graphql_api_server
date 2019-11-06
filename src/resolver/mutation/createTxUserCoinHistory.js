@@ -39,7 +39,7 @@ module.exports = async (
         let rewards = await ctx.db.query.userCoinRewardsFees({where: feeQuery, orderBy: 'contents_DESC'});
         let today = new Date();
         today = new Date(`${today.getFullYear()}-${today.getMonth() + 1 }-01`);
-        reqBody.date = today;
+        reqBody.date = today; 
 
         // history 확인
         if(contents.includes('Data record')) {
