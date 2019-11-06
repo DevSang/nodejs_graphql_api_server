@@ -377,7 +377,7 @@ type UserRecordCameraDataByTime @pgTable(name: "user_record_camera_data_by_time"
   id: Int! @unique
   coinHistoryRowId: UserCoinHistory @pgColumn(name: "coin_history_row_id")
   confirmYn: Boolean @pgColumn(name: "confirm_yn")
-  deleteYn: Boolean @default(value: false) @pgColumn(name: "delete_yn")
+  deleteYn: Boolean @pgColumn(name: "delete_yn")
   height: Float
   imagePath: String @pgColumn(name: "image_path")
   locationX: Float @pgColumn(name: "location_x")

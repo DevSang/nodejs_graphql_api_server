@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue Nov 05 2019 13:32:25 GMT+0900 (GMT+09:00)
+# timestamp: Tue Nov 05 2019 16:56:18 GMT+0900 (GMT+09:00)
 
 type AdditionalInfo {
   id: Int!

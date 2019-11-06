@@ -66,7 +66,6 @@ module.exports = async (parent, {changeTime}, ctx, info) => {
             all.forEach(cameraData => {
                 allData.some((data, idx) => {
                     if(data.cameraDataId == cameraData.id) {
-                        console.log(`data.cameraDataId ${data.cameraDataId} cameraData.id ${cameraData.id}`)
                         let d = {...cameraData, cameraCoinHistoryId: cameraData.coinHistoryRowId}
                         delete d.coinHistoryRowId
                         result.push(Object.assign(data, cameraData))
