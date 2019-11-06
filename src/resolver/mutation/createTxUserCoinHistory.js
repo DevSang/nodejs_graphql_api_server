@@ -41,6 +41,9 @@ module.exports = async (
         
         // history 확인
         if(contents.includes('Data record')) {
+            reqBody.recordedDayCount = recordedDayCount;
+            reqBody.isImageColorCount = isImageColorCount;
+
             const paidHistory = await ctx.db.query.userCoinHistories({where: {contents: contents, 
                                                                     userId: {id: user_id},
                                                                     date_gte: new Date(`${today.getFullYear()}-${today.getMonth()}-01`)
