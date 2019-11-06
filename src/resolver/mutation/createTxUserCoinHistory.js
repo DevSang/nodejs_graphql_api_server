@@ -37,7 +37,9 @@ module.exports = async (
     if(category == 'REWARDS') {
         let feeQuery = contents.includes('Data record') ? {contents_in: ['RECORD', 'CAMERA RECORD']} : {contents};
         let rewards = await ctx.db.query.userCoinRewardsFees({where: feeQuery, orderBy: 'contents_DESC'});
-        const today = new Date();
+        let today = new Date();
+        today = new Date(`${today.getFullYear()}-${today.getMonth()}-01`);
+        reqBody.date = today;
         
         // history 확인
         if(contents.includes('Data record')) {
@@ -46,7 +48,7 @@ module.exports = async (
 
             const paidHistory = await ctx.db.query.userCoinHistories({where: {contents: contents, 
                                                                     userId: {id: user_id},
-                                                                    date_gte: new Date(`${today.getFullYear()}-${today.getMonth()}-01`)
+                                                                    date_gte: today
                                                                     },
                                                                     orderBy: 'date_DESC'});
             let paidGem = 0;
