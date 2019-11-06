@@ -27,7 +27,7 @@ module.exports = async (
         const today = new Date();
         const paidHistory = await ctx.db.query.userCoinHistories({where: {contents: contents, 
                                                                     userId: {id: userId},
-                                                                    date_gte: new Date(`${today.getFullYear()}-${today.getMonth()}-01`)
+                                                                    date_gte: new Date(`${today.getFullYear()}-${today.getMonth() + 1}-01`)
                                                                 },
                                                                 orderBy: 'date_DESC'});
         if(paidHistory.length >= 5) {
