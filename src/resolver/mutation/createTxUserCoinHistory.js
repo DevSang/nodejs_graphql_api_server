@@ -64,12 +64,13 @@ module.exports = async (
             if(rewards[0].contents == 'RECORD') {
                 reqBody.contents = rewards[0].contents;
                 reqBody.token = rewards[0].amount * recordedDayCount + rewards[1].amount * isImageColorCount;
-                if(reqBody.token + paidGem >= 50) {
-                    reqBody.token = 50 - paidGem;
-                }
             } else {
                 reqBody.contents = rewards[1].contents;
                 reqBody.token = rewards[1].amount * recordedDayCount + rewards[0].amount * isImageColorCount;
+            }
+
+            if(reqBody.token + paidGem > 50) {
+                reqBody.token = 50 - paidGem;
             }
         } else if(contents == 'INVITE FRIEND') {
             const referralUser = await ctx.db.query.users({where: {referralCode : address}}, '{ id userWallet{id address status}}');
