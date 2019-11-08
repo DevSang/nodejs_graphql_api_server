@@ -1,5 +1,7 @@
 const request = require('request-promise-native');
 const moment = require('moment');
+const recoverUserWallet = require('./recoverUserWallet');
+const registerUserWallet = require('./registerUserWallet');
 
 module.exports = async (
     parent,
@@ -66,9 +68,13 @@ module.exports = async (
             if(rewards[0].contents == 'RECORD') {
                 reqBody.contents = rewards[0].contents;
                 reqBody.token = rewards[0].amount * recordedDayCount + rewards[1].amount * isImageColorCount;
+                console.log(`${rewards[0].amount} ${rewards[1].amount}`)
+                console.log(`${isImageColorCount}`)
             } else {
                 reqBody.contents = rewards[1].contents;
                 reqBody.token = rewards[1].amount * recordedDayCount + rewards[0].amount * isImageColorCount;
+                console.log(`${rewards[0].amount} ${rewards[1].amount}`)
+                console.log(`${isImageColorCount}`)
             }
 
             if(reqBody.token + paidGem > 50) {
@@ -139,9 +145,34 @@ module.exports = async (
         data.coin = data.coin * -1
     }
 
-    let wallet = await ctx.db.query.userWallets({where: {userId: {id: user_id}, address: dbAddress, status: true}})
+    let wallet = await ctx.db.query.userWallets({where: {userId: {id: user_id}, address: dbAddress}})
     if(wallet.length !== 0) {
         data.walletId = wallet[0].id
+        if(!wallet[0].status) {
+            try {
+                let recoverUser = await ctx.db.query.user({where: {id: user_id}})
+                await recoverUserWallet(
+                    parent,
+                    {userId: user_id, address: dbAddress, email: recoverUser.email},
+                    ctx,
+                info)
+            } catch(err) {
+                console.log(err)
+            }
+        }
+    } else {
+        let recoverUser = await ctx.db.query.user({where: {id: user_id}})
+        try {
+            wallet = await registerUserWallet(
+                parent,
+                {userId: user_id, address: dbAddress, email: recoverUser.email},
+                ctx,
+                info
+                )
+            data.walletId = wallet.id
+        } catch(err) {
+            console.log(err)
+        }
     }
     let createUserCoin = await ctx.db.mutation.createUserCoinHistory({
         data

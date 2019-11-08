@@ -16,7 +16,7 @@ module.exports = db = new Prisma({
     typeDefs: 'src/generated/prisma.graphql',
     endpoint: 'http://localhost:4466/',
     secret: 'jwt-secret',
-    debug: false
+    debug: true
 });
 
 const server = new GraphQLServer({

@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue Nov 05 2019 16:56:18 GMT+0900 (GMT+09:00)
+# timestamp: Thu Nov 07 2019 17:42:52 GMT+0900 (GMT+09:00)
 
 type AdditionalInfo {
   id: Int!
@@ -9,6 +9,7 @@ type AdditionalInfo {
   cycleIrregular: Boolean!
   ethnicity: String
   height: Float!
+  heightUnit: String
   inUseMenstrualCup: String
   inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
@@ -19,6 +20,7 @@ type AdditionalInfo {
   periodIrregular: Boolean!
   userId: Int
   weight: Float!
+  weightUnit: String
 }
 
 """A connection to a list of items."""
@@ -38,6 +40,7 @@ input AdditionalInfoCreateInput {
   cycleIrregular: Boolean!
   ethnicity: String
   height: Float!
+  heightUnit: String
   inUseMenstrualCup: String
   inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
@@ -48,6 +51,7 @@ input AdditionalInfoCreateInput {
   periodIrregular: Boolean!
   userId: Int
   weight: Float!
+  weightUnit: String
 }
 
 """An edge in a connection."""
@@ -74,6 +78,8 @@ enum AdditionalInfoOrderByInput {
   ethnicity_DESC
   height_ASC
   height_DESC
+  heightUnit_ASC
+  heightUnit_DESC
   inUseMenstrualCup_ASC
   inUseMenstrualCup_DESC
   inUseMenstrualCupSize_ASC
@@ -94,6 +100,8 @@ enum AdditionalInfoOrderByInput {
   userId_DESC
   weight_ASC
   weight_DESC
+  weightUnit_ASC
+  weightUnit_DESC
 }
 
 type AdditionalInfoPreviousValues {
@@ -104,6 +112,7 @@ type AdditionalInfoPreviousValues {
   cycleIrregular: Boolean!
   ethnicity: String
   height: Float!
+  heightUnit: String
   inUseMenstrualCup: String
   inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
@@ -114,6 +123,7 @@ type AdditionalInfoPreviousValues {
   periodIrregular: Boolean!
   userId: Int
   weight: Float!
+  weightUnit: String
 }
 
 type AdditionalInfoSubscriptionPayload {
@@ -160,6 +170,7 @@ input AdditionalInfoUpdateInput {
   cycleIrregular: Boolean
   ethnicity: String
   height: Float
+  heightUnit: String
   inUseMenstrualCup: String
   inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
@@ -170,6 +181,7 @@ input AdditionalInfoUpdateInput {
   periodIrregular: Boolean
   userId: Int
   weight: Float
+  weightUnit: String
 }
 
 input AdditionalInfoUpdateManyMutationInput {
@@ -179,6 +191,7 @@ input AdditionalInfoUpdateManyMutationInput {
   cycleIrregular: Boolean
   ethnicity: String
   height: Float
+  heightUnit: String
   inUseMenstrualCup: String
   inUseMenstrualCupSize: String
   iudImplanonExpireDate: DateTime
@@ -189,6 +202,7 @@ input AdditionalInfoUpdateManyMutationInput {
   periodIrregular: Boolean
   userId: Int
   weight: Float
+  weightUnit: String
 }
 
 input AdditionalInfoWhereInput {
@@ -354,6 +368,46 @@ input AdditionalInfoWhereInput {
 
   """All values greater than or equal the given value."""
   height_gte: Float
+  heightUnit: String
+
+  """All values that are not equal to given value."""
+  heightUnit_not: String
+
+  """All values that are contained in given list."""
+  heightUnit_in: [String!]
+
+  """All values that are not contained in given list."""
+  heightUnit_not_in: [String!]
+
+  """All values less than the given value."""
+  heightUnit_lt: String
+
+  """All values less than or equal the given value."""
+  heightUnit_lte: String
+
+  """All values greater than the given value."""
+  heightUnit_gt: String
+
+  """All values greater than or equal the given value."""
+  heightUnit_gte: String
+
+  """All values containing the given string."""
+  heightUnit_contains: String
+
+  """All values not containing the given string."""
+  heightUnit_not_contains: String
+
+  """All values starting with the given string."""
+  heightUnit_starts_with: String
+
+  """All values not starting with the given string."""
+  heightUnit_not_starts_with: String
+
+  """All values ending with the given string."""
+  heightUnit_ends_with: String
+
+  """All values not ending with the given string."""
+  heightUnit_not_ends_with: String
   inUseMenstrualCup: String
 
   """All values that are not equal to given value."""
@@ -610,6 +664,46 @@ input AdditionalInfoWhereInput {
 
   """All values greater than or equal the given value."""
   weight_gte: Float
+  weightUnit: String
+
+  """All values that are not equal to given value."""
+  weightUnit_not: String
+
+  """All values that are contained in given list."""
+  weightUnit_in: [String!]
+
+  """All values that are not contained in given list."""
+  weightUnit_not_in: [String!]
+
+  """All values less than the given value."""
+  weightUnit_lt: String
+
+  """All values less than or equal the given value."""
+  weightUnit_lte: String
+
+  """All values greater than the given value."""
+  weightUnit_gt: String
+
+  """All values greater than or equal the given value."""
+  weightUnit_gte: String
+
+  """All values containing the given string."""
+  weightUnit_contains: String
+
+  """All values not containing the given string."""
+  weightUnit_not_contains: String
+
+  """All values starting with the given string."""
+  weightUnit_starts_with: String
+
+  """All values not starting with the given string."""
+  weightUnit_not_starts_with: String
+
+  """All values ending with the given string."""
+  weightUnit_ends_with: String
+
+  """All values not ending with the given string."""
+  weightUnit_not_ends_with: String
 }
 
 input AdditionalInfoWhereUniqueInput {
@@ -733,6 +827,10 @@ type AggregateMarketList {
 }
 
 type AggregateMarketListDetail {
+  count: Int!
+}
+
+type AggregateMenstualCup {
   count: Int!
 }
 
@@ -12319,6 +12417,494 @@ input MarketListWhereUniqueInput {
   id: Int
 }
 
+type MenstualCup {
+  id: Int!
+  bodyLength: Float
+  cupName: String
+  cupSize: String
+  halfVolume: Float
+  quarterVolume: Float
+  rimDiameter: Float
+  stemLength: Float
+  stemType: String
+  threeFourthVolume: Float
+  totalLength: Float
+  totalVolume: Float
+}
+
+"""A connection to a list of items."""
+type MenstualCupConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [MenstualCupEdge]!
+  aggregate: AggregateMenstualCup!
+}
+
+input MenstualCupCreateInput {
+  bodyLength: Float
+  cupName: String
+  cupSize: String
+  halfVolume: Float
+  quarterVolume: Float
+  rimDiameter: Float
+  stemLength: Float
+  stemType: String
+  threeFourthVolume: Float
+  totalLength: Float
+  totalVolume: Float
+}
+
+"""An edge in a connection."""
+type MenstualCupEdge {
+  """The item at the end of the edge."""
+  node: MenstualCup!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum MenstualCupOrderByInput {
+  id_ASC
+  id_DESC
+  bodyLength_ASC
+  bodyLength_DESC
+  cupName_ASC
+  cupName_DESC
+  cupSize_ASC
+  cupSize_DESC
+  halfVolume_ASC
+  halfVolume_DESC
+  quarterVolume_ASC
+  quarterVolume_DESC
+  rimDiameter_ASC
+  rimDiameter_DESC
+  stemLength_ASC
+  stemLength_DESC
+  stemType_ASC
+  stemType_DESC
+  threeFourthVolume_ASC
+  threeFourthVolume_DESC
+  totalLength_ASC
+  totalLength_DESC
+  totalVolume_ASC
+  totalVolume_DESC
+}
+
+type MenstualCupPreviousValues {
+  id: Int!
+  bodyLength: Float
+  cupName: String
+  cupSize: String
+  halfVolume: Float
+  quarterVolume: Float
+  rimDiameter: Float
+  stemLength: Float
+  stemType: String
+  threeFourthVolume: Float
+  totalLength: Float
+  totalVolume: Float
+}
+
+type MenstualCupSubscriptionPayload {
+  mutation: MutationType!
+  node: MenstualCup
+  updatedFields: [String!]
+  previousValues: MenstualCupPreviousValues
+}
+
+input MenstualCupSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MenstualCupSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MenstualCupSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MenstualCupSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: MenstualCupWhereInput
+}
+
+input MenstualCupUpdateInput {
+  bodyLength: Float
+  cupName: String
+  cupSize: String
+  halfVolume: Float
+  quarterVolume: Float
+  rimDiameter: Float
+  stemLength: Float
+  stemType: String
+  threeFourthVolume: Float
+  totalLength: Float
+  totalVolume: Float
+}
+
+input MenstualCupUpdateManyMutationInput {
+  bodyLength: Float
+  cupName: String
+  cupSize: String
+  halfVolume: Float
+  quarterVolume: Float
+  rimDiameter: Float
+  stemLength: Float
+  stemType: String
+  threeFourthVolume: Float
+  totalLength: Float
+  totalVolume: Float
+}
+
+input MenstualCupWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MenstualCupWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MenstualCupWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MenstualCupWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  bodyLength: Float
+
+  """All values that are not equal to given value."""
+  bodyLength_not: Float
+
+  """All values that are contained in given list."""
+  bodyLength_in: [Float!]
+
+  """All values that are not contained in given list."""
+  bodyLength_not_in: [Float!]
+
+  """All values less than the given value."""
+  bodyLength_lt: Float
+
+  """All values less than or equal the given value."""
+  bodyLength_lte: Float
+
+  """All values greater than the given value."""
+  bodyLength_gt: Float
+
+  """All values greater than or equal the given value."""
+  bodyLength_gte: Float
+  cupName: String
+
+  """All values that are not equal to given value."""
+  cupName_not: String
+
+  """All values that are contained in given list."""
+  cupName_in: [String!]
+
+  """All values that are not contained in given list."""
+  cupName_not_in: [String!]
+
+  """All values less than the given value."""
+  cupName_lt: String
+
+  """All values less than or equal the given value."""
+  cupName_lte: String
+
+  """All values greater than the given value."""
+  cupName_gt: String
+
+  """All values greater than or equal the given value."""
+  cupName_gte: String
+
+  """All values containing the given string."""
+  cupName_contains: String
+
+  """All values not containing the given string."""
+  cupName_not_contains: String
+
+  """All values starting with the given string."""
+  cupName_starts_with: String
+
+  """All values not starting with the given string."""
+  cupName_not_starts_with: String
+
+  """All values ending with the given string."""
+  cupName_ends_with: String
+
+  """All values not ending with the given string."""
+  cupName_not_ends_with: String
+  cupSize: String
+
+  """All values that are not equal to given value."""
+  cupSize_not: String
+
+  """All values that are contained in given list."""
+  cupSize_in: [String!]
+
+  """All values that are not contained in given list."""
+  cupSize_not_in: [String!]
+
+  """All values less than the given value."""
+  cupSize_lt: String
+
+  """All values less than or equal the given value."""
+  cupSize_lte: String
+
+  """All values greater than the given value."""
+  cupSize_gt: String
+
+  """All values greater than or equal the given value."""
+  cupSize_gte: String
+
+  """All values containing the given string."""
+  cupSize_contains: String
+
+  """All values not containing the given string."""
+  cupSize_not_contains: String
+
+  """All values starting with the given string."""
+  cupSize_starts_with: String
+
+  """All values not starting with the given string."""
+  cupSize_not_starts_with: String
+
+  """All values ending with the given string."""
+  cupSize_ends_with: String
+
+  """All values not ending with the given string."""
+  cupSize_not_ends_with: String
+  halfVolume: Float
+
+  """All values that are not equal to given value."""
+  halfVolume_not: Float
+
+  """All values that are contained in given list."""
+  halfVolume_in: [Float!]
+
+  """All values that are not contained in given list."""
+  halfVolume_not_in: [Float!]
+
+  """All values less than the given value."""
+  halfVolume_lt: Float
+
+  """All values less than or equal the given value."""
+  halfVolume_lte: Float
+
+  """All values greater than the given value."""
+  halfVolume_gt: Float
+
+  """All values greater than or equal the given value."""
+  halfVolume_gte: Float
+  quarterVolume: Float
+
+  """All values that are not equal to given value."""
+  quarterVolume_not: Float
+
+  """All values that are contained in given list."""
+  quarterVolume_in: [Float!]
+
+  """All values that are not contained in given list."""
+  quarterVolume_not_in: [Float!]
+
+  """All values less than the given value."""
+  quarterVolume_lt: Float
+
+  """All values less than or equal the given value."""
+  quarterVolume_lte: Float
+
+  """All values greater than the given value."""
+  quarterVolume_gt: Float
+
+  """All values greater than or equal the given value."""
+  quarterVolume_gte: Float
+  rimDiameter: Float
+
+  """All values that are not equal to given value."""
+  rimDiameter_not: Float
+
+  """All values that are contained in given list."""
+  rimDiameter_in: [Float!]
+
+  """All values that are not contained in given list."""
+  rimDiameter_not_in: [Float!]
+
+  """All values less than the given value."""
+  rimDiameter_lt: Float
+
+  """All values less than or equal the given value."""
+  rimDiameter_lte: Float
+
+  """All values greater than the given value."""
+  rimDiameter_gt: Float
+
+  """All values greater than or equal the given value."""
+  rimDiameter_gte: Float
+  stemLength: Float
+
+  """All values that are not equal to given value."""
+  stemLength_not: Float
+
+  """All values that are contained in given list."""
+  stemLength_in: [Float!]
+
+  """All values that are not contained in given list."""
+  stemLength_not_in: [Float!]
+
+  """All values less than the given value."""
+  stemLength_lt: Float
+
+  """All values less than or equal the given value."""
+  stemLength_lte: Float
+
+  """All values greater than the given value."""
+  stemLength_gt: Float
+
+  """All values greater than or equal the given value."""
+  stemLength_gte: Float
+  stemType: String
+
+  """All values that are not equal to given value."""
+  stemType_not: String
+
+  """All values that are contained in given list."""
+  stemType_in: [String!]
+
+  """All values that are not contained in given list."""
+  stemType_not_in: [String!]
+
+  """All values less than the given value."""
+  stemType_lt: String
+
+  """All values less than or equal the given value."""
+  stemType_lte: String
+
+  """All values greater than the given value."""
+  stemType_gt: String
+
+  """All values greater than or equal the given value."""
+  stemType_gte: String
+
+  """All values containing the given string."""
+  stemType_contains: String
+
+  """All values not containing the given string."""
+  stemType_not_contains: String
+
+  """All values starting with the given string."""
+  stemType_starts_with: String
+
+  """All values not starting with the given string."""
+  stemType_not_starts_with: String
+
+  """All values ending with the given string."""
+  stemType_ends_with: String
+
+  """All values not ending with the given string."""
+  stemType_not_ends_with: String
+  threeFourthVolume: Float
+
+  """All values that are not equal to given value."""
+  threeFourthVolume_not: Float
+
+  """All values that are contained in given list."""
+  threeFourthVolume_in: [Float!]
+
+  """All values that are not contained in given list."""
+  threeFourthVolume_not_in: [Float!]
+
+  """All values less than the given value."""
+  threeFourthVolume_lt: Float
+
+  """All values less than or equal the given value."""
+  threeFourthVolume_lte: Float
+
+  """All values greater than the given value."""
+  threeFourthVolume_gt: Float
+
+  """All values greater than or equal the given value."""
+  threeFourthVolume_gte: Float
+  totalLength: Float
+
+  """All values that are not equal to given value."""
+  totalLength_not: Float
+
+  """All values that are contained in given list."""
+  totalLength_in: [Float!]
+
+  """All values that are not contained in given list."""
+  totalLength_not_in: [Float!]
+
+  """All values less than the given value."""
+  totalLength_lt: Float
+
+  """All values less than or equal the given value."""
+  totalLength_lte: Float
+
+  """All values greater than the given value."""
+  totalLength_gt: Float
+
+  """All values greater than or equal the given value."""
+  totalLength_gte: Float
+  totalVolume: Float
+
+  """All values that are not equal to given value."""
+  totalVolume_not: Float
+
+  """All values that are contained in given list."""
+  totalVolume_in: [Float!]
+
+  """All values that are not contained in given list."""
+  totalVolume_not_in: [Float!]
+
+  """All values less than the given value."""
+  totalVolume_lt: Float
+
+  """All values less than or equal the given value."""
+  totalVolume_lte: Float
+
+  """All values greater than the given value."""
+  totalVolume_gt: Float
+
+  """All values greater than or equal the given value."""
+  totalVolume_gte: Float
+}
+
+input MenstualCupWhereUniqueInput {
+  id: Int
+}
+
 type Mutation {
   createAdditionalInfo(data: AdditionalInfoCreateInput!): AdditionalInfo!
   createAnswerType(data: AnswerTypeCreateInput!): AnswerType!
@@ -12350,6 +12936,7 @@ type Mutation {
   createMarketBuyHistory(data: MarketBuyHistoryCreateInput!): MarketBuyHistory!
   createMarketList(data: MarketListCreateInput!): MarketList!
   createMarketListDetail(data: MarketListDetailCreateInput!): MarketListDetail!
+  createMenstualCup(data: MenstualCupCreateInput!): MenstualCup!
   createPlatformComp(data: PlatformCompCreateInput!): PlatformComp!
   createUser(data: UserCreateInput!): User!
   createUserCoinHistory(data: UserCoinHistoryCreateInput!): UserCoinHistory!
@@ -12392,6 +12979,7 @@ type Mutation {
   updateMarketBuyHistory(data: MarketBuyHistoryUpdateInput!, where: MarketBuyHistoryWhereUniqueInput!): MarketBuyHistory
   updateMarketList(data: MarketListUpdateInput!, where: MarketListWhereUniqueInput!): MarketList
   updateMarketListDetail(data: MarketListDetailUpdateInput!, where: MarketListDetailWhereUniqueInput!): MarketListDetail
+  updateMenstualCup(data: MenstualCupUpdateInput!, where: MenstualCupWhereUniqueInput!): MenstualCup
   updatePlatformComp(data: PlatformCompUpdateInput!, where: PlatformCompWhereUniqueInput!): PlatformComp
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateUserCoinHistory(data: UserCoinHistoryUpdateInput!, where: UserCoinHistoryWhereUniqueInput!): UserCoinHistory
@@ -12435,6 +13023,7 @@ type Mutation {
   deleteMarketBuyHistory(where: MarketBuyHistoryWhereUniqueInput!): MarketBuyHistory
   deleteMarketList(where: MarketListWhereUniqueInput!): MarketList
   deleteMarketListDetail(where: MarketListDetailWhereUniqueInput!): MarketListDetail
+  deleteMenstualCup(where: MenstualCupWhereUniqueInput!): MenstualCup
   deletePlatformComp(where: PlatformCompWhereUniqueInput!): PlatformComp
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUserCoinHistory(where: UserCoinHistoryWhereUniqueInput!): UserCoinHistory
@@ -12477,6 +13066,7 @@ type Mutation {
   upsertMarketBuyHistory(where: MarketBuyHistoryWhereUniqueInput!, create: MarketBuyHistoryCreateInput!, update: MarketBuyHistoryUpdateInput!): MarketBuyHistory!
   upsertMarketList(where: MarketListWhereUniqueInput!, create: MarketListCreateInput!, update: MarketListUpdateInput!): MarketList!
   upsertMarketListDetail(where: MarketListDetailWhereUniqueInput!, create: MarketListDetailCreateInput!, update: MarketListDetailUpdateInput!): MarketListDetail!
+  upsertMenstualCup(where: MenstualCupWhereUniqueInput!, create: MenstualCupCreateInput!, update: MenstualCupUpdateInput!): MenstualCup!
   upsertPlatformComp(where: PlatformCompWhereUniqueInput!, create: PlatformCompCreateInput!, update: PlatformCompUpdateInput!): PlatformComp!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertUserCoinHistory(where: UserCoinHistoryWhereUniqueInput!, create: UserCoinHistoryCreateInput!, update: UserCoinHistoryUpdateInput!): UserCoinHistory!
@@ -12519,6 +13109,7 @@ type Mutation {
   updateManyMarketBuyHistories(data: MarketBuyHistoryUpdateManyMutationInput!, where: MarketBuyHistoryWhereInput): BatchPayload!
   updateManyMarketLists(data: MarketListUpdateManyMutationInput!, where: MarketListWhereInput): BatchPayload!
   updateManyMarketListDetails(data: MarketListDetailUpdateManyMutationInput!, where: MarketListDetailWhereInput): BatchPayload!
+  updateManyMenstualCups(data: MenstualCupUpdateManyMutationInput!, where: MenstualCupWhereInput): BatchPayload!
   updateManyPlatformComps(data: PlatformCompUpdateManyMutationInput!, where: PlatformCompWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyUserCoinHistories(data: UserCoinHistoryUpdateManyMutationInput!, where: UserCoinHistoryWhereInput): BatchPayload!
@@ -12561,6 +13152,7 @@ type Mutation {
   deleteManyMarketBuyHistories(where: MarketBuyHistoryWhereInput): BatchPayload!
   deleteManyMarketLists(where: MarketListWhereInput): BatchPayload!
   deleteManyMarketListDetails(where: MarketListDetailWhereInput): BatchPayload!
+  deleteManyMenstualCups(where: MenstualCupWhereInput): BatchPayload!
   deleteManyPlatformComps(where: PlatformCompWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyUserCoinHistories(where: UserCoinHistoryWhereInput): BatchPayload!
@@ -12857,6 +13449,7 @@ type Query {
   marketBuyHistories(where: MarketBuyHistoryWhereInput, orderBy: MarketBuyHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketBuyHistory]!
   marketLists(where: MarketListWhereInput, orderBy: MarketListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketList]!
   marketListDetails(where: MarketListDetailWhereInput, orderBy: MarketListDetailOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MarketListDetail]!
+  menstualCups(where: MenstualCupWhereInput, orderBy: MenstualCupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MenstualCup]!
   platformComps(where: PlatformCompWhereInput, orderBy: PlatformCompOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlatformComp]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   userCoinHistories(where: UserCoinHistoryWhereInput, orderBy: UserCoinHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserCoinHistory]!
@@ -12900,6 +13493,7 @@ type Query {
   marketBuyHistory(where: MarketBuyHistoryWhereUniqueInput!): MarketBuyHistory
   marketList(where: MarketListWhereUniqueInput!): MarketList
   marketListDetail(where: MarketListDetailWhereUniqueInput!): MarketListDetail
+  menstualCup(where: MenstualCupWhereUniqueInput!): MenstualCup
   platformComp(where: PlatformCompWhereUniqueInput!): PlatformComp
   user(where: UserWhereUniqueInput!): User
   userCoinHistory(where: UserCoinHistoryWhereUniqueInput!): UserCoinHistory
@@ -12943,6 +13537,7 @@ type Query {
   marketBuyHistoriesConnection(where: MarketBuyHistoryWhereInput, orderBy: MarketBuyHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MarketBuyHistoryConnection!
   marketListsConnection(where: MarketListWhereInput, orderBy: MarketListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MarketListConnection!
   marketListDetailsConnection(where: MarketListDetailWhereInput, orderBy: MarketListDetailOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MarketListDetailConnection!
+  menstualCupsConnection(where: MenstualCupWhereInput, orderBy: MenstualCupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MenstualCupConnection!
   platformCompsConnection(where: PlatformCompWhereInput, orderBy: PlatformCompOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlatformCompConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   userCoinHistoriesConnection(where: UserCoinHistoryWhereInput, orderBy: UserCoinHistoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserCoinHistoryConnection!
@@ -12989,6 +13584,7 @@ type Subscription {
   marketBuyHistory(where: MarketBuyHistorySubscriptionWhereInput): MarketBuyHistorySubscriptionPayload
   marketList(where: MarketListSubscriptionWhereInput): MarketListSubscriptionPayload
   marketListDetail(where: MarketListDetailSubscriptionWhereInput): MarketListDetailSubscriptionPayload
+  menstualCup(where: MenstualCupSubscriptionWhereInput): MenstualCupSubscriptionPayload
   platformComp(where: PlatformCompSubscriptionWhereInput): PlatformCompSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   userCoinHistory(where: UserCoinHistorySubscriptionWhereInput): UserCoinHistorySubscriptionPayload

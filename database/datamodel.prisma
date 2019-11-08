@@ -6,6 +6,7 @@ type AdditionalInfo @pgTable(name: "additional_info") {
   cycleIrregular: Boolean! @pgColumn(name: "cycle_irregular")
   ethnicity: String
   height: Float!
+  heightUnit: String
   inUseMenstrualCup: String @pgColumn(name: "in_use_menstrual_cup")
   inUseMenstrualCupSize: String @pgColumn(name: "in_use_menstrual_cup_size")
   iudImplanonExpireDate: DateTime @pgColumn(name: "iud_implanon_expire_date")
@@ -16,6 +17,7 @@ type AdditionalInfo @pgTable(name: "additional_info") {
   periodIrregular: Boolean! @pgColumn(name: "period_irregular")
   userId: Int @pgColumn(name: "user_id")
   weight: Float!
+  weightUnit: String
 }
 
 type AnswerType @pgTable(name: "answer_types") {
@@ -286,6 +288,21 @@ type MarketListDetail @pgTable(name: "market_list_detail") {
   savingPrice: Int @default(value: 0) @pgColumn(name: "saving_price")
   subTitle: String @pgColumn(name: "sub_title")
   title: String
+}
+
+type MenstualCup @pgTable(name: "menstual_cup") {
+  id: Int! @unique
+  bodyLength: Float @pgColumn(name: "body_length")
+  cupName: String @pgColumn(name: "cup_name")
+  cupSize: String @pgColumn(name: "cup_size")
+  halfVolume: Float @pgColumn(name: "half_volume")
+  quarterVolume: Float @pgColumn(name: "quarter_volume")
+  rimDiameter: Float @pgColumn(name: "rim_diameter")
+  stemLength: Float @pgColumn(name: "stem_length")
+  stemType: String @pgColumn(name: "stem_type")
+  threeFourthVolume: Float @pgColumn(name: "three_fourth_volume")
+  totalLength: Float @pgColumn(name: "total_length")
+  totalVolume: Float @pgColumn(name: "total_volume")
 }
 
 type PlatformComp @pgTable(name: "platform_comp") {
