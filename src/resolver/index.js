@@ -103,6 +103,7 @@ const resolvers = {
         recoverUserWallet: require('./mutation/recoverUserWallet'),
         createCameraCoinHistory: require('./mutation/createCameraCoinHistory'),
         getCameraDatas: require('./mutation/getCameraDatas'),
+        getMenstualCups: require('./mutation/getMenstualCups'),
     }
 };
 

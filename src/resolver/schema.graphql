@@ -67,6 +67,20 @@ type Mutation {
     getCameraDatas(
         changeTime: DateTime!
     ): [ CameraData ]
+    getMenstualCups(
+        id: Int
+        cupName: String
+        cupSize: String
+        rimDiameter: Int
+        bodyLength: Int
+        stemLength: Int
+        totalLength: Int
+        stemType: String
+        quarterVolume: Int
+        halfVolume: Int
+        threeFourthVolume: Int
+        totalVolume: Int
+    ): [MenstualCup]
 }
 
 type CameraData {
