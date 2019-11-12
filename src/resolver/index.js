@@ -104,6 +104,7 @@ const resolvers = {
         createCameraCoinHistory: require('./mutation/createCameraCoinHistory'),
         getCameraDatas: require('./mutation/getCameraDatas'),
         getMenstualCups: require('./mutation/getMenstualCups'),
+        getUserMenstualCupInfo: require('./mutation/getUserMenstualCupInfo'),
     }
 };
 

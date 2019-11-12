@@ -81,6 +81,20 @@ type Mutation {
         threeFourthVolume: Int
         totalVolume: Int
     ): [MenstualCup]
+    getUserMenstualCupInfo(
+        userId: Int!
+    ): UserMenstualCupInfo
+}
+
+type UserMenstualCupInfo {
+    name: String
+    size: String
+    cupData: [MenstualCupData]
+}
+type MenstualCupData {
+    size: String
+    rim: Float
+    body: Float
 }
 
 type CameraData {
