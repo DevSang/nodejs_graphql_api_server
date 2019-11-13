@@ -33,7 +33,7 @@ type Mutation {
         fromAddress: String
         fromPkey: String
     ): UserCoinHistory
-    createTxMarketBuyHistory(
+    buyMarketCoupon(
         userId: Int!
         address: String!
         pKey: String!
@@ -87,6 +87,28 @@ type Mutation {
     getUserData(
         userId: Int!
     ): UserContryData
+    buyCustomCup(
+        userId: Int
+        address: String
+        pKey: String
+        marketListId: Int
+        rimDiameter: Float
+        bodyLength: Float
+        stemType: String
+        firmness: String
+        airHoles: String
+        lettering: String
+        letteringText: String
+        userName: String
+        email:String
+        address1: String
+        address2: String
+        city: String
+        country: String
+        postalCode: String
+        phoneCountry: String
+        phoneNumber: String
+    ) : MarketCustomize
 }
 
 type UserContryData {

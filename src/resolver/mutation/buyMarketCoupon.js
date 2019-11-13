@@ -49,9 +49,10 @@ module.exports = async (
                 category: 'BUY',
                 contents: 'Amazon Coupon',
                 date,
+                address: address,
                 fromPkey: pKey,
                 fromAddress: address,
-                coin: coupon.price
+                price: coupon.price
             },
             ctx,
             info
@@ -127,7 +128,7 @@ module.exports = async (
                     date,
                     fromAddress: 'loon',
                     address,
-                    coin: coupon.price
+                    price: coupon.price
                 },
                 ctx,
                 info

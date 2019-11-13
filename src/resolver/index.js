@@ -95,7 +95,7 @@ const resolvers = {
         getCupData: require('./mutation/getCupData'),
         signinDataAnalysis: require('./mutation/signinDataAnalysis'),
         createTxUserCoinHistory: require('./mutation/createTxUserCoinHistory'),
-        createTxMarketBuyHistory: require('./mutation/createTxMarketBuyHistory'),
+        buyMarketCoupon: require('./mutation/buyMarketCoupon'),
         changeCouponCount: require('./mutation/changeCouponCount'),
         changePasswordSignIn: require('./mutation/changePasswordSignIn'),
         removeUserRecordCameraData: require('./mutation/removeUserRecordCameraData'),
@@ -106,6 +106,7 @@ const resolvers = {
         getMenstualCups: require('./mutation/getMenstualCups'),
         getUserMenstualCupInfo: require('./mutation/getUserMenstualCupInfo'),
         getUserData: require('./mutation/getUserData'),
+        buyCustomCup: require('./mutation/buyCustomCup'),
     }
 };
 

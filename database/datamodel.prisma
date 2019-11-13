@@ -260,10 +260,33 @@ type MarketBuyHistory @pgTable(name: "market_buy_history") {
   category: String @default(value: "''AMAZONCOUPON'")
   coinHistoryRowId: UserCoinHistory @pgColumn(name: "coin_history_row_id")
   createTime: DateTime! @pgColumn(name: "create_time")
+  marketCustomize: [MarketCustomize] @pgColumn(name: "market_customize")
   orderNumber: String @pgColumn(name: "order_number")
   productId: Int @pgColumn(name: "product_id")
   status: Boolean! @default(value: true)
   updateTime: DateTime! @pgColumn(name: "update_time")
+  userId: Int @pgColumn(name: "user_id")
+}
+
+type MarketCustomize @pgTable(name: "market_customize") {
+  id: Int! @unique
+  address1: String
+  address2: String
+  airHoles: String @pgColumn(name: "air-holes")
+  bodyLength: Float @pgColumn(name: "body_length")
+  city: String
+  country: String
+  email: String
+  firmness: String
+  lettering: String
+  letteringText: String @pgColumn(name: "lettering_text")
+  marketBuyHistoryId: MarketBuyHistory @pgColumn(name: "market_buy_history_id")
+  name: String
+  phoneCountry: String
+  phoneNumber: String
+  postalCode: String
+  rimDiameter: Float @pgColumn(name: "rim_diameter")
+  stemType: String @pgColumn(name: "stem_type")
   userId: Int @pgColumn(name: "user_id")
 }
 

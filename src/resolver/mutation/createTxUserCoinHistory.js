@@ -19,7 +19,7 @@ module.exports = async (
     console.log('>>> isImageColorCount : ' + isImageColorCount);
     try {
     let reqBody = {
-        toAddress: address,
+        toAddress: category != 'BUY' ? address : null,
         fromAddress,
         fromPkey,
         category,
@@ -115,7 +115,7 @@ module.exports = async (
         console.log(`reqBody.token ${reqBody.token}`)
     } else if (price) {
         reqBody.token = price;
-    } else {
+    } else if(category != 'BUY'){
         return Error('No Data')
     }
     // url : 172.31.0.13
@@ -146,34 +146,8 @@ module.exports = async (
     }
 
     let wallet = await ctx.db.query.userWallets({where: {userId: {id: user_id}, address: dbAddress}})
-    if(wallet.length !== 0) {
-        data.walletId = wallet[0].id
-        if(!wallet[0].status) {
-            try {
-                let recoverUser = await ctx.db.query.user({where: {id: user_id}})
-                await recoverUserWallet(
-                    parent,
-                    {userId: user_id, address: dbAddress, email: recoverUser.email},
-                    ctx,
-                info)
-            } catch(err) {
-                console.log(err)
-            }
-        }
-    } else {
-        let recoverUser = await ctx.db.query.user({where: {id: user_id}})
-        try {
-            wallet = await registerUserWallet(
-                parent,
-                {userId: user_id, address: dbAddress, email: recoverUser.email},
-                ctx,
-                info
-                )
-            data.walletId = wallet.id
-        } catch(err) {
-            console.log(err)
-        }
-    }
+    console.log(`address ${dbAddress} id ${wallet[0].id}`)
+    if(wallet) data.walletId = wallet[0].id
     let createUserCoin = await ctx.db.mutation.createUserCoinHistory({
         data
     });
