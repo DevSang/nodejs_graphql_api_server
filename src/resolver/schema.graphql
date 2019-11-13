@@ -84,6 +84,14 @@ type Mutation {
     getUserMenstualCupInfo(
         userId: Int!
     ): UserMenstualCupInfo
+    getUserData(
+        userId: Int!
+    ): UserContryData
+}
+
+type UserContryData {
+    user: User
+    country: Country
 }
 
 type UserMenstualCupInfo {

@@ -105,6 +105,7 @@ const resolvers = {
         getCameraDatas: require('./mutation/getCameraDatas'),
         getMenstualCups: require('./mutation/getMenstualCups'),
         getUserMenstualCupInfo: require('./mutation/getUserMenstualCupInfo'),
+        getUserData: require('./mutation/getUserData'),
     }
 };
 
