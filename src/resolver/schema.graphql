@@ -108,6 +108,7 @@ type Mutation {
         postalCode: String
         phoneCountry: String
         phoneNumber: String
+        addtionalSuggestion: String
     ) : MarketCustomize
 }
 

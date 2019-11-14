@@ -5,7 +5,8 @@ const createTxUserCoinHistory = require('./createTxUserCoinHistory');
 module.exports = async (
     parent,
     { userId, address, pKey, marketListId, rimDiameter, bodyLength, stemType, firmness, airHoles, lettering, letteringText,
-        userName, email, address1, address2, city, country, postalCode, phoneCountry, phoneNumber  
+        userName, email, address1, address2, city, country, postalCode, phoneCountry, phoneNumber, addtionalSuggestion
+
     },
     ctx,
     info
@@ -82,7 +83,8 @@ module.exports = async (
                 marketBuyHistoryId: {
                     connect: {id: marketBuyHistory.id}
                 },
-                name: userName, email, address1, address2, city, country, postalCode, phoneCountry, phoneNumber 
+                name: userName, email, address1, address2, city, country, postalCode, phoneCountry, phoneNumber,
+                addtionalSuggestion 
             }
         },`
         {
@@ -90,10 +92,11 @@ module.exports = async (
             rimDiameter
             bodyLength
             stemType
+            firmness
             airHoles
             lettering
             letteringText
-            name
+            userName
             email
             address1
             address2
@@ -102,6 +105,7 @@ module.exports = async (
             postalCode
             phoneCountry
             phoneNumber
+            addtionalSuggestion
             marketBuyHistoryId {
                 id
                 productId
