@@ -22,7 +22,7 @@ module.exports = async (
         url: 'http://34.85.62.36:8080/api/user',
         body: JSON.stringify({
             "user_id" : Number(userId),
-            "email" : email,
+            "email" : email.toLowerCase(),
             "wallet_address" : address
         })
     };
