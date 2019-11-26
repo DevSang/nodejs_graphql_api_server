@@ -34,7 +34,8 @@ module.exports = (req, res, next) => {
                 email: user.email
             }
             res.locals.user = payload;
-            console.log('>> Firebase Request : ', user.email);
+            console.log('>> [Firebase Request] : ', moment().format('YYYY.MM.DD HH:mm:ss ddd') );
+            console.log('>> User : ', user.email);
             next();
         })
         .catch(err => {
@@ -66,7 +67,7 @@ module.exports = (req, res, next) => {
                 } else next(err);
                 return;
             }
-            console.log('>> [Common Request] ',  moment().format('YYYY.MM.DD HH:mm:ss ddd') );
+            console.log('>> [Common Request] ', moment().format('YYYY.MM.DD HH:mm:ss ddd') );
             console.log('>> User : ', decoded.email, '\n');
 
             next();

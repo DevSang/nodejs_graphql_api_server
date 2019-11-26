@@ -12,8 +12,8 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 	if (!ctx.response.locals.user)
 		throw new Error('NO_FIREBASE_TOKEN');
 	else 
-		console.log('>> [SIGN IN]', moment().format('YYYY.MM.DD HH:mm:ss ddd'));
-	console.log(`>> email : ${email}`);
+		console.log('>> SignIn : ', email, '\n');
+
 
 	const lowerEmail = email.toLowerCase();
 	const tokenUser = ctx.response.locals.user;

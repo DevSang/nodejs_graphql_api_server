@@ -19,7 +19,7 @@ module.exports = async (parent, { email }, ctx, info) => {
         // console.log('>> [GET NEW TOKEN] ',ctx.response.locals.refreshToken);
         console.log('>> [GET NEW TOKEN] ', moment().format('YYYY.MM.DD HH:mm:ss ddd'));
 
-    console.log('>> Sign in : ', email, '\n');
+    console.log('>> SignIn : ', email, '\n');
     var refreshToken = ctx.response.locals.refreshToken;
     var user = await ctx.db.query.user({ where: { email : email } });
     
