@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 function formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -12,7 +14,7 @@ function formatDate(date) {
 
 
 module.exports = async (parent, {userId, mdateRowIdArray}, ctx, info) => {
-    console.log(">>[GET CUP DATA]");
+    console.log(">>[GET CUP DATA]", moment().format('YYYY.MM.DD HH:mm:ss ddd'));
     console.log(">>> userId : " + userId);
     console.log(">>> Request mdate row id : " + mdateRowIdArray);
     mdateRowIdArray = JSON.parse(mdateRowIdArray);

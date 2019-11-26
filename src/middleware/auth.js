@@ -53,8 +53,6 @@ module.exports = (req, res, next) => {
         
         jwt.verify(parsed, certAccessPublic, function(err, decoded) {
 
-            console.log("@@@@@", JSON.stringify(decoded));
-
             //Loon data 분석 시스템 로그인 시 
             if(!decoded) {
                 return res.status(400).send({message:'EXPIRED_ACCESS_TOKEN'});

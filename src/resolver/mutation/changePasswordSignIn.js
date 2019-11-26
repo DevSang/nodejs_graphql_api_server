@@ -6,12 +6,17 @@ var certAccessPrivate = fs.readFileSync(path.resolve(jwtConfig.certAccessPrivate
 var certRefreshPrivate = fs.readFileSync(path.resolve(jwtConfig.certRefreshPrivate));
 const crypto = require("crypto");
 var rand = require('csprng');
+const moment = require('moment');
+
 
 module.exports = async (parent, { email, password }, ctx, info) => {
 	// exception : no firebase token
 	if (!ctx.response.locals.user)
 		throw new Error('NO_FIREBASE_TOKEN');
-	else console.log(">> [Change Password] ", email);
+	else{
+		console.log(">> [Change Password] ", moment().format('YYYY.MM.DD HH:mm:ss ddd'));
+		console.log(">> User : ", email);
+	} 
 
 	const tokenUser = ctx.response.locals.user;
 	var user = await ctx.db.query.user({ where: { email: email.toLowerCase() } });

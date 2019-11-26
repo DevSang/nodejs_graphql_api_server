@@ -8,9 +8,9 @@ module.exports = async (
     info
 ) => {
     try {
-        console.log('>>[CREATE CAMERA DATA COIN HISTORY]');
-        console.log(`userId ${userId}`)
-        console.log(`cameraId ${cameraId}`)
+        console.log('>>[CREATE CAMERA DATA COIN HISTORY]', moment().format('YYYY.MM.DD HH:mm:ss ddd'));
+        console.log(`userId : ${userId}`)
+        console.log(`cameraId : ${cameraId}`)
 
         let wallet = await ctx.db.query.userWallets({where: {userId: {id: userId}, status: true}})
         if(wallet.length == 0) {

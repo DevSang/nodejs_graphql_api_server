@@ -9,7 +9,7 @@ module.exports = async (
     ctx,
     info
 ) => {
-    console.log('>>[CREATE TX USER COIN HISTORY]');
+    console.log('>>[CREATE TX USER COIN HISTORY]', moment().format('YYYY.MM.DD HH:mm:ss ddd'));
     console.log('>>> address : ' + address);
     console.log('>>> category : ' + category);
     console.log('>>> contents : ' + contents);
