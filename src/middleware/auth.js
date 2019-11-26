@@ -66,12 +66,9 @@ module.exports = (req, res, next) => {
                 } else next(err);
                 return;
             }
-            console.log('>> Common Request :', decoded.email);
-            // access token 만료 10분 전일 때-사용하지 않음
-            // if (decoded.exp-new Date().getTime()/1000 < 10 * 60){
-            //     res.set('JWT-TOKEN-NOTICE', 'NEED_REFRESH_TOKEN');
-            // }
-            // 얘는 user를 넘기면 안되고 필요도 없음.
+            console.log('>> [Common Request] ',  moment().format('YYYY.MM.DD HH:mm:ss ddd') );
+            console.log('>> User : ', decoded.email, '\n');
+
             next();
             return;
         });
