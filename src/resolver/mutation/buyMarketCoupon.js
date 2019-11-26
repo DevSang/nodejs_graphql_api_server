@@ -9,7 +9,7 @@ module.exports = async (
     ctx,
     info
 ) => {
-    console.log('>>[CREATE USER TOKEN HISTORY]');
+    console.log('>>[CREATE USER TOKEN HISTORY]' , moment().format('YYYY.MM.DD HH:mm:ss ddd'));
     console.log('>>> userId : ' + userId);
     console.log('>>> marketListId : ' + marketListId);
 

@@ -7,7 +7,7 @@ module.exports = async (
     ctx,
     info
 ) => {
-    console.log('>>[CREATE RECOVER USER WALLET]');
+    console.log('>>[CREATE RECOVER USER WALLET]', moment().format('YYYY.MM.DD HH:mm:ss ddd'));
     console.log('>>> address : ' + address);
     console.log('>>> email : ' + email);
     console.log('>>> userId : ' + userId);

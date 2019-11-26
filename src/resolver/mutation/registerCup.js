@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = async (parent, { anon_serial_number }, ctx, info) => {
 
 
@@ -50,8 +52,11 @@ module.exports = async (parent, { anon_serial_number }, ctx, info) => {
     }`
     )
 
-    console.log('>> [REGISTER CUP] user_Id : ',anon_serial_number," serial_number : ", user_cup.serial_number.id);
-
+    console.log('>> [REGISTER CUP] ', moment().format('YYYY.MM.DD HH:mm:ss ddd'))
+    console.log('>> user_Id : ',anon_serial_number)
+    console.log('>> serial_number : ', user_cup.serial_number.id);
+    console.log('\n\n');
+    
     return {
         user_cup
     }

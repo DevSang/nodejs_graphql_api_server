@@ -12,9 +12,9 @@ module.exports = async (
     info
 ) => {
     try {
-        console.log('>>[CREATE CUSTOM HISTORY]');
-        console.log(`userId ${userId}`)
-        console.log(`rimDiameter ${rimDiameter} bodyLength ${bodyLength} stemType ${stemType} firmness ${firmness} airHoles ${airHoles} lettering ${lettering} letteringText ${letteringText}`)
+        console.log('>>[CREATE CUSTOM HISTORY] ', moment().format('YYYY.MM.DD HH:mm:ss ddd'));
+        console.log(`>> userId : ${userId}`)
+        console.log(`>> rimDiameter : ${rimDiameter} \n >> bodyLength : ${bodyLength}\n >> stemType : ${stemType}\n >> firmness : ${firmness}\n >> airHoles : ${airHoles}\n >> lettering : ${lettering}\n >> letteringText : ${letteringText}\n\n`)
         
         let marketList = await ctx.db.query.marketList({where: {id: marketListId}});
         if(!marketList) throw new Error(`NO MARKET DATA ${marketListId}`);

@@ -8,9 +8,9 @@ module.exports = async (
     info
 ) => {
     console.log('>>[CREATE REGISTER USER WALLET] ', moment().format('YYYY.MM.DD HH:mm:ss ddd'));
-    console.log('>>> address : ' + address);
-    console.log('>>> email : ' + email);
-    console.log('>>> userId : ' + userId);
+    console.log('>> address : ' + address);
+    console.log('>> email : ' + email);
+    console.log('>> userId : ' + userId);
     console.log('\n\n');
 
     //url : 172.31.0.13

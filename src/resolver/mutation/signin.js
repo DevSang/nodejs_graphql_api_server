@@ -5,28 +5,31 @@ const path = require('path');
 var certAccessPrivate = fs.readFileSync(path.resolve(jwtConfig.certAccessPrivate));
 var certRefreshPrivate = fs.readFileSync(path.resolve(jwtConfig.certRefreshPrivate));
 const crypto = require("crypto");
+const moment = require('moment');
 
 module.exports = async (parent, { email, password }, ctx, info) => {
 	// exception : no firebase token
 	if (!ctx.response.locals.user)
 		throw new Error('NO_FIREBASE_TOKEN');
-	else console.log('>> [SIGN IN]', email);
+	else 
+		console.log('>> [SIGN IN]', moment().format('YYYY.MM.DD HH:mm:ss ddd'));
+	console.log(`>> email : ${email}`);
 
 	const lowerEmail = email.toLowerCase();
 	const tokenUser = ctx.response.locals.user;
 	var user = await ctx.db.query.user({ where: { email: lowerEmail } });
 
 	// exception : DB에 user가 없을 때
-	if (!user) throw new Error('NO_USER_IN_DB');
+	if (!user) throw new Error('NO_USER_IN_DB\n');
 
 	// exception : token email 과 param 으로 온 email이 다를 때
-	if (user.email != tokenUser.email) throw new Error(`NOT_USERS_TOKEN ${user.email}`);
+	if (user.email != tokenUser.email) throw new Error(`NOT_USERS_TOKEN ${user.email} \n`);
 
 	let salt = user.encryptSaltString;
 	let decodedPassword = crypto.createHash("sha512").update(password + salt).digest("hex");
 	
 	// exception : password가 일치하지 않을 때
-	if(user.password != decodedPassword) throw new Error('INVALID_PASSWORD');
+	if(user.password != decodedPassword) throw new Error('INVALID_PASSWORD\n');
 	
 	var country = await ctx.db.query.country(
         { 
