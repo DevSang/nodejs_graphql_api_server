@@ -11,7 +11,7 @@ module.exports = async (
     console.log('>> address : ' + address);
     console.log('>> email : ' + email);
     console.log('>> userId : ' + userId);
-    console.log('\n\n');
+    console.log('\n');
 
     //url : 172.31.0.13
     // console.log(parent)

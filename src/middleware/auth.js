@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
     // console.log('>>> accessToken  : ', accessToken);
     // console.log('>>> refreshToken : ', refreshToken);
     // console.log('>>> firebaseAuth : ', firebaseAuth);
-    console.log('\n\n');
+    console.log('\n');
 
 
     // console.log('');
@@ -35,7 +35,7 @@ module.exports = (req, res, next) => {
                 email: user.email
             }
             res.locals.user = payload;
-            console.log('>> Firebase Request : ', user.email, '\n\n');
+            console.log('>> Firebase Request : ', user.email, '\n');
             next();
         })
         .catch(err => {
@@ -56,7 +56,7 @@ module.exports = (req, res, next) => {
             if(!decoded) {
                 return res.status(400).send({message:'EXPIRED_ACCESS_TOKEN'});
             } else if(decoded.email === 'admin@looncup.com'){
-                console.log('>> Admin Request', decoded.email, '\n\n');
+                console.log('>> Admin Request', decoded.email, '\n');
                 next();
                 return;
             }
@@ -68,7 +68,7 @@ module.exports = (req, res, next) => {
                 } else next(err);
                 return;
             }
-            console.log('>> Common Request :', decoded.email, '\n\n');
+            console.log('>> Common Request :', decoded.email, '\n');
             // access token 만료 10분 전일 때-사용하지 않음
             // if (decoded.exp-new Date().getTime()/1000 < 10 * 60){
             //     res.set('JWT-TOKEN-NOTICE', 'NEED_REFRESH_TOKEN');
