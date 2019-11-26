@@ -18,11 +18,10 @@ module.exports = (req, res, next) => {
     const refreshToken = req.header('LOON-HEADER-REFRESHTOKEN');
     const marketToken = req.header('LOON-MARKET-TOKEN');
 
-    console.log('>> [AUTH REQUEST]', moment().format('YYYY.MM.DD HH:mm:ss ddd') );
+    // console.log('>> [AUTH REQUEST]', moment().format('YYYY.MM.DD HH:mm:ss ddd') );
     // console.log('>>> accessToken  : ', accessToken);
     // console.log('>>> refreshToken : ', refreshToken);
     // console.log('>>> firebaseAuth : ', firebaseAuth);
-    console.log('\n');
 
 
     // console.log('');
@@ -35,7 +34,7 @@ module.exports = (req, res, next) => {
                 email: user.email
             }
             res.locals.user = payload;
-            console.log('>> Firebase Request : ', user.email, '\n');
+            console.log('>> Firebase Request : ', user.email);
             next();
         })
         .catch(err => {
@@ -59,8 +58,7 @@ module.exports = (req, res, next) => {
                 console.log('>> Admin Request', decoded.email, '\n');
                 next();
                 return;
-            }
-            else if (err) {
+            } else if (err) {
                 if(err.name=='TokenExpiredError') {
                     next({message:'EXPIRED_ACCESS_TOKEN'});
                 } else if(marketToken) {
@@ -68,7 +66,7 @@ module.exports = (req, res, next) => {
                 } else next(err);
                 return;
             }
-            console.log('>> Common Request :', decoded.email, '\n');
+            console.log('>> Common Request :', decoded.email);
             // access token 만료 10분 전일 때-사용하지 않음
             // if (decoded.exp-new Date().getTime()/1000 < 10 * 60){
             //     res.set('JWT-TOKEN-NOTICE', 'NEED_REFRESH_TOKEN');
