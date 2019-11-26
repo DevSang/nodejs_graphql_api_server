@@ -3,6 +3,7 @@ const jwtConfig = require('../../../config/jwt.json');
 const fs = require('fs');
 const path = require('path');
 const crypto = require("crypto");
+const moment = require('moment');
 
 // private key
 var certAccessPrivate = fs.readFileSync(path.resolve(jwtConfig.certAccessPrivate));
