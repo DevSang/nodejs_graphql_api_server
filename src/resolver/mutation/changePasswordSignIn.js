@@ -14,7 +14,7 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 	else console.log(">> [Change Password] ", email);
 
 	const tokenUser = ctx.response.locals.user;
-	var user = await ctx.db.query.user({ where: { email: email } });
+	var user = await ctx.db.query.user({ where: { email: email.toLowerCase() } });
 
 	// exception : DB에 user가 없을 때
 	if (!user) throw new Error('NO_USER_IN_DB');
