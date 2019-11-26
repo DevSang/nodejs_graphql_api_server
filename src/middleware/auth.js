@@ -52,11 +52,14 @@ module.exports = (req, res, next) => {
         }
         
         jwt.verify(parsed, certAccessPublic, function(err, decoded) {
+
+            console.log("@@@@@", JSON.stringify(decoded));
+
             //Loon data 분석 시스템 로그인 시 
             if(!decoded) {
                 return res.status(400).send({message:'EXPIRED_ACCESS_TOKEN'});
             } else if(decoded.email === 'admin@looncup.com'){
-                console.log('>> Admin Request', decoded.email, '\n');
+                console.log('>> [Admin Request]', moment().format('YYYY.MM.DD HH:mm:ss ddd'));
                 next();
                 return;
             } else if (err) {
