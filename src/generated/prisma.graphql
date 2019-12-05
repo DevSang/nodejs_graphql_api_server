@@ -1,5 +1,9 @@
 # source: http://localhost:4466
+<<<<<<< HEAD
+# timestamp: Thu Dec 05 2019 01:21:45 GMT+0000 (UTC)
+=======
 # timestamp: Thu Dec 05 2019 14:32:49 GMT+0900 (GMT+09:00)
+>>>>>>> e9513f753c2fa756e902dffe5df5b2e84fd50b4a
 
 type AdditionalInfo {
   id: Int!
