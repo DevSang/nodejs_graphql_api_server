@@ -12,7 +12,7 @@ module.exports = async (
     console.log('>> email : ' + email);
     console.log('>> userId : ' + userId);
     console.log('\n');
-    email = email.toLowerCase();
+
     //url : 172.31.0.13
     // console.log(parent)
     // console.log(info)
@@ -23,7 +23,7 @@ module.exports = async (
         url: 'http://34.85.62.36:8080/api/user',
         body: JSON.stringify({
             "user_id" : Number(userId),
-            "email" : email,
+            "email" : email.toLowerCase(),
             "wallet_address" : address
         })
     };
