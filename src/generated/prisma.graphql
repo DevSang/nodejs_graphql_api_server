@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Thu Nov 14 2019 14:06:12 GMT+0900 (GMT+09:00)
+# timestamp: Thu Dec 05 2019 01:21:45 GMT+0000 (UTC)
 
 type AdditionalInfo {
   id: Int!
@@ -15501,6 +15501,7 @@ type User {
   cupDataProcMdates(where: CupDataProcMdateWhereInput, orderBy: CupDataProcMdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CupDataProcMdate!]
   cupDataQaResponse(where: CupDataQaResponseWhereInput, orderBy: CupDataQaResponseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CupDataQaResponse!]
   cupDataUserRemove(where: CupDataUserRemoveWhereInput, orderBy: CupDataUserRemoveOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CupDataUserRemove!]
+  cupSize: String
   deleted: Boolean!
   deviceModel: String
   dob: DateTime!
@@ -15512,6 +15513,7 @@ type User {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -16509,6 +16511,7 @@ type UserConnection {
 input UserCreateInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime!
@@ -16519,6 +16522,7 @@ input UserCreateInput {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -16594,6 +16598,7 @@ input UserCreateOneWithoutUserWalletInput {
 input UserCreateWithoutAppServerSyncInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime!
@@ -16604,6 +16609,7 @@ input UserCreateWithoutAppServerSyncInput {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -16623,6 +16629,7 @@ input UserCreateWithoutAppServerSyncInput {
 input UserCreateWithoutCupDataProcFlowInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime!
@@ -16633,6 +16640,7 @@ input UserCreateWithoutCupDataProcFlowInput {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -16652,6 +16660,7 @@ input UserCreateWithoutCupDataProcFlowInput {
 input UserCreateWithoutCupDataProcMdatesInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime!
@@ -16662,6 +16671,7 @@ input UserCreateWithoutCupDataProcMdatesInput {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -16681,6 +16691,7 @@ input UserCreateWithoutCupDataProcMdatesInput {
 input UserCreateWithoutCupDataQaResponseInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime!
@@ -16691,6 +16702,7 @@ input UserCreateWithoutCupDataQaResponseInput {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -16710,6 +16722,7 @@ input UserCreateWithoutCupDataQaResponseInput {
 input UserCreateWithoutCupDataUserRemoveInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime!
@@ -16720,6 +16733,7 @@ input UserCreateWithoutCupDataUserRemoveInput {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -16739,6 +16753,7 @@ input UserCreateWithoutCupDataUserRemoveInput {
 input UserCreateWithoutEthnicityIdInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime!
@@ -16749,6 +16764,7 @@ input UserCreateWithoutEthnicityIdInput {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -16768,6 +16784,7 @@ input UserCreateWithoutEthnicityIdInput {
 input UserCreateWithoutUserCoinHistoryInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime!
@@ -16778,6 +16795,7 @@ input UserCreateWithoutUserCoinHistoryInput {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -16797,6 +16815,7 @@ input UserCreateWithoutUserCoinHistoryInput {
 input UserCreateWithoutUserCupsInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime!
@@ -16807,6 +16826,7 @@ input UserCreateWithoutUserCupsInput {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -16826,6 +16846,7 @@ input UserCreateWithoutUserCupsInput {
 input UserCreateWithoutUserInterviewDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime!
@@ -16836,6 +16857,7 @@ input UserCreateWithoutUserInterviewDataInput {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -16855,6 +16877,7 @@ input UserCreateWithoutUserInterviewDataInput {
 input UserCreateWithoutUserRecordDataByPeriodInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime!
@@ -16865,6 +16888,7 @@ input UserCreateWithoutUserRecordDataByPeriodInput {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -16884,6 +16908,7 @@ input UserCreateWithoutUserRecordDataByPeriodInput {
 input UserCreateWithoutUserWalletInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime!
@@ -16894,6 +16919,7 @@ input UserCreateWithoutUserWalletInput {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -17929,6 +17955,8 @@ enum UserOrderByInput {
   anonUserId_DESC
   countryId_ASC
   countryId_DESC
+  cupSize_ASC
+  cupSize_DESC
   deleted_ASC
   deleted_DESC
   deviceModel_ASC
@@ -17949,6 +17977,8 @@ enum UserOrderByInput {
   lastName_DESC
   macId_ASC
   macId_DESC
+  menstrualCup_ASC
+  menstrualCup_DESC
   password_ASC
   password_DESC
   personalHealthRecord_ASC
@@ -17963,6 +17993,7 @@ type UserPreviousValues {
   id: Int!
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean!
   deviceModel: String
   dob: DateTime!
@@ -17973,6 +18004,7 @@ type UserPreviousValues {
   givenBirth: Boolean!
   lastName: String!
   macId: String
+  menstrualCup: String
   password: String!
   personalHealthRecord: Boolean
   referralCode: String
@@ -20064,6 +20096,46 @@ input UserScalarWhereInput {
 
   """All values greater than or equal the given value."""
   countryId_gte: Int
+  cupSize: String
+
+  """All values that are not equal to given value."""
+  cupSize_not: String
+
+  """All values that are contained in given list."""
+  cupSize_in: [String!]
+
+  """All values that are not contained in given list."""
+  cupSize_not_in: [String!]
+
+  """All values less than the given value."""
+  cupSize_lt: String
+
+  """All values less than or equal the given value."""
+  cupSize_lte: String
+
+  """All values greater than the given value."""
+  cupSize_gt: String
+
+  """All values greater than or equal the given value."""
+  cupSize_gte: String
+
+  """All values containing the given string."""
+  cupSize_contains: String
+
+  """All values not containing the given string."""
+  cupSize_not_contains: String
+
+  """All values starting with the given string."""
+  cupSize_starts_with: String
+
+  """All values not starting with the given string."""
+  cupSize_not_starts_with: String
+
+  """All values ending with the given string."""
+  cupSize_ends_with: String
+
+  """All values not ending with the given string."""
+  cupSize_not_ends_with: String
   deleted: Boolean
 
   """All values that are not equal to given value."""
@@ -20338,6 +20410,46 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   macId_not_ends_with: String
+  menstrualCup: String
+
+  """All values that are not equal to given value."""
+  menstrualCup_not: String
+
+  """All values that are contained in given list."""
+  menstrualCup_in: [String!]
+
+  """All values that are not contained in given list."""
+  menstrualCup_not_in: [String!]
+
+  """All values less than the given value."""
+  menstrualCup_lt: String
+
+  """All values less than or equal the given value."""
+  menstrualCup_lte: String
+
+  """All values greater than the given value."""
+  menstrualCup_gt: String
+
+  """All values greater than or equal the given value."""
+  menstrualCup_gte: String
+
+  """All values containing the given string."""
+  menstrualCup_contains: String
+
+  """All values not containing the given string."""
+  menstrualCup_not_contains: String
+
+  """All values starting with the given string."""
+  menstrualCup_starts_with: String
+
+  """All values not starting with the given string."""
+  menstrualCup_not_starts_with: String
+
+  """All values ending with the given string."""
+  menstrualCup_ends_with: String
+
+  """All values not ending with the given string."""
+  menstrualCup_not_ends_with: String
   password: String
 
   """All values that are not equal to given value."""
@@ -20818,6 +20930,7 @@ input UserSubscriptionWhereInput {
 input UserUpdateInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -20828,6 +20941,7 @@ input UserUpdateInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -20848,6 +20962,7 @@ input UserUpdateInput {
 input UserUpdateManyDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -20858,6 +20973,7 @@ input UserUpdateManyDataInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -20867,6 +20983,7 @@ input UserUpdateManyDataInput {
 input UserUpdateManyMutationInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -20877,6 +20994,7 @@ input UserUpdateManyMutationInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -20981,6 +21099,7 @@ input UserUpdateOneWithoutUserWalletInput {
 input UserUpdateWithoutAppServerSyncDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -20991,6 +21110,7 @@ input UserUpdateWithoutAppServerSyncDataInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -21010,6 +21130,7 @@ input UserUpdateWithoutAppServerSyncDataInput {
 input UserUpdateWithoutCupDataProcFlowDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -21020,6 +21141,7 @@ input UserUpdateWithoutCupDataProcFlowDataInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -21039,6 +21161,7 @@ input UserUpdateWithoutCupDataProcFlowDataInput {
 input UserUpdateWithoutCupDataProcMdatesDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -21049,6 +21172,7 @@ input UserUpdateWithoutCupDataProcMdatesDataInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -21068,6 +21192,7 @@ input UserUpdateWithoutCupDataProcMdatesDataInput {
 input UserUpdateWithoutCupDataQaResponseDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -21078,6 +21203,7 @@ input UserUpdateWithoutCupDataQaResponseDataInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -21097,6 +21223,7 @@ input UserUpdateWithoutCupDataQaResponseDataInput {
 input UserUpdateWithoutCupDataUserRemoveDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -21107,6 +21234,7 @@ input UserUpdateWithoutCupDataUserRemoveDataInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -21126,6 +21254,7 @@ input UserUpdateWithoutCupDataUserRemoveDataInput {
 input UserUpdateWithoutEthnicityIdDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -21136,6 +21265,7 @@ input UserUpdateWithoutEthnicityIdDataInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -21155,6 +21285,7 @@ input UserUpdateWithoutEthnicityIdDataInput {
 input UserUpdateWithoutUserCoinHistoryDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -21165,6 +21296,7 @@ input UserUpdateWithoutUserCoinHistoryDataInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -21184,6 +21316,7 @@ input UserUpdateWithoutUserCoinHistoryDataInput {
 input UserUpdateWithoutUserCupsDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -21194,6 +21327,7 @@ input UserUpdateWithoutUserCupsDataInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -21213,6 +21347,7 @@ input UserUpdateWithoutUserCupsDataInput {
 input UserUpdateWithoutUserInterviewDataDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -21223,6 +21358,7 @@ input UserUpdateWithoutUserInterviewDataDataInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -21242,6 +21378,7 @@ input UserUpdateWithoutUserInterviewDataDataInput {
 input UserUpdateWithoutUserRecordDataByPeriodDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -21252,6 +21389,7 @@ input UserUpdateWithoutUserRecordDataByPeriodDataInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -21271,6 +21409,7 @@ input UserUpdateWithoutUserRecordDataByPeriodDataInput {
 input UserUpdateWithoutUserWalletDataInput {
   anonUserId: Int
   countryId: Int
+  cupSize: String
   deleted: Boolean
   deviceModel: String
   dob: DateTime
@@ -21281,6 +21420,7 @@ input UserUpdateWithoutUserWalletDataInput {
   givenBirth: Boolean
   lastName: String
   macId: String
+  menstrualCup: String
   password: String
   personalHealthRecord: Boolean
   referralCode: String
@@ -21789,6 +21929,46 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   countryId_gte: Int
+  cupSize: String
+
+  """All values that are not equal to given value."""
+  cupSize_not: String
+
+  """All values that are contained in given list."""
+  cupSize_in: [String!]
+
+  """All values that are not contained in given list."""
+  cupSize_not_in: [String!]
+
+  """All values less than the given value."""
+  cupSize_lt: String
+
+  """All values less than or equal the given value."""
+  cupSize_lte: String
+
+  """All values greater than the given value."""
+  cupSize_gt: String
+
+  """All values greater than or equal the given value."""
+  cupSize_gte: String
+
+  """All values containing the given string."""
+  cupSize_contains: String
+
+  """All values not containing the given string."""
+  cupSize_not_contains: String
+
+  """All values starting with the given string."""
+  cupSize_starts_with: String
+
+  """All values not starting with the given string."""
+  cupSize_not_starts_with: String
+
+  """All values ending with the given string."""
+  cupSize_ends_with: String
+
+  """All values not ending with the given string."""
+  cupSize_not_ends_with: String
   deleted: Boolean
 
   """All values that are not equal to given value."""
@@ -22063,6 +22243,46 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   macId_not_ends_with: String
+  menstrualCup: String
+
+  """All values that are not equal to given value."""
+  menstrualCup_not: String
+
+  """All values that are contained in given list."""
+  menstrualCup_in: [String!]
+
+  """All values that are not contained in given list."""
+  menstrualCup_not_in: [String!]
+
+  """All values less than the given value."""
+  menstrualCup_lt: String
+
+  """All values less than or equal the given value."""
+  menstrualCup_lte: String
+
+  """All values greater than the given value."""
+  menstrualCup_gt: String
+
+  """All values greater than or equal the given value."""
+  menstrualCup_gte: String
+
+  """All values containing the given string."""
+  menstrualCup_contains: String
+
+  """All values not containing the given string."""
+  menstrualCup_not_contains: String
+
+  """All values starting with the given string."""
+  menstrualCup_starts_with: String
+
+  """All values not starting with the given string."""
+  menstrualCup_not_starts_with: String
+
+  """All values ending with the given string."""
+  menstrualCup_ends_with: String
+
+  """All values not ending with the given string."""
+  menstrualCup_not_ends_with: String
   password: String
 
   """All values that are not equal to given value."""
