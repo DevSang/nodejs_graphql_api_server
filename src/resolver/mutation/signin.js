@@ -50,12 +50,7 @@ module.exports = async (parent, { email, password }, ctx, info) => {
 			status
         }`
 	);
-	
-	for(let i = 0; i < wallet.length; i++){
-		if(wallet[i].status == true){
-			wallet = wallet[i];
-		}
-	}
+	wallet = wallet[0];
 
 	// jwt payload
 	let payload = {

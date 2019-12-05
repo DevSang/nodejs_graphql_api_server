@@ -42,6 +42,7 @@ module.exports = async (parent, { email }, ctx, info) => {
         }`
     );
     wallet = wallet[0];
+    
     // var cups = await ctx.db.query.userCups(
     //                     { 
     //                        where: { userId : {id : user.id} } 
