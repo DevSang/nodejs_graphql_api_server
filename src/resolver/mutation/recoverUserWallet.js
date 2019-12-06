@@ -28,7 +28,7 @@ module.exports = async (
         })
     };
     
-    let res = await request.patch(options);
+    let res = await request.put(options);
     await ctx.db.mutation.updateManyUserWallets({where: {userId: {id: Number(userId)}}, data: {status: false}});
     let wallet = await ctx.db.query.userWallets({where: {address}});
     let result;
