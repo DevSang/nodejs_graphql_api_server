@@ -1,12 +1,12 @@
 module.exports = async (parent, {
     userId,
 }, ctx, info) => {
-    let usedCups = await ctx.db.query.additionalInfoes({where: {userId, inUseMenstrualCup_not: ""}});
+    let usedCups = await ctx.db.query.users({where: {userId, menstrualCup_not: ""}});
     let cup;
     if(usedCups.length == 0) {
         return null
     } else {
-        cup = await ctx.db.query.menstualCups({where: {cupName: usedCups[0].inUseMenstrualCup}, orderBy: 'cupName_ASC'})
+        cup = await ctx.db.query.menstrualCups({where: {cupName: usedCups[0].menstrualCup}, orderBy: 'cupName_ASC'})
     }
 
     // let cup = await ctx.db.query.menstualCups({where: query, orderBy: 'cupName_ASC'})
@@ -15,9 +15,9 @@ module.exports = async (parent, {
         await cup.map((data) => {
             cupData.push({size: String(data.cupSize), rim: data.rimDiameter, body: data.bodyLength})
         })
-        return {name: usedCups[0].inUseMenstrualCup, size: usedCups[0].inUseMenstrualCupSize, cupData}
+        return {name: usedCups[0].menstrualCup, size: usedCups[0].cupSize, cupData}
     } else {
-        return null
+        return null;
     }
     
 }
