@@ -7,7 +7,7 @@ module.exports = async (
     ctx,
     info
 ) => {
-    console.log('>>[CREATE RECOVER USER WALLET]', moment().format('YYYY.MM.DD HH:mm:ss ddd'));
+    console.log('>>[RECOVER USER WALLET]', moment().format('YYYY.MM.DD HH:mm:ss ddd'));
     console.log('>>> address : ' + address);
     console.log('>>> email : ' + email);
     console.log('>>> userId : ' + userId);
@@ -20,7 +20,7 @@ module.exports = async (
     let options = {
         headers: { 'Content-Type': 'application/json', 'LOON-HEADER-ACCESSTOKEN':  accesstoken},
         // url: 'http://localhost:8080/api/user/wallet',
-        url: 'http://34.85.62.36:8080/user/wallet',
+        url: 'http://34.85.62.36:8080/api/user/wallet',
         body: JSON.stringify({
             "user_id" : Number(userId),
             "email" : email.toLowerCase(),
