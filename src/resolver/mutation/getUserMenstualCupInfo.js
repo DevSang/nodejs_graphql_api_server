@@ -1,7 +1,7 @@
 module.exports = async (parent, {
     userId,
 }, ctx, info) => {
-    let usedCups = await ctx.db.query.users({where: {userId, menstrualCup_not: ""}});
+    let usedCups = await ctx.db.query.users({where: {id:userId, menstrualCup_not: ""}});
     let cup;
     if(usedCups.length == 0) {
         return null
