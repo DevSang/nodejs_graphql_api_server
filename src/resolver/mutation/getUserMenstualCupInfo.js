@@ -6,7 +6,7 @@ module.exports = async (parent, {
     if(usedCups.length == 0) {
         return null
     } else {
-        cup = await ctx.db.query.menstrualCups({where: {cupName: usedCups[0].menstrualCup}, orderBy: 'cupName_ASC'})
+        cup = await ctx.db.query.menstualCups({where: {cupName: usedCups[0].menstrualCup}, orderBy: 'cupName_ASC'})
     }
 
     // let cup = await ctx.db.query.menstualCups({where: query, orderBy: 'cupName_ASC'})
