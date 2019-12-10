@@ -90,6 +90,7 @@ module.exports = async (
             txhash
           }
           status
+          category
           cancelYn
           createTime
         }

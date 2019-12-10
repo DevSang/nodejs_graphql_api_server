@@ -66,6 +66,7 @@ module.exports = async (
           }
           status
           cancelYn
+          category
           createTime
         }
         `
