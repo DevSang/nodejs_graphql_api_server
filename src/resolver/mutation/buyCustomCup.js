@@ -51,6 +51,7 @@ module.exports = async (
                         }
                     },
                     orderNumber,
+                    category:'LEONA D.I.Y.',
                     status: true
                 }
             },

@@ -75,6 +75,7 @@ module.exports = async (
                         }
                     },
                     orderNumber,
+                    category:"AMAZONCOUPON",
                     status: true
                 }
             },
