@@ -28,7 +28,7 @@ module.exports = async (
             {
                 userId,
                 category: 'BUY',
-                contents: 'LEONA D.I.Y.',
+                contents: 'LEONA Designed by _',
                 date,
                 address: address,
                 fromPkey: pKey,
@@ -54,7 +54,7 @@ module.exports = async (
                         }
                     },
                     orderNumber,
-                    category:'LEONA D.I.Y.',
+                    category:'LEONA Designed by _',
                     status: true
                 }
             },
