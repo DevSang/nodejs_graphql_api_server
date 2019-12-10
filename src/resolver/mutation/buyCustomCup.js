@@ -88,7 +88,7 @@ module.exports = async (
                 marketBuyHistoryId: {
                     connect: {id: marketBuyHistory.id}
                 },
-                name: userName, email, address1, address2, city, country, postalCode, phoneCountry, phoneNumber,
+                userName: userName, email, address1, address2, city, country, postalCode, phoneCountry, phoneNumber,
                 addtionalSuggestion 
             }
         },`
