@@ -21,7 +21,7 @@ module.exports = async (
         let reqBody = {
             email,
             toAddress: toAddress,
-            token: gem,
+            token: gem.toString(),
         }
 
         const accesstoken = ctx.request.header('LOON-HEADER-ACCESSTOKEN');
