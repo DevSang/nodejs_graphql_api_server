@@ -102,6 +102,7 @@ const resolvers = {
         registerUserWallet: require('./mutation/registerUserWallet'),
         recoverUserWallet: require('./mutation/recoverUserWallet'),
         createCameraCoinHistory: require('./mutation/createCameraCoinHistory'),
+        createRechargeTokenHistory: require('./mutation/createRechargeTokenHistory'),
         getCameraDatas: require('./mutation/getCameraDatas'),
         getMenstualCups: require('./mutation/getMenstualCups'),
         getUserMenstualCupInfo: require('./mutation/getUserMenstualCupInfo'),

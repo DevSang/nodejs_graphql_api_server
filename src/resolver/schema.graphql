@@ -64,6 +64,11 @@ type Mutation {
         userId: Int!
         periodCoinHistoryRowId: Int!
     ): UserCoinHistory
+    createRechargeTokenHistory(
+        email: String!
+        toAddress: String!
+        gem: Int!
+    ): UserCoinHistory
     getCameraDatas(
         changeTime: DateTime!
     ): [ CameraData ]
