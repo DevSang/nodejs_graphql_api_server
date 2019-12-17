@@ -19,9 +19,8 @@ module.exports = async (
         }
 
         let reqBody = {
-            email,
             toAddress: toAddress,
-            token: gem.toString(),
+            token: gem,
         }
 
         const accesstoken = ctx.request.header('LOON-HEADER-ACCESSTOKEN');
@@ -41,7 +40,7 @@ module.exports = async (
                 }
             },
             category: 'RECHARGE',
-            contents: contents,
+            contents: 'Recharge ' + gem + 'G'  ,
             coin: gem,
             date: new Date(),
             txhash: res.message,
