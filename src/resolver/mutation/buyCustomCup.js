@@ -27,7 +27,7 @@ module.exports = async (
             parent,
             {
                 userId,
-                category: 'BUY',
+                category: 'USE',
                 contents: 'LEONA Designed by _',
                 date,
                 address: address,
@@ -40,7 +40,6 @@ module.exports = async (
         );
         const orderNumber = date.toISOString().split(/[-TL:\.Z]/).join('');
         
-        // 쿠폰 구매 히스토리 저장
         const marketBuyHistory = await ctx.db.mutation.createMarketBuyHistory(
             {
                 data: {

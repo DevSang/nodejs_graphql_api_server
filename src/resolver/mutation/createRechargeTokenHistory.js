@@ -52,8 +52,8 @@ module.exports = async (
                     id: wallet[0].userId.id
                 }
             },
-            category: 'RECHARGE',
-            contents: 'Recharge ' + gem + 'G'  ,
+            category: 'BUY',
+            contents: 'Buy GEMs'  ,
             coin: gem,
             date: new Date(),
             txhash: res.message,

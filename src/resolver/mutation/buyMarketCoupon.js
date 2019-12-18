@@ -46,7 +46,7 @@ module.exports = async (
             parent,
             {
                 userId,
-                category: 'BUY',
+                category: 'USE',
                 contents: 'Amazon Coupon',
                 date,
                 address: address,
