@@ -33,6 +33,8 @@ module.exports = async (
         let res = await request.post(options);
         res = JSON.parse(res);
 
+        console.log(JSON.stringify(wallet));
+
         let data = {
             userId: {
                 connect: {
@@ -46,6 +48,8 @@ module.exports = async (
             txhash: res.message,
             walletId: wallet[0].id
         }
+        console.log(`data ${data}`);
+
         let createUserCoin = await ctx.db.mutation.createUserCoinHistory({
             data
         });
