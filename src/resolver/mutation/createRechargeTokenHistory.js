@@ -13,7 +13,18 @@ module.exports = async (
         console.log(`toAddress : ${toAddress}`)
         console.log(`gem : ${gem}`)
 
-        let wallet = await ctx.db.query.userWallets({where: {address: toAddress, status: true}})
+        let wallet = await ctx.db.query.userWallets({where: {address: toAddress, status: true}},
+            `{
+                id 
+                userId {
+                    id
+                }
+                address 
+                createTime 
+                status
+            }`
+        );    
+
         if(wallet.length == 0) {
             throw new Error('NO USER WALLET');
         }
@@ -38,7 +49,7 @@ module.exports = async (
         let data = {
             userId: {
                 connect: {
-                    id: wallet[0].userId
+                    id: wallet[0].userId.id
                 }
             },
             category: 'RECHARGE',
