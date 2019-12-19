@@ -144,7 +144,7 @@ module.exports = async (
             txhash: res.message,
         }
 
-        if(category === 'BUY') {
+        if(category === 'USE') {
             data.coin = data.coin * -1
         }
 
