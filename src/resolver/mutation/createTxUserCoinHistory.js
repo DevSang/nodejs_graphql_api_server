@@ -117,6 +117,8 @@ module.exports = async (
             return Error('No Data')
         }
         // url : 172.31.0.13
+        console.log(JSON.stringify(reqBody))
+
         const accesstoken = ctx.request.header('LOON-HEADER-ACCESSTOKEN');
         let options = {
             headers: { 'Content-Type': 'application/json', 'LOON-HEADER-ACCESSTOKEN':  accesstoken},
@@ -126,6 +128,9 @@ module.exports = async (
         };
         let res = await request.post(options);
         res = JSON.parse(res);
+
+        console.log(`res : ${res}`);``
+
         let data = {
             userId: {
                 connect: {
