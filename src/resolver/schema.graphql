@@ -114,7 +114,6 @@ type Mutation {
         phoneCountry: String
         phoneNumber: String
         addtionalSuggestion: String
-        deliveryStatus: String
     ) : MarketCustomize
 }
 

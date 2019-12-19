@@ -54,7 +54,8 @@ module.exports = async (
                     },
                     orderNumber,
                     category:'LEONA Designed by _',
-                    status: true
+                    status: true,
+                    deliveryStatus:'Order complete'
                 }
             },
             `
@@ -70,6 +71,7 @@ module.exports = async (
           cancelYn
           category
           createTime
+          deliveryStatus
         }
         `
         );
@@ -88,7 +90,7 @@ module.exports = async (
                     connect: {id: marketBuyHistory.id}
                 },
                 userName: userName, email, address1, address2, city, country, postalCode, phoneCountry, phoneNumber,
-                addtionalSuggestion,deliveryStatus
+                addtionalSuggestion
             }
         },`
         {
@@ -110,7 +112,6 @@ module.exports = async (
             phoneCountry
             phoneNumber
             addtionalSuggestion
-            deliveryStatus
             marketBuyHistoryId {
                 id
                 productId
