@@ -11,7 +11,7 @@ module.exports = async (parent, {changeTime}, ctx, info) => {
                 coinHistoryRowId_not: null,
                 userRecordDataByDay_some: {
                     userRecordDataByTime_some: {
-                        changeTime_gte: new Date(changeTime),
+                        // changeTime_gte: new Date(changeTime),
                         cameraDataId_not : null,
                     }
                 }
